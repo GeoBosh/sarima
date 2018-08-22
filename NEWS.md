@@ -1,7 +1,8 @@
 # sarima 0.7-6
 
-* `nSeasons()` and `nSeasons<-()`are now imported from package lagged.
-
+* updated Makefiles and Makefiles.win to deal with a NOTE from recent tightening
+  of checks on CRAN (see
+  https://stat.ethz.ch/pipermail/r-package-devel/2018q3/003030.html). 
 
 # sarima 0.7-5
 
