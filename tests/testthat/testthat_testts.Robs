@@ -1,0 +1,5 @@
+## Sys.setenv(R_TESTS="")
+library(testthat)
+library(testts)
+
+test_check("testts")

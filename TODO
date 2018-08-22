@@ -1,0 +1,7 @@
+- 2017-05-20 In version 0.4-4 (and maybe earlier) of package 'sarima', CRAN
+     doesn't notice the non-existent function maxlag() called in
+     setMethod("Ops", c(e1 = "Lagged", e2 = "Lagged"), ...)
+
+- 2017-05-20 Make sure autocorrelations(), etc, follow the convention that the lag in "Lagged"
+     objects is in the first index.
+

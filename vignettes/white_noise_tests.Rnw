@@ -1,0 +1,186 @@
+\documentclass[article,nojss]{jss}
+\usepackage{amsmath, amsfonts}
+
+%% need no \usepackage{Sweave}
+%\VignetteIndexEntry{Autocorrelations and white noise tests}
+
+
+\author{Georgi N. Boshnakov \\ University of Manchester }
+\Plainauthor{Georgi N. Boshnakov}
+
+\title{Autocorrelations and white noise tests}
+\Plaintitle{Autocorrelations and white noise tests} %% without formatting
+%\Shorttitle{} %% a short title (if necessary)
+
+%% an abstract and keywords
+\Abstract{
+    The \proglang{R} package \proglang{sarima} provides
+    functions, classes and methods for time series modelling with ARIMA
+    and related models. The aim of the package is to provide consistent
+    interface for the user. This document gives examples for white noise tests.
+}
+\Keywords{arima, sarima, time series, \proglang{S4}, \proglang{R}}
+\Plainkeywords{arima, sarima, time series, S4, R} %% without formatting
+%% at least one keyword must be supplied
+
+%% publication information
+%% NOTE: Typically, this can be left commented and will be filled out by the technical editor
+%% \Volume{50}
+%% \Issue{9}
+%% \Month{June}
+%% \Year{2012}
+%% \Submitdate{2012-06-04}
+%% \Acceptdate{2012-06-04}
+
+%% The address of (at least) one author should be given
+%% in the following format:
+\Address{
+  Georgi N. Boshnakov\\
+  School of Mathematics\\
+  The University of Manchester\\
+  Oxford Road, Manchester M13 9PL, UK\\
+  URL: \url{http://www.maths.manchester.ac.uk/~gb/}
+}
+
+
+\begin{document}
+%% include your article here, just as usual
+%% Note that you should use the \pkg{}, \proglang{} and \code{} commands.
+
+% borrowed from zoo.Rnw in package zoo:
+
+\SweaveOpts{engine=R,eps=FALSE}
+%\VignetteIndexEntry{Brief guide to package sarima}
+%\VignetteDepends{}
+%\VignetteKeywords{portmanteau tests, autocorrelations, ARIMA, time series, S4, R}
+%\VignettePackage{sarima}
+
+<<setup,echo=FALSE,results=hide>>=
+library("sarima")
+options(prompt = "R> ")
+Sys.setenv(TZ = "GMT")
+@
+
+
+\section{Autocorrelations and related properties}
+\label{sec:autoc-relat-prop}
+
+The generic function \code{autocorrelations()} computes autocorrelations. What exactly is
+computed depends on the first argument. There are analogous functions for other second order
+characteristics, e.g. \code{partialAutocorrelations}, see the package documentation for the
+available functions.
+
+The examples below use models used in the examples in Francq \& Zakoian's book on GARCH
+models. It can be consulted for concepts and technical details.  
+
+<<>>=
+n <- 100
+ma2.model <- list(ma = c(0.56, -0.44))
+xma2 <- arima.sim(ma2.model, n)
+@
+
+With time series or similar argument \code{autocorrelations} computes the sample
+quantity. There are similar functions for other quantities, the example below computes also
+partial autocorrelations:
+<<>>=
+xma2.acf <- autocorrelations(xma2, maxlag = 8)
+class(xma2.acf)
+xma2.pacf <- partialAutocorrelations(xma2, maxlag = 8)
+class(xma2.pacf)
+@
+
+If the argument is a model, the suitable theoretical properties are computed.
+In interactive use an ARMA model can be specified also as a list with components \code{ar},
+\code{ma} and \code{sigma2}
+
+<<>>=
+xma2.tacf <- autocorrelations(ma2.model, maxlag = 8)
+class(xma2.tacf)
+xma2.tpacf <- partialAutocorrelations(ma2.model, maxlag = 8)
+class(xma2.tpacf)
+@
+
+A plot of the autocorrelation object \code{plot} can be used to check if the time series is
+white noise. Without further arguments, the confidence limits correspond to a null hypothesis
+of iid:
+<<fig=TRUE>>=
+plot(xma2.acf)
+@
+
+If the time series is supplied, limits for null hypothesis of GARCH are given, as well. Here
+is an example. First we simulate a GARCH(1,1) time series and compute sample autocorrelations
+and partial autocorrelations.
+<<>>=
+n <- 5000
+set.seed(124) # for reproducibility
+x <- rgarch1p1(n, alpha = 0.3, beta = 0.55, omega = 1, n.skip = 1000)
+x.acf <- autocorrelations(x)
+x.pacf <- partialAutocorrelations(x)
+@ 
+
+This produces a plot for assessing if the time series is white noise. There are two sets of
+intervals: one computed under the stronger hypothesis that the time series is iid, the other
+under the hypothesis that the time series is GARCH.
+<<fig=TRUE>>=
+plot(x.acf, data = x)
+@ 
+
+Notice that several autocorrelations seem significant under the iid hypothesis and in
+practice some ARMA or MA model would be tried. On the other hand, there is no evidence
+against the GARCH hypothesis, suggesting a GARCH model without any ARMA terms.
+Similar inference follows from the portmanteau tests, see next
+section.
+
+The partial autocorrelation function can be used instead of the autocorrelations:
+<<fig=TRUE>>=
+plot(x.pacf, data = x)
+@ 
+
+Arguments can be used to change some aspects of the graphics. Here we change the title:
+<<fig=TRUE>>=
+plot(x.acf, data = x, main = "Autocorrelation test")
+## plot(x.pacf, data = x, main = "Partial autocorrelation test")
+@ 
+
+\section{White noise tests}
+\label{sec:white-noise-tests}
+
+
+\code{whiteNoiseTest} computes pormanteau statistics. When argument \code{ci} is TRUE, it
+also computes the intervals for the individual correlations visualised by the above plots. 
+Here we carry out iid tests using the method of Li-McLeod and Ljung-Box:
+<<>>=
+x.iid <- whiteNoiseTest(x.acf, h0 = "iid", nlags = c(5,10,20), x = x, method = "LiMcLeod")
+x.iid
+
+x.iid2 <- whiteNoiseTest(x.acf, h0 = "iid", nlags = c(5,10,20), x = x, method = "LjungBox")
+x.iid2
+@ 
+
+If the iid hypothesis is retained this implies uncorrelatedness, as well.
+But it is also a rather common practice when the iid hypothesis is rejected, to take this as
+evidence that the time series is correlated and go on to fit ARMA models. This is fine for
+many applications but not always. 
+
+In particular, if the intent is to fit GARCH-type models the following test is more suitable.
+
+Here we test the weaker assumption that the underlying time series is GARCH:
+<<>>=
+x.garch <- whiteNoiseTest(x.acf, h0 = "garch", nlags = c(5,10,20), x = x)
+x.garch
+@ 
+
+
+
+
+%\bibliography{REFERENCES}
+
+\end{document}
+
+
+
+
+
+
+
+

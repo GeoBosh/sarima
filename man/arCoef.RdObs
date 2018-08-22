@@ -1,0 +1,94 @@
+\name{arCoef}
+\alias{arCoef}
+\alias{maCoef}
+\alias{arPolyCoef}
+\alias{maPolyCoef}
+\alias{arOrder}
+\alias{maOrder}
+\alias{arCoef,VirtualArmaFilter-method}
+\alias{maCoef,VirtualArmaFilter-method}
+\alias{arOrder,VirtualArmaFilter-method}
+\alias{maOrder,VirtualArmaFilter-method}
+\alias{arPolyCoef,VirtualArmaFilter-method}
+\alias{maPolyCoef,VirtualArmaFilter-method}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{Get coefficients and order ARMA filter objects}
+\description{Get coefficients and order of ARMA filter objects.}
+\usage{
+arCoef(object, \dots)
+
+maCoef(object, \dots)
+
+arPolyCoef(object, \dots)
+
+maPolyCoef(object, \dots)
+
+arOrder(object, \dots)
+
+maOrder(object, \dots)
+
+\S4method{arCoef}{VirtualArmaFilter}(object, \dots)
+\S4method{maCoef}{VirtualArmaFilter}(object, \dots)
+\S4method{arPolyCoef}{VirtualArmaFilter}(object)
+\S4method{maPolyCoef}{VirtualArmaFilter}(object)
+\S4method{arOrder}{VirtualArmaFilter}(object)
+\S4method{maOrder}{VirtualArmaFilter}(object)
+}
+\arguments{
+  \item{object}{an ARMA filter object.}
+  \item{\dots}{further arguments for methods.}
+}
+\details{
+
+  \strong{Note: These functions should be considered deprecated and
+  will be removed after documenting suitable alternatives.}
+
+\preformatted{
+arCoef     => filterCoef(object@ar, ...)
+maCoef     => filterCoef(object@ma, ...)
+arOrder    => filterOrder(object@ar)
+maOrder    => filterOrder(object@ma)
+arPolyCoef => filterPolyCoef(object@ar, lag_0 = FALSE)
+maPolyCoef => filterPolyCoef(object@ma, lag_0 = FALSE)
+}
+  Generic functions to extract properties of filter objects.
+
+  \code{arCoef} and \code{maCoef} return the autoregressive and moving
+  average coefficients, respectively.
+  The method for \code{"VirtualArmaFilter"} is inherited by the
+  ARMA models and the arguments are passed eventually to \code{filterCoef}.
+  Use argument \code{convention} of the latter if a non-default
+  convention for the coefficients is needed, see \code{filterCoef} for details.
+
+  The other functions described here do not need argument for the
+  convention since their values do not depend on it.
+
+}
+%\value{
+%%%  ~Describe the value returned
+%%%  If it is a LIST, use
+%%%  \item{comp1 }{Description of 'comp1'}
+%%%  \item{comp2 }{Description of 'comp2'}
+%%% ...
+%}
+%\references{
+%%% ~put references to the literature/web site here ~
+%}
+\author{Georgi N. Boshnakov}
+
+%\author{
+%%%  ~~who you are~~
+%}
+%\note{
+%%%  ~~further notes~~
+%}
+%
+%%% ~Make other sections like Warning with \section{Warning }{....} ~
+%
+%\seealso{
+%%% ~~objects to See Also as \code{\link{help}}, ~~~
+%}
+%\examples{
+%}
+\keyword{methods}
+%% use one of  RShowDoc("KEYWORDS")

@@ -1,0 +1,143 @@
+useDynLib(sarima, .registration=TRUE)
+importFrom(Rcpp, evalCpp)
+
+import(methods, Formula, PolynomF, lagged)
+importFrom(stats4, vcov, coef, confint, plot)
+
+importFrom(stats, var, sd, filter, pnorm, rnorm, qnorm, pchisq,
+           ts, ar, acf, pacf, acf2AR, ARMAacf, arima.sim,
+           formula, as.formula, terms, is.empty.model, model.frame, model.matrix, update,
+           lm, predict, printCoefmat, na.omit, poly,
+           KalmanLike, KalmanRun, KalmanForecast, makeARIMA,
+           logLik, optim)
+
+importFrom(utils, capture.output)
+importFrom(utils, as.relistable, relist)
+
+importFrom(graphics, abline, lines)
+
+importFrom(ltsa, DLAcfToAR, PredictionVariance, tacvfARMA)
+importFrom(FitAR, TacvfAR, TacvfMA, VarianceRacfAR, PacfDL, PacfToAR,
+           ARToPacf, ARToMA)
+importFrom(FitARMA, TacvfARMA, InformationMatrixARMA,
+           ImpulseCoefficientsARMA
+           ) # maybe also tccfAR
+
+# importFrom(portes, LjungBox)
+importFrom(Rdpack, rebib)
+
+# 2018-07-08 commenting out for the CRAN release
+# importFrom(FKF, fkf)
+
+importFrom(numDeriv, hessian)
+
+import(KFAS)
+
+
+##S3method(print, sarima)
+S3method(print, simSarimaFun)
+S3method(print, Sarima)
+
+
+S3method(summary, SarimaFilter)
+S3method(summary, SarimaSpec)
+S3method(summary, SarimaModel)
+S3method(summary, Sarima)
+
+S3method(as.list, SarimaModel)
+S3method(as.list, ArmaModel)
+S3method(as.list, ArmaSpec)
+
+S3method(predict, Sarima)
+
+
+#S3method(coef, SampleAutocorrelations)
+#S3method(confint, SampleAutocorrelations)
+
+
+exportClassPattern("^[^\\.]")
+
+##exportPattern("^[[:alpha:]]+")
+export(
+    ## work in progress
+
+    arma_Q0gnb,
+
+    ## pacf2Ar,
+    ## pacf2ArWithJacobian,
+    sarima,
+
+    ## odl
+    sim_sarima, # was: sarima.sim
+    fun.forecast,
+    ##print.sarima,
+    sarima.f,
+    ##sarima.mod,
+
+
+    prepareSimSarima,   #was: simenvSarima,
+    print.simSarimaFun,  #  print.simenvSarima,
+    ## from_sarima.mod,
+    ## from_modellist,
+
+    xarmaFilter,
+
+    armaacf, # from package pcts
+    armaccf_xe,
+
+    filterCoef,
+    filterOrder,
+    filterPoly,
+    filterPolyCoef,
+
+
+    autocovariances,
+    autocorrelations,
+    partialAutocovariances,
+    partialAutocorrelations,
+    partialVariances,
+    backwardPartialVariances,
+    partialCoefficients,
+    backwardPartialCoefficients,
+
+    sigmaSq,
+    modelCenter,
+    modelIntercept,
+    nUnitRoots,
+    isStationaryModel,
+
+    modelOrder,
+    modelPoly,
+    modelPolyCoef,
+
+    modelCoef,
+
+    ## acfLjungBoxTest,
+    acfIidTest,
+    whiteNoiseTest,
+    acfMaTest,
+    acfGarchTest,
+
+    ## Bartlet
+    acfOfSquaredArmaModel,
+    nvcovOfAcf,
+    nvcovOfAcfBD,
+
+    nSeasons,
+
+    ## arOrder,
+    ## maOrder,
+    ## arCoef,
+    ## maCoef,
+    ## arPolyCoef,
+    ## maPolyCoef,
+
+    ArmaModel,
+    ArModel,
+    MaModel,
+
+    ## internal
+    rgarch1p1
+)
+
+

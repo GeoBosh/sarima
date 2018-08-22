@@ -1,0 +1,225 @@
+% originally gnbvig.Rnw, from James Probets' project
+\documentclass[article,nojss]{jss}
+\usepackage{amsmath, amsfonts}
+
+%% need no \usepackage{Sweave}
+%\VignetteIndexEntry{Garch and white noise tests}
+
+
+\author{James Proberts\\University of Manchester \And
+        Georgi N. Boshnakov \\ University of Manchester
+}
+\Plainauthor{James Proberts and Georgi N. Boshnakov}
+
+
+\title{ARMA-GARCH modelling and white noise tests}
+\Plaintitle{Garch modelling and white noise tests}
+%\Shorttitle{} %% a short title (if necessary)
+
+%% an abstract and keywords
+\Abstract{
+  This vignette illustrates applications of white noise tests in GARCH
+  modelling. It is based on an example from an MMath project by the first author.
+}
+\Keywords{autocorrelations, white noise tests, IID tests, GARCH models, time series}
+
+\Plainkeywords{autocorrelations, white noise tests, IID tests, GARCH models, time series}
+
+
+%% publication information
+%% NOTE: Typically, this can be left commented and will be filled out by the technical editor
+%% \Volume{50}
+%% \Issue{9}
+%% \Month{June}
+%% \Year{2012}
+%% \Submitdate{2012-06-04}
+%% \Acceptdate{2012-06-04}
+%% The address of (at least) one author should be given
+%% in the following format:
+\Address{
+  Georgi N. Boshnakov\\
+  School of Mathematics\\
+  The University of Manchester\\
+  Oxford Road, Manchester M13 9PL, UK\\
+  URL: \url{http://www.maths.manchester.ac.uk/~gb/}
+}
+
+
+\begin{document}
+%% include your article here, just as usual
+%% Note that you should use the \pkg{}, \proglang{} and \code{} commands.
+
+% borrowed from zoo.Rnw in package zoo:
+
+\SweaveOpts{engine=R,eps=FALSE}
+%\VignetteIndexEntry{Brief guide to package sarima}
+%\VignetteDepends{}
+%\VignetteKeywords{portmanteau tests, autocorrelations, ARIMA, time series, S4, R}
+%\VignettePackage{sarima}
+
+<<setup,echo=FALSE,results=hide>>=
+library("sarima")
+options(prompt = "R> ")
+Sys.setenv(TZ = "GMT")
+@
+
+
+
+
+\SweaveOpts{engine=R,eps=FALSE}
+%\VignetteIndexEntry{Brief guide to package sarima}
+%\VignetteDepends{}
+%\VignetteKeywords{portmanteau tests, autocorrelations, ARIMA, time series, S4, R}
+%\VignettePackage{sarima}
+
+<<setup,echo=FALSE>>=
+library("fImport")
+library("sarima")
+library("fGarch")
+options(prompt = "R> ")
+Sys.setenv(TZ = "GMT")
+@
+
+\section{The data}
+
+In this example we consider data from Freddie Mac, a mortgage loan company in
+the USA. This stock is an interesting case for study. In the financial crash of
+2008 it dropped from roughly \$60 to \$0.5 over the course of a year. It is now
+(April 2017) majority owned by the government and has all its profits and
+dividends sweeped. There has been speculation on this stock being returned to
+private ownership for years making it prone to clusters of volatility.
+
+We import weekly data from Yahoo Finance covering the period from 10/05/2006 to 22/04/2017,
+and calculate the weekly simple log returns.
+<<>>=
+## using a saved object, orginally imported with:
+##  FMCC <- yahooSeries("FMCC", from = "2006-05-10", to = "2017-04-22",
+##                         freq = "weekly")
+FMCC <- readRDS("FMCC.rds")
+logreturns <- diff(rev(log(FMCC$FMCC.Close)))
+@
+A plot of the log-returns. is given in Fig.~1.
+\begin{figure}[ht]
+  \centering
+<<fig=TRUE>>=
+plot(logreturns, type="l", main="Log-returns of FMCC")
+@
+\caption{Log-returns of weekly log-returns of FMCC from 10 May 2006 to 22 Apr 2017.}
+\end{figure}
+We also calculate the autocorrelations and partial autocorrelations for the log returns.
+<<>>=
+FMCClr.acf <- autocorrelations(logreturns)
+FMCClr.pacf <- partialAutocorrelations(logreturns)
+@
+
+\section{Autocorrelations}
+\label{sec:autocorrelations}
+
+We now produce a plot of the autocorrelations to assess whether the series is autocorrelated,
+see Fig.~2. There are two bounds plotted on the graph. The straight red line represents the
+standard bounds under the strong white noise assumption. The second line is under the
+hypothesis that the process is GARCH.
+% plot(FMCClr.acf, data = logreturns,
+%      main="Autocorrelation test of the log returns of FMCC")
+\begin{figure}[ht]
+  \centering
+<<fig=TRUE>>=
+plot(FMCClr.acf, data = logreturns)
+@
+\caption{Autocorrelation test of the log returns of FMCC}
+\end{figure}
+
+Several autocorrelations seem significant under the iid hypothesis.
+This may lead us to fitting an ARMA or ARMA-GARCH model.
+On the other hand, the autocorrelations are well into the bands produced under the GARCH
+hypothesis, suggesting a pure GARCH model,
+without any ARMA terms.
+So, it matters on which test we base our decision.
+
+The partial autocorrelation function can be used instead of the autocorrelations, with
+similar inferences, see Fig.~3.
+\begin{figure}
+  \centering
+<<fig=TRUE>>=
+plot(FMCClr.pacf, data = logreturns,
+main="Partial Autocorrelation test of the log returns of FMCC")
+@
+\end{figure}
+
+
+\section{Pormanteau tests}
+\label{sec:white-noise-tests}
+
+
+Routine portmanteau tests, such as Ljung-Box, also reject the IID hypothesis.
+Here we carry out IID tests using the method of Li-McLeod:
+<<>>=
+wntLM <- whiteNoiseTest(FMCClr.acf, h0 = "iid", nlags = c(5,10,20),
+                        x = logreturns, method = "LiMcLeod")
+wntLM$test
+@
+Small p-values lead to rejection of the null hypothesis at reasonable levels.
+Rejection of the null hypothesis is often taken to mean that the data are autocorrelated.
+
+Let us test for fitting a GARCH-type model by using the following code which has the
+weaker assumption that the log returns are GARCH.
+Let us change the null hypothesis to "garch" (one possible weak white noise hypothesis):
+<<>>=
+wntg <- whiteNoiseTest(FMCClr.acf, h0 = "garch", nlags = c(5,10,15), x = logreturns)
+wntg$test
+@
+
+The high p-values give no reason to reject the hypothesis
+that the log-returns are a GARCH white noise process. In other words, there is no need to
+ARMA modelling.
+
+
+
+\section{Fitting GARCH(1,1) models and their variants}
+\label{sec:fit garch}
+
+Based on the discussion above, we go on to fit GARCH model(s), starting with a GARCH(1,1)
+model with Gaussian innovations.
+
+<<>>=
+fit1 <- garchFit(~garch(1,1), data = logreturns, trace = FALSE)
+summary(fit1)
+@
+
+The diagnostics suggest that the standardised residuals and their squares are IID and that
+the ARCH effects have been accommodated by the model. Their distribution is clearly not
+Gaussian however (see the p-values for Jarque-Bera and Shapiro-Wilk Tests), so another conditional
+distribution can be tried.
+
+Another possible problem is that $\alpha_{1} + \beta_{1} > 0$.
+
+
+<<>>=
+fit2 <- garchFit(~garch(1,1), cond.dist = c("sstd"), data = logreturns, trace = FALSE)
+summary(fit2)
+@
+
+The qq-plot of the standardised residuals, suggests that the fitted standardised skew-t
+conditional distribution is not good enough.
+<<fig=TRUE>>=
+plot(fit2, which = 13)
+@
+
+<<>>=
+fit3 <- garchFit(~aparch(1,1), cond.dist = c("sstd"), data = logreturns, trace = FALSE)
+summary(fit3)
+@
+
+The qq-plots of the standardised results for all models fitted above suggest that the chosen
+conditiional distributions are unsatisfactory. Moreover, the fitted standardised-t
+distributions have shape parameters (degrees of freedom) slightly over two. Suggesting
+extremely heavy tails, maybe even the need for stable distributions.
+
+Note also that in all models above $\alpha_{1} + \beta_{1}$ is greater than one, a possible
+violation of any form of stationarity.
+
+Or maybe, it is just that the GARCH models tried here are not able to accomodate varying
+behaviour before, during and after the financial crisis.
+
+
+\end{document}

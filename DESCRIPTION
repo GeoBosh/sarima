@@ -1,0 +1,55 @@
+Package: sarima
+Type: Package
+Title: Simulation and Prediction with Seasonal ARIMA Models
+Version: 0.7.6
+Date: 2018-08-21
+Authors@R: c( person(given = c("Georgi", "N."), 
+                     family = "Boshnakov", 
+                     role = c("aut", "cre"), 
+                     email = "georgi.boshnakov@manchester.ac.uk"), 
+	      person(given = "Jamie", 
+	             family = "Halliday", 
+	             role = "ctb", email = "jamie.halliday@manchester.ac.uk") )
+Description: Functions, classes and methods for time series modelling with ARIMA
+    and related models. The aim of the package is to provide consistent
+    interface for the user. For example, a single function autocorrelations()
+    computes various kinds of theoretical and sample autocorrelations. This is
+    work in progress, see the documentation and vignettes for the current
+    functionality.  Function sarima() fits extended multiplicative seasonal
+    ARIMA models with trends, exogenous variables and arbitrary roots on the
+    unit circle, which can be fixed or estimated.
+Depends:
+    FitAR,
+    stats4
+Imports:
+    methods, graphics, stats, utils, 
+    PolynomF (>= 1.0-0),
+    Formula,
+    ltsa, FitARMA,
+    lagged (>= 0.2),
+    Rdpack,
+    KFAS,
+    Rcpp (>= 0.12.14),
+    numDeriv
+Suggests:
+    fGarch,
+    fImport,
+    testthat
+RdMacros: Rdpack
+License: GPL (>= 2)
+LazyLoad: yes
+Collate:
+    RcppExports.R
+    utils.R
+    generics.R
+    filterClasses.R
+    modelClasses.R
+    sarima.R
+    autocovariances.R
+    armacalc.R
+    fit.R
+    wrapKFAS.R
+    arma_Q0dotdotstats.R
+    fkf.R
+LinkingTo: Rcpp, RcppArmadillo
+RoxygenNote: 6.0.1
