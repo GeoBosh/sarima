@@ -6,5 +6,5 @@
 ## 2018-08-22 delay uncommenting to upload the update regarding 'Makefiles'.
 ##   This is the entry for NEWS:
 ##      * `nSeasons()` and `nSeasons<-()`are now imported from package lagged.
-## setGeneric("nSeasons", def = function(object){ standardGeneric("nSeasons") } )
-## setGeneric("nSeasons<-", def = function(object, ..., value){ standardGeneric("nSeasons<-") } )
+setGeneric("nSeasons", def = function(object){ standardGeneric("nSeasons") } )
+setGeneric("nSeasons<-", def = function(object, ..., value){ standardGeneric("nSeasons<-") } )
