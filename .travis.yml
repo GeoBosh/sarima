@@ -23,7 +23,6 @@ after_failure:
   find *Rcheck -name '*.fail' -print -exec cat '{}' \;
 
 script: 
-  - |
-    R CMD build .
-    travis_wait 60 R CMD check --as-cran --use-valgrind sarima*.tar.gz
+  - R CMD build .
+  - travis_wait 60 R CMD check --no-examples --no-vignettes --as-cran --use-valgrind sarima*.tar.gz
     
