@@ -1,6 +1,6 @@
 # sarima 0.7-6
 
-* updated Makefiles and Makefiles.win to deal with a NOTE from recent tightening
+* updated Makevars and Makevars.win to deal with a NOTE from recent tightening
   of checks on CRAN (see
   https://stat.ethz.ch/pipermail/r-package-devel/2018q3/003030.html). 
 
