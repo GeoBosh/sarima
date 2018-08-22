@@ -1,0 +1,107 @@
+#------------------------------------------------------------------------------#
+# AirPassengers data
+#------------------------------------------------------------------------------#
+
+library(sarima)
+
+## arima() for reference
+arima(log(AirPassengers), order = c(0, 1, 1), 
+      seasonal = list(order = c(0, 1, 1), period = 12),
+      method = "ML")
+
+## sarima() agrees with arima() for fixed unit roots
+sarima(log(AirPassengers) ~ 0 | ma(1, c(-0.3)) + sma(12,1, c(-0.1)) + 
+           i(1) + si(12, 1), ss.method = "sarima")
+
+## when we estimate the unit roots by 'sarima', the ma coefficients change
+
+# starting from U(z) = 1 + z^13 : OK
+sarima(log(AirPassengers) ~ 0 | ma(1, c(-0.3)) + sma(12,1, c(-0.1)) + 
+           uar(13, c(rep(0,12), 1), fixed = 13, atanh.tr = TRUE), 
+       ss.method = "sarima")
+
+# starting from U(z) = 1 - z - z^12 + z^13 : ERROR
+sarima(log(AirPassengers) ~ 0 | ma(1, c(-0.3)) + sma(12,1, c(-0.1)) + 
+           uar(13, c(-1, rep(0,10), -1, 1), fixed = 13, atanh.tr = TRUE), 
+       ss.method = "sarima")
+# this will be due to -Inf/Inf in estimable parcors
+
+# starting from U(z) = 1 - 0.99 z - 0.99z^12 + z^13 : same estimates as 1 + z^13
+sarima(log(AirPassengers) ~ 0 | ma(1, c(-0.3)) + sma(12,1, c(-0.1)) + 
+           uar(13, c(-0.99, rep(0,10), -0.99, 1), fixed = 13, atanh.tr = TRUE), 
+       ss.method = "sarima")
+
+## fitting using a two-stage process changes the values again
+
+# starting from U(z) = 1 + z^13 : OK
+sarima(log(AirPassengers) ~ 0 | ma(1) + sma(12, 1) + 
+           uar(13, c(rep(0,12), 1), fixed = 13, atanh.tr = TRUE), 
+       ss.method = "twostage")
+
+# starting from U(z) = 1 - 0.99 z - 0.99z^12 + z^13 : oh dear!
+#  stationary estimates are awful...
+sarima(log(AirPassengers) ~ 0 | ma(1, c(-0.3)) + sma(12,1, c(-0.1)) + 
+           uar(13, c(-0.99, rep(0,10), -0.99, 1), fixed = 13, atanh.tr = TRUE), 
+       ss.method = "twostage")
+sarima(log(AirPassengers) ~ 0 | ma(1, c(-0.3)) + sma(12,1, c(-0.1)) + 
+           uar(13, c(-0.99, rep(0,10), -0.99, 1), fixed = 13, atanh.tr = TRUE), 
+       ss.method = "iter")
+
+## what happens if we fix in uar?
+sarima(log(AirPassengers) ~ 0 | ma(1, c(-0.3)) + sma(12,1, c(-0.1)) + 
+           uar(13, c(-1, rep(0,10), -1, 1), fixed = 1:13, atanh.tr = TRUE), 
+       ss.method = "sarima")
+# 1). ma coefficients are now bizarre
+# 2). the 'fixed' uar values have changed!
+
+arima(log(AirPassengers), order = c(13, 0, 0), include.mean = FALSE, method = "CSS")
+sarima(log(AirPassengers) ~ 0 | uar(13, c(rep(0,12), 1), fixed = 13), ss.method = "sarima")
+sarima(log(AirPassengers) ~ 0 | uar(13, c(-0.99, rep(0,10), 0.99, 1), fixed = 13), ss.method = "sarima")
+
+#------------------------------------------------------------------------------#
+# Simulated data with AR
+#------------------------------------------------------------------------------#
+
+## Simulated ARIMA(1,1,0)(0,1,0)(12) data
+set.seed(85)
+x1 <- arima.sim(model = list(order = c(1, 1, 0), 
+                             seasonal = c(0, 1, 0),
+                             period = 12,
+                             ar = 0.5, sd = 0.1), 
+                n = 5000)
+
+## arima() reference:
+arima(x1, order = c(1, 1, 0), 
+      seasonal = list(order = c(0, 1, 0), period = 12),
+      method = "ML")
+
+## sarima() agrees:
+sarima(x1 ~ 0 | i(1) + si(12,1) + ar(1), ss.method = "sarima")
+
+## estimating unit polynomial:
+##   ar coefficient nowhere near 0.5
+sarima(x1 ~ 0 | uar(13, c(rep(0,12), 1), fixed = 13) + ar(1),
+               ss.method = "sarima")
+
+## two-stage attempt to improve estimates:
+##    ar coefficient closer, but still nowhere near 0.5
+fit_twostage <- sarima(x1 ~ 0 | uar(13, c(rep(0,12), 1), fixed = 13) + ar(1),
+                       ss.method = "twostage")
+
+## just by the by, if we were to fit an AR(13) polynommial 
+##   for the nonstationary parts:
+fit_unit <- arima(x1, order = c(13, 0, 0), include.mean = FALSE,
+                  method = "CSS")
+fit_stat <- arima(fit_unit$residuals, order = c(1, 0, 0), include.mean = FALSE,
+                  method = "CSS")
+fit_coef <- c(coef(fit_stat), coef(fit_unit))
+names(fit_coef)[2:14] <- gsub("ar", "uar", names(fit_coef)[2:14])
+round(fit_coef, digits = 4)
+fit_twostage
+# they somewhat resemble 'twostage' coefficients
+
+
+##' NOTES:
+##'  - standard errors in 'twostage' are very wrong. Possibly a divide by n issue
+##'  - 'twostage' estimation has gone wrong where 'oh dear' appears!
+##'       I'll see if I can rethink this...
