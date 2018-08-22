@@ -24,6 +24,5 @@ after_failure:
 
 script: 
   - R CMD build .
-  - R CMD check --no-manual --no-tests --as-cran --use-valgrind sarima*.tar.gz
-  - travis_wait 60 R CMD check --no-manual --no-examples --no-build-vignettes --as-cran --use-valgrind sarima*.tar.gz
+  - travis_wait 60 R CMD check --no-build-manual --no-examples --no-build-vignettes --as-cran --use-valgrind sarima*.tar.gz
     
