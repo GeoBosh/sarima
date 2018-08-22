@@ -1,4 +1,4 @@
-# sarima 0.7-6
+# sarima 0.7-6 (CRAN)
 
 * updated Makevars and Makevars.win to deal with a NOTE from recent tightening
   of checks on CRAN (see

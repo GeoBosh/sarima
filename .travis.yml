@@ -14,20 +14,7 @@ addons:
 env:
   - VALGRIND_OPTS='--leak-check=full --track-origins=yes'
 
-r_github_packages:
-  - r-lib/covr
-
-after_success:
-  - Rscript -e 'covr::coveralls()'
-
 matrix:
   include:
     - os: linux
-      r: release
-    - os: linux
       r: devel
-    - os: linux
-      dist: trusty
-      env: R_CODECOV=true
-    - os: osx
-      osx_image: xcode8.3
