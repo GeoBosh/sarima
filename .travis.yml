@@ -6,8 +6,8 @@
 #
 language: r
 cache: packages
-latex: true
 
+r_github_packages: GeoBosh/lagged
 r_check_args: '--as-cran --use-valgrind'
 
 addons:
