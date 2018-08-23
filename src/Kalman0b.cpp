@@ -48,7 +48,10 @@ List uniKalmanLikelihood0b(
   const int d = Delta.size();
   const int r = (p >= q + 1) ? p : q + 1;  // int r = max(p, q + 1);
   
+  NumericVector gainVec(n); // 2018-08-23
   NumericVector rsResid(n);
+  NumericMatrix states(n, r+d); // 2018-08-23 This nees more thought, 
+                                //  for long time series it may be enourmous
 
   double gain;
   arma::colvec anew(r + d, fill::zeros);
@@ -102,15 +105,25 @@ List uniKalmanLikelihood0b(
 	ssq += resid * resid / gain;
 	sumlog += log(gain);
       }
-      if (useResid) rsResid[l] = resid / sqrt(gain);
 
       a = anew + M * resid / gain; // a is a(t|t)
       P = Pnew - M * M.t() / gain; // P is P(t|t)
        
+     if (useResid){ // record residuals, standardised residuals, gain and state values
+          rsResid[l] = resid / sqrt(gain); // only this was returned before v0.7-8 (2018-08-23)
+          gainVec[l] = gain; 
+          for(int i = 0; i < (r + d); i++)
+              states(l,i) = a[i];
+      } 
     }else{
       a = anew;
-      P = Pnew;
-      if (useResid) rsResid[l] = NA_REAL;
+      P = Pnew;     
+      if (useResid){
+          rsResid[l] = NA_REAL; // only this was returned before v0.7-8 (2018-08-23)
+          gainVec[l] = NA_REAL;
+          for(int i = 0; i < (r + d); i++)
+              states(l,i) = a[i];
+      } 
     }
   }
 
@@ -119,9 +132,10 @@ List uniKalmanLikelihood0b(
     res = List::create(    // Rcpp::Named("ssq") = ssq,
 			      // Rcpp::Named("sumlog") = sumlog,
 			      // Rcpp::Named("nu") = (double) nu,
-			    NumericVector::create(ssq, sumlog, (double) nu),
-			    rsResid
-				);    
+		       NumericVector::create(ssq, sumlog, (double) nu),
+		       rsResid,
+		       states,    // 2018-08-23 new
+		       gainVec);  // 2018-08-23 new
   }else{
     res = List::create( NumericVector::create(ssq, sumlog, (double) nu)	);    
   }
@@ -134,5 +148,6 @@ List uniKalmanLikelihood0b(
 				   );
       }
   
-  return res;    // ssq, sumlog, nu and possibly residuals;
+                 // before 2018-08-23 was only: ssq, sumlog, nu and possibly residuals;
+  return res;    // ssq, sumlog, nu, and possibly residuals (ordinary and standardised), state values, and gains,;
 }

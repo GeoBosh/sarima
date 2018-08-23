@@ -1,9 +1,13 @@
-# sarima 0.7-7 (CRAN)
+# sarima 0.7-7
 
 * Now require `lagged (>= 0.2.1)` (`lagged 0.2.0` is not sufficient since
   `nSeasons()` and `nSeasons<-()` accidentally were not exported by it).
   `lagged (>= 0.2.1)` will have to be put on CRAN before any future release of
   sarima. 
+
+* Vignette `garch_tests_example` now imports the data using `system.file()`,
+  so that the examples can be run easily by the user.
+
 
 
 # sarima 0.7-6 (CRAN)

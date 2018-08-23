@@ -95,7 +95,8 @@ and calculate the weekly simple log returns.
 ## using a saved object, orginally imported with:
 ##  FMCC <- yahooSeries("FMCC", from = "2006-05-10", to = "2017-04-22",
 ##                         freq = "weekly")
-FMCC <- readRDS("FMCC.rds")
+## FMCC <- readRDS("FMCC.rds")
+FMCC <- readRDS(system.file("doc", "FMCC.rds", package = "sarima"))
 logreturns <- diff(rev(log(FMCC$FMCC.Close)))
 @
 A plot of the log-returns. is given in Fig.~1.

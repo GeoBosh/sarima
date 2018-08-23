@@ -212,7 +212,7 @@ sarima(model, data = NULL, ss.method = "sarima")
 
   Argument \code{fixed} can be used to fix some of them.  If it is a
   logical vector it should be of length one or have the same length as
-  the coefficients. If \code{fixed} is of length and \code{TRUE}, all
+  the coefficients. If \code{fixed} is of length one and \code{TRUE}, all
   coefficients are fixed. If FALSE, all are non-fixed. Otherwise, the
   TRUE/FALSE values in \code{fixed} determine the fixedness of the
   corresponding coefficients.

@@ -16,7 +16,8 @@ addons:
       - valgrind
 
 env:
-  - VALGRIND_OPTS='--leak-check=full --track-origins=yes'
+  - VALGRIND_OPTS='--leak-check=full
+#  - VALGRIND_OPTS='--leak-check=full --track-origins=yes'
 
 matrix:
   include:

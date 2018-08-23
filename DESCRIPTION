@@ -1,7 +1,7 @@
 Package: sarima
 Type: Package
 Title: Simulation and Prediction with Seasonal ARIMA Models
-Version: 0.7.7
+Version: 0.7.8
 Date: 2018-08-23
 Authors@R: c( person(given = c("Georgi", "N."), 
                      family = "Boshnakov", 
@@ -9,7 +9,7 @@ Authors@R: c( person(given = c("Georgi", "N."),
                      email = "georgi.boshnakov@manchester.ac.uk"), 
 	      person(given = "Jamie", 
 	             family = "Halliday", 
-	             role = "ctb", email = "jamie.halliday@manchester.ac.uk") )
+	             role = "aut", email = "jamie.halliday@manchester.ac.uk") )
 Description: Functions, classes and methods for time series modelling with ARIMA
     and related models. The aim of the package is to provide consistent
     interface for the user. For example, a single function autocorrelations()
@@ -51,5 +51,6 @@ Collate:
     wrapKFAS.R
     arma_Q0dotdotstats.R
     fkf.R
+    sarimaFormulae.R
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 6.0.1

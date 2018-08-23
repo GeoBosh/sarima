@@ -1,3 +1,4 @@
+^man/.*[.]RdObs$
 ^.travis.yml
 ^Org/
 ^Org$
