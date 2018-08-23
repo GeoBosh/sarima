@@ -1,8 +1,8 @@
 Package: sarima
 Type: Package
 Title: Simulation and Prediction with Seasonal ARIMA Models
-Version: 0.7.6
-Date: 2018-08-22
+Version: 0.7.7
+Date: 2018-08-23
 Authors@R: c( person(given = c("Georgi", "N."), 
                      family = "Boshnakov", 
                      role = c("aut", "cre"), 
@@ -26,7 +26,7 @@ Imports:
     PolynomF (>= 1.0-0),
     Formula,
     ltsa, FitARMA,
-    lagged (>= 0.2),
+    lagged (>= 0.2.1),
     Rdpack,
     KFAS,
     Rcpp (>= 0.12.14),

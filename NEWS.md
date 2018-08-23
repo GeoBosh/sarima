@@ -1,3 +1,11 @@
+# sarima 0.7-7 (CRAN)
+
+* Now require `lagged (>= 0.2.1)` (`lagged 0.2.0` is not sufficient since
+  `nSeasons()` and `nSeasons<-()` accidentally were not exported by it).
+  `lagged (>= 0.2.1)` will have to be put on CRAN before any future release of
+  sarima. 
+
+
 # sarima 0.7-6 (CRAN)
 
 * updated Makevars and Makevars.win to deal with a NOTE from recent tightening
