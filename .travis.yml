@@ -28,7 +28,7 @@ after_failure:
   find *Rcheck -name '*.fail' -print -exec cat '{}' \;
 
 script: 
-  - R CMD build .
+  - R CMD build --no-build-vignettes .
   - travis_wait 60 R CMD check --no-build-manual --no-examples --no-build-vignettes --as-cran --use-valgrind sarima*.tar.gz
 
 
