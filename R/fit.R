@@ -155,7 +155,7 @@ poly_delta <- polynom(c(1, -1)) # = 1 - poly_x
         coef <- .set_coef(p, rep(1, p), sign = "+", fixed = TRUE, operator = TRUE, dispname = "s")
         list(name = "s", p = p, coef = coef)
     }
-    
+
     ## unit roots
     i <- function(d, ...){
         ## TODO: this needs special method later!
@@ -177,7 +177,7 @@ poly_delta <- polynom(c(1, -1)) # = 1 - poly_x
                                                  operator = operator, dispname = "su") )
         list(name = "u", u = u, coef = coef)
     }
-    
+
     su <- function(s, h){
                       # TODO: check that elements of h are among 1,2, ..., s/2 (excluding s/s
                       #       if s is even) coef is a list here!
@@ -212,7 +212,7 @@ poly_delta <- polynom(c(1, -1)) # = 1 - poly_x
                           atanh.tr = atanh.tr, ...)
         list(name = "sar", s = s, p = p, coef = coef)        # TODO: remove 's' and 'p'?
     }
-    
+
     sma <- function(s, q = 0, ma, sign = "+", atanh.tr = TRUE, ...){
         coef <- .set_coef(q, ma, sign = sign, nseasons = s, dispname = "sma",
                           atanh.tr = atanh.tr, ...)
