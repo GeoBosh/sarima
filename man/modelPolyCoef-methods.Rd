@@ -4,6 +4,7 @@
 \alias{modelPolyCoef,SarimaModel,ArmaFilter-method}
 %\alias{modelPolyCoef,SarimaModel,missing-method}
 \alias{modelPolyCoef,VirtualMonicFilter,missing-method}
+\alias{modelPolyCoef,VirtualFilterModel,character-method}
 \title{Methods for modelPolyCoef}
 \description{Methods for modelPolyCoef, e generic function for getting
   the coefficients of polynomials associated with SARIMA models.}
@@ -15,6 +16,9 @@
 }
 
 \item{\code{signature(object = "VirtualMonicFilter", convention = "missing")}}{{
+%%  ~~describe this method here~~
+}
+}\item{\code{signature(object = "VirtualFilterModel", convention = "character")}}{{
 %%  ~~describe this method here~~
 }
 }}}

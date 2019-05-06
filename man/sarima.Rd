@@ -13,7 +13,8 @@
 
 }
 \usage{
-sarima(model, data = NULL, ss.method = "sarima")
+sarima(model, data = NULL, ss.method = "sarima", use.symmetry = FALSE, 
+       SSinit = "Rossignol2011")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -22,6 +23,11 @@ sarima(model, data = NULL, ss.method = "sarima")
   \item{ss.method}{state space engine to use, defaults to
     \code{"sarima"}. (\strong{Note:} this argument will
     probably be renamed.)}
+  \item{use.symmetry}{a logical argument indicating whether 
+    symmetry should be used to estimate the unit polynomial.}
+  \item{SSinit}{method to use for computation of the stationary part of
+    the initial covariance matrix, one of "Rossignol2011", "gnb",
+    "Gardner1980".} 
 }
 \details{
 
@@ -227,6 +233,7 @@ sarima(model, data = NULL, ss.method = "sarima")
 
   TODO: streamline "atanh.tr"
 
+  TODO: describe \code{SSinit}
 }
 \value{
   an object from S3 class Sarima

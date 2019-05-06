@@ -4,6 +4,7 @@
 \alias{modelPoly,SarimaModel,ArmaFilter-method}
 %\alias{modelPoly,SarimaModel,missing-method}
 \alias{modelPoly,VirtualMonicFilter,missing-method}
+\alias{modelPoly,VirtualFilterModel,character-method}
 \title{Get polynomials associated with SARIMA models}
 \description{Get polynomials associated with SARIMA models.}
 \section{Methods}{
@@ -14,6 +15,9 @@
 }
 
 \item{\code{signature(object = "VirtualMonicFilter", convention = "missing")}}{{
+%%  ~~describe this method here~~
+}
+}\item{\code{signature(object = "VirtualFilterModel", convention = "character")}}{{
 %%  ~~describe this method here~~
 }
 }}}

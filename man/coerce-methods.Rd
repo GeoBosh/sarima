@@ -35,8 +35,8 @@
 \section{Methods}{
 
   This section shows the methods for converting objects from one class
-  to another, defined via \code{setAs()}. Use \code{as(obj,
-  "classname")} to convert object \code{obj} to class "classname".
+  to another, defined via \code{setAs()}. Use \code{as(obj, "classname")}
+  to convert object \code{obj} to class "classname".
 
 \describe{
 

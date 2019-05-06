@@ -9,7 +9,7 @@ using namespace arma;
 // [[Rcpp::export]]
 List uniKalmanLikelihood0b(
 			  const NumericVector & y, 
-			  const List          &  mod,
+			  const List          & mod,
 			  const NumericVector & nit,
 			  const LogicalVector & op,
 			  const LogicalVector & update) {
@@ -137,7 +137,7 @@ List uniKalmanLikelihood0b(
 		       states,    // 2018-08-23 new
 		       gainVec);  // 2018-08-23 new
   }else{
-    res = List::create( NumericVector::create(ssq, sumlog, (double) nu)	);    
+    res = List::create( NumericVector::create(ssq, sumlog, (double) nu) );    
   }
 
   if(update[0]){
@@ -150,4 +150,209 @@ List uniKalmanLikelihood0b(
   
                  // before 2018-08-23 was only: ssq, sumlog, nu and possibly residuals;
   return res;    // ssq, sumlog, nu, and possibly residuals (ordinary and standardised), state values, and gains,;
+}
+
+// Uses very similar code to uniKalmanLike0b but is to mimic KalmanForecast()
+// [[Rcpp::export]]
+List uniKalmanForecast0b( 
+        const int           & nahead,
+        const List          & mod,
+        const LogicalVector & update) {
+  const arma::colvec & phi   = mod["phi"]  ;
+  const arma::colvec & theta = mod["theta"];
+  const arma::colvec & Delta = mod["Delta"];
+  
+  const arma::rowvec & Z  = as<arma::rowvec>(mod["Z"]);
+  arma::colvec         a  = as<arma::colvec>(mod["a"]);
+  arma::mat            P  = as<arma::mat>(mod["P"]);
+  const arma::mat    & T  = as<arma::mat>(mod["T"]);
+  const arma::mat    & V  = as<arma::mat>(mod["V"]);
+  double               h  = as<double>(mod["h"]); // TODO: in general, h is a matrix
+  arma::mat            Pn = as<arma::mat>(mod["Pn"]);
+
+  const arma::mat    & Tt  = T.t();
+  const arma::colvec & Zt  = Z.t();
+  const arma::rowvec & phit  = phi.t();
+  const arma::rowvec & Deltat  = Delta.t();
+  
+  const int n = nahead;  
+  const int p = phi.size();
+  const int q = theta.size();
+  const int d = Delta.size();
+  const int r = (p >= q + 1) ? p : q + 1;  // int r = max(p, q + 1);
+  
+  arma::colvec anew(r + d, fill::zeros);
+  
+  arma::mat Pnew = Pn;
+  arma::mat Ptmp = Pn;
+  
+  double gain;
+
+  NumericVector forecasts(n);
+  NumericVector standarderrors(n);
+
+  const span sp0Tpm1 = span(0, p - 1);
+  const span sp1Trm1 = span(1, r - 1);
+  const span sp0Trm2 = span(0, r - 2);
+  const span sprTrpdm1 = span(r, r + d - 1);
+  const span sprp1Trpdm1 = span(r + 1, r + d - 1);
+  const span sprTrpdm2 = span(r, r + d - 2);
+  // const span sp0Trpdm1 = span(0, r + d - 1);
+  for (int l = 0; l < n; l++){
+    // anew = T * a;  // anew  = a(t|t-1)
+    double a1 = (double) a[0];
+    anew.fill(0.0);
+    if(p > 0) anew(sp0Tpm1)  = phi * a1;
+    if(r > 1) anew(sp0Trm2) += a(sp1Trm1);
+    if(d > 0) anew[r] = a1 + as_scalar(Deltat * a(sprTrpdm1));
+    if(d > 1) anew(sprp1Trpdm1) = a(sprTrpdm2);
+
+    if(l > 0){  // update Pnew = P[t|t -1]
+      // Pnew = V + T * P * T';
+
+      // T * P
+      Ptmp.fill(0.0);
+      if(p > 0) Ptmp(sp0Tpm1, span::all)    = phi * P(0, span::all );
+      if(r > 1) Ptmp(sp0Trm2, span::all)   += P(sp1Trm1, span::all);
+      if(d > 0)	Ptmp(r, span::all)          = T(r, span::all)  * P; // TODO: this line could be optimised somewhat
+      if(d > 1) Ptmp(sprp1Trpdm1, span::all) = P(sprTrpdm2, span::all);
+
+      // (T * P) * T'
+      Pnew.fill(0.0);
+      if(p > 0) Pnew(span::all, sp0Tpm1)     = Ptmp(span::all, 0) * phit;
+      if(r > 1) Pnew(span::all, sp0Trm2)    += Ptmp(span::all, sp1Trm1);
+      // if r > p the r-th row is zero (its index is r-1 in C++)
+      if(d > 0)	Pnew(span::all, r)           = Ptmp * Tt(span::all, r);
+      // the last d - 1 columns are obtained by shifting columns of Ptmp to the right
+      if(d > 1) Pnew(span::all, sprp1Trpdm1) = Ptmp(span::all, sprTrpdm2);
+
+      Pnew += V;
+    }
+    
+    double fc = arma::as_scalar(Z * anew);
+//    double resid = y[l] - fc;
+    arma::mat M = Pnew * Zt;
+    
+    gain =  h + arma::as_scalar(Z * Pnew * Zt);
+    a = anew;
+    P = Pnew;
+//    P = Pnew - M * M.t() / gain;
+    
+    forecasts[l] = fc;
+    standarderrors[l] = gain;
+
+  }
+
+  List res = List::create( forecasts, standarderrors );
+
+  return res;
+}
+
+// This is another forecasting chunk of code, but is for making several 
+//    n-step ahead forecasts whilst updating the model with observed values.
+// [[Rcpp::export]]
+List uniKalmanForeUp0b(
+		       const NumericVector & y, 
+		       const int           & nahead,
+		       const List          & mod,
+		       const NumericVector & nit,
+		       const LogicalVector & update) {
+  const arma::colvec & phi   = mod["phi"]  ;
+  const arma::colvec & theta = mod["theta"];
+  const arma::colvec & Delta = mod["Delta"];
+  
+  const arma::rowvec & Z  = as<arma::rowvec>(mod["Z"]);
+  arma::colvec         a  = as<arma::colvec>(mod["a"]);
+  arma::mat            P  = as<arma::mat>(mod["P"]);
+  const arma::mat    & T  = as<arma::mat>(mod["T"]);
+  const arma::mat    & V  = as<arma::mat>(mod["V"]);
+  double               h  = as<double>(mod["h"]); // TODO: in general, h is a matrix
+  arma::mat            Pn = as<arma::mat>(mod["Pn"]);
+
+  const int sUP = nit[0];
+  
+  const arma::mat    & Tt  = T.t();
+  const arma::colvec & Zt  = Z.t();
+  const arma::rowvec & phit  = phi.t();
+  const arma::rowvec & Deltat  = Delta.t();
+  
+  const int n = y.size();  
+  const int p = phi.size();
+  const int q = theta.size();
+  const int d = Delta.size();
+  const int r = (p >= q + 1) ? p : q + 1;  // int r = max(p, q + 1);
+  
+  arma::colvec anew(r + d, fill::zeros);
+  arma::colvec aUpdate(r + d, fill::zeros);
+  arma::mat P1   = P;
+  arma::mat Pnew = Pn; 
+  arma::mat Ptmp = Pn;
+
+  double fc, gain;
+
+  arma::mat forecasts(nahead, n), standarderrors(nahead, n);
+
+  const span sp0Tpm1 = span(0, p - 1);
+  const span sp1Trm1 = span(1, r - 1);
+  const span sp0Trm2 = span(0, r - 2);
+  const span sprTrpdm1 = span(r, r + d - 1);
+  const span sprp1Trpdm1 = span(r + 1, r + d - 1);
+  const span sprTrpdm2 = span(r, r + d - 2);
+  // const span sp0Trpdm1 = span(0, r + d - 1);
+  for (int l = 0; l < n; l++){
+    for (int k = 0; k < nahead; k++){
+      // anew = T * a;  // anew  = a(t|t-1)
+      double a1 = (double) a[0];
+      anew.fill(0.0);
+      if (p > 0) anew(sp0Tpm1)  = phi * a1;
+      if (r > 1) anew(sp0Trm2) += a(sp1Trm1);
+      if (d > 0) anew[r] = a1 + as_scalar(Deltat * a(sprTrpdm1));
+      if (d > 1) anew(sprp1Trpdm1) = a(sprTrpdm2);
+
+      if (k > sUP){  // update Pnew = P[t|t -1]
+        // Pnew = V + T * P * T';
+
+        // T * P
+        Ptmp.fill(0.0);
+        if (p > 0) Ptmp(sp0Tpm1, span::all)    = phi * P(0, span::all );
+        if (r > 1) Ptmp(sp0Trm2, span::all)   += P(sp1Trm1, span::all);
+        if (d > 0) Ptmp(r, span::all)          = T(r, span::all)  * P; // TODO: this line could be optimised somewhat
+        if (d > 1) Ptmp(sprp1Trpdm1, span::all) = P(sprTrpdm2, span::all);
+
+        // (T * P) * T'
+        Pnew.fill(0.0);
+        if (p > 0) Pnew(span::all, sp0Tpm1)     = Ptmp(span::all, 0) * phit;
+        if (r > 1) Pnew(span::all, sp0Trm2)    += Ptmp(span::all, sp1Trm1);
+        // if r > p the r-th row is zero (its index is r-1 in C++)
+        if (d > 0) Pnew(span::all, r)           = Ptmp * Tt(span::all, r);
+        // the last d - 1 columns are obtained by shifting columns of Ptmp to the right
+        if (d > 1) Pnew(span::all, sprp1Trpdm1) = Ptmp(span::all, sprTrpdm2);
+  
+        Pnew += V;
+      }
+      
+      fc   = arma::as_scalar(Z * anew);
+      gain =  h + arma::as_scalar(Z * Pnew * Zt);
+      
+      if (k < 0.5){
+          double resid = y[l] - fc;
+          arma::mat M = Pnew * Zt;
+          
+          aUpdate = anew + M * resid / gain;
+      }
+      a = anew;
+      P = Pnew; 
+      
+      forecasts(k, l) = fc;
+      standarderrors(k, l) = gain;
+    }
+    
+    a    = aUpdate;
+    P    = P1;
+    Pnew = Pn;
+  }
+
+  List res = List::create( forecasts, standarderrors );
+
+  return res;
 }

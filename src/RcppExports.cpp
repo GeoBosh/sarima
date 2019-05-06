@@ -6,6 +6,49 @@
 
 using namespace Rcpp;
 
+// uniKalmanLikelihood0b
+List uniKalmanLikelihood0b(const NumericVector& y, const List& mod, const NumericVector& nit, const LogicalVector& op, const LogicalVector& update);
+RcppExport SEXP _sarima_uniKalmanLikelihood0b(SEXP ySEXP, SEXP modSEXP, SEXP nitSEXP, SEXP opSEXP, SEXP updateSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const NumericVector& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< const List& >::type mod(modSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type nit(nitSEXP);
+    Rcpp::traits::input_parameter< const LogicalVector& >::type op(opSEXP);
+    Rcpp::traits::input_parameter< const LogicalVector& >::type update(updateSEXP);
+    rcpp_result_gen = Rcpp::wrap(uniKalmanLikelihood0b(y, mod, nit, op, update));
+    return rcpp_result_gen;
+END_RCPP
+}
+// uniKalmanForecast0b
+List uniKalmanForecast0b(const int& nahead, const List& mod, const LogicalVector& update);
+RcppExport SEXP _sarima_uniKalmanForecast0b(SEXP naheadSEXP, SEXP modSEXP, SEXP updateSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const int& >::type nahead(naheadSEXP);
+    Rcpp::traits::input_parameter< const List& >::type mod(modSEXP);
+    Rcpp::traits::input_parameter< const LogicalVector& >::type update(updateSEXP);
+    rcpp_result_gen = Rcpp::wrap(uniKalmanForecast0b(nahead, mod, update));
+    return rcpp_result_gen;
+END_RCPP
+}
+// uniKalmanForeUp0b
+List uniKalmanForeUp0b(const NumericVector& y, const int& nahead, const List& mod, const NumericVector& nit, const LogicalVector& update);
+RcppExport SEXP _sarima_uniKalmanForeUp0b(SEXP ySEXP, SEXP naheadSEXP, SEXP modSEXP, SEXP nitSEXP, SEXP updateSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const NumericVector& >::type y(ySEXP);
+    Rcpp::traits::input_parameter< const int& >::type nahead(naheadSEXP);
+    Rcpp::traits::input_parameter< const List& >::type mod(modSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type nit(nitSEXP);
+    Rcpp::traits::input_parameter< const LogicalVector& >::type update(updateSEXP);
+    rcpp_result_gen = Rcpp::wrap(uniKalmanForeUp0b(y, nahead, mod, nit, update));
+    return rcpp_result_gen;
+END_RCPP
+}
 // arma_Q0gnb0
 arma::mat arma_Q0gnb0(const arma::colvec& phi, const arma::colvec& theta, double tol);
 RcppExport SEXP _sarima_arma_Q0gnb0(SEXP phiSEXP, SEXP thetaSEXP, SEXP tolSEXP) {
@@ -29,21 +72,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const arma::colvec& >::type theta(thetaSEXP);
     Rcpp::traits::input_parameter< const double >::type tol(tolSEXP);
     rcpp_result_gen = Rcpp::wrap(arma_Q0gnb(phi, theta, tol));
-    return rcpp_result_gen;
-END_RCPP
-}
-// uniKalmanLikelihood0b
-List uniKalmanLikelihood0b(const NumericVector& y, const List& mod, const NumericVector& nit, const LogicalVector& op, const LogicalVector& update);
-RcppExport SEXP _sarima_uniKalmanLikelihood0b(SEXP ySEXP, SEXP modSEXP, SEXP nitSEXP, SEXP opSEXP, SEXP updateSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const NumericVector& >::type y(ySEXP);
-    Rcpp::traits::input_parameter< const List& >::type mod(modSEXP);
-    Rcpp::traits::input_parameter< const NumericVector& >::type nit(nitSEXP);
-    Rcpp::traits::input_parameter< const LogicalVector& >::type op(opSEXP);
-    Rcpp::traits::input_parameter< const LogicalVector& >::type update(updateSEXP);
-    rcpp_result_gen = Rcpp::wrap(uniKalmanLikelihood0b(y, mod, nit, op, update));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -71,9 +99,11 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_sarima_uniKalmanLikelihood0b", (DL_FUNC) &_sarima_uniKalmanLikelihood0b, 5},
+    {"_sarima_uniKalmanForecast0b", (DL_FUNC) &_sarima_uniKalmanForecast0b, 3},
+    {"_sarima_uniKalmanForeUp0b", (DL_FUNC) &_sarima_uniKalmanForeUp0b, 5},
     {"_sarima_arma_Q0gnb0", (DL_FUNC) &_sarima_arma_Q0gnb0, 3},
     {"_sarima_arma_Q0gnb", (DL_FUNC) &_sarima_arma_Q0gnb, 3},
-    {"_sarima_uniKalmanLikelihood0b", (DL_FUNC) &_sarima_uniKalmanLikelihood0b, 5},
     {"_sarima_DAcvfWrtMA", (DL_FUNC) &_sarima_DAcvfWrtMA, 1},
     {"_sarima_MAacvf0", (DL_FUNC) &_sarima_MAacvf0, 1},
     {NULL, NULL, 0}

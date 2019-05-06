@@ -1,3 +1,5 @@
+- 2019-04-12 There is no README currently!
+
 - 2017-05-20 In version 0.4-4 (and maybe earlier) of package 'sarima', CRAN
      doesn't notice the non-existent function maxlag() called in
      setMethod("Ops", c(e1 = "Lagged", e2 = "Lagged"), ...)

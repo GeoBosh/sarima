@@ -36,8 +36,23 @@ setClass("SamplePartialVariances",        contains = c("PartialVariances",      
 
 .printFittedPart <- function(x){
     for(slot in slotNames("Fitted")){
-        cat('Slot ', slot, ':', "\n", sep = "")
-        print(slot(x, slot))
+        switch(slot,
+               varnames = {
+                   if(length(slot(x, slot)) == 0){
+                       cat('Slot ', slot, ':  ', " <not set>", "\n", sep = "")
+                   }else{
+                       cat('Slot ', slot, ':', "\n", sep = "")
+                       print(slot(x, slot))
+                   }
+               },
+               objectname = { 
+                   cat('Slot ', slot, ':  ', slot(x, slot), "\n", sep = "")
+               },
+               ## default       
+               { cat('Slot ', slot, ':', "\n", sep = "")
+                   print(slot(x, slot))
+               }
+        )
     }
 }
 
@@ -45,15 +60,41 @@ setMethod("show", signature(object = "Autocovariances"),
           function (object)
           {
               .reportClassName(object, "Autocovariances")
-              callNextMethod()
-          }
-          )
+                  # 2019-03-29 (similarly below) was: callNextMethod()
+                  #    is it better to drop prefix "Lag_":
+                  #        dataWithLagNames(object, "") 
+              print(dataWithLagNames(object)) 
+          })
 
 setMethod("show", signature(object = "Autocorrelations"),
           function (object)
           {
               .reportClassName(object, "Autocorrelations")
-              callNextMethod()
+              print(dataWithLagNames(object)) 
+          }
+          )
+
+setMethod("show", signature(object = "PartialAutocovariances"),
+          function (object)
+          {
+              .reportClassName(object, "PartialAutocovariances")
+              print(dataWithLagNames(object)) 
+          }
+          )
+
+setMethod("show", signature(object = "PartialAutocorrelations"),
+          function (object)
+          {
+              .reportClassName(object, "PartialAutocorrelations")
+              print(dataWithLagNames(object)) 
+          }
+          )
+
+setMethod("show", signature(object = "PartialVariances"),
+          function (object)
+          {
+              .reportClassName(object, "PartialVariances")
+              print(dataWithLagNames(object)) 
           }
           )
 
@@ -70,6 +111,24 @@ setMethod("show", signature(object = "SampleAutocovariances"),
           function (object)
           {
               .reportClassName(object, "SampleAutocovariances")
+              callNextMethod()
+              .printFittedPart(object)
+          }
+          )
+
+setMethod("show", signature(object = "SamplePartialAutocovariances"),
+          function (object)
+          {
+              .reportClassName(object, "SamplePartialAutocovariances")
+              callNextMethod()
+              .printFittedPart(object)
+          }
+          )
+
+setMethod("show", signature(object = "SamplePartialAutocorrelations"),
+          function (object)
+          {
+              .reportClassName(object, "SamplePartialAutocorrelations")
               callNextMethod()
               .printFittedPart(object)
           }
@@ -191,9 +250,12 @@ partialAutocovariances <- function(x, maxlag, ...){
             # TODO: for now don't use lag_0 since it is not supported consistently yet.
             # wrk <- autocorrelations(x, lag_0 = "var", ...) # TODO: put R(0) at lag(0)
         # TODO: only univariate for now
-    acvfobj <- autocovariances(x, maxlag, ...)
-    pacvf <- .comboAcvf(acvfobj, "pacvf")
+    acvfobj <- if(missing(maxlag))
+                   autocovariances(x, ...)
+               else
+                   autocovariances(x, maxlag, ...)
 
+    pacvf <- .comboAcvf(acvfobj, "pacvf")
     if(is(acvfobj, "SampleAutocovariances")){
         new("SamplePartialAutocovariances", data = pacvf, as(acvfobj, "Fitted"))
     }else
@@ -225,6 +287,31 @@ partialCoefficients <-
 backwardPartialCoefficients <- function(x, p) stop(x)
 setGeneric("partialCoefficients")	       # setGeneric("predictionCoefficients")	       
 setGeneric("backwardPartialCoefficients")   # setGeneric("backwardPredictionCoefficients")
+
+setMethod("autocovariances",
+          signature(x = "VirtualAutocovariances"),
+          function (x, ...)
+          {
+              stop("Can't compute autocovariances from objects from class ", class(x))
+          }
+          )
+
+setMethod("autocovariances",
+          signature(x = "Autocovariances", maxlag = "missing"),
+          function (x, ...)
+          {
+              x
+          }
+          )
+
+setMethod("autocovariances",
+          signature(x = "Autocovariances", maxlag = "ANY"),
+          function (x, maxlag, lag_0, ...)
+          {
+              x[] <- x[0:maxlag]   # may introduce NA's
+              x
+          }
+          )
 
 ## TODO: set default value for maxlag?
 setMethod("autocovariances",
@@ -276,7 +363,7 @@ setMethod("autocorrelations",
           function (x, maxlag, ...)
           {
               if(isS4(x))
-                  stop("there is no applicable method for this object's class")
+                  stop("there is no applicable method for object from class ", class(x))
 
               if(is.list(x) && all(names(x) %in% c("ar", "ma", "sigma2"))){
                   ## theoretical ARMA autocov
@@ -307,15 +394,12 @@ setMethod("autocorrelations",
           }
           )
 
-
-
-## seemingly redundant method but it does some non-trivial work ('maxlag' and possibly changes
-## the class of x.
 setMethod("autocorrelations",
           signature(x = "Autocorrelations", maxlag = "missing", lag_0 = "missing"),
           function (x, ...)
           {
-              as(x, "Autocorrelations")   # x may be from a subclass
+              ## as(x, "Autocorrelations")   # x may be from a subclass
+              x
           }
           )
 
@@ -323,63 +407,55 @@ setMethod("autocorrelations",
           signature(x = "Autocorrelations", maxlag = "ANY", lag_0 = "missing"),
           function (x, maxlag, lag_0, ...)
           {
-              new("Autocorrelations", data = x[0:maxlag]) # may introduce NA's
+              ## new("Autocorrelations", data = x[0:maxlag]) # may introduce NA's
+              x[] <- x[0:maxlag]   # may introduce NA's
+              x
           }
           )
+
 
 
 setMethod("autocorrelations",
           signature(x = "Autocovariances", maxlag = "ANY", lag_0 = "missing"),
           function (x, maxlag, ...)
           {
-              acr <- x[0:maxlag] / x[[0]] # TODO: Only univariate case!
-              new("Autocorrelations", data = acr)
+              if(missing(maxlag))
+                  maxlag <- maxLag(x)
+              acr <- x[0:maxlag] / x[[0]] # TODO: Only univariate case for now!
+              if(is(x, "Fitted"))
+                  new("SampleAutocorrelations", data = acr, as(x, "Fitted"))
+              else
+                  new("Autocorrelations", data = acr)
           }
           )
 
-setMethod("autocorrelations",
-          signature(x = "PartialAutocovariances", maxlag = "ANY", lag_0 = "missing"),
-          function (x, maxlag, ...)
-          {
-              acr <- modelCoef(x, "Autocorrelations")
-              res <- new("Autocorrelations", data = acr)
-              if(!missing(maxlag))
-                  res@data <- res[0:maxlag]     # may introduce NA's
-              res
-          }
-          )
+## .pacvf2acrf <- 
+##           function (x, maxlag, ...)
+##           {
+##               acr <- modelCoef(x, "Autocorrelations")
+##               res <- if(is(x, "Fitted"))
+##                          new("SampleAutocorrelations", data = acr, as(x, "Fitted"))
+##                      else
+##                          new("Autocorrelations", data = acr)
+##               if(!missing(maxlag))
+##                   res@data <- res[0:maxlag]     # may introduce NA's
+##               res
+##           }
+## 
+## setMethod("autocorrelations",
+##           signature(x = "PartialAutocovariances", maxlag = "ANY", lag_0 = "missing"),
+## 	  .pacvf2acrf
+##           )
 
 setMethod("autocorrelations",
           signature(x = "PartialAutocorrelations", maxlag = "ANY", lag_0 = "missing"),
           function (x, maxlag, ...)
           {
               acr <- modelCoef(x, "Autocorrelations")
-              res <- new("Autocorrelations", data = acr)
-              if(!missing(maxlag))
-                  res@data <- res[0:maxlag]     # may introduce NA's
-              res
-          }
-          )
-
-
-setMethod("autocorrelations",
-          signature(x = "SamplePartialAutocovariances", maxlag = "ANY", lag_0 = "missing"),
-          function (x, maxlag, ...)
-          {
-              acr <- modelCoef(x, "Autocorrelations")
-              res <- new("SampleAutocorrelations", data = acr, as(x, "Fitted"))
-              if(!missing(maxlag))
-                  res@data <- res[0:maxlag]     # may introduce NA's
-              res
-          }
-          )
-
-setMethod("autocorrelations",
-          signature(x = "SamplePartialAutocorrelations", maxlag = "ANY", lag_0 = "missing"),
-          function (x, maxlag, ...)
-          {
-              acr <- modelCoef(x, "Autocorrelations")
-              res <- new("SampleAutocorrelations", data = acr, as(x, "Fitted"))
+              res <- if(is(x, "Fitted"))
+                         new("SampleAutocorrelations", data = acr, as(x, "Fitted"))
+                     else
+                         new("Autocorrelations", data = acr)
               if(!missing(maxlag))
                   res@data <- res[0:maxlag]     # may introduce NA's
               res
@@ -437,17 +513,18 @@ setMethod("partialAutocorrelations",
           )
 
 
-setMethod("partialAutocorrelations",
-          signature(x = "PartialAutocovariances", maxlag = "ANY", lag_0 = "missing"),
-          function (x, maxlag, ...)
-          {
-              pacr <- modelCoef(x, "PartialAutocorrelations")
-              res <- new("PartialAutocorrelations", data = pacr)
-              if(!missing(maxlag))
-                  res@data <- res[0:maxlag]     # may introduce NA's
-              res
-          }
-          )
+## BUGFIX: this cannot be done, see details elsewhere in this document!
+## setMethod("partialAutocorrelations",
+##           signature(x = "PartialAutocovariances", maxlag = "ANY", lag_0 = "missing"),
+##           function (x, maxlag, ...)
+##           {
+##               pacr <- modelCoef(x, "PartialAutocorrelations")
+##               res <- new("PartialAutocorrelations", data = pacr)
+##               if(!missing(maxlag))
+##                   res@data <- res[0:maxlag]     # may introduce NA's
+##               res
+##           }
+##           )
 
 ## not needed since the default does the job
 ##
@@ -548,25 +625,25 @@ setAs("vector", "PartialAutocovariances",
 setAs("vector", "PartialAutocorrelations",
       function(from) new("PartialAutocorrelations", data = from))
 
-setAs("ANY", "PartialAutocovariances",
-      function(from){
-          partialAutocovariances(from)
-      })
-
-setAs("ANY", "PartialVariances",
-      function(from){
-          partialVariances(from)
-      })
-
-setAs("ANY", "Autocorrelations",
-      function(from){
-          autocorrelations(from)
-      })
-
-setAs("ANY", "PartialAutocorrelations",
-      function(from){
-          partialAutocorrelations(from)
-      })
+## setAs("ANY", "PartialAutocovariances",
+##       function(from){
+##           partialAutocovariances(from)
+##       })
+## 
+## setAs("ANY", "PartialVariances",
+##       function(from){
+##           partialVariances(from)
+##       })
+## 
+## setAs("ANY", "Autocorrelations",
+##       function(from){
+##           autocorrelations(from)
+##       })
+## 
+## setAs("ANY", "PartialAutocorrelations",
+##       function(from){
+##           partialAutocorrelations(from)
+##       })
 
 setAs("ANY", "ComboAutocovariances",
       function(from){
@@ -605,24 +682,34 @@ setAs("Autocorrelations", "ComboAutocorrelations",
           new("ComboAutocorrelations", data = wrk)
       })
 
-setAs("PartialVariances", "Autocovariances",
+## setAs("PartialVariances", "Autocovariances",
+##       function(from){
+##           stop("PartialVariances cannot be converted to the requested class.")
+##       })
+## 
+## setAs("PartialVariances", "ComboAutocovariances",
+##       function(from){
+##           stop("PartialVariances cannot be converted to the requested class.")
+##       })
+## 
+## setAs("PartialVariances", "Autocorrelations",
+##       function(from){
+##           stop("PartialVariances cannot be converted to the requested class.")
+##       })
+## 
+## setAs("PartialVariances", "ComboAutocorrelations",
+##       function(from){
+##           stop("PartialVariances cannot be converted to the requested class.")
+##       })
+
+setAs("Autocorrelations", "Autocovariances",
       function(from){
-          stop("PartialVariances cannot be converted to the requested class.")
+          new("Autocovariances", data = from[])
       })
 
-setAs("PartialVariances", "ComboAutocovariances",
+setAs("SampleAutocorrelations", "SampleAutocovariances",
       function(from){
-          stop("PartialVariances cannot be converted to the requested class.")
-      })
-
-setAs("PartialVariances", "Autocorrelations",
-      function(from){
-          stop("PartialVariances cannot be converted to the requested class.")
-      })
-
-setAs("PartialVariances", "ComboAutocorrelations",
-      function(from){
-          stop("PartialVariances cannot be converted to the requested class.")
+          new("SampleAutocovariances", data = from[], as(from, "Fitted"))
       })
 
 setMethod("modelCoef", c("VirtualAutocovariances", "missing", "missing"),
@@ -647,6 +734,12 @@ setMethod("modelCoef", c("VirtualAutocovariances", "VirtualAutocovariances", "mi
           function(object, convention){
               acvf <- modelCoef(object, "Autocovariances")
               modelCoef(acvf, convention)
+          }
+          )
+
+setMethod("modelCoef", c("VirtualAutocovariances", "Autocovariances", "missing"),
+          function(object, convention){
+              stop("Can't obtain autocovariances from object from class ", class(object))
           }
           )
 
@@ -764,11 +857,24 @@ setMethod("modelCoef", c("PartialAutocorrelations", "Autocorrelations", "missing
 ##not available on purpose
 ##setMethod("modelCoef", c("Autocorrelations", "PartialAutocovariances", "missing"))
 
-setMethod("modelCoef", c("PartialAutocovariances", "PartialAutocorrelations", "missing"),
-          function(object, convention){
-              pacr <- object[] / object[0] # TODO: currently scalar only
-          }
-          )
+## setMethod("modelCoef", c("PartialAutocovariances", "PartialAutocorrelations", "missing"),
+##           function(object, convention){
+##               ## pacr <- object[] / object[0] # TODO: currently scalar only
+##               stop("Partial autocorrelations are not uniquely determined by partial autocovariances")
+##           }
+##           )
+## 
+## setMethod("modelCoef", c("PartialAutocovariances", "Autocorrelations", "missing"),
+##           function(object, convention){
+##               ## pacfonly <- object[] / object[0] # TODO: currently scalar only
+##               ## ar <- FitAR::PacfToAR(pacfonly[-1]) # drop lag 0 !
+##               ##      # alternatively:
+##               ##      # acvf <- ltsa::tacvfARMA(phi = ar, maxLag = length(ar))
+##               ##      # acf <- acvf/acvf[0]
+##               ## ARMAacf(ar, lag.max = length(ar))
+##               stop("Autocorrelations are not uniquely determined by partial autocovariances")
+##           }
+##           )
 
 ## n     - length of time series, scalar
 ## npar  - no. estimated param, scalar
@@ -845,6 +951,8 @@ setMethod("acfIidTest", "missing",
 
 acfMaTest <- function(acf, ma,  n, nlags,
                        interval = 0.95){
+    if(!is(acf, "Lagged"))
+        acf <- Lagged(acf)
     maxlag <- max(nlags)
     usedLags <- 1:maxlag
 
@@ -871,7 +979,11 @@ acfMaTest <- function(acf, ma,  n, nlags,
         lq <- qnorm((1 - interval) / 2, sd = sqrt(diag(W)))
         int <- lq / sqrt(n)
 
-        int <- cbind(int, - int)
+        ## 2019-03-15 <BUGFIX> was:  int <- cbind(int, - int)
+        ##         also need levels for the lags!
+        rho_hat_null <- c(acf[seq_len(ma)], rep(0, length(int) - ma))
+        int <- rho_hat_null + cbind(int, - int) 
+
         res$ci <- int
         attr(res$ci, "level") <- interval
     }
@@ -942,6 +1054,28 @@ acfGarchTest <- function(acr, x, nlags, interval = 0.95){
     res
 }
 
+acfWnTest <- function(acr, x, nlags, interval = 0.95, ...){
+    maxlag <- max(nlags)
+    n <- length(x)
+
+    v <- nvarOfAcfKP(x, maxlag = maxlag, ...)
+    ## nvcov is diagonal in this case
+    Q <-  n * cumsum(acr[1:maxlag]^2 / v )[nlags]
+    
+    pval <- pchisq(Q, df = nlags, lower.tail = FALSE)
+    res <- list(test = cbind(h = nlags, Q = Q, pval = pval))
+
+    if(!is.null(interval)){
+        lq <- qnorm((1 - interval) / 2)
+            # se <- sqrt(diag(v))
+        se <- sqrt(v / n)
+        int <- lq * se
+        int <- cbind(int, -int)
+        res$ci <- int
+    }
+    res
+}
+
 whiteNoiseTest <- function(object, h0, ...){
     switch(h0,
            "iid" = {
@@ -949,6 +1083,10 @@ whiteNoiseTest <- function(object, h0, ...){
            },
            "garch" = {
                acfGarchTest(object, ...) # no method yet for this case
+           },
+           "sv" = ,
+           "arch-type" = {
+               acfWnTest(object, ...)
            },
            ##default
            stop("Unrecognised null hypothesis")
@@ -1015,6 +1153,8 @@ setMethod("confint", "SampleAutocorrelations",
                             legend = TRUE, ylim = c(NA, NA), ylim.fac = 1.2,
                             xlab = "Lag",
 			    ci.lty = 2:3, # 2017-08-29 new, corresponding changes below
+                            h0 = "garch", # 2019-04-09 new to accommodate the new white noise test
+                                          #                (Kokoszka-Politis)
                             ...){
     if(missing(nlags))
         nlags <- seq(from = maxLag(x), to = 1, by = -5)
@@ -1057,13 +1197,13 @@ setMethod("confint", "SampleAutocorrelations",
             )
 
     if(!missing(data)){
-        x.garch <- whiteNoiseTest(x, h0 = "garch", x = data, nlags = nlags)
+        x.garch <- whiteNoiseTest(x, h0 = h0, x = data, nlags = nlags)
         .cilines(1:nrow(x.garch$ci), x.garch$ci, col = "blue", lty = ci.lty[2])
     }
 
     ## see ?legend, example thanks to Uwe Ligges
     if(legend){
-        legend("topright", legend = c("H0: iid", "H0: garch"),
+        legend("topright", legend = c("H0: iid", paste0("H0: ", h0)),
                col = c("brown ", "blue"), lty = ci.lty )
     }
 
@@ -1181,7 +1321,8 @@ nvcovOfAcf <- function(model, maxlag){
     res <- matrix(NA_real_, nrow = maxlag, ncol = maxlag)
     for(k in 1:maxlag){
         for(l in k:maxlag){
-            res[k, l] <- Rg[l - k] + Rg[l + k] - 2 * Rg[k] * r[l] - 2 * Rg[l] * r[k] + 2 * Rg[0] * r[k] * r[l]
+            res[k, l] <- Rg[l - k] + Rg[l + k] - 2 * Rg[k] * r[l] - 
+                                                 2 * Rg[l] * r[k] + 2 * Rg[0] * r[k] * r[l]
             if(k != l)
                 res[l, k] <- res[k, l]
         }
@@ -1189,23 +1330,59 @@ nvcovOfAcf <- function(model, maxlag){
     res / R[0]^2
 }
 
-nvcovOfAcfBD <- function(acf, ma, maxlag){
+nvcovOfAcfBD <- function(acf, ma = NULL, maxlag){
+    maacf <- new("Lagged1d", data = acf[])
+    max_avail_lag <- maxLag(maacf)
+
+    if(is.null(ma))
+        ma <- max_avail_lag
+    else
+        stopifnot(ma <= max_avail_lag)
+
+    if(max_avail_lag < 2 * maxlag + ma)
+        max_avail_lag <- 2 * maxlag + ma
+
+    if(ma < max_avail_lag)
+        maacf[(ma + 1) : max_avail_lag] <- 0
+
     ## eq. 7.2.6. BD, p. 222
     res <- matrix(NA_real_, nrow = maxlag, ncol = maxlag)
-    for(j in 1:maxlag){
-        for(i in j:maxlag){
+    for(j in seq_len(maxlag)){
+        for(i in j:maxlag){            # i >= j
             maxk <- ma + max(i, ma)
             val <- 0
             for(k in 1 : maxk){
-                val <- val + (acf[k + i] + acf[abs(k - i)] - 2 * acf[i] * acf[k]) *
-                             (acf[k + j] + acf[abs(k - j)] - 2 * acf[j] * acf[k])
+                ## k + i  can be up to  ma + 2*maxlag
+                val <- val + (maacf[k + i] + maacf[abs(k - i)] - 2 * maacf[i] * maacf[k]) *
+                             (maacf[k + j] + maacf[abs(k - j)] - 2 * maacf[j] * maacf[k])
             }
             res[i, j] <- val
             if(i != j)
                 res[j, i] <- res[i, j]
         }
     }
+
     res
+}
+
+nvarOfAcfKP <- function(x, maxlag, center = FALSE, acfscale = c("one", "mom")){
+    acfscale <- match.arg(acfscale)
+    if(center)
+        x <- x - mean(x)
+    acv <- acf(x^2, lag.max = maxlag, demean = FALSE, type = "covariance", plot = FALSE)
+    acv <- acv$acf[ , , ] # make numeric, or more explicitly: acv$acf[ , , 1]
+    ## the denominator, NOTE: it is the square of the lag 0 acv of x, not x^2
+    n <- length(x)
+    den <- (sum(x^2) / n) ^ 2
+    switch(acfscale,
+           one = acv[-1] / den,
+           mom = {
+               fac <- n / (n - seq_len(maxlag))
+               fac * acv[-1] / den
+           },
+           ## default
+           stop("argument 'acfscale' must be one of 'one', 'mom' or abbreviation thereof")
+           )
 }
 
 rgarch1p1 <- function(n, alpha, beta, omega, n.skip = 100){

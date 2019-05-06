@@ -1,6 +1,6 @@
 \name{filterPolyCoef-methods}
 \docType{methods}
-\alias{filterPolyCoef}
+%\alias{filterPolyCoef}
 \alias{filterPolyCoef-methods}
 \alias{filterPolyCoef,BJFilter-method}
 \alias{filterPolyCoef,SarimaFilter-method}
@@ -12,16 +12,16 @@
 \description{
   Methods for \code{filterPolyCoef} in package \pkg{sarima}.
 }
-\usage{
-filterPolyCoef(object, lag_0 = TRUE, \dots)
-}
-\arguments{
-  \item{object}{an object.}
-  \item{lag_0}{
-    if \code{TRUE}, the default, include the coefficient of order zero.
-  }
-  \item{...}{further arguments for methods.}
-}
+% \usage{
+% filterPolyCoef(object, lag_0 = TRUE, \dots)
+% }
+% \arguments{
+%   \item{object}{an object.}
+%   \item{lag_0}{
+%     if \code{TRUE}, the default, include the coefficient of order zero.
+%   }
+%   \item{...}{further arguments for methods.}
+% }
 \section{Methods}{
 
   The \code{filterPolyCoef} methods return results with the same

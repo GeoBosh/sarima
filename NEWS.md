@@ -1,13 +1,38 @@
-# sarima 0.7-7
+# sarima 0.8.1
+
+
+# sarima 0.8.0 (CRAN)
+
+* new test for GARCH-type noise based on Kokoszka and Politis result.
+
+* more complete sets of methods for several functions. In particular, there was
+  infinite recursion in some cases.
+
+* bug fixes
+
+* improved `show()` methods for autocovariance objects
+
+* numerous changes in `sarima()`
+
+* cater for changing function names in the forthcoming release 2.0.0 of package
+  `PolynomF`. 
 
 * Now require `lagged (>= 0.2.1)` (`lagged 0.2.0` is not sufficient since
   `nSeasons()` and `nSeasons<-()` accidentally were not exported by it).
-  `lagged (>= 0.2.1)` will have to be put on CRAN before any future release of
-  sarima. 
 
 * Vignette `garch_tests_example` now imports the data using `system.file()`,
   so that the examples can be run easily by the user.
 
+* new function `makeArimaGnb()` for setting up the state space form of ARIMA
+  models. It is a modification of `stats::makeARIMA()` with Georgi's method for
+  computation of the stationary part of the initial state covariance matrix.
+  The methods implemented in `stats::makeARIMA()`are commented out since they
+  are not exported from package `stats`.
+  
+* `sarima()` gets an argument to specify the method to use for the stationary
+  part of P0 (see above). The available options are the ones in `makeARIMA()` 
+  ("Rossignol2011" and "Gardner1980") plus Georgi's method ("gnb"). The default
+  is "Rossignol2011".
 
 
 # sarima 0.7-6 (CRAN)

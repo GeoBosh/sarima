@@ -1,8 +1,8 @@
 Package: sarima
 Type: Package
 Title: Simulation and Prediction with Seasonal ARIMA Models
-Version: 0.7.8
-Date: 2018-08-23
+Version: 0.8.1
+Date: 2019-04-15
 Authors@R: c( person(given = c("Georgi", "N."), 
                      family = "Boshnakov", 
                      role = c("aut", "cre"), 
@@ -19,6 +19,7 @@ Description: Functions, classes and methods for time series modelling with ARIMA
     ARIMA models with trends, exogenous variables and arbitrary roots on the
     unit circle, which can be fixed or estimated.
 Depends:
+    R (>= 2.10),
     FitAR,
     stats4
 Imports:
@@ -30,7 +31,8 @@ Imports:
     Rdpack,
     KFAS,
     Rcpp (>= 0.12.14),
-    numDeriv
+    numDeriv,
+    dplyr
 Suggests:
     fGarch,
     fImport,
@@ -51,6 +53,11 @@ Collate:
     wrapKFAS.R
     arma_Q0dotdotstats.R
     fkf.R
-    sarimaFormulae.R
+    Kalman.R
+    fitTools.R
+    periodogram.R
+    predict.Sarima.R
+    zzz.R
 LinkingTo: Rcpp, RcppArmadillo
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
+NeedsCompilation: yes

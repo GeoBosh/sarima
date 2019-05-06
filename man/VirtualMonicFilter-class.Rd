@@ -115,3 +115,4 @@ No methods defined with class "VirtualMonicFilter" in the signature.
 %showClass("VirtualMonicFilter")
 %}
 \keyword{classes}
+\keyword{internal}

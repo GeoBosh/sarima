@@ -33,6 +33,9 @@ importFrom(numDeriv, hessian)
 
 import(KFAS)
 
+# 2018-10-10 periodogram function
+importFrom(dplyr, mutate, select)
+importFrom(stats, frequency, spectrum)
 
 ##S3method(print, sarima)
 S3method(print, simSarimaFun)
@@ -117,11 +120,13 @@ export(
     whiteNoiseTest,
     acfMaTest,
     acfGarchTest,
+    acfWnTest,
 
     ## Bartlet
     acfOfSquaredArmaModel,
     nvcovOfAcf,
     nvcovOfAcfBD,
+    nvarOfAcfKP,
 
     nSeasons,
 
@@ -137,7 +142,10 @@ export(
     MaModel,
 
     ## internal
-    rgarch1p1
+    rgarch1p1,
+    
+    ## periodogram
+    periodogram
 )
 
 

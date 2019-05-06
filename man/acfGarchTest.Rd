@@ -1,29 +1,40 @@
 \name{acfGarchTest}
 \alias{acfGarchTest}
-%- Also NEED an '\alias' for EACH other topic documented here.
+\alias{acfWnTest}
 \title{Test for GARCH white noise}
 \description{Carry out a test for GARCH white noise}
 \usage{
 acfGarchTest(acr, x, nlags, interval = 0.95)
+
+acfWnTest(acr, x, nlags, interval = 0.95, \dots)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{acr}{autocorrelations.}
   \item{x}{time series.}
   \item{nlags}{how many lags to use.}
   \item{interval}{If not NULL, compute also confidence intervals with
     the specified coverage probability.}
+  \item{...}{~~ TODO: describe this argument. ~~}
 }
 \details{
-
-  \code{acfGarchTest} performs a test for uncorrelatedness of a time
-  series. The null hypothesis is that the time series is GARCH,
-  see Francq \& Zakoian (2010).
 
   Unlike the autocorrelation IID test, the time series is needed here to
   estimate the covariance matrix of the autocorrelations under the null
   hypothesis.
 
+  \code{acfGarchTest} performs a test for uncorrelatedness of a time
+  series. The null hypothesis is that the time series is GARCH,
+  see \insertRef{FrancqZakoian2010garch}{sarima}.
+
+  \code{acfWnTest} performs a test for uncorrelatedness of a time
+  series under a weaker null hypothesis.
+  The null hypothesis is that the time series is GARCH-type or
+  from a stochasitc volatily model,
+  see   \insertCite{kokoszka2011nonlinearity}{sarima}.
+
+  See the references for details and precise specification of the
+  hypotheses.
+  
   The format of the return vaue is the same as for \code{acfIidTest}.
 
 }
@@ -31,7 +42,7 @@ acfGarchTest(acr, x, nlags, interval = 0.95)
   a list with components "test" and "ci"
 }
 \references{
-  \insertRef{FrancqZakoian2010garch}{sarima}
+  \insertAllCited{}
 }
 \author{Georgi N. Boshnakov}
 %\note{
@@ -63,6 +74,10 @@ plot(x.pacf, data = x)
 
 ## use 90% limits:
 plot(x.acf, data = x, interval = 0.90)
+
+acfWnTest(x.acf, x = x, nlags = c(5,10,20))
+nvarOfAcfKP(x, maxlag = 20)
+whiteNoiseTest(x.acf, h0 = "arch-type", x = x, nlags = c(5,10,20))
 }
 \keyword{ts}
 \keyword{garch}

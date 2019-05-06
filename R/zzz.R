@@ -1,0 +1,13 @@
+.onLoad <- function(libname, pkgname){
+    ## TODO: when Polynom 2.0.0 or later has een around for some time,
+    ##       rename the calls in the package with the new names
+    ##       and reverse the check here to
+    ##                 utils::packageVersion("PolynomF") < "2.0.0"
+    if (utils::packageVersion("PolynomF") >= "2.0.0") {
+                                               # or: envir = asNamespace("sarima")
+        assign("as.polylist", PolynomF::as_polylist, envir = topenv())
+        ## add other renamed functions from PolynomF
+    }
+
+    NULL
+}

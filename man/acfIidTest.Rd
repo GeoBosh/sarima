@@ -33,12 +33,15 @@ acfIidTest(acf, n, npar = 0, nlags = npar + 1,
     logical flag, if \code{TRUE} return a CI for each lag up to
     \code{max(nlags)}. Used only if CI's are requested.
   }
-  \item{...}{currently ignored.}
+  \item{...}{
+    additional arguments passed on to methods. In particular, some
+    methods have argument \code{x} for the time series.
+  }
 }
 \details{
 
   Performs one of several tests for IID based on sample
-  autocorrelations. A correction of the degerees of freedom
+  autocorrelations. A correction of the degrees of freedom
   for residuals from fitted models can be specified with argument
   \code{npar}. \code{nlags} specifies the number of autocorrelations to
   use in the test, it can be a vector to request several tests.
@@ -76,7 +79,7 @@ acfIidTest(acf, n, npar = 0, nlags = npar + 1,
 
 \item{\code{signature(acf = "missing")}}{
 
-  The autocorrelations are computed from argument \code{x}.
+  The autocorrelations are computed from argument \code{x} (the time series).
 
 }
 

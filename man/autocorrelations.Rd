@@ -46,12 +46,16 @@ partialVariances(x, \dots)
   The other functions described are similar for other second order
   properties of \code{x}.
 
-  These functions return objects from suitable classes. A value for lag
-  zero is included (and is accessed by \code{r[0]}). Functions computing
-  autocorrelations and partial autocorrelations have argument
-  \code{lag_0} --- if it is set to \code{FALSE}, the value for lag zero
-  is dropped from the result and the returned object is an ordinary
-  vector or array, as appropriate.
+  These functions return objects from suitable classes, all inheriting
+  from \code{"Lagged"}. The latter means that indexing starts from zero,
+  so the value for lag zero is accessed by \code{r[0]}). Subscripting
+  always returns the underlying data unclassed (i.e. ordinary vectors or
+  arrays). In particular, \code{"[]"} extracts the underlying data.
+
+  Functions computing autocorrelations and partial autocorrelations have
+  argument \code{lag_0} --- if it is set to \code{FALSE}, the value for
+  lag zero is dropped from the result and the returned object is an
+  ordinary vector or array, as appropriate.
 
   See the individual methods for the format of the result and further
   details.
@@ -82,6 +86,7 @@ autocorrelations(v1, maxlag = 10, lag_0 = FALSE) # same
 partialAutocorrelations(v1)
 partialAutocorrelations(v1, maxlag = 10)
 
+## compute 2nd order properties from raw data
 autocovariances(v1)
 autocovariances(v1, maxlag = 10)
 partialAutocovariances(v1, maxlag = 6)
@@ -89,10 +94,40 @@ partialAutocovariances(v1)
 partialVariances(v1, maxlag = 6)
 pv1 <- partialVariances(v1)
 
+## compute 2nd order properties from raw data
 autocovariances(AirPassengers, maxlag = 6)
 autocorrelations(AirPassengers, maxlag = 6)
 partialAutocorrelations(AirPassengers, maxlag = 6)
 partialAutocovariances(AirPassengers, maxlag = 6)
 partialVariances(AirPassengers, maxlag = 6)
+
+acv <- autocovariances(AirPassengers, maxlag = 6)
+autocovariances(acv) # no-op
+autocovariances(acv, maxlag = 4) # trim the available lags
+
+## compute 2nd order properties from sample autocovariances
+acr <- autocorrelations(acv)
+acr
+partialAutocorrelations(acv)
+partialAutocovariances(acv)
+partialVariances(acv)
+
+## compute 2nd order properties from sample autocorrelations
+acr
+partialAutocorrelations(acr)
+
+## These cannot be computed, since the variance is needed but unknown:
+##     autocovariances(acr)
+##     partialAutocovariances(acr)
+##     partialVariances(acr)
+
+## to treat autocorrelations as autocovariances, 
+## convert them to autocovariances explicitly:
+as(acr, "Autocovariances")
+as(acr, "SampleAutocovariances")
+
+partialVariances(as(acr, "Autocovariances"))
+partialVariances(as(acr, "SampleAutocovariances"))
 }
 \keyword{ts}
+

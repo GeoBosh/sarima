@@ -46,14 +46,25 @@ xarmaFilter(model, x = NULL, eps = NULL, from = NULL, whiten = FALSE,
 
   }
 
-  The relation between \code{x} and \code{eps} is assumed to be the
-  following. Let
+  \code{model$center} and \code{model$intercept} are scalars and usually
+  at most one of them is nonzero. They can be considered part of the
+  model specification. In contrast, arguments \code{xcenter} and
+  \code{xintercept} are vectors of the same length as \code{x}. They can
+  represent contributions from covariate variables. Usually at most one
+  of \code{xcenter} and \code{xintercept} is used.
+
+  The description below uses \eqn{\mu_t}{mu(t)} and \eqn{c_t}{c(t)} for
+  the contributions by \code{model$center} plus \code{xcenter} and
+  \code{model$intercept} plus \code{xintercept}, respectively.
+  The time series \eqn{\{x_t\}} and \eqn{\{\varepsilon_t\}} are
+  represented by \code{x} and \code{eps} in the \R code.
+  Let
       \deqn{y_t = x_t - \mu_t}{y(t)=x(t)-mu(t)}
-  be the centered series, where \eqn{\mu_t}{mu(t)} is obtained from
-  \code{center} and \code{xcenter} and is not necessarilly the mean,
-  see below. The equation relating the
-  centered series, \eqn{y_t=x_t - \mu_t}{y(t)=x(t)-mean(t)}, and
-  \code{eps} is the following:
+  be the centered series.  where the centering term \eqn{\mu_t}{mu(t)}
+  is essentially the sum of \code{center} and \code{xcenter} and is not
+  necessarilly the mean.  The equation relating the centered series,
+  \eqn{y_t=x_t - \mu_t}{y(t)=x(t)-mu(t)}, and \code{eps} is the
+  following:
     \deqn{ y_t
     =   c_t
       + \sum_{i=1}^{p} \phi(i)y            _{t-i}
@@ -63,12 +74,24 @@ xarmaFilter(model, x = NULL, eps = NULL, from = NULL, whiten = FALSE,
       = c(t)
       + \sum_\{i=1\}^\{p\} phi(i) y(t-i)
       + \sum_\{i=1\}^\{q\} theta(i)e(t-i)
-      + e(t)
+      + e(t),
     }
   where \eqn{c_t}{c(t)} is the intercept (basically the sum of
-  \code{intercept} with \code{xintercept}. The inverse
-  filter is obtained by writing this as an equation expressing
-  \eqn{\varepsilon_t} in terms of the remaining quantities:
+  \code{intercept} with \code{xintercept}).
+
+  If \code{whiten = FALSE}, \eqn{y_t}{y(t)} is computed for
+  \code{t=from,...,n} using the above formula, i.e. the filter is
+  applied to get \code{y} from \code{eps} (and some initial values). If
+  \code{eps} is white noise, it can be said that \code{y} is obtained by
+  ``colouring'' the white noise \code{eps}. This can be used, for
+  example, to simulate ARIMA time series.  Finally, the centering term
+  is added back, \eqn{x_t=y_t+\mu_t} for \code{t=from,...,n}, and the
+  modified \code{x} is returned.  The first \code{from - 1} elements of
+  \code{x} are left unchanged.
+
+
+  The inverse filter is obtained by rewriting the above equation as an equation
+  expressing \eqn{\varepsilon_t} in terms of the remaining quantities:
   \deqn{ \varepsilon_t
     = - c_t
       - \sum_{i=1}^{q} \theta(i)\varepsilon_{t-i}
@@ -80,19 +103,15 @@ xarmaFilter(model, x = NULL, eps = NULL, from = NULL, whiten = FALSE,
       - \sum_\{i=1\}^\{p\} phi(i) y(t-i)
       + y(t)
     }
-  If \code{whiten = TRUE}, \code{xarmaFilter} uses the above formula to
-  compute the filtered values of \code{x} for \code{t=from,...,n},
-  i.e. whitening the time series if \code{eps} is white noise.  If
-  \code{whiten = FALSE}, \code{eps} is computed, i.e. the inverse filter
-  is applied to get \code{x} from \code{eps}, i.e. ``colouring'' \code{eps}.
-  In both cases the first few values in \code{x} and/or \code{eps} are
-  used as initial values.
 
-  Essentially, the centering is subtracted from the series to obtain the
-  centred series, say \code{y}. Then either \code{y} is filtered to
-  obtain \code{eps} or the inverse filter is applied to obtain \code{y}
-  from \code{eps}. Finally the mean is added back to \code{y} and the
-  result returned.
+  If \code{whiten = TRUE}, \code{xarmaFilter} uses this formula for
+  \code{t=from,...,n} to compute \code{eps} from \code{y} (and some
+  initial values). If \code{eps} is white noise, then it can be said
+  that the time series \code{y} has been whitened.
+
+  In both cases the first few values in \code{x} and/or
+  \code{eps} are used as initial values.
+
 
   The centering is formed from \code{model$center} and argument
   \code{xcenter}.  If \code{model$center} is supplied it is recycled
@@ -101,37 +120,31 @@ xarmaFilter(model, x = NULL, eps = NULL, from = NULL, whiten = FALSE,
   from \code{x}. If both \code{model$center} and \code{xcenter} are
   supplied their sum is subtracted from \code{x}.
 
-  The above gives a vector \code{y}, \eqn{y_t=x_t -
-  \mu_t}{y(t)=x(t)-mean(t)}, which is then filtered.  If the mean is
-  zero, \eqn{y_t=x_t}{y[t]=x[t]} in the formulas below.
-
-  Finally, the mean is added back, \eqn{x_t=y_t+\mu_t}, and the new
-  \code{x} is returned.
-
-  \code{xarmaFilter} can be used to simulate arma series with the
+  \code{xarmaFilter} can be used to simulate ARMA series with the
   default value of \code{whiten = FALSE}. In this case \code{eps} is the
   input series and \code{y} the output:
   Then \code{model$center} and/or \code{xcenter} are added to \code{y}
   to form the output vector \code{x}.
 
-  Residuals corresponding to a series \code{y} can be obtained by
-  setting \code{whiten = TRUE}. In this case \code{y} is the input series.
+  Residuals corresponding to a series \code{x} can be obtained by
+  setting \code{whiten = TRUE}. In this case \code{x} is the input series.
   The elements of the output vector \code{eps} are calculated by the
   formula for \eqn{\varepsilon_{t}}{e(t)} given above.
   There is no need in this case to restore \code{x} since \code{eps} is
   returned.
 
   In both cases any necessary initial values are assumed to be already
-  in the vectors. Argument \code{from} should be not smaller than the
+  in the vectors and provide the first \code{from - 1} values in the
+  returned vectors.  Argument \code{from} should not be smaller than the
   default value \code{max(p,q)+1}.
 
   \code{xarmaFilter} calls the lower level function \code{coreXarmaFilter}
   to do the computation.
-
 }
 \value{
-  The filtered series: the modified \code{x} if \code{whiten = FALSE}, the
-  modified \code{eps} if \code{whiten = TRUE}.
+  the result of applying the filter or its inverse, as descibed in Details:
+    if \code{whiten = FALSE}, the modified \code{x};
+    if \code{whiten = TRUE}, the modified \code{eps}.
 }
 %\references{ }
 \author{Georgi N. Boshnakov}
@@ -143,9 +156,10 @@ xarmaFilter(model, x = NULL, eps = NULL, from = NULL, whiten = FALSE,
 %  which does the computations
 %}
 \examples{
+## define a seasonal ARIMA model
 m1 <- new("SarimaModel", iorder = 1, siorder = 1, ma = -0.3, sma = -0.1, nseasons = 12)
+
 model0 <- modelCoef(m1, "ArmaModel")
-## model1 <- filterCoef(model1)
 model1 <- as(model0, "list")
 
 ap.1 <- xarmaFilter(model1, x = AirPassengers, whiten = TRUE)

@@ -2,7 +2,7 @@
 \alias{filterCoef}
 \alias{filterOrder}
 \alias{filterPoly}
-%\alias{filterPolyCoef}
+\alias{filterPolyCoef}
 \title{
 
   Coefficients and other basic properties of filters
@@ -20,12 +20,12 @@ filterOrder(object, \dots)
 
 filterPoly(object, \dots)
 
-%filterPolyCoef(object, lag_0 = TRUE, \dots)
+filterPolyCoef(object, lag_0 = TRUE, \dots)
 }
 \arguments{
   \item{object}{object.}
   \item{convention}{convention for the sign.}
-  %\item{lag_0}{if FALSE, drop the constant term.}
+  \item{lag_0}{if FALSE, drop the coefficient of order zero.}
   \item{\dots}{further arguments for methods.}
 }
 \details{
@@ -36,6 +36,9 @@ filterPoly(object, \dots)
   \code{filterPoly}, returns the characteristic polynomial,
   \code{filterPolyCoef} gives the coefficients of the characteristic
   polynomial.
+
+  For further details on argument \code{convention} see 
+  \code{\link{filterCoef-methods}}.
 
   What exactly is returned depends on the specific filter classes, see
   the description of the corresponding methods. For the core filters,
@@ -65,6 +68,12 @@ filterPoly(object, \dots)
   \code{\link{modelPoly}},
   \code{\link{modelPolyCoef}},
   for the recommended higher level alternatives for models.
+
+  \code{\link{filterOrder-methods}},
+  \code{\link{filterCoef-methods}},
+  \code{\link{filterPoly-methods}},
+  \code{\link{filterPolyCoef-methods}},
+  for more information on the methods and the arguments.
 }
 \examples{
 filterPoly(as(c(0.3, 0.5), "BJFilter"))   # 1 - 0.3*x - 0.5*x^2

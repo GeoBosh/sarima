@@ -75,7 +75,7 @@ test_that("sarima() works ok", {
 ## bad initial values:
 expect_error(   
     sarima(y ~ 1 + t| ar(2, c(0.5, -0.8), atanh.tr = TRUE) + ma(2, c(-0.3,0.8), atanh.tr = TRUE), 
-           data = data.frame(y = as.vector(yKFAS)), ss.method = "base")
+           data = data.frame(y = as.vector(yKFAS)), ss.method = "base", SSinit = "Gardner1980")
 ## The hessian is degenerate probably because the MA part gets to large values of the transformed
 ##    parameters which have parcors = tanh() = 1 or -1 (but I haven't investigated futher).  
 ##
@@ -87,15 +87,18 @@ expect_error(
 expect_warning( capture.output( # wrap in capture.output, to prevent printing during devtools::test()
     print( 
     sarima(y ~ 1 + t| ar(2, c(0.5, -0.8), atanh.tr = TRUE) + ma(2, c(-0.3,0.8), atanh.tr = TRUE), 
-           data = data.frame(y = as.vector(yKFAS)), ss.method = "sarima") )
+           data = data.frame(y = as.vector(yKFAS)), ss.method = "sarima", SSinit = "Gardner1980") )
     )
 , "NaNs produced")
 
     sarima(y ~ 1 + t| ar(2, c(0.5, -0.8), atanh.tr = FALSE) + ma(2, c(-0.3,0.8), atanh.tr = FALSE), 
-           data = data.frame(y = as.vector(yKFAS)), ss.method = "base")
+           data = data.frame(y = as.vector(yKFAS)), ss.method = "base", SSinit = "Gardner1980")
 
 expect_warning(sarima(y ~ 1 + t| ar(2, c(0.5, -0.8), atanh.tr = FALSE) + ma(2, c(-0.3,0.8), atanh.tr = FALSE), 
-           data = data.frame(y = as.vector(yKFAS)), ss.method = "sarima"), "NaNs produced")
+           data = data.frame(y = as.vector(yKFAS)), ss.method = "sarima", SSinit = "Gardner1980"), "NaNs produced")
+
+expect_warning(sarima(y ~ 1 + t| ar(2, c(0.5, -0.8), atanh.tr = FALSE) + ma(2, c(-0.3,0.8), atanh.tr = FALSE), 
+           data = data.frame(y = as.vector(yKFAS)), ss.method = "sarima", SSinit = "gnb"), "NaNs produced")
 
 
     sarima(y ~ 1 + .cs(12, 1)| ar(2, c(0.5, -0.8)) + ma(2, c(-0.3,0.8)), 

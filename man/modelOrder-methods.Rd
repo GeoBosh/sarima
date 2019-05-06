@@ -12,6 +12,7 @@
 \alias{modelOrder,SarimaModel,MaModel-method}
 %\alias{modelOrder,SarimaModel,missing-method}
 \alias{modelOrder,VirtualFilterModel,missing-method}
+\alias{modelOrder,VirtualFilterModel,character-method}
 \title{Get the order of a model}
 \description{Get the order of a model.}
 \section{Methods}{
@@ -25,9 +26,6 @@
 %%  ~~describe this method here~~
 }
 
-\item{\code{signature(object = "ArmaModel", convention = "missing")}}{
-%%  ~~describe this method here~~
-}
 
 \item{\code{signature(object = "SarimaModel", convention = "ArFilter")}}{
 %%  ~~describe this method here~~
@@ -53,10 +51,11 @@
 %%  ~~describe this method here~~
 }
 
-\item{\code{signature(object = "SarimaModel", convention = "missing")}}{
+
+\item{\code{signature(object = "VirtualFilterModel", convention = "missing")}}{{
 %%  ~~describe this method here~~
 }
-\item{\code{signature(object = "VirtualFilterModel", convention = "missing")}}{{
+}\item{\code{signature(object = "VirtualFilterModel", convention = "character")}}{{
 %%  ~~describe this method here~~
 }
 }}}

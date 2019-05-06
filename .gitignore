@@ -1,3 +1,12 @@
+auto/
+vignettes/white_noise_tests-*.pdf
+vignettes/white_noise_tests.aux
+vignettes/white_noise_tests.blg
+vignettes/white_noise_tests.log
+vignettes/white_noise_tests.out
+vignettes/white_noise_tests.tex
+
+
 .RData
 /*.tar.gz
 
@@ -15,6 +24,9 @@
 .project
 .settings/
 inst/doc
+## Windows
+src-i386/
+src-x64/
 
 ## Core latex/pdflatex auxiliary files:
 *.aux

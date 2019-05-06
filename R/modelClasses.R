@@ -240,9 +240,33 @@ setMethod("modelPoly", c("VirtualMonicFilter", "missing"),
          }
          )
 
+setMethod("modelPoly", c("VirtualFilterModel", "character"),
+          function(object, convention){
+              if(class(object) == convention)
+                  modelPoly(object)
+              else{
+                  convention <- new(convention)  # classes that allow other things here
+                                                 # should provide their own methods
+                  modelPoly(object, convention  = convention )
+              }
+          }
+          )
+
 setMethod("modelPolyCoef", c("VirtualMonicFilter", "missing"),
           function(object, lag_0 = TRUE){
               filterPolyCoef(object, lag_0 = lag_0)
+          }
+          )
+
+setMethod("modelPolyCoef", c("VirtualFilterModel", "character"),
+          function(object, convention){
+              if(class(object) == convention)
+                  modelPolyCoef(object)
+              else{
+                  convention <- new(convention)  # classes that allow other things here
+                                                 # should provide their own methods
+                  modelPolyCoef(object, convention  = convention )
+              }
           }
           )
 
@@ -383,6 +407,19 @@ setMethod("modelCoef", c("SarimaModel", "MaModel", "missing"),
 setMethod("modelOrder", c("VirtualFilterModel", "missing"),
           function(object){
               filterOrder(object)
+          }
+          )
+
+
+setMethod("modelOrder", c("VirtualFilterModel", "character"),
+          function(object, convention){
+              if(class(object) == convention)
+                  modelOrder(object)
+              else{
+                  convention <- new(convention)  # classes that allow other things here
+                                                 # should provide their own methods
+                  modelOrder(object, convention  = convention )
+              }
           }
           )
 

@@ -34,6 +34,7 @@
 \alias{modelCoef,VirtualFilterModel,missing,missing-method}
 \alias{modelCoef,VirtualFilterModel,SP,missing-method}
 \alias{modelCoef,ArmaModel,ArmaFilter,missing-method}
+\alias{modelCoef,VirtualAutocovariances,Autocovariances,missing-method}
 \title{Methods for generic function modelCoef}
 \description{Methods for generic function modelCoef.}
 \section{Methods}{
@@ -121,10 +122,7 @@
 \item{\code{signature(object = "VirtualAutocovariances", convention = "VirtualAutocovariances", component = "missing")}}{
 %%  ~~describe this method here~~
 }
-\item{\code{signature(object = "PartialAutocovariances", convention = "PartialAutocorrelations", component = "missing")}}{{
-%%  ~~describe this method here~~
-}
-}\item{\code{signature(object = "SarimaModel", convention = "ArModel", component = "missing")}}{{
+\item{\code{signature(object = "SarimaModel", convention = "ArModel", component = "missing")}}{{
 %%  ~~describe this method here~~
 }
 }\item{\code{signature(object = "SarimaModel", convention = "MaModel", component = "missing")}}{{
@@ -147,6 +145,10 @@
 }
 }\item{\code{signature(object = "ArmaModel", convention = "ArmaFilter", 
           component = "missing")}}{{
+%%  ~~describe this method here~~
+}
+}\item{\code{signature(object = "VirtualAutocovariances", 
+          convention = "Autocovariances", component = "missing")}}{{
 %%  ~~describe this method here~~
 }
 }}}

@@ -80,8 +80,15 @@ modelPolyCoef(object, convention, lag_0 = TRUE, \dots)
 \seealso{
   \code{\link{modelCoef}}
 }
-%\examples{
-%}
+\examples{
+m1 <- new("SarimaModel", iorder = 1, siorder = 1, ma = -0.3, sma = -0.1, nseasons = 12)
+modelOrder(m1)
+modelOrder(m1, "ArmaFilter")
+modelOrder(m1, new("ArmaFilter"))
+
+modelPoly(m1, "ArmaModel")
+modelPolyCoef(m1, "ArmaModel")
+}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ts}

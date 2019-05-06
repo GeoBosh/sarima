@@ -29,16 +29,28 @@ functions, often with similar or overlapping functionality and different argumen
 conventions. One of the aims of package \pkg{sarima} is to provide consistent interface to
 some frequently used functionality.
 
-In package \pkg{sarima} names of functions and S4 classes generally consist of whole words
-stringed together in camel case.  Only the first letter is capitalised in common
-abbreviations, such as ARIMA.  The first word in class names is also capitalised, while
-function names start with lowercase letters.
+In package \pkg{sarima} a consistent naming scheme is used as much as
+possible. Names of functions start with a lowercase letter and consist
+of whole words, acronyms or commonly used abbreviations. In multiword
+names, the second and subsequent words start with capital letters
+(camelCase).  Only the first letter in acronyms is capitalised,
+e.g. Arma stands for ARMA.  Formal (S4) classes follow the same rules
+but the first letter of the first word is capitalised, as well.
+
+For example, the functions that compute autocorrelations,
+autocovariances, partial autocorrelations are called
+\code{autocorrelations}, \code{autocovariances}, and
+\code{partialAutocorrelations}, respectively. Moreover, they recognise
+from their argument(s) what exactly is needed. If they are given times
+series, they compute sample autocorrelations, etc; if they are given
+model specifications, they compute the corresponding theoretical
+properties.
 
 This is work in progress, see also the vignette(s).
 % e.g. \url{../doc/white_noise_tests.pdf}.
 
-% ~~ An overview of how to use the package, including the most important ~~
-% ~~ functions ~~
+
+
 }
 \author{
   \Sexpr[stage=build]{pd$Author}

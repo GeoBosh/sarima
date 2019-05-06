@@ -21,8 +21,13 @@ acfMaTest(acf, ma, n, nlags, interval = 0.95)
 }
 \details{
 
-  \code{acfMaTest} performs a test that the time series is MA(ma),
+  \code{acfMaTest} performs a test that the time series is MA(\code{ma}), 
   under the classical assumptions of Bartlett's formulas.
+
+  When intervals are requested, they are confidence intervals for lags from 1 to
+  \code{ma}.  For lags greater than the moving average order, \code{ma},
+  autocorrelations outside them suggest to reject the null hypothesis that the
+  process is MA(\code{ma}).
 
 %%  ~~ If necessary, more details than the description above ~~
 }

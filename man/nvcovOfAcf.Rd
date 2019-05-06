@@ -17,7 +17,10 @@ acfOfSquaredArmaModel(model, maxlag)
   \item{model}{a model, see Details.}
   \item{maxlag}{a positive integer number, the maximal lag.}
   \item{acf}{autocorrelations.}
-  \item{ma}{a positive integer number, the order of the MA(q) model.}
+  \item{ma}{
+    a positive integer number, the order of the MA(q) model. The default
+    is the maximal lag available in \code{acf}.
+  }
 }
 \details{
 
@@ -32,17 +35,25 @@ acfOfSquaredArmaModel(model, maxlag)
   \code{nvcovOfAcfBD} computes the same quantities but uses the formula
   given by Brockwell \& Davis (1991) (eq. (7.2.6.), p. 222), which is
   based on the autocorrelations of the model. Argument
-  \code{acf} contains the autocorrelations. Currently \code{nvcovOfAcfBD}
-  works for MA models only (but specifying a high order MA(q) should be
-  fine in typical use).
+  \code{acf} contains the autocorrelations.
+  
+  For \code{nvcovOfAcfBD}, argument \code{ma} asks to treat the provided
+  acf as that of MA(\code{ma}). Only the values for lags up to
+  \code{ma} are used and the rest are set to zero, since the
+  autocorrelations of MA(\code{ma}) models are zero for lags greater
+  than \code{ma}.
+  To force the use of all autocorrelations provided in \code{acf}, set
+  \code{ma} to the maximal lag available in \code{acf} or omit
+  \code{ma}, since this is its default.
 
+  
   \code{acfOfSquaredArmaModel(model, maxlag)} is a convenience function
   which computes the autocovariances of the "squared" model, see
   Boshnakov (1996).
 
 }
 \value{
-  a matrix
+  an \code{(maxlag,maxlag)}-matrix
 }
 \references{
   \insertRef{boshnakov1996aism}{sarima}
@@ -52,18 +63,27 @@ acfOfSquaredArmaModel(model, maxlag)
 \author{Georgi N. Boshnakov}
 \note{
 
-  Currently the implementation of \code{nvcovOfAcfBD} is limited
-  to MA models.
+  The name of \code{nvcovOfAcf} stands for \dQuote{\code{n} times the
+  variance-covariance matrix}, so it needs to be divided by \code{n} to
+  get the asymptotic variances and covariances. 
 
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
-%\seealso{
-%%% ~~objects to See Also as \code{\link{help}}, ~~~
-%}
-%\examples{
-%##---- Should be DIRECTLY executable !! ----
-%}
+\seealso{
+  \code{\link{whiteNoiseTest}}
+}
+\examples{
+## MA(2)
+ma2 <- list(ma = c(0.8, 0.1), sigma2 = 1)
+nv <- nvcovOfAcf(ma2, maxlag = 4)
+d <- diag(nvcovOfAcf(ma2, maxlag = 7))
+cbind(ma2 = 1.96 * sqrt(d) / sqrt(200), iid = 1.96/sqrt(200))
+
+acr <- autocorrelations(list(ma = c(0.8, 0.1)), maxlag = 7)
+nvBD <- nvcovOfAcfBD(acr, 2, maxlag = 4)
+all.equal(nv, nvBD) # TRUE
+}
 \keyword{ts}
 % use one of  RShowDoc("KEYWORDS")
