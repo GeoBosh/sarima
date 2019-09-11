@@ -43,7 +43,7 @@ setClass("VirtualWhiteNoiseModel", contains = c("VirtualStationaryModel", "VIRTU
 
 setClass("VirtualFilterModel",  contains = c("VIRTUAL"))
 
-  ## setMethod("sigmaSq", "VirtualFilterModel", function(object) object@sigma2)
+## setMethod("sigmaSq", "VirtualFilterModel", function(object) object@sigma2)
 
 setClass("VirtualArmaModel",
          contains = c("VirtualFilterModel", "VirtualStationaryModel", "VIRTUAL")
@@ -649,6 +649,7 @@ setMethod("show",
     function (object){
         .reportClassName(object, "InterceptSpec")
         .print_cis(object, unconditional = TRUE)
+        invisible(NULL)
     }
 )
 
@@ -667,6 +668,7 @@ setMethod("show",
         .reportClassName(object, "ArmaModel")
         .print_mis(object)
         callNextMethod()
+        invisible(NULL)
     }
 )
 setMethod("show",

@@ -1,0 +1,63 @@
+
+reference:
+  - title: "sarima overview"
+    desc: >
+      sarima overview
+    contents:
+      - "sarima-package"
+      - sarima
+      - sim_sarima
+  - title: "Functions for properties of models and time series"
+    contents: 
+      - matches("autocorrelations")
+      - matches("autocovariances")
+      - armaccf_xe
+      - armaacf
+      - autocovariances
+      - autocorrelations
+      - partialAutocorrelations
+      - partialAutocovariances
+      - partialVariances
+      - filterCoef
+      - filterOrder
+      - filterPoly
+      - filterPolyCoef
+      - modelCoef
+      - modelOrder
+      - modelPoly
+      - modelPolyCoef
+  - title: "Inference"
+    contents:
+      - acfGarchTest
+      - acfWnTest
+      - acfMaTest
+      - whiteNoiseTest
+      - nvarOfAcfKP
+      - nvcovOfAcf
+      - nvcovOfAcfBD
+      - acfOfSquaredArmaModel
+  - title: "Classes"
+    contents:
+      - ArmaModel
+      - matches("-class$")
+  - title: "Methods"
+    contents: 
+      - matches("-methods$")
+      - matches("summary")
+  - title: "Initialisation for Kalman filter"
+    contents: 
+      - arma_Q0naive
+      - arma_Q0gnbR
+      - arma_Q0gnb
+  - title: "Other"
+    contents: 
+      # - "-`sarima-package`"
+      # - -matches("-class$")
+      # - -matches("-methods$")
+      # - -matches("summary")
+      - fun.forecast
+      - xarmaFilter
+      - sarima.f
+      - periodogram
+      - prepareSimSarima
+      # - print(<simSarimaFun>)

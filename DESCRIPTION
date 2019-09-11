@@ -1,8 +1,8 @@
 Package: sarima
 Type: Package
 Title: Simulation and Prediction with Seasonal ARIMA Models
-Version: 0.8.1
-Date: 2019-04-15
+Version: 0.8.2
+Date: 2019-09-11
 Authors@R: c( person(given = c("Georgi", "N."), 
                      family = "Boshnakov", 
                      role = c("aut", "cre"), 
@@ -18,6 +18,8 @@ Description: Functions, classes and methods for time series modelling with ARIMA
     functionality.  Function sarima() fits extended multiplicative seasonal
     ARIMA models with trends, exogenous variables and arbitrary roots on the
     unit circle, which can be fixed or estimated.
+URL: https://github.com/GeoBosh/sarima https://geobosh.github.io/sarima/
+BugReports: https://github.com/GeoBosh/sarima/issues
 Depends:
     R (>= 2.10),
     FitAR,

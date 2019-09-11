@@ -89,7 +89,7 @@ sim_sarima(model, n = NA, rand.gen = rnorm, n.start = NA, x, eps,
 % %% ~~objects to See Also as \code{\link{help}}, ~~~
 % }
 \examples{
-require("PolynomF") # package "sarima" imports it, so should not be absent here.
+require("PolynomF") # guaranteed to be available since package "sarima" imports it.
 
 x <- sim_sarima(n=144, model = list(ma=0.8))               # MA(1)
 x <- sim_sarima(n=144, model = list(ar=0.8))               # AR(1)
@@ -105,9 +105,9 @@ x <- sim_sarima(n=144, model = list(iorder=1, sigma2 = 1)) # (1-B)X_t = e_t (ran
 acf(x)
 acf(diff(x))
 
-x <-sim_sarima(n=144, model = list(iorder=2, sigma2 = 1))  # (1-B)^2 X_t = e_t
-x <-sim_sarima(n=144, model = list(siorder=1,
-                                   nseasons=12, sigma2 = 1)) # (1-B)^{12} X_t = e_t
+x <- sim_sarima(n=144, model = list(iorder=2, sigma2 = 1))  # (1-B)^2 X_t = e_t
+x <- sim_sarima(n=144, model = list(siorder=1,
+                                    nseasons=12, sigma2 = 1)) # (1-B)^{12} X_t = e_t
 
 x <- sim_sarima(n=144, model = list(iorder=1, siorder=1,
                                     nseasons=12, sigma2 = 1))

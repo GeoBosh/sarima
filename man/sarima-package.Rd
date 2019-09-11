@@ -10,15 +10,19 @@
   \Sexpr[stage=build]{pd$Description}
 }
 \details{
-   \tabular{ll}{
-   Package:  \tab \Sexpr[stage=build]{pd$Package}\cr
-   Type:     \tab \Sexpr[stage=build]{pd$Type}\cr
-   Version:  \tab \Sexpr[stage=build]{pd$Version} \cr
-   Date:     \tab \Sexpr[stage=build]{pd$Date}\cr
-   License:  \tab \Sexpr[stage=build]{pd$License}\cr
-   LazyLoad: \tab \Sexpr[stage=build]{pd$LazyLoad}\cr
-   Built:    \tab \Sexpr[stage=build]{pd$Built}\cr
-   }
+%% Commenting out on 2019-09-11:
+%%    (i)  pkgdown::build_site() doesn't render it properly,
+%%    (ii) most of the info in this table is redundant.
+%%    
+%%    \tabular{ll}{
+%%    Package:  \tab \Sexpr[stage=build]{pd$Package}  \cr
+%%    Type:     \tab \Sexpr[stage=build]{pd$Type}     \cr
+%%    Version:  \tab \Sexpr[stage=build]{pd$Version}  \cr
+%%    Date:     \tab \Sexpr[stage=build]{pd$Date}     \cr
+%%    License:  \tab \Sexpr[stage=build]{pd$License}  \cr
+%%    LazyLoad: \tab \Sexpr[stage=build]{pd$LazyLoad} \cr
+%%    Built:    \tab \Sexpr[stage=build]{pd$Built}    \cr
+%%    }
 
 % Commenting out for now.
 %    Index:

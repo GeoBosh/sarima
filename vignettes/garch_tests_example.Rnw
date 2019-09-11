@@ -89,18 +89,20 @@ the USA. This stock is an interesting case for study. In the financial crash of
 dividends sweeped. There has been speculation on this stock being returned to
 private ownership for years making it prone to clusters of volatility.
 
-We import weekly data from Yahoo Finance covering the period from 10/05/2006 to 22/04/2017,
-and calculate the weekly simple log returns.
+We import weekly data from Yahoo Finance covering the period from
+10/05/2006 to 22/04/2017, and calculate the weekly simple log returns.
+%% 2019-09-12: removing rev() from logreturns <-
+%%    diff(rev(log(FMCC$FMCC.Close))) I hadn't noticed that James had
+%%    done this!  Though the GARCH models are not reversible in the
+%%    way the ARMA models are, the results and their interpretation
+%%    don't change materially in this case since here only the sign of
+%%    the returns is flipped
 <<>>=
 ## using a saved object, orginally imported with:
 ##  FMCC <- yahooSeries("FMCC", from = "2006-05-10", to = "2017-04-22",
 ##                         freq = "weekly")
 FMCC <- readRDS(system.file("extdata", "FMCC.rds", package = "sarima"))
-###### JAMIE (23/08/2018): above command wouldn't work for me!
-##  @JAMIE (2018-10-11): should work now. If it doesn't install the package.
-##      (.gitignore had a rule that prevented pushing the file on bibbucket)
-##FMCC <- readRDS("FMCC.rds")
-logreturns <- diff(rev(log(FMCC$FMCC.Close)))
+logreturns <- diff(log(FMCC$FMCC.Close))
 @
 A plot of the log-returns. is given in Fig.~1.
 \begin{figure}[ht]

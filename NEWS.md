@@ -1,5 +1,23 @@
-# sarima 0.8.1
+# sarima 0.8.2
 
+- remove developers' comments that had been accidentally left in a vignette.
+
+- remove an erroneous `rev()` from the garch tests vignette.
+
+- the show method for class "ArmaModel" now returns NULL. The previous
+  return value was spooking "pkgdown::build_site()" resulting in the error:
+```
+Error in UseMethod("replay_html", x) : 
+  no applicable method for 'replay_html' applied to an object of class "c('double', 'numeric')"
+
+```
+
+
+# sarima 0.8.1 (CRAN)
+
+- relaxed numerical comparisons in some tests, to account for additional
+  platforms, such as Open-BLAS, recently activated for checks on CRAN.
+  
 
 # sarima 0.8.0 (CRAN)
 
