@@ -55,8 +55,8 @@ matrix:
     - os: linux
       dist: trusty
       env: R_CODECOV=true
-    - os: osx
-      osx_image: xcode8.3
+##     - os: osx
+##       osx_image: xcode8.3
 
 
 # # Alternatively, run several 'R CMD check' with different arguments.
