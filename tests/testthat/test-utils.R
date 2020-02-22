@@ -6,5 +6,6 @@ test_that("functions in utils.R work ok", {
 
     expect_equal(.capturePrint(1:4), "[1] 1 2 3 4")
 
+    mo <- lm(dist ~ speed, data = cars)
     expect_equal(diagOfVcov(mo), diag(vcov(mo)))
 })
