@@ -151,7 +151,8 @@ dbind <- function(...){
 diag_bind <- function(...){
     blocks <- list()
     d <- rapply(list(...), function(x){ 
-                               res <<- c(blocks, list(x))
+                               ## 2020-02-22 was: res <<- c(blocks, list(x))
+                               blocks <<- c(blocks, list(x))
                                if(is.matrix(x)) dim(x) else c(length(x), 1)
                            }
                )
