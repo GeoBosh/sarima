@@ -1,6 +1,9 @@
 test_that("functions in autocorrelations.org work ok", {
     acv1 <- autocovariances(list(ar = c(0.5), ma = c(0.8), sigma2 = 2), maxlag = 5)
     expect_true(is(acv1, "Autocovariances"))
+    expect_identical(autocovariances(acv1), acv1)
+    autocovariances(acv1, maxlag = 3)
+    autocorrelations(acv1, maxlag = 3)
 
     v1 <- rnorm(100)
     autocorrelations(v1)
@@ -86,6 +89,10 @@ test_that("functions in autocorrelations.org work ok", {
     acr <- autocorrelations(list(ma = c(0.8, 0.1)), maxlag = 7)
     nvBD <- nvcovOfAcfBD(acr, 2, maxlag = 4)
     expect_equal(nv, nvBD)
+
+    expect_error(autocorrelations(list(ma = c(0.8, 0.1)), maxlag = 7, lag_0 = "var"),
+                 "sigma2 > 0 is not TRUE")
+    autocorrelations(list(ma = c(0.8, 0.1), sigma2 = 1), maxlag = 7, lag_0 = "var")
 
     acfOfSquaredArmaModel(ma2, maxlag = 4)
 })
