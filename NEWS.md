@@ -1,8 +1,12 @@
-# sarima 0.8.2
+# sarima 0.8.2 (CRAN)
 
-- remove developers' comments that had been accidentally left in a vignette.
+- removed developers' comments that had been accidentally left in a vignette.
 
-- remove an erroneous `rev()` from the garch tests vignette.
+- removed an erroneous `rev()` from the garch tests vignette.
+
+- fixed minor several bugs.
+
+- added new tests.
 
 - the show method for class "ArmaModel" now returns NULL. The previous
   return value was spooking "pkgdown::build_site()" resulting in the error:

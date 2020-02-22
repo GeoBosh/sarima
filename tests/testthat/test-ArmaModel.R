@@ -55,4 +55,41 @@ test_that("Sarima and Arma models work ok", {
     as(sm2, "ArmaModel")
     as(sm3, "list")
 
+
+    m1 <- new("SarimaModel", iorder = 1, siorder = 1, ma = -0.3, sma = -0.1, nseasons = 12)
+    modelOrder(m1)
+    modelOrder(m1, "ArmaFilter")
+    modelOrder(m1, new("ArmaFilter"))
+    
+    modelPoly(m1, "ArmaModel")
+    modelPolyCoef(m1, "ArmaModel")
+
+    ## from coerce-methods.Rd
+    mo <- new("ArmaModel", ar = 0.9, ma = 0.4, sigma2 = 1)
+    modelPoly(mo)
+    
+    mo1 <- new("ArmaModel", ar = 0.9, ma = as(0.4, "SPFilter"), sigma2 = 1)
+    modelPoly(mo1)
+    expect_identical(mo, mo1)
+    
+    mo2 <- new("ArmaModel", ar = 0.9, ma = as(-0.4, "BJFilter"), sigma2 = 1)
+    modelPoly(mo2)
+    expect_identical(mo, mo2)
+    
+    ar3 <- as(0.9, "BJFilter")
+    ma3 <- as(-0.4, "BJFilter")
+    mo3 <- new("ArmaModel", ar = ar3, ma = ma3, sigma2 = 1)
+    modelPoly(mo3)
+    expect_identical(mo, mo3)
+    
+    modelCoef(mo3) # coefficients of the model with the default (BD) sign convention
+    modelCoef(mo3, convention = "BD") # same result
+    modelCoef(mo3, convention = "SP") # signal processing convention
+    
+    ## for ltsa::tacvfARMA() the convention is BJ, so:
+    co <- modelCoef(mo3, convention = "BJ") # Box-Jenkins convention
+    
+    ## ltsa::tacvfARMA(co$ar, co$ma, maxLag = 6, sigma2 = 1)
+    autocovariances(mo3, maxlag = 6) ## same
+
 })

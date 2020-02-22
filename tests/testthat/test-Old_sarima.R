@@ -30,4 +30,14 @@ test_that("functions in sarima.R work ok", {
     all(pred1 == pred2) ##TRUE
     expect_true(all(pred1 == pred2))
 
+    set.seed(1234)
+    moA <- sim_sarima(n=144, model = list(ar=c(1.2,-0.8), ma=0.4, sar=0.3, sma=0.7,
+                               iorder=1, siorder=1, nseasons=12))
+    set.seed(1234)
+    moB <- sim_sarima(n=144, model = list(ar=c(1.2,-0.8), ma=0.4, sar=0.3, sma=0.7,
+                               iorder=1, siorder=1, nseasons=12, sigma2 = 1))
+    expect_equal(moA, moB)
+
+    fun.forecast(ar = 0.5, n = 10)
+
 })
