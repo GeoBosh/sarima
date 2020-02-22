@@ -14,7 +14,10 @@ acfWnTest(acr, x, nlags, interval = 0.95, \dots)
   \item{nlags}{how many lags to use.}
   \item{interval}{If not NULL, compute also confidence intervals with
     the specified coverage probability.}
-  \item{...}{~~ TODO: describe this argument. ~~}
+  \item{...}{
+    additional arguments for the computation of the variance matrix
+    under the null hypothesis, passed on to \code{\link{nvarOfAcfKP}}.
+  }
 }
 \details{
 
@@ -24,18 +27,18 @@ acfWnTest(acr, x, nlags, interval = 0.95, \dots)
 
   \code{acfGarchTest} performs a test for uncorrelatedness of a time
   series. The null hypothesis is that the time series is GARCH,
-  see \insertRef{FrancqZakoian2010garch}{sarima}.
+  see \insertCite{FrancqZakoian2010garch;textual}{sarima}.
 
   \code{acfWnTest} performs a test for uncorrelatedness of a time
   series under a weaker null hypothesis.
   The null hypothesis is that the time series is GARCH-type or
   from a stochasitc volatily model,
-  see   \insertCite{kokoszka2011nonlinearity}{sarima}.
+  see   \insertCite{kokoszka2011nonlinearity;textual}{sarima}.
 
   See the references for details and precise specification of the
   hypotheses.
   
-  The format of the return vaue is the same as for \code{acfIidTest}.
+  The format of the return value is the same as for \code{acfIidTest}.
 
 }
 \value{

@@ -8,21 +8,25 @@
 
 <title>Changelog • sarima</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,7 +34,9 @@
 
 
 
+
 <meta property="og:title" content="Changelog" />
+
 
 
 
@@ -42,6 +48,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -68,7 +75,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -79,11 +86,10 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/GeoBosh/sarima">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -94,6 +100,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -103,30 +110,30 @@
       <small>Source: <a href='https://github.com/GeoBosh/sarima/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="sarima-0-8-2" class="section level1">
+    <div id="sarima-082" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-8-2" class="anchor"></a>sarima 0.8.2<small> Unreleased </small>
+<a href="#sarima-082" class="anchor"></a>sarima 0.8.2<small> Unreleased </small>
 </h1>
 <ul>
 <li><p>remove developers’ comments that had been accidentally left in a vignette.</p></li>
-<li><p>remove an erroneous <code><a href="https://www.rdocumentation.org/packages/base/topics/rev">rev()</a></code> from the garch tests vignette.</p></li>
+<li><p>remove an erroneous <code><a href="https://rdrr.io/r/base/rev.html">rev()</a></code> from the garch tests vignette.</p></li>
 <li>the show method for class “ArmaModel” now returns NULL. The previous return value was spooking “pkgdown::build_site()” resulting in the error:</li>
 </ul>
 <pre><code>Error in UseMethod("replay_html", x) : 
   no applicable method for 'replay_html' applied to an object of class "c('double', 'numeric')"
 </code></pre>
 </div>
-    <div id="sarima-0-8-1-cran" class="section level1">
+    <div id="sarima-081-cran" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-8-1-cran" class="anchor"></a>sarima 0.8.1 (CRAN)<small> 2019-05-12 </small>
+<a href="#sarima-081-cran" class="anchor"></a>sarima 0.8.1 (CRAN)<small> 2019-05-12 </small>
 </h1>
 <ul>
 <li>relaxed numerical comparisons in some tests, to account for additional platforms, such as Open-BLAS, recently activated for checks on CRAN.</li>
 </ul>
 </div>
-    <div id="sarima-0-8-0-cran" class="section level1">
+    <div id="sarima-080-cran" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-8-0-cran" class="anchor"></a>sarima 0.8.0 (CRAN)<small> 2019-04-13 </small>
+<a href="#sarima-080-cran" class="anchor"></a>sarima 0.8.0 (CRAN)<small> 2019-04-13 </small>
 </h1>
 <ul>
 <li><p>new test for GARCH-type noise based on Kokoszka and Politis result.</p></li>
@@ -136,22 +143,22 @@
 <li><p>numerous changes in <code><a href="../reference/sarima.html">sarima()</a></code></p></li>
 <li><p>cater for changing function names in the forthcoming release 2.0.0 of package <code>PolynomF</code>.</p></li>
 <li><p>Now require <code>lagged (&gt;= 0.2.1)</code> (<code>lagged 0.2.0</code> is not sufficient since <code><a href="../reference/nSeasons.html">nSeasons()</a></code> and <code>nSeasons&lt;-()</code> accidentally were not exported by it).</p></li>
-<li><p>Vignette <code>garch_tests_example</code> now imports the data using <code><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file()</a></code>, so that the examples can be run easily by the user.</p></li>
-<li><p>new function <code>makeArimaGnb()</code> for setting up the state space form of ARIMA models. It is a modification of <code><a href="https://www.rdocumentation.org/packages/stats/topics/KalmanLike">stats::makeARIMA()</a></code> with Georgi’s method for computation of the stationary part of the initial state covariance matrix. The methods implemented in <code><a href="https://www.rdocumentation.org/packages/stats/topics/KalmanLike">stats::makeARIMA()</a></code>are commented out since they are not exported from package <code>stats</code>.</p></li>
-<li><p><code><a href="../reference/sarima.html">sarima()</a></code> gets an argument to specify the method to use for the stationary part of P0 (see above). The available options are the ones in <code><a href="https://www.rdocumentation.org/packages/stats/topics/KalmanLike">makeARIMA()</a></code> (“Rossignol2011” and “Gardner1980”) plus Georgi’s method (“gnb”). The default is “Rossignol2011”.</p></li>
+<li><p>Vignette <code>garch_tests_example</code> now imports the data using <code><a href="https://rdrr.io/r/base/system.file.html">system.file()</a></code>, so that the examples can be run easily by the user.</p></li>
+<li><p>new function <code>makeArimaGnb()</code> for setting up the state space form of ARIMA models. It is a modification of <code><a href="https://rdrr.io/r/stats/KalmanLike.html">stats::makeARIMA()</a></code> with Georgi’s method for computation of the stationary part of the initial state covariance matrix. The methods implemented in <code><a href="https://rdrr.io/r/stats/KalmanLike.html">stats::makeARIMA()</a></code>are commented out since they are not exported from package <code>stats</code>.</p></li>
+<li><p><code><a href="../reference/sarima.html">sarima()</a></code> gets an argument to specify the method to use for the stationary part of P0 (see above). The available options are the ones in <code><a href="https://rdrr.io/r/stats/KalmanLike.html">makeARIMA()</a></code> (“Rossignol2011” and “Gardner1980”) plus Georgi’s method (“gnb”). The default is “Rossignol2011”.</p></li>
 </ul>
 </div>
-    <div id="sarima-0-7-6-cran" class="section level1">
+    <div id="sarima-07-6-cran" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-7-6-cran" class="anchor"></a>sarima 0.7-6 (CRAN)<small> Unreleased </small>
+<a href="#sarima-07-6-cran" class="anchor"></a>sarima 0.7-6 (CRAN)<small> Unreleased </small>
 </h1>
 <ul>
 <li>updated Makevars and Makevars.win to deal with a NOTE from recent tightening of checks on CRAN (see <a href="https://stat.ethz.ch/pipermail/r-package-devel/2018q3/003030.html" class="uri">https://stat.ethz.ch/pipermail/r-package-devel/2018q3/003030.html</a>).</li>
 </ul>
 </div>
-    <div id="sarima-0-7-5" class="section level1">
+    <div id="sarima-07-5" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-7-5" class="anchor"></a>sarima 0.7-5<small> Unreleased </small>
+<a href="#sarima-07-5" class="anchor"></a>sarima 0.7-5<small> Unreleased </small>
 </h1>
 <ul>
 <li><p><code>NEWS</code> becomes <code>NEWS.md</code> and uses markdown syntax. The style is loosely based on <a href="http://style.tidyverse.org/news.html" class="uri">http://style.tidyverse.org/news.html</a>).</p></li>
@@ -163,26 +170,26 @@
 </li>
 </ul>
 </div>
-    <div id="sarima-0-7-4" class="section level1">
+    <div id="sarima-07-4" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-7-4" class="anchor"></a>sarima 0.7-4<small> Unreleased </small>
+<a href="#sarima-07-4" class="anchor"></a>sarima 0.7-4<small> Unreleased </small>
 </h1>
 <ul>
 <li><p>dealt with ‘valgrind’ warnings (had missed one uninitialised warning).</p></li>
 <li><p>fixed a bug in prepareSimSarima() - when initial values were not supplied in the stationary case, the initialisation was not correct (thanks to Cameron Doyle for reporting this).</p></li>
 </ul>
 </div>
-    <div id="sarima-0-7-3-cran" class="section level1">
+    <div id="sarima-07-3-cran" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-7-3-cran" class="anchor"></a>sarima 0.7-3 (CRAN)<small> Unreleased </small>
+<a href="#sarima-07-3-cran" class="anchor"></a>sarima 0.7-3 (CRAN)<small> Unreleased </small>
 </h1>
 <ul>
 <li>dealt with ‘valgrind’ warnings.</li>
 </ul>
 </div>
-    <div id="sarima-0-7-2-cran" class="section level1">
+    <div id="sarima-07-2-cran" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-7-2-cran" class="anchor"></a>sarima 0.7-2 (CRAN)<small> Unreleased </small>
+<a href="#sarima-07-2-cran" class="anchor"></a>sarima 0.7-2 (CRAN)<small> Unreleased </small>
 </h1>
 <ul>
 <li><p>this is an emergency release to avoid the package being archived on CRAN due to the archival of a dependency.</p></li>
@@ -191,9 +198,9 @@
 <li><p>removed package ‘FKF’ from Imports, since it has been archived on CRAN.</p></li>
 </ul>
 </div>
-    <div id="sarima-0-7-0---0-7-1" class="section level1">
+    <div id="sarima-07-0---07-1" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-7-0---0-7-1" class="anchor"></a>sarima 0.7-0 - 0.7-1<small> Unreleased </small>
+<a href="#sarima-07-0---07-1" class="anchor"></a>sarima 0.7-0 - 0.7-1<small> Unreleased </small>
 </h1>
 <ul>
 <li><p>merged branch models with master.</p></li>
@@ -207,9 +214,9 @@
 <li><p>returned the stuff the test package ‘testts’ (and removed the latter). <code>testts</code> was not helpful and complicated the workflow. Now the tests for <code>armaQ0</code> etc are in `sarima.</p></li>
 </ul>
 </div>
-    <div id="sarima-0-6-6" class="section level1">
+    <div id="sarima-06-6" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-6-6" class="anchor"></a>sarima 0.6-6<small> Unreleased </small>
+<a href="#sarima-06-6" class="anchor"></a>sarima 0.6-6<small> Unreleased </small>
 </h1>
 <ul>
 <li><p>now can request estimation of components with roots on the unit circle.</p></li>
@@ -218,9 +225,9 @@
 <li><p>removed sincos() and L() from sarima specifications, use the equivalents .cs() and .B(), respectively.</p></li>
 </ul>
 </div>
-    <div id="sarima-0-6-4---0-6-5" class="section level1">
+    <div id="sarima-06-4---06-5" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-6-4---0-6-5" class="anchor"></a>sarima 0.6-4 - 0.6-5<small> Unreleased </small>
+<a href="#sarima-06-4---06-5" class="anchor"></a>sarima 0.6-4 - 0.6-5<small> Unreleased </small>
 </h1>
 <ul>
 <li><p>intermediate versions, not useful for back reference (the zip file given is a better place to look for code before 0.6-6).</p></li>
@@ -228,9 +235,9 @@
 <li><p>wrapping up 0.6-5 before making the changes needed for estimation of unit roots.</p></li>
 </ul>
 </div>
-    <div id="sarima-0-6-3" class="section level1">
+    <div id="sarima-06-3" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-6-3" class="anchor"></a>sarima 0.6-3<small> Unreleased </small>
+<a href="#sarima-06-3" class="anchor"></a>sarima 0.6-3<small> Unreleased </small>
 </h1>
 <ul>
 <li><p>support for tanh transformation.</p></li>
@@ -238,18 +245,18 @@
 <li><p>Packing up this version before moving stuff that needs ‘:::’ calls elsewhere (e.g. to myRcpp, but haven’t decided on the structure)</p></li>
 </ul>
 </div>
-    <div id="sarima-0-6-1---0-6-2" class="section level1">
+    <div id="sarima-06-1---06-2" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-6-1---0-6-2" class="anchor"></a>sarima 0.6-1 - 0.6-2<small> Unreleased </small>
+<a href="#sarima-06-1---06-2" class="anchor"></a>sarima 0.6-1 - 0.6-2<small> Unreleased </small>
 </h1>
 <ul>
 <li><p>Several bug fixes.</p></li>
 <li><p>Some trouble with Rcpp, further trouble with Rtools after installing the latest version of R. Packing up this version for a working reference.</p></li>
 </ul>
 </div>
-    <div id="sarima-0-6-0" class="section level1">
+    <div id="sarima-06-0" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-6-0" class="anchor"></a>sarima 0.6-0<small> Unreleased </small>
+<a href="#sarima-06-0" class="anchor"></a>sarima 0.6-0<small> Unreleased </small>
 </h1>
 <ul>
 <li><p>included some C++ code (using Rcpp/RcppArmadilo) previously tested in my (private) package myRcpp.</p></li>
@@ -258,26 +265,26 @@
 <li><p>bumping the version number to have a working version in case further improvements mess things up.</p></li>
 </ul>
 </div>
-    <div id="sarima-0-5-11" class="section level1">
+    <div id="sarima-05-11" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-5-11" class="anchor"></a>sarima 0.5-11<small> Unreleased </small>
+<a href="#sarima-05-11" class="anchor"></a>sarima 0.5-11<small> Unreleased </small>
 </h1>
 <ul>
 <li>temporarily created a number of functions to call functions used internally by arima(), see arima.R.</li>
 </ul>
 </div>
-    <div id="sarima-0-5-9" class="section level1">
+    <div id="sarima-05-9" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-5-9" class="anchor"></a>sarima 0.5-9<small> Unreleased </small>
+<a href="#sarima-05-9" class="anchor"></a>sarima 0.5-9<small> Unreleased </small>
 </h1>
 <ul>
 <li><p>moved temporarilly FitAR from Imports to Depends, since FitARMA can’t find some functions from FitAR if FitARMA is not attached. (move back to Imports when Ian imports FitAR in FitARMA’s namespace)</p></li>
 <li><p>further work on sarima(), saving before more meddling with the environments of the formulas</p></li>
 </ul>
 </div>
-    <div id="sarima-0-5-8" class="section level1">
+    <div id="sarima-05-8" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-5-8" class="anchor"></a>sarima 0.5-8<small> Unreleased </small>
+<a href="#sarima-05-8" class="anchor"></a>sarima 0.5-8<small> Unreleased </small>
 </h1>
 <ul>
 <li><p>added support for KFAS.</p></li>
@@ -286,42 +293,42 @@
 <li><p>archiving before a full scale consolidation and clean up, in case that messes things up.</p></li>
 </ul>
 </div>
-    <div id="sarima-0-5-7" class="section level1">
+    <div id="sarima-05-7" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-5-7" class="anchor"></a>sarima 0.5-7<small> Unreleased </small>
+<a href="#sarima-05-7" class="anchor"></a>sarima 0.5-7<small> Unreleased </small>
 </h1>
 <ul>
 <li><p>sarima() now fits XARIMAX models, in the case of the second X, using FKF::fkf().</p></li>
 <li><p>archiving before starting work on completing the handling of fixed parameters.</p></li>
 </ul>
 </div>
-    <div id="sarima-0-5-6" class="section level1">
+    <div id="sarima-05-6" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-5-6" class="anchor"></a>sarima 0.5-6<small> Unreleased </small>
+<a href="#sarima-05-6" class="anchor"></a>sarima 0.5-6<small> Unreleased </small>
 </h1>
 <ul>
 <li>some consolidation of sarima(), now supports lagged variables and calls only sarimat(). sarima0() has been removed. the data argument of sarima() is processed properly (incomplete maybe).</li>
 </ul>
 </div>
-    <div id="sarima-0-5-5" class="section level1">
+    <div id="sarima-05-5" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-5-5" class="anchor"></a>sarima 0.5-5<small> Unreleased </small>
+<a href="#sarima-05-5" class="anchor"></a>sarima 0.5-5<small> Unreleased </small>
 </h1>
 <ul>
 <li>sarima() now uses the facilities of package Formula to process the model formulas.</li>
 </ul>
 </div>
-    <div id="sarima-0-5-4" class="section level1">
+    <div id="sarima-05-4" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-5-4" class="anchor"></a>sarima 0.5-4<small> Unreleased </small>
+<a href="#sarima-05-4" class="anchor"></a>sarima 0.5-4<small> Unreleased </small>
 </h1>
 <ul>
 <li>sarima() can now fit time regression. It currently calls sarimat() if there is treg argument and sarima0() otherwise.</li>
 </ul>
 </div>
-    <div id="sarima-0-5-3" class="section level1">
+    <div id="sarima-05-3" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-5-3" class="anchor"></a>sarima 0.5-3<small> Unreleased </small>
+<a href="#sarima-05-3" class="anchor"></a>sarima 0.5-3<small> Unreleased </small>
 </h1>
 <ul>
 <li><p>model formulas for SARIMA models using package Formula.</p></li>
@@ -329,9 +336,9 @@
 <li><p>packing this version before further work on sarima().</p></li>
 </ul>
 </div>
-    <div id="sarima-0-5-2-cran" class="section level1">
+    <div id="sarima-05-2-cran" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-5-2-cran" class="anchor"></a>sarima 0.5-2 (CRAN)<small> 2017-10-16 </small>
+<a href="#sarima-05-2-cran" class="anchor"></a>sarima 0.5-2 (CRAN)<small> 2017-10-16 </small>
 </h1>
 <ul>
 <li><p>plot of acf tests now uses different ‘lty’ so that the confidence limits under iid and garch nulls are visually distinguishable in black and white printouts.</p></li>
@@ -342,9 +349,9 @@
 <li><p>additional examples.</p></li>
 </ul>
 </div>
-    <div id="sarima-0-5-1" class="section level1">
+    <div id="sarima-05-1" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-5-1" class="anchor"></a>sarima 0.5-1<small> Unreleased </small>
+<a href="#sarima-05-1" class="anchor"></a>sarima 0.5-1<small> Unreleased </small>
 </h1>
 <ul>
 <li><p>SarimaModel now inherits from VirtualSarimaModel (it was inheriting from VirtualFilterModel. On its own, this is invisible to the user. It didn’t invalidate existing objects either.</p></li>
@@ -353,9 +360,9 @@
 <li><p>further streamlining.</p></li>
 </ul>
 </div>
-    <div id="sarima-0-5-0" class="section level1">
+    <div id="sarima-05-0" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-5-0" class="anchor"></a>sarima 0.5-0<small> Unreleased </small>
+<a href="#sarima-05-0" class="anchor"></a>sarima 0.5-0<small> Unreleased </small>
 </h1>
 <ul>
 <li><p>exported functions related to Bartlett’s formula (they were there in version 0.4-5, under different names).</p></li>
@@ -363,9 +370,9 @@
 <li><p>increasing the version number before some streamlining of class SarimaModel.</p></li>
 </ul>
 </div>
-    <div id="sarima-0-4-5-cran" class="section level1">
+    <div id="sarima-04-5-cran" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-4-5-cran" class="anchor"></a>sarima 0.4-5 (CRAN)<small> 2017-05-23 </small>
+<a href="#sarima-04-5-cran" class="anchor"></a>sarima 0.4-5 (CRAN)<small> 2017-05-23 </small>
 </h1>
 <ul>
 <li><p>moved “Lagged” to a separate package, “lagged”.</p></li>
@@ -374,51 +381,51 @@
 <li><p>first submission to CRAN.</p></li>
 </ul>
 </div>
-    <div id="sarima-0-4-0" class="section level1">
+    <div id="sarima-04-0" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-4-0" class="anchor"></a>sarima 0.4-0<small> Unreleased </small>
+<a href="#sarima-04-0" class="anchor"></a>sarima 0.4-0<small> Unreleased </small>
 </h1>
 <ul>
 <li>first version for CRAN.</li>
 </ul>
 </div>
-    <div id="sarima-0-3-6" class="section level1">
+    <div id="sarima-03-6" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-3-6" class="anchor"></a>sarima 0.3-6<small> Unreleased </small>
+<a href="#sarima-03-6" class="anchor"></a>sarima 0.3-6<small> Unreleased </small>
 </h1>
 <ul>
 <li>white noise tests based on acf and pacf and corresponding plots.</li>
 <li>vignette.</li>
 </ul>
 </div>
-    <div id="sarima-0-3-5" class="section level1">
+    <div id="sarima-03-5" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-3-5" class="anchor"></a>sarima 0.3-5<small> Unreleased </small>
+<a href="#sarima-03-5" class="anchor"></a>sarima 0.3-5<small> Unreleased </small>
 </h1>
 <ul>
-<li>revamped “Lagged”: introduced Lagged2d, etc.; mixed Ops, e.g. “Lagged” + “vector”, now work only if “vector” is of length one or multiple of the length of <a href="mailto:e1@data">e1@data</a> has the same length as the vector.</li>
+<li>revamped “Lagged”: introduced Lagged2d, etc.; mixed Ops, e.g. “Lagged” + “vector”, now work only if “vector” is of length one or multiple of the length of <a href="mailto:e1@data" class="email">e1@data</a> has the same length as the vector.</li>
 </ul>
 </div>
-    <div id="sarima-0-3-4" class="section level1">
+    <div id="sarima-03-4" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-3-4" class="anchor"></a>sarima 0.3-4<small> Unreleased </small>
+<a href="#sarima-03-4" class="anchor"></a>sarima 0.3-4<small> Unreleased </small>
 </h1>
 <ul>
 <li>removed some old commented out code from sarima.org to reduce clutter.</li>
 <li>extensive changes and consolidation.</li>
 </ul>
 </div>
-    <div id="sarima-0-3-3" class="section level1">
+    <div id="sarima-03-3" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-3-3" class="anchor"></a>sarima 0.3-3<small> Unreleased </small>
+<a href="#sarima-03-3" class="anchor"></a>sarima 0.3-3<small> Unreleased </small>
 </h1>
 <ul>
 <li>streamlined SARIMA models and the functions based on old code. Keeping the old code (commented out) for reference.</li>
 </ul>
 </div>
-    <div id="sarima-0-3-2" class="section level1">
+    <div id="sarima-03-2" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-3-2" class="anchor"></a>sarima 0.3-2<small> Unreleased </small>
+<a href="#sarima-03-2" class="anchor"></a>sarima 0.3-2<small> Unreleased </small>
 </h1>
 <ul>
 <li>defined the classes for autocorrelations and similar.</li>
@@ -426,9 +433,9 @@
 <li>passes ‘R CMD check’. Most classes have only fake documentation in VirtualMonicFilter-class.Rd.</li>
 </ul>
 </div>
-    <div id="sarima-0-3-0" class="section level1">
+    <div id="sarima-03-0" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-3-0" class="anchor"></a>sarima 0.3-0<small> Unreleased </small>
+<a href="#sarima-03-0" class="anchor"></a>sarima 0.3-0<small> Unreleased </small>
 </h1>
 <ul>
 <li>switched to package PolynomF (from polynom).</li>
@@ -436,59 +443,59 @@
 <li>R CMD check passes 9only a WARNING for undocumented objects and S$ methods.</li>
 </ul>
 </div>
-    <div id="sarima-0-2-x" class="section level1">
+    <div id="sarima-02-x" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-2-x" class="anchor"></a>sarima 0.2-x<small> Unreleased </small>
+<a href="#sarima-02-x" class="anchor"></a>sarima 0.2-x<small> Unreleased </small>
 </h1>
 <ul>
 <li>added new classes, substantial extension.</li>
 <li>renamed sarima.sim() to sim_sarima()</li>
 </ul>
 </div>
-    <div id="sarima-0-1-0" class="section level1">
+    <div id="sarima-01-0" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-1-0" class="anchor"></a>sarima 0.1-0<small> Unreleased </small>
+<a href="#sarima-01-0" class="anchor"></a>sarima 0.1-0<small> Unreleased </small>
 </h1>
 <ul>
 <li>updated and cleaned a bit the old code.</li>
 </ul>
 </div>
-    <div id="sarima-0-0-5" class="section level1">
+    <div id="sarima-00-5" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-0-5" class="anchor"></a>sarima 0.0-5<small> Unreleased </small>
+<a href="#sarima-00-5" class="anchor"></a>sarima 0.0-5<small> Unreleased </small>
 </h1>
 <ul>
 <li>removed argument “eps” from fun.forecast since it is ignored.</li>
 </ul>
 </div>
-    <div id="sarima-0-0-3" class="section level1">
+    <div id="sarima-00-3" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-0-3" class="anchor"></a>sarima 0.0-3<small> Unreleased </small>
+<a href="#sarima-00-3" class="anchor"></a>sarima 0.0-3<small> Unreleased </small>
 </h1>
 <ul>
 <li>sarima.mod now sets class “sarima” for its result.</li>
 <li>print method for “sarima” class.</li>
 </ul>
 </div>
-    <div id="sarima-0-0-2" class="section level1">
+    <div id="sarima-00-2" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-0-2" class="anchor"></a>sarima 0.0-2<small> Unreleased </small>
+<a href="#sarima-00-2" class="anchor"></a>sarima 0.0-2<small> Unreleased </small>
 </h1>
 <ul>
 <li>inserted examples from lectures and handouts from past years.</li>
 </ul>
 </div>
-    <div id="sarima-0-0-1" class="section level1">
+    <div id="sarima-00-1" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-0-1" class="anchor"></a>sarima 0.0-1<small> Unreleased </small>
+<a href="#sarima-00-1" class="anchor"></a>sarima 0.0-1<small> Unreleased </small>
 </h1>
 <ul>
 <li>created documentation using the comments in the source code.</li>
 </ul>
 </div>
-    <div id="sarima-0-0-0" class="section level1">
+    <div id="sarima-00-0" class="section level1">
 <h1 class="page-header">
-<a href="#sarima-0-0-0" class="anchor"></a>sarima 0.0-0<small> Unreleased </small>
+<a href="#sarima-00-0" class="anchor"></a>sarima 0.0-0<small> Unreleased </small>
 </h1>
 <ul>
 <li>turned atssarima.r (written in 2006-2007 for course “Applied time series”) into a package.</li>
@@ -500,51 +507,52 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#sarima-0-8-2">0.8.2</a></li>
-        <li><a href="#sarima-0-8-1-cran">0.8.1</a></li>
-        <li><a href="#sarima-0-8-0-cran">0.8.0</a></li>
-        <li><a href="#sarima-0-7-6-cran">0.7-6</a></li>
-        <li><a href="#sarima-0-7-5">0.7-5</a></li>
-        <li><a href="#sarima-0-7-4">0.7-4</a></li>
-        <li><a href="#sarima-0-7-3-cran">0.7-3</a></li>
-        <li><a href="#sarima-0-7-2-cran">0.7-2</a></li>
-        <li><a href="#sarima-0-7-0---0-7-1">0.7-0</a></li>
-        <li><a href="#sarima-0-6-6">0.6-6</a></li>
-        <li><a href="#sarima-0-6-4---0-6-5">0.6-4</a></li>
-        <li><a href="#sarima-0-6-3">0.6-3</a></li>
-        <li><a href="#sarima-0-6-1---0-6-2">0.6-1</a></li>
-        <li><a href="#sarima-0-6-0">0.6-0</a></li>
-        <li><a href="#sarima-0-5-11">0.5-11</a></li>
-        <li><a href="#sarima-0-5-9">0.5-9</a></li>
-        <li><a href="#sarima-0-5-8">0.5-8</a></li>
-        <li><a href="#sarima-0-5-7">0.5-7</a></li>
-        <li><a href="#sarima-0-5-6">0.5-6</a></li>
-        <li><a href="#sarima-0-5-5">0.5-5</a></li>
-        <li><a href="#sarima-0-5-4">0.5-4</a></li>
-        <li><a href="#sarima-0-5-3">0.5-3</a></li>
-        <li><a href="#sarima-0-5-2-cran">0.5-2</a></li>
-        <li><a href="#sarima-0-5-1">0.5-1</a></li>
-        <li><a href="#sarima-0-5-0">0.5-0</a></li>
-        <li><a href="#sarima-0-4-5-cran">0.4-5</a></li>
-        <li><a href="#sarima-0-4-0">0.4-0</a></li>
-        <li><a href="#sarima-0-3-6">0.3-6</a></li>
-        <li><a href="#sarima-0-3-5">0.3-5</a></li>
-        <li><a href="#sarima-0-3-4">0.3-4</a></li>
-        <li><a href="#sarima-0-3-3">0.3-3</a></li>
-        <li><a href="#sarima-0-3-2">0.3-2</a></li>
-        <li><a href="#sarima-0-3-0">0.3-0</a></li>
-        <li><a href="#sarima-0-2-x">0.2</a></li>
-        <li><a href="#sarima-0-1-0">0.1-0</a></li>
-        <li><a href="#sarima-0-0-5">0.0-5</a></li>
-        <li><a href="#sarima-0-0-3">0.0-3</a></li>
-        <li><a href="#sarima-0-0-2">0.0-2</a></li>
-        <li><a href="#sarima-0-0-1">0.0-1</a></li>
-        <li><a href="#sarima-0-0-0">0.0-0</a></li>
+        <li><a href="#sarima-082">0.8.2</a></li>
+        <li><a href="#sarima-081-cran">0.8.1</a></li>
+        <li><a href="#sarima-080-cran">0.8.0</a></li>
+        <li><a href="#sarima-07-6-cran">0.7-6</a></li>
+        <li><a href="#sarima-07-5">0.7-5</a></li>
+        <li><a href="#sarima-07-4">0.7-4</a></li>
+        <li><a href="#sarima-07-3-cran">0.7-3</a></li>
+        <li><a href="#sarima-07-2-cran">0.7-2</a></li>
+        <li><a href="#sarima-07-0---07-1">0.7-0</a></li>
+        <li><a href="#sarima-06-6">0.6-6</a></li>
+        <li><a href="#sarima-06-4---06-5">0.6-4</a></li>
+        <li><a href="#sarima-06-3">0.6-3</a></li>
+        <li><a href="#sarima-06-1---06-2">0.6-1</a></li>
+        <li><a href="#sarima-06-0">0.6-0</a></li>
+        <li><a href="#sarima-05-11">0.5-11</a></li>
+        <li><a href="#sarima-05-9">0.5-9</a></li>
+        <li><a href="#sarima-05-8">0.5-8</a></li>
+        <li><a href="#sarima-05-7">0.5-7</a></li>
+        <li><a href="#sarima-05-6">0.5-6</a></li>
+        <li><a href="#sarima-05-5">0.5-5</a></li>
+        <li><a href="#sarima-05-4">0.5-4</a></li>
+        <li><a href="#sarima-05-3">0.5-3</a></li>
+        <li><a href="#sarima-05-2-cran">0.5-2</a></li>
+        <li><a href="#sarima-05-1">0.5-1</a></li>
+        <li><a href="#sarima-05-0">0.5-0</a></li>
+        <li><a href="#sarima-04-5-cran">0.4-5</a></li>
+        <li><a href="#sarima-04-0">0.4-0</a></li>
+        <li><a href="#sarima-03-6">0.3-6</a></li>
+        <li><a href="#sarima-03-5">0.3-5</a></li>
+        <li><a href="#sarima-03-4">0.3-4</a></li>
+        <li><a href="#sarima-03-3">0.3-3</a></li>
+        <li><a href="#sarima-03-2">0.3-2</a></li>
+        <li><a href="#sarima-03-0">0.3-0</a></li>
+        <li><a href="#sarima-02-x">0.2</a></li>
+        <li><a href="#sarima-01-0">0.1-0</a></li>
+        <li><a href="#sarima-00-5">0.0-5</a></li>
+        <li><a href="#sarima-00-3">0.0-3</a></li>
+        <li><a href="#sarima-00-2">0.0-2</a></li>
+        <li><a href="#sarima-00-1">0.0-1</a></li>
+        <li><a href="#sarima-00-0">0.0-0</a></li>
       </ul>
     </div>
   </div>
 
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -552,13 +560,16 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
