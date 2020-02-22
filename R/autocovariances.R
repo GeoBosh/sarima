@@ -236,7 +236,8 @@ partialAutocorrelations <- function(x, maxlag, lag_0 = TRUE, ...){
             ## TODO: this may fail if 'x' doesn't contain info about autocovariances.
             ##    Maybe just put NA instead?
             wrk <- autocovariances(x, maxlag = 0, ...)
-            res <- as(obj, "FlexibleLagged")
+            ## BUGFIX: was: res <- as(obj, "FlexibleLagged")
+            res <- new("FlexibleLagged", data = pacr)
             res[[0]] <- wrk[[0]]
             res
     }
