@@ -11,21 +11,25 @@
   
   Simulation and Prediction with Seasonal ARIMA Models — sarima-package • sarima</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -33,20 +37,21 @@
 
 
 
+
 <meta property="og:title" content="Package sarima
   
   
   Simulation and Prediction with Seasonal ARIMA Models — sarima-package" />
-
 <meta property="og:description" content="Functions, classes and methods for time series modelling with ARIMA
-and related models. The aim of the package is to provide consistent
-interface for the user. For example, a single function autocorrelations()
-computes various kinds of theoretical and sample autocorrelations. This is
-work in progress, see the documentation and vignettes for the current
-functionality.  Function sarima() fits extended multiplicative seasonal
-ARIMA models with trends, exogenous variables and arbitrary roots on the
-unit circle, which can be fixed or estimated." />
+    and related models. The aim of the package is to provide consistent
+    interface for the user. For example, a single function autocorrelations()
+    computes various kinds of theoretical and sample autocorrelations. This is
+    work in progress, see the documentation and vignettes for the current
+    functionality.  Function sarima() fits extended multiplicative seasonal
+    ARIMA models with trends, exogenous variables and arbitrary roots on the
+    unit circle, which can be fixed or estimated." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -58,6 +63,7 @@ unit circle, which can be fixed or estimated." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -84,7 +90,7 @@ unit circle, which can be fixed or estimated." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -95,11 +101,10 @@ unit circle, which can be fixed or estimated." />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/GeoBosh/sarima">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -110,6 +115,7 @@ unit circle, which can be fixed or estimated." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -124,19 +130,18 @@ unit circle, which can be fixed or estimated." />
     </div>
 
     <div class="ref-description">
-    
     <p>Functions, classes and methods for time series modelling with ARIMA
-and related models. The aim of the package is to provide consistent
-interface for the user. For example, a single function autocorrelations()
-computes various kinds of theoretical and sample autocorrelations. This is
-work in progress, see the documentation and vignettes for the current
-functionality.  Function sarima() fits extended multiplicative seasonal
-ARIMA models with trends, exogenous variables and arbitrary roots on the
-unit circle, which can be fixed or estimated.</p>
-    
+    and related models. The aim of the package is to provide consistent
+    interface for the user. For example, a single function autocorrelations()
+    computes various kinds of theoretical and sample autocorrelations. This is
+    work in progress, see the documentation and vignettes for the current
+    functionality.  Function sarima() fits extended multiplicative seasonal
+    ARIMA models with trends, exogenous variables and arbitrary roots on the
+    unit circle, which can be fixed or estimated.</p>
     </div>
 
-        
+
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><!-- %% Commenting out on 2019-09-11: -->
@@ -176,7 +181,9 @@ model specifications, they compute the corresponding theoretical
 properties.</p>
 <p>This is work in progress, see also the vignette(s).
 <!-- % e.g. \url{../doc/white_noise_tests.pdf}. --></p>
-    
+
+
+
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Boshnakov GN (1996).
@@ -198,17 +205,15 @@ Chapman &amp; Hall/CRC Press.</p>
 &#8220;Algorithms for Linear Time Series Analysis: With R Package.&#8221;
 <em>Journal of Statistical Software</em>, <b>23</b>(5).
 <a href='http://www.jstatsoft.org/v23/i05/'>http://www.jstatsoft.org/v23/i05/</a>.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='ArmaModel.html'>ArmaModel</a></code>
   <code><a href='autocorrelations.html'>autocorrelations</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## simulate a white noise ts (model from Francq &amp; Zakoian)</span>
 <span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fl'>5000</span>
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sarima</span><span class='kw ns'>:::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/sarima/topics/rgarch1p1'>rgarch1p1</a></span>(<span class='no'>n</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.3</span>, <span class='kw'>beta</span> <span class='kw'>=</span> <span class='fl'>0.55</span>, <span class='kw'>omega</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n.skip</span> <span class='kw'>=</span> <span class='fl'>100</span>)
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>sarima</span><span class='kw ns'>:::</span><span class='fu'><a href='https://rdrr.io/pkg/sarima/man/rgarch1p1.html'>rgarch1p1</a></span>(<span class='no'>n</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.3</span>, <span class='kw'>beta</span> <span class='kw'>=</span> <span class='fl'>0.55</span>, <span class='kw'>omega</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>n.skip</span> <span class='kw'>=</span> <span class='fl'>100</span>)
 
 <span class='co'>## acf and pacf</span>
 ( <span class='no'>x.acf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='autocorrelations.html'>autocorrelations</a></span>(<span class='no'>x</span>) )</div><div class='output co'>#&gt; An object of class "SampleAutocorrelations"
@@ -253,7 +258,7 @@ Chapman &amp; Hall/CRC Press.</p>
 #&gt; Slot varnames:   &lt;not set&gt;
 #&gt; Slot objectname:  x</div><div class='input'>
 <span class='co'>## portmanteau test for iid, by default gives also ci's for the acf under H0</span>
-<span class='no'>x.iid</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='whiteNoiseTest.html'>whiteNoiseTest</a></span>(<span class='no'>x.acf</span>, <span class='kw'>h0</span> <span class='kw'>=</span> <span class='st'>"iid"</span>, <span class='kw'>nlags</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>5</span>,<span class='fl'>10</span>,<span class='fl'>20</span>), <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"LiMcLeod"</span>)
+<span class='no'>x.iid</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='whiteNoiseTest.html'>whiteNoiseTest</a></span>(<span class='no'>x.acf</span>, <span class='kw'>h0</span> <span class='kw'>=</span> <span class='st'>"iid"</span>, <span class='kw'>nlags</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>,<span class='fl'>10</span>,<span class='fl'>20</span>), <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"LiMcLeod"</span>)
 <span class='no'>x.iid</span></div><div class='output co'>#&gt; $test
 #&gt;          ChiSq DF    pvalue
 #&gt; [1,]  7.590469  5 0.1802969
@@ -287,7 +292,7 @@ Chapman &amp; Hall/CRC Press.</p>
 #&gt; attr(,"level")
 #&gt; [1] 0.95
 #&gt; </div><div class='input'>
-<span class='no'>x.iid2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='whiteNoiseTest.html'>whiteNoiseTest</a></span>(<span class='no'>x.acf</span>, <span class='kw'>h0</span> <span class='kw'>=</span> <span class='st'>"iid"</span>, <span class='kw'>nlags</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>5</span>,<span class='fl'>10</span>,<span class='fl'>20</span>), <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"LjungBox"</span>)
+<span class='no'>x.iid2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='whiteNoiseTest.html'>whiteNoiseTest</a></span>(<span class='no'>x.acf</span>, <span class='kw'>h0</span> <span class='kw'>=</span> <span class='st'>"iid"</span>, <span class='kw'>nlags</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>,<span class='fl'>10</span>,<span class='fl'>20</span>), <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"LjungBox"</span>)
 <span class='no'>x.iid2</span></div><div class='output co'>#&gt; $test
 #&gt;          ChiSq DF    pvalue
 #&gt; [1,]  7.593737  5 0.1800927
@@ -322,7 +327,7 @@ Chapman &amp; Hall/CRC Press.</p>
 #&gt; [1] 0.95
 #&gt; </div><div class='input'>
 <span class='co'>## portmanteau test for garch H0</span>
-<span class='no'>x.garch</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='whiteNoiseTest.html'>whiteNoiseTest</a></span>(<span class='no'>x.acf</span>, <span class='kw'>h0</span> <span class='kw'>=</span> <span class='st'>"garch"</span>, <span class='kw'>nlags</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>5</span>,<span class='fl'>10</span>,<span class='fl'>20</span>), <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>)
+<span class='no'>x.garch</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='whiteNoiseTest.html'>whiteNoiseTest</a></span>(<span class='no'>x.acf</span>, <span class='kw'>h0</span> <span class='kw'>=</span> <span class='st'>"garch"</span>, <span class='kw'>nlags</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>,<span class='fl'>10</span>,<span class='fl'>20</span>), <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>)
 <span class='no'>x.garch</span></div><div class='output co'>#&gt; $test
 #&gt;       h         Q      pval
 #&gt; [1,]  5  4.027093 0.5455219
@@ -353,14 +358,14 @@ Chapman &amp; Hall/CRC Press.</p>
 #&gt; [20,] -0.02797315 0.02797315
 #&gt; </div><div class='input'>
 <span class='co'>## plot methods give the CI's under H0</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x.acf</span>)</div><div class='img'><img src='sarima-package-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x.acf</span>)</div><div class='img'><img src='sarima-package-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## if the data are given, the CI's under garch H0 are also given.</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x.acf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>x</span>)</div><div class='img'><img src='sarima-package-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x.acf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>x</span>)</div><div class='img'><img src='sarima-package-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Tests based on partial autocorrelations are also available:</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x.pacf</span>)</div><div class='img'><img src='sarima-package-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>x.pacf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>x</span>)</div><div class='img'><img src='sarima-package-4.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x.pacf</span>)</div><div class='img'><img src='sarima-package-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x.pacf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>x</span>)</div><div class='img'><img src='sarima-package-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Models</span>
 <span class='co'>## AR</span>
-( <span class='no'>ar2a1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ArmaModel.html'>ArModel</a></span>(<span class='kw'>ar</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(-<span class='fl'>0.3</span>, -<span class='fl'>0.7</span>), <span class='kw'>sigma2</span> <span class='kw'>=</span> <span class='fl'>1</span>) )</div><div class='output co'>#&gt; An object of class "ArModel"
+( <span class='no'>ar2a1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ArmaModel.html'>ArModel</a></span>(<span class='kw'>ar</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>0.3</span>, -<span class='fl'>0.7</span>), <span class='kw'>sigma2</span> <span class='kw'>=</span> <span class='fl'>1</span>) )</div><div class='output co'>#&gt; An object of class "ArModel"
 #&gt; mean:  0 
 #&gt; sigmaSq:  1 
 #&gt; 
@@ -378,9 +383,9 @@ Chapman &amp; Hall/CRC Press.</p>
 #&gt;          0          1          2          3          4          5          6 
 #&gt;  1.0000000 -0.1764706 -0.6470588  0.3176471  0.3576471 -0.3296471 -0.1514588 </div><div class='input'><span class='fu'><a href='autocorrelations.html'>partialAutocorrelations</a></span>(<span class='no'>ar2a1</span>, <span class='kw'>maxlag</span> <span class='kw'>=</span> <span class='fl'>6</span>)</div><div class='output co'>#&gt; An object of class "PartialAutocorrelations"
 #&gt;         Lag_0         Lag_1         Lag_2         Lag_3         Lag_4 
-#&gt;  1.000000e+00 -1.764706e-01 -7.000000e-01 -1.123440e-16  1.123440e-16 
+#&gt;  1.000000e+00 -1.764706e-01 -7.000000e-01 -1.123440e-16  0.000000e+00 
 #&gt;         Lag_5         Lag_6 
-#&gt; -1.123440e-16 -5.617200e-17 </div><div class='input'><span class='fu'><a href='autocorrelations.html'>autocovariances</a></span>(<span class='no'>ar2a1</span>, <span class='kw'>maxlag</span> <span class='kw'>=</span> <span class='fl'>6</span>)</div><div class='output co'>#&gt; An object of class "Autocovariances"
+#&gt;  0.000000e+00 -5.617200e-17 </div><div class='input'><span class='fu'><a href='autocorrelations.html'>autocovariances</a></span>(<span class='no'>ar2a1</span>, <span class='kw'>maxlag</span> <span class='kw'>=</span> <span class='fl'>6</span>)</div><div class='output co'>#&gt; An object of class "Autocovariances"
 #&gt;      Lag_0      Lag_1      Lag_2      Lag_3      Lag_4      Lag_5      Lag_6 
 #&gt;  2.0238095 -0.3571429 -1.3095238  0.6428571  0.7238095 -0.6671429 -0.3065238 </div><div class='input'><span class='fu'><a href='autocorrelations.html'>partialVariances</a></span>(<span class='no'>ar2a1</span>, <span class='kw'>maxlag</span> <span class='kw'>=</span> <span class='fl'>6</span>)</div><div class='output co'>#&gt; An object of class "PartialVariances"
 #&gt;        0        1        2        3        4        5        6 
@@ -391,27 +396,19 @@ Chapman &amp; Hall/CRC Press.</p>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
       <li><a href="#details">Details</a></li>
-
       <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
     <h2>Author</h2>
-    <p>c( person(given = c("Georgi", "N."),
-family = "Boshnakov",
-role = c("aut", "cre"),
-email = "georgi.boshnakov@manchester.ac.uk"),
-person(given = "Jamie",
-family = "Halliday",
-role = "aut", email = "jamie.halliday@manchester.ac.uk") )</p>
-<p>Maintainer:</p>
+    <p>Georgi N. Boshnakov [aut, cre],
+  Jamie Halliday [aut]</p>
+<p>Maintainer: Georgi N. Boshnakov &lt;georgi.boshnakov@manchester.ac.uk&gt;</p>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -419,13 +416,16 @@ role = "aut", email = "jamie.halliday@manchester.ac.uk") )</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

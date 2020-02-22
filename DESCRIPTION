@@ -2,7 +2,7 @@ Package: sarima
 Type: Package
 Title: Simulation and Prediction with Seasonal ARIMA Models
 Version: 0.8.2
-Date: 2019-09-11
+Date: 2020-02-22
 Authors@R: c( person(given = c("Georgi", "N."), 
                      family = "Boshnakov", 
                      role = c("aut", "cre"), 

@@ -26,12 +26,19 @@ reference:
       - modelOrder
       - modelPoly
       - modelPolyCoef
+      - isStationaryModel
+      - modelCenter
+      - modelIntercept
+      - nSeasons
+      - nUnitRoots
+      - sigmaSq
   - title: "Inference"
     contents:
+      - acfIidTest
+      - whiteNoiseTest
       - acfGarchTest
       - acfWnTest
       - acfMaTest
-      - whiteNoiseTest
       - nvarOfAcfKP
       - nvcovOfAcf
       - nvcovOfAcfBD
@@ -41,8 +48,20 @@ reference:
       - ArmaModel
       - matches("-class$")
   - title: "Methods"
-    contents: 
-      - matches("-methods$")
+    contents:
+      # - "autocorrelations-methods"
+      # - "autocovariances-methods"
+      - "coerce-methods"
+      - "filterCoef-methods"
+      - "filterOrder-methods"
+      - "filterPoly-methods"
+      - "filterPolyCoef-methods"
+      - "modelCoef-methods"
+      - "modelOrder-methods"
+      - "modelPoly-methods"
+      - "modelPolyCoef-methods"
+      - "partialAutocorrelations-methods"
+      - "plot-methods"
       - matches("summary")
   - title: "Initialisation for Kalman filter"
     contents: 
