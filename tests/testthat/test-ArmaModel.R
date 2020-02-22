@@ -18,4 +18,17 @@ test_that("Sarima and Arma models work ok", {
 
     expect_error(new("MaModel", ma = 0.9, ar = 0.5), "Autoregressive terms found in MaModel")
     expect_error(new("ArModel", ma = 0.9, ar = 0.5), "Moving average terms found in ArModel")
+
+    expect_null(.reportClassName(sm0, "VirtualSarimaModel"))
+    expect_null(.reportClassName(sm0, "SarimaModel"))
+    expect_output(.reportClassName(sm0, "SarimaModel"), "An object")
+
+    expect_output(show(sm0), "An object")
+
+    arma1p1 <- new("ArmaModel", ar = 0.5, ma = 0.9, center = 1.23, intercept = 2)
+    expect_output(show(arma1p1), "An object")
+
+    expect_output(show(new("MaModel", ma = 0.9)), "An object")
+    expect_output(show(new("ArModel", ar = 0.5)), "An object")
+    
 })

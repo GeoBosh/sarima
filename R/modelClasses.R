@@ -43,7 +43,7 @@ setClass("VirtualWhiteNoiseModel", contains = c("VirtualStationaryModel", "VIRTU
 
 setClass("VirtualFilterModel",  contains = c("VIRTUAL"))
 
-## setMethod("sigmaSq", "VirtualFilterModel", function(object) object@sigma2)
+  ## setMethod("sigmaSq", "VirtualFilterModel", function(object) object@sigma2)
 
 setClass("VirtualArmaModel",
          contains = c("VirtualFilterModel", "VirtualStationaryModel", "VIRTUAL")
