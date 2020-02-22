@@ -81,6 +81,22 @@ test_that("Sarima and Arma models work ok", {
     mo3 <- new("ArmaModel", ar = ar3, ma = ma3, sigma2 = 1)
     modelPoly(mo3)
     expect_identical(mo, mo3)
+
+    expect_true(isStationaryModel(mo3))
+    modelPoly(mo3)
+    modelPolyCoef(mo3)
+    modelPolyCoef(mo3, lag_0 = FALSE)
+    modelCoef(mo3, "ArmaFilter")
+
+    ArmaModel(ar = ar3, ma = ma3, sigma2 = 1)
+    ArModel(ar = ar3 sigma2 = 1)
+    MaModel(ma = ma3, sigma2 = 1)
+
+    as(ArmaModel(ar = ar3, sigma2 = 1), "ArModel")
+    as(ArmaModel(ma = ma3, sigma2 = 1), "MaModel")
+
+    expect_error(as(ArmaModel(ar = ar3, ma = ma3, sigma2 = 1), "ArModel"))
+    expect_error(as(ArmaModel(ar = ar3, ma = ma3, sigma2 = 1), "MaModel"))
     
     modelCoef(mo3) # coefficients of the model with the default (BD) sign convention
     modelCoef(mo3, convention = "BD") # same result

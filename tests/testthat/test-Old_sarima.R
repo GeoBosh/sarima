@@ -6,7 +6,19 @@ test_that("functions in sarima.R work ok", {
     
     model0 <- modelCoef(m1, "ArmaModel")
     model1 <- as(model0, "list")
+
+    modelCoef(m1, "SarimaFilter")
+    modelCoef(m1, "ArmaFilter")
+    modelCoef(new("SarimaModel", iorder = 1, siorder = 1, nseasons = 12), "ArFilter")
+    modelCoef(new("SarimaModel", ma = -0.3, sma = -0.1, nseasons = 12), "MaFilter")
+
+    modelCoef(new("SarimaModel", iorder = 1, siorder = 1, nseasons = 12), "ArModel")
+    modelCoef(new("SarimaModel", ma = -0.3, sma = -0.1, nseasons = 12), "MaModel")
     
+    modelCoef(m1, "ArmaModel")
+    expect_error(modelCoef(m1, "ArFilter"))
+    expect_error(modelCoef(m1, "MaFilter"))
+
     ap.1 <- xarmaFilter(model1, x = AirPassengers, whiten = TRUE)
     ap.2 <- xarmaFilter(model1, x = AirPassengers, eps = ap.1, whiten = FALSE)
     ap <- AirPassengers
