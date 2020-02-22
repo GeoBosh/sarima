@@ -30,5 +30,29 @@ test_that("Sarima and Arma models work ok", {
 
     expect_output(show(new("MaModel", ma = 0.9)), "An object")
     expect_output(show(new("ArModel", ar = 0.5)), "An object")
-    
+
+    expect_output(summary(sm0))
+    expect_output(summary(sm1))
+    expect_output(summary(sm2))
+    expect_output(summary(sm3))
+
+    expect_output(summary(as(sm0, "SarimaSpec")))
+    expect_output(summary(as(sm1, "SarimaSpec")))
+    expect_output(summary(as(sm2, "SarimaSpec")))
+    expect_output(summary(as(sm3, "SarimaSpec")))
+
+    sm3i <- new("SarimaModel", ar = 0.9, sar= 0.8, nseasons = 12, intercept = 3, sigma2 = 1, iorder = 1)
+
+    expect_output(summary(sm3i))
+    expect_output(show(as(sm3i, "InterceptSpec")))
+    isStationaryModel(sm3i)
+    as(sm3i, "list")
+
+    isStationaryModel(sm3)
+    ## as(sm3, "ArmaModel") # TODO: this gives Warning message:
+    ##                              In .local(.Object, ...) : The AR polynomial is not stable.
+    ##                        Investigate! 
+    as(sm2, "ArmaModel")
+    as(sm3, "list")
+
 })

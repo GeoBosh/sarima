@@ -38,31 +38,31 @@ Q0gnbR    <- arma_Q0gnbR(c(0.2, 0.5, 0.1), c(0.3))
 ## 		      sarima:::arma_Q0gnbR(c(0.2, 0.5, 0.1), c(0.3))   	,
 ## 		      sarima:::arma_Q0gnb0(c(0.2, 0.5, 0.1), c(0.3))   	,
 ## 		      sarima:::arma_Q0Gardner(c(0.2, 0.5, 0.1), c(0.3)) ,
-##                       repetitions = 1000)
+##                       repetitions = 1000) 
 
 arma_Q0Gardner(c(0.2, 0.5), c(0.3))
 arma_Q0naive(c(0.2, 0.5), c(0.3))
-sarima:::arma_Q0gnb(c(0.2, 0.5), c(0.3))
-arma_Q0gnbR(c(0.2, 0.5), c(0.3))
+sarima:::arma_Q0gnb(c(0.2, 0.5), c(0.3)) 
+arma_Q0gnbR(c(0.2, 0.5), c(0.3)) 
 sarima:::arma_Q0gnb0(c(0.2, 0.5), c(0.3))
 
 
-## rbenchmark::benchmark(sarima:::arma_Q0bis(c(0.2, 0.5), c(0.3)),
-## sarima:::arma_Q0Gardner(c(0.2, 0.5), c(0.3)),
-## sarima:::arma_Q0naive(c(0.2, 0.5), c(0.3)),
-## sarima:::arma_Q0gnb(c(0.2, 0.5), c(0.3)),
-## sarima:::arma_Q0gnbR(c(0.2, 0.5), c(0.3)),
-## sarima:::arma_Q0gnb0(c(0.2, 0.5), c(0.3)),
+## rbenchmark::benchmark(sarima:::arma_Q0bis(c(0.2, 0.5), c(0.3)), 
+## sarima:::arma_Q0Gardner(c(0.2, 0.5), c(0.3)), 
+## sarima:::arma_Q0naive(c(0.2, 0.5), c(0.3)), 
+## sarima:::arma_Q0gnb(c(0.2, 0.5), c(0.3)), 
+## sarima:::arma_Q0gnbR(c(0.2, 0.5), c(0.3)), 
+## sarima:::arma_Q0gnb0(c(0.2, 0.5), c(0.3)), 
 ## replications = 10000)
-##                                           test replications elapsed relative   user.self
-## 1     sarima:::arma_Q0bis(c(0.2, 0.5), c(0.3))        10000    0.38    2.714	1      0.37
-## 2 sarima:::arma_Q0Gardner(c(0.2, 0.5), c(0.3))        10000    0.14    1.000	2      0.14
-## 4     sarima:::arma_Q0gnb(c(0.2, 0.5), c(0.3))        10000    0.14    1.000	4      0.14
-## 6    sarima:::arma_Q0gnb0(c(0.2, 0.5), c(0.3))        10000    0.16    1.143	6      0.15
-## 5    sarima:::arma_Q0gnbR(c(0.2, 0.5), c(0.3))        10000    0.87    6.214	5      0.87
-## 3   sarima:::arma_Q0naive(c(0.2, 0.5), c(0.3))        10000    1.14    8.143	3      1.12
+##                                           test replications elapsed relative   user.self 
+## 1     sarima:::arma_Q0bis(c(0.2, 0.5), c(0.3))        10000    0.38    2.714	1      0.37 
+## 2 sarima:::arma_Q0Gardner(c(0.2, 0.5), c(0.3))        10000    0.14    1.000	2      0.14 
+## 4     sarima:::arma_Q0gnb(c(0.2, 0.5), c(0.3))        10000    0.14    1.000	4      0.14 
+## 6    sarima:::arma_Q0gnb0(c(0.2, 0.5), c(0.3))        10000    0.16    1.143	6      0.15 
+## 5    sarima:::arma_Q0gnbR(c(0.2, 0.5), c(0.3))        10000    0.87    6.214	5      0.87 
+## 3   sarima:::arma_Q0naive(c(0.2, 0.5), c(0.3))        10000    1.14    8.143	3      1.12 
 
-phi4p2 <- c(0.2, 0.5, 0.1, -0.2)
+phi4p2 <- c(0.2, 0.5, 0.1, -0.2) 
 theta4p2 <- c(0.3, 0.05)
 
 a1 <- arma_Q0Gardner(phi4p2, theta4p2)
@@ -109,8 +109,8 @@ test_that("kikiriki", {
     }
 
 
-## these are modified examples from arimaML.R
-##           in "R\src\base\R-3.3.2\src\library\stats\tests\arimaML.R"
+## these are modified examples from arimaML.R 
+##           in "R\src\base\R-3.3.2\src\library\stats\tests\arimaML.R" 
 ##
 ## The k smallest eigenvalues of m
 EV.k <- function(m, k = 2) {
@@ -128,12 +128,12 @@ chkQ0 <- function(phi, theta, tol = .Machine$double.eps^0.5,
                  Q0gnbR  = arma_Q0gnbR(phi, theta),
                  Q0gnb   = arma_Q0gnb(phi, theta)
                 )
-
+  
 
   eig <- if(doEigen) sapply(all_Q0, function(x) EV.k(x))
 
   a.eq <- mapply(function(x, y, ...) all.equal(all_Q0[[x]], all_Q0[[y]], ...),
-                 rep(names(all_Q0), each = length(all_Q0)),
+                 rep(names(all_Q0), each = length(all_Q0)), 
                  rep(names(all_Q0), length(all_Q0)),
                  MoreArgs = list(tol = tol) #,                 SIMPLIFY = FALSE
                 )
@@ -169,16 +169,16 @@ chkQ0(   .5,     numeric())
 chkQ0(numeric(), .7)
 chkQ0(numeric(), c(.7, .2))
 
-chkQ <- function(s, theta, tol = 0)
+chkQ <- function(s, theta, tol = 0) 
             chkQ0(mkPhi(s = s), theta = theta, tol = tol, strict = FALSE)
 
     # all.eq2num <- function(ae) as.numeric(sub(".* difference: ", '', ae))
-all.eq2num <- function(ae){
+all.eq2num <- function(ae){ 
     sub(".* difference: ", '', ae)
 }
 
 
-getN12 <- function(r)
+getN12 <- function(r) 
               all.eq2num(r$all.eq$c12)
 
 ss <- setNames(,2:20)
@@ -302,7 +302,6 @@ stopifnot(e1.bis > -1e-12)
 ##       Uncomment when that's sorted out!
 ##
 e1.gnb <- sapply(ev3.gnb, function(m) m[,1])
-e1.gnb
 if(!(any(is.na(e1.gnb)))){
 min(e1.gnb) # -7.1e-15 , -7.5e-15
 stopifnot(e1.gnb > -1e-12)
@@ -347,7 +346,7 @@ tt$eigen
 ##  [6]  7.364358e+01  7.344826e+01  3.900463e+01  3.896386e+01  1.369306e+01
 ## [11]  1.367364e+01  4.422551e+00 -6.352749e-22
 ##
-## (the last element is the smallest)
+## (the last element is the smallest) 
 ## However, if also the vectors are computed it is positive:
 ##
 ## > eigen(tt$Q0naive)$values
@@ -355,9 +354,9 @@ tt$eigen
 ##  [6] 7.364358e+01 7.344826e+01 3.900463e+01 3.896386e+01 1.369306e+01
 ## [11] 1.367364e+01 4.422551e+00 8.526513e-14
 ##
-## It is tempting to think that the value from the full decomposition is more reliable.
+## It is tempting to think that the value from the full decomposition is more reliable. 
 ## However, it is all probably noise. Indeed, computing v' tt$Q0naive v gives a negative value:
-##
+## 
 ## > t(eigen(tt$Q0naive)$vectors[, 13]) %*% tt$Q0naive %*% eigen(tt$Q0naive)$vectors[ , 13]
 ##               [,1]
 ## [1,] -4.618197e-22
@@ -368,8 +367,8 @@ out.R <- makeARIMA(phi, theta, NULL, SSinit="Rossignol")
 
 set.seed(7)
 x <- arima.sim(1000,model=list(ar=phi,ma=theta))
-str(k0 <- KalmanLike(x, mod=out.0))
-str(kS <- KalmanLike(x, mod=out.R))
+k0 <- KalmanLike(x, mod=out.0)
+kS <- KalmanLike(x, mod=out.R)
 stopifnot(sapply(kS, is.finite))
 
 ## ini.ph <- true.cf
@@ -377,7 +376,7 @@ stopifnot(sapply(kS, is.finite))
 ## fm1 <- arima(x, order= c(1,0,1), seasonal= list(period=12, order=c(1,0,0)),
 ##              include.mean=FALSE, init=ini.ph)
 ## stopifnot(all.equal(true.cf, coef(fm1), tol = 0.05))
-##
+## 
 ## ## Using  'ML'  seems "harder" :
 ## e1 <- try(
 ## arima(x, order= c(1,0,1), seasonal= list(period=12, order=c(1,0,0)),
@@ -389,7 +388,7 @@ stopifnot(sapply(kS, is.finite))
 ##       include.mean=FALSE, init=ini.ph, method='ML', transform.pars=FALSE)
 ## )
 ## ## Error in optim(init[mask], armafn, ..): initial value in 'vmmin' is not finite
-##
+## 
 ## ## MM: The new Q0 does *not* help here, really:
 ## e3 <- try(
 ## arima(x, order= c(1,0,1), seasonal= list(period=12, order=c(1,0,0)),
@@ -399,10 +398,10 @@ stopifnot(sapply(kS, is.finite))
 ## fm2 <-
 ## arima(x, order= c(1,0,1), seasonal= list(period=12, order=c(1,0,0)),
 ##       include.mean=FALSE, init=ini.ph, method='ML', SSinit = "Rossi", transform.p=FALSE)
-##
+## 
 ## stopifnot(all.equal(confint(fm1),
 ##                     confint(fm2), tol = 4e-4))
-##
+## 
 
 
 

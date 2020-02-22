@@ -2,6 +2,7 @@
 test_that("functions in sarima.R work ok", {
     ## define a seasonal ARIMA model
     m1 <- new("SarimaModel", iorder = 1, siorder = 1, ma = -0.3, sma = -0.1, nseasons = 12)
+    expect_output(summary(m1))
     
     model0 <- modelCoef(m1, "ArmaModel")
     model1 <- as(model0, "list")
