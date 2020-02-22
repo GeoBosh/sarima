@@ -89,7 +89,7 @@ test_that("Sarima and Arma models work ok", {
     modelCoef(mo3, "ArmaFilter")
 
     ArmaModel(ar = ar3, ma = ma3, sigma2 = 1)
-    ArModel(ar = ar3 sigma2 = 1)
+    ArModel(ar = ar3, sigma2 = 1)
     MaModel(ma = ma3, sigma2 = 1)
 
     as(ArmaModel(ar = ar3, sigma2 = 1), "ArModel")
