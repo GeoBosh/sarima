@@ -4,7 +4,12 @@ test_that("functions in autocorrelations.org work ok", {
 
     v1 <- rnorm(100)
     autocorrelations(v1)
-    v1.acf <- autocorrelations(v1, maxlag = 10)
+    v1.acf <- autocorrelations(v1, maxlag = 10, se = TRUE)
+    vcov(v1.acf)
+    diagOfVcov(v1.acf)
+    confint(v1.acf)
+    confint(v1.acf, maxlag = 5)
+    coef(v1.acf)
 
     v1.acf[1:10] # drop lag zero value (and the class)
     autocorrelations(v1, maxlag = 10, lag_0 = FALSE) # same
@@ -45,7 +50,42 @@ test_that("functions in autocorrelations.org work ok", {
     ## plot(x.acf, data = x, interval = 0.90)
     
     acfWnTest(x.acf, x = x, nlags = c(5,10,20))
-    nvarOfAcfKP(x, maxlag = 20)
     whiteNoiseTest(x.acf, h0 = "arch-type", x = x, nlags = c(5,10,20))
+    expect_error(whiteNoiseTest(x.acf, h0 = "argh", x = x, nlags = c(5,10,20)))
 
+    ts1 <- rnorm(100)
+    
+    a1 <- drop(acf(ts1)$acf)
+    acfIidTest(a1, n = 100, nlags = c(5, 10, 20))
+    acfIidTest(a1, n = 100, nlags = c(5, 10, 20), method = "LjungBox")
+    acfIidTest(a1, n = 100, nlags = c(5, 10, 20), interval = NULL)
+    acfIidTest(a1, n = 100, method = "LjungBox", interval = c(0.95, 0.90), expandCI = FALSE)
+    
+    
+    ## acfIidTest() is called behind the scenes by methods for autocorrelation objects
+    ts1_acrf <- autocorrelations(ts1)
+    class(ts1_acrf)  # "SampleAutocorrelations"
+    whiteNoiseTest(ts1_acrf, h0 = "iid", nlags = c(5,10,20), method = "LiMcLeod")
+    plot(ts1_acrf)
+    
+    ## use 10% level of significance in the plot:
+    plot(ts1_acrf, interval = 0.9)
+
+
+
+    nvarOfAcfKP(x, maxlag = 10)
+    nvarOfAcfKP(x, maxlag = 10, center = TRUE, acfscale = "mom")
+    expect_error(nvarOfAcfKP(x, maxlag = 10, acfscale = "argh"))
+
+    ## MA(2)
+    ma2 <- list(ma = c(0.8, 0.1), sigma2 = 1)
+    nv <- nvcovOfAcf(ma2, maxlag = 4)
+    d <- diag(nvcovOfAcf(ma2, maxlag = 7))
+    cbind(ma2 = 1.96 * sqrt(d) / sqrt(200), iid = 1.96/sqrt(200))
+    
+    acr <- autocorrelations(list(ma = c(0.8, 0.1)), maxlag = 7)
+    nvBD <- nvcovOfAcfBD(acr, 2, maxlag = 4)
+    expect_equal(nv, nvBD)
+
+    acfOfSquaredArmaModel(ma2, maxlag = 4)
 })
