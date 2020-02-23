@@ -400,7 +400,8 @@ setMethod("modelCoef", c("SarimaModel", "MaModel", "missing"),
               if(length(wrk$fullarpoly) > 0)
                   stop("Model not MA-like (has non-trivial autoregressive part)")
 
-              list(ar = numeric(0), ma = coef(wrk$fullmapoly)[-1])
+              ## 2020-02-22 was: list(ar = numeric(0), ma = coef(wrk$fullmapoly)[-1])
+              list(ar = numeric(0), ma = wrk$fullmapoly)
           }
           )
 
