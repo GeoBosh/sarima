@@ -4,9 +4,7 @@
 
 - removed an erroneous `rev()` from the garch tests vignette.
 
-- fixed minor several bugs.
-
-- added new tests.
+- added new tests and fixed several bugs in the process.
 
 - the show method for class "ArmaModel" now returns NULL. The previous
   return value was spooking "pkgdown::build_site()" resulting in the error:
