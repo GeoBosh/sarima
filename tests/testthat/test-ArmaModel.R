@@ -78,6 +78,48 @@ test_that("Sarima and Arma models work ok", {
     
     ar3 <- as(0.9, "BJFilter")
     ma3 <- as(-0.4, "BJFilter")
+    ar3SP <- as(ar3, "SPFilter")
+
+    
+    filterCoef(ar3, "SP")
+    expect_error(filterCoef(ar3, "+-"))
+    filterCoef(ar3, "BJ")
+    
+    filterCoef(ar3SP)
+    filterCoef(ar3SP, "SP")
+    expect_error(filterCoef(ar3SP, "+-"))
+    filterCoef(ar3SP, "BJ")
+
+    filterPolyCoef(ar3)
+    filterPolyCoef(ar3SP)
+    filterPolyCoef(ar3, lag_0 = FALSE)
+    filterPolyCoef(ar3SP, lag_0 = FALSE)
+
+    filterPoly(ar3)
+    filterPoly(ar3SP)
+
+    new("BJFilter", order = 2)
+
+    armafi <- new("ArmaFilter", ar = 0.9, ma = 0.3)
+    filterCoef(armafi, "BJ")
+    filterCoef(armafi, "SP")
+    filterCoef(armafi, "BD")
+    filterCoef(armafi, "-+")
+    filterCoef(armafi, "+-")
+    filterCoef(armafi, "--")
+    filterCoef(armafi, "++")
+    
+    expect_error(filterCoef(armafi, "-"))
+    expect_error(filterCoef(armafi, "+"))
+    expect_error(filterCoef(armafi, "argh"))
+
+    ## nSeasons(armafi)
+    as(armafi, "list")
+
+    expect_error(new("ArFilter", ar = 0.9, ma = 0.3), "Non-trivial moving average part")
+    expect_error(new("MaFilter", ar = 0.9, ma = 0.3), "Non-trivial autoregressive part")
+
+    
     mo3 <- new("ArmaModel", ar = ar3, ma = ma3, sigma2 = 1)
     modelPoly(mo3)
     expect_identical(mo, mo3)
