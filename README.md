@@ -32,7 +32,15 @@ variables and arbitrary roots on the unit circle, which can be fixed or
 estimated.
 
 Reference manuals and vignettes are available as usual from running R
-sessions. Alternatively, here are some links to online versions of the documentation:
+sessions. For example,
+
+    vignette(package = "sarima") # which vignettes are available?
+    
+    vignette("white_noise_tests", package = "sarima")
+    vignette("garch_tests_example", package = "sarima")
+
+
+Alternatively, here are some links to online versions of the documentation:
 
 - [sarima online reference manual](https://geobosh.github.io/sarima/)
 
