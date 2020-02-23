@@ -426,9 +426,9 @@ setMethod("modelOrder", c("VirtualFilterModel", "character"),
 
 setMethod("modelOrder", c("ArmaModel", "ArFilter"),
           function(object, convention){
-          wrk <- filterOrder(object)
-          if(wrk$ma != 0)
-              stop("Non-zero moving average order")
+              wrk <- filterOrder(object)
+              if(wrk$ma != 0)
+                  stop("Non-zero moving average order")
               wrk
           }
           )
@@ -437,7 +437,7 @@ setMethod("modelOrder", c("ArmaModel", "MaFilter"),
           function(object, convention){
               wrk <- filterOrder(object)
               if(wrk$ar != 0)
-                  stop("Non-zero moving average order")
+                  stop("Non-zero autoregressive order")
               wrk
           }
           )

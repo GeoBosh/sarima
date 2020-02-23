@@ -3,15 +3,22 @@ test_that("functions in sarima.R work ok", {
     ## define a seasonal ARIMA model
     m1 <- new("SarimaModel", iorder = 1, siorder = 1, ma = -0.3, sma = -0.1, nseasons = 12)
     expect_output(summary(m1))
+    expect_output(show(m1))
     iOrder(m1)
     siOrder(m1)
     anyUnitRoots(m1)
     nSeasons(m1)
+    nSeasons(as(m1, "SarimaFilter"))
 
     m1a <- new("SarimaModel", iorder = 1, siorder = 1, ma = -0.3)
+    m1b <- new("SarimaModel", iorder = 1, ma = -0.3)
     filterPoly(m1a)
+    anyUnitRoots(m1a)
     expect_output(show(m1a))
-    
+    modelPolyCoef(m1a, "ArmaFilter")
+    modelPolyCoef(m1a, "ArmaFilter", lag_0 = FALSE)
+    expect_error(modelCoef(m1a, "ArModel"), "has non-trivial moving average part")
+    expect_error(modelCoef(m1a, "MaModel"), "has non-trivial autoregressive part")
     model0 <- modelCoef(m1, "ArmaModel")
     model1 <- as(model0, "list")
 
@@ -26,6 +33,19 @@ test_that("functions in sarima.R work ok", {
     modelCoef(m1, "ArmaModel")
     expect_error(modelCoef(m1, "ArFilter"))
     expect_error(modelCoef(m1, "MaFilter"))
+
+    modelOrder(m1b, "ArmaFilter")
+    expect_error(modelOrder(m1b, "ArFilter"), "Non-zero moving average order")
+    expect_error(modelOrder(m1b, "MaFilter"), "Non-zero autoregressive order")
+
+    expect_error(modelOrder(m1b, "ArmaModel"), "iorder == 0 is not TRUE")
+    expect_error(modelOrder(m1b, "ArModel"), "iorder == 0 is not TRUE")
+    expect_error(modelOrder(m1b, "MaModel"), "iorder == 0 is not TRUE")
+
+    as.list(m1b)
+    as(m1b, "list")
+    expect_error(as(m1b, "ArmaModel"), "This SARIMA model is not stationary")
+
 
     ap.1 <- xarmaFilter(model1, x = AirPassengers, whiten = TRUE)
     ap.2 <- xarmaFilter(model1, x = AirPassengers, eps = ap.1, whiten = FALSE)
