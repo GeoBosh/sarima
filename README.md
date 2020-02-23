@@ -31,3 +31,13 @@ fits extended multiplicative seasonal ARIMA models with trends, exogenous
 variables and arbitrary roots on the unit circle, which can be fixed or
 estimated.
 
+Reference manuals and vignettes are available as usual from running R
+sessions. Alternatively, here are some links to online versions of the documentation:
+
+- [online reference manual](https://geobosh.github.io/sarima/)
+
+- [sarima pdf reference manual on CRAN](https://cran.r-project.org/web/packages/sarima/sarima.pdf)
+
+- [vignette Garch and white noise tests](https://cran.r-project.org/package=sarima/vignettes/garch_tests_example.pdf)
+
+- [vignette Autocorrelations and white noise tests](https://cran.r-project.org/package=sarima/vignettes/white_noise_tests.pdf)
