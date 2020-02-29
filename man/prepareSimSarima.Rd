@@ -92,7 +92,7 @@ prepareSimSarima(model, x = NULL, eps = NULL, n, n.start = NA,
 %%% ~~objects to See Also as \code{\link{help}}, ~~~
 %}
 \examples{
-mo1 <- list(ar=0.9, iorder = 1, siorder = 1, nseasons = 4, sigma2 = 2)
+mo1 <- list(ar = 0.9, iorder = 1, siorder = 1, nseasons = 4, sigma2 = 2)
 fs1 <- prepareSimSarima(mo1, x = list(before = rep(0,6)),  n = 100)
 tmp1 <- fs1()
 plot(ts(tmp1))

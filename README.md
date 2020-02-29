@@ -44,7 +44,7 @@ Alternatively, here are some links to online versions of the documentation:
 
 - [sarima online reference manual](https://geobosh.github.io/sarima/)
 
-- [sarima pdf reference manual on CRAN](https://cran.r-project.org/web/packages/sarima/sarima.pdf)
+- [sarima pdf reference manual on CRAN](https://CRAN.R-project.org/package=sarima/sarima.pdf)
 
 - [vignette _Garch and white noise tests_ on CRAN](https://cran.r-project.org/package=sarima/vignettes/garch_tests_example.pdf)
 

@@ -2,7 +2,7 @@ Package: sarima
 Type: Package
 Title: Simulation and Prediction with Seasonal ARIMA Models
 Version: 0.8.2
-Date: 2020-02-22
+Date: 2020-02-29
 Authors@R: c( person(given = c("Georgi", "N."), 
                      family = "Boshnakov", 
                      role = c("aut", "cre"), 
@@ -32,6 +32,7 @@ Imports:
     lagged (>= 0.2.1),
     Rdpack,
     KFAS,
+    FKF,
     Rcpp (>= 0.12.14),
     numDeriv,
     dplyr
@@ -54,7 +55,6 @@ Collate:
     fit.R
     wrapKFAS.R
     arma_Q0dotdotstats.R
-    fkf.R
     Kalman.R
     fitTools.R
     periodogram.R

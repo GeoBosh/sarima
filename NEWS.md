@@ -1,5 +1,8 @@
 # sarima 0.8.2 (CRAN)
 
+- import again FKF (support for it was removed when FKF was temporarily
+  archived on CRAN).
+
 - removed developers' comments that had been accidentally left in a vignette.
 
 - removed an erroneous `rev()` from the garch tests vignette.

@@ -26,8 +26,9 @@ importFrom(FitARMA, TacvfARMA, InformationMatrixARMA,
 # importFrom(portes, LjungBox)
 importFrom(Rdpack, rebib)
 
-# 2018-07-08 commenting out for the CRAN release
-# importFrom(FKF, fkf)
+## 2018-07-08 commenting out for the CRAN release
+## 2020-02-29 reinstating
+importFrom(FKF, fkf)
 
 importFrom(numDeriv, hessian)
 

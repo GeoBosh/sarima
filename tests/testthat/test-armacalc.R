@@ -16,6 +16,7 @@ test_that("functions in armacalc.R work ok", {
     sigma2 <- out$sigma2
 
     armaacf(list(ar = phi, ma = theta, sigma2 = sigma2), lag.max = 20)
+    armaacf(list(          ma = 0.5, sigma2 = sigma2), lag.max = 20)
 
     ## pacf2Ar, ar2Pacf, pacf2ArWithJacobian
     expect_identical(pacf2Ar(numeric(0)), numeric(0))

@@ -41,9 +41,17 @@ test_that("Sarima and Arma models work ok", {
     expect_output(summary(as(sm2, "SarimaSpec")))
     expect_output(summary(as(sm3, "SarimaSpec")))
 
-    sm3i <- new("SarimaModel", ar = 0.9, sar= 0.8, nseasons = 12, intercept = 3, sigma2 = 1, iorder = 1)
+    sm3i <- new("SarimaModel", ar = 0.9, sar= 0.8, nseasons = 12, intercept = 3, 
+                               sigma2 = 1, iorder = 1)
+
+    expect_output(show(sm3i))
+    expect_output(show(new("SarimaModel", ar = 0.9, sar = 0.8, nseasons = 12, intercept = 3, 
+                               sigma2 = 1, iorder = 2, siorder = 2)))
+    expect_output(show(new("SarimaModel", ar = 0.9, sar = 0.8, nseasons = 12, intercept = 3, 
+                               sigma2 = 1, center = 5)))
 
     expect_output(summary(sm3i))
+
     expect_output(show(as(sm3i, "InterceptSpec")))
     isStationaryModel(sm3i)
     as(sm3i, "list")
@@ -52,18 +60,31 @@ test_that("Sarima and Arma models work ok", {
     ## as(sm3, "ArmaModel") # TODO: this gives Warning message:
     ##                              In .local(.Object, ...) : The AR polynomial is not stable.
     ##                        Investigate! 
-    as(sm2, "ArmaModel")
+    mo_arma <- as(sm2, "ArmaModel")
     as(sm3, "list")
 
+    as(mo_arma, "list")
+    as(mo_arma, "ArmaSpec")
+    as(as(mo_arma, "ArmaSpec"), "list")
 
     m1 <- new("SarimaModel", iorder = 1, siorder = 1, ma = -0.3, sma = -0.1, nseasons = 12)
     modelOrder(m1)
     modelOrder(m1, "ArmaFilter")
     modelOrder(m1, new("ArmaFilter"))
-    
+    expect_error(modelOrder(m1, new("ArModel")),  "iorder == 0 is not TRUE")
+        
     modelPoly(m1, "ArmaModel")
     modelPolyCoef(m1, "ArmaModel")
 
+    m1xx <- new("SarimaModel", ar = 0.5, ma = -0.3, sma = -0.1, nseasons = 12)
+    expect_error(modelOrder(m1xx, new("ArModel")),  "Non-zero moving average order")    
+    expect_error(modelOrder(m1xx, new("MaModel")),  "Non-zero autoregressive order")    
+    modelOrder(m1xx, "ArmaModel")
+
+    modelOrder(new("SarimaModel", ma = -0.3, sma = -0.1, nseasons = 12), "MaFilter")
+    modelOrder(new("SarimaModel", ar = -0.3, sar = -0.1, nseasons = 12), "ArFilter")
+
+    
     ## from coerce-methods.Rd
     mo <- new("ArmaModel", ar = 0.9, ma = 0.4, sigma2 = 1)
     modelPoly(mo)

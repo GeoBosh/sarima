@@ -6,36 +6,42 @@ context("Fitting extended Sarima models")
 ## Commenting out tests for 'fkf' for the CRAN release of 'sarima' since FKF has been
 ## archived on CRAN.
 ##
-## test_that("xarmaxss() works ok with fkf", {
-##     ## this exanple is from the vignette in GKF and probably also from FKF
-##     ## but I generalised the code for general p,q
-##     arm <- c(0.6, 0.2)
-##     mam <- -0.2
-##     sigma <- sqrt(0.2)
-## 
-##     expect_equal(mam, -0.2)
-## 
-##     n <- 1000
-##     a <- arima.sim(model = list(ar = arm, ma = mam), n = n, innov = rnorm(n) * sigma)
-##     yt <- rbind(a)
-##     sp <- armapqss(ar = arm, ma = mam, sigma = sigma)
-##     logLikfkf <- fkf(a0 = sp$a0, P0 = sp$P0, dt = sp$dt, ct = sp$ct, Tt = sp$Tt,
-##                      Zt = sp$Zt, HHt = sp$HHt, GGt = sp$GGt,
-##                      yt = yt)$logLik
-## 
-##      yt2 <- 5 + 2*seq_along(a) + yt
-##      sp2 <- sp
-##      sp2$ct <- matrix(c(5 + 2*seq_along(a)), nrow = 1)
-## 
-##      logLikfkf <- FKF::fkf(a0 = sp2$a0, P0 = sp2$P0, dt = sp2$dt, ct = sp2$ct, Tt = sp2$Tt,
-##                            Zt = sp2$Zt, HHt = sp2$HHt, GGt = sp2$GGt,
-##                            yt = yt2)$logLik
-## 
-##      sp2a <- xarmaxss(ar = arm, ma = mam, sigma = sigma, xreg = matrix(c(5 + 2*seq_along(a)), nrow = 1))
-## 
-##      logLikfkf <- FKF::fkf(a0 = sp2a$a0, P0 = sp2a$P0, dt = sp2a$dt, ct = sp2a$ct, Tt = sp2a$Tt,
-##                            Zt = sp2a$Zt, HHt = sp2a$HHt, GGt = sp2a$GGt, yt = yt2)$logLik
+## 2020-02-29 reinstated FKF
+##
+## test_that("temporary disable FKF, see fkf.R", {
+##     expect_error(fkf(), "FKF methods are not currently available")
 ## })
+
+test_that("xarmaxss() works ok with fkf", {
+    ## this exanple is from the vignette in GKF and probably also from FKF
+    ## but I generalised the code for general p,q
+    arm <- c(0.6, 0.2)
+    mam <- -0.2
+    sigma <- sqrt(0.2)
+
+    expect_equal(mam, -0.2)
+
+    n <- 1000
+    a <- arima.sim(model = list(ar = arm, ma = mam), n = n, innov = rnorm(n) * sigma)
+    yt <- rbind(a)
+    sp <- armapqss(ar = arm, ma = mam, sigma = sigma)
+    logLikfkf <- fkf(a0 = sp$a0, P0 = sp$P0, dt = sp$dt, ct = sp$ct, Tt = sp$Tt,
+                     Zt = sp$Zt, HHt = sp$HHt, GGt = sp$GGt,
+                     yt = yt)$logLik
+
+     yt2 <- 5 + 2*seq_along(a) + yt
+     sp2 <- sp
+     sp2$ct <- matrix(c(5 + 2*seq_along(a)), nrow = 1)
+
+     logLikfkf <- FKF::fkf(a0 = sp2$a0, P0 = sp2$P0, dt = sp2$dt, ct = sp2$ct, Tt = sp2$Tt,
+                           Zt = sp2$Zt, HHt = sp2$HHt, GGt = sp2$GGt,
+                           yt = yt2)$logLik
+
+     sp2a <- xarmaxss(ar = arm, ma = mam, sigma = sigma, xreg = matrix(c(5 + 2*seq_along(a)), nrow = 1))
+
+     logLikfkf <- FKF::fkf(a0 = sp2a$a0, P0 = sp2a$P0, dt = sp2a$dt, ct = sp2a$ct, Tt = sp2a$Tt,
+                           Zt = sp2a$Zt, HHt = sp2a$HHt, GGt = sp2a$GGt, yt = yt2)$logLik
+})
 
 test_that("sarima() works ok", {
     phi <- list(structure(c(1, 0.1), fixed = c(TRUE,FALSE)))
@@ -118,6 +124,9 @@ expect_warning(sarima(y ~ 1 + t| ar(2, c(0.5, -0.8), atanh.tr = FALSE) + ma(2, c
     capture.output( summary(ap.baseA) ) # capture.output() to avoid printing during devtools::test()
     ap.baseB
     capture.output( summary(ap.baseB) )
+
+    expect_output( print(ap.baseA) )
+    expect_output( print(ap.baseB) )
 
     ap2.arima <- arima(log(AirPassengers), order = c(0,0,1), seasonal = c(0,1,1))
     ap2.baseA <- sarima(log(AirPassengers) ~ 0 | ma(1, c(-0.3)) + sma(12,1, c(-0.1)) +     si(12,1), ss.method = "base")
