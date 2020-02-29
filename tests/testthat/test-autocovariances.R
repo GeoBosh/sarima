@@ -178,4 +178,6 @@ test_that("functions in autocorrelations.org work ok", {
     autocorrelations(list(ma = c(0.8, 0.1), sigma2 = 1), maxlag = 7, lag_0 = "var")
 
     acfOfSquaredArmaModel(ma2, maxlag = 4)
+
+    plot(autocorrelations(AirPassengers), data = as.matrix(AirPassengers))
 })
