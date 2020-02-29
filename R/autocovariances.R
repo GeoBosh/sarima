@@ -458,7 +458,10 @@ setMethod("autocorrelations",
                      else
                          new("Autocorrelations", data = acr)
               if(!missing(maxlag))
-                  res@data <- res[0:maxlag]     # may introduce NA's
+                  ## BugFix 2020-02-29 was: res@data <- res[0:maxlag]
+                  ##     TODO: needs more testing
+                  res@data <- Lagged(res[0:maxlag])     # may introduce NA's
+
               res
           }
           )
@@ -482,7 +485,7 @@ setMethod("autocorrelations",
     signature(x = "VirtualSarimaModel", maxlag = "ANY", lag_0 = "missing"),
     function (x, maxlag, ...)
     {
-        arma <- as(x, "ArmaModel") # should give error if x is non-sttionary
+        arma <- as(x, "ArmaModel") # should give error if x is non-stationary
         autocorrelations(arma, maxlag = maxlag, ...)
     }
 )
@@ -503,13 +506,16 @@ setMethod("partialAutocorrelations",
           signature(x = "mts", maxlag = "ANY", lag_0 = "missing"),
           function (x, maxlag, ...){             # TODO: check what definition they use, etc.
               wrk <- if(missing(maxlag))
-                  pacf(x, plot = FALSE)
-              else
-                  pacf(x, lag.max = maxlag, plot = FALSE)
+                         pacf(x, plot = FALSE)
+                     else
+                         pacf(x, lag.max = maxlag, plot = FALSE)
               r0 <- acf(x, lag.max = 0, plot = FALSE)
               res <- .basecfclass2S4(wrk, r0)
-              if(!missing(maxlag))
-                  res@data <- res[0:maxlag]     # may introduce NA's
+              ## 2020-02-29 not needed, maxlag has already been used above!
+              ##     Also, this is wrong since res@data has a Lagged class.
+              ## if(!missing(maxlag))
+              ##     res@data <- res[0:maxlag]     # may introduce NA's
+              res
           }
           )
 

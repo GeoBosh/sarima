@@ -4,6 +4,7 @@ test_that("functions in autocorrelations.org work ok", {
     expect_identical(autocovariances(acv1), acv1)
     autocovariances(acv1, maxlag = 3)
     autocorrelations(acv1, maxlag = 3)
+    autocorrelations(acv1, maxlag = 3, lag_0 = TRUE)
 
     v1 <- rnorm(100)
     autocorrelations(v1)
@@ -16,6 +17,23 @@ test_that("functions in autocorrelations.org work ok", {
 
     v1.acf[1:10] # drop lag zero value (and the class)
     autocorrelations(v1, maxlag = 10, lag_0 = FALSE) # same
+
+    autocorrelations(v1.acf) # null op.
+    autocorrelations(v1.acf, maxlag = 4)
+    autocorrelations(v1.acf, maxlag = 12) # introduces NA's since maxlag > 10
+
+    autocorrelations(acv1)
+    autocorrelations(acv1, maxlag = 6)
+    pacr_acv1 <- partialAutocorrelations(acv1)
+    partialAutocorrelations(pacr_acv1)
+    autocorrelations(pacr_acv1)
+    autocorrelations(pacr_acv1, maxlag = 5)
+
+    partialAutocorrelations(AirPassengers)
+    partialAutocorrelations(AirPassengers, maxlag = 10)
+    z <- ts(matrix(rnorm(60), 20, 3), start = c(1961, 1), frequency = 4)
+    partialAutocorrelations(z)
+    partialAutocorrelations(z, maxlag = 8)
                        
     expect_output(show(autocorrelations(v1, maxlag = 10) ))
     expect_output(show(autocorrelations(v1, maxlag = 10, lag_0 = FALSE) ))

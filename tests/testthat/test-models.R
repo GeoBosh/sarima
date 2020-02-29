@@ -8,6 +8,8 @@ test_that("Sarima and Arma models work ok", {
     sm2b <- new("SarimaModel", sm1, ar = 0.9, sigma2 = 1)
     sm2c <- new("SarimaModel", sm0, ar = 0.9, intercept = 3, sigma2 = 1)
 
+    nSeasons(sm2)
+
     expect_identical(sm2, sm2b)
     expect_identical(sm2, sm2c)
 
@@ -84,6 +86,7 @@ test_that("Sarima and Arma models work ok", {
     modelOrder(new("SarimaModel", ma = -0.3, sma = -0.1, nseasons = 12), "MaFilter")
     modelOrder(new("SarimaModel", ar = -0.3, sar = -0.1, nseasons = 12), "ArFilter")
 
+    autocorrelations(m1xx, 20)
     
     ## from coerce-methods.Rd
     mo <- new("ArmaModel", ar = 0.9, ma = 0.4, sigma2 = 1)
@@ -189,6 +192,11 @@ test_that("Sarima and Arma models work ok", {
     
     ## ltsa::tacvfARMA(co$ar, co$ma, maxLag = 6, sigma2 = 1)
     autocovariances(mo3, maxlag = 6) ## same
+
+    autocovariances(mo3)
+
+    autocorrelations(mo3, maxlag = 6)
+
 
     expand_ar(0.5, 0.8, 12)
 
