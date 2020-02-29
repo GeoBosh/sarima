@@ -45,12 +45,12 @@ test_that("functions in autocorrelations.org work ok", {
     # do not compute CI's:
     acfGarchTest(x.pacf, x = x, nlags = c(5,10,20), interval = NULL)
     
-    ## ## plot methods call acfGarchTest() suitably if 'x' is given:
-    ## plot(x.acf, data = x)
-    ## plot(x.pacf, data = x)
+    ## plot methods call acfGarchTest() suitably if 'x' is given:
+    plot(x.acf, data = x)
+    plot(x.pacf, data = x)
     
-    ## ## use 90% limits:
-    ## plot(x.acf, data = x, interval = 0.90)
+    ## use 90% limits:
+    plot(x.acf, data = x, interval = 0.90)
     
     acfWnTest(x.acf, x = x, nlags = c(5,10,20))
     whiteNoiseTest(x.acf, h0 = "arch-type", x = x, nlags = c(5,10,20))
@@ -78,7 +78,8 @@ test_that("functions in autocorrelations.org work ok", {
 
     nvarOfAcfKP(x, maxlag = 10)
     nvarOfAcfKP(x, maxlag = 10, center = TRUE, acfscale = "mom")
-    expect_error(nvarOfAcfKP(x, maxlag = 10, acfscale = "argh"))
+    expect_error(nvarOfAcfKP(x, maxlag = 10, acfscale = "argh"),
+                 ".arg. should be one of")
 
     ## MA(2)
     ma2 <- list(ma = c(0.8, 0.1), sigma2 = 1)
@@ -89,6 +90,8 @@ test_that("functions in autocorrelations.org work ok", {
     acr <- autocorrelations(list(ma = c(0.8, 0.1)), maxlag = 7)
     nvBD <- nvcovOfAcfBD(acr, 2, maxlag = 4)
     expect_equal(nv, nvBD)
+    nvcovOfAcfBD(acr, maxlag = 2)
+    nvcovOfAcfBD(acr, maxlag = 4)
 
     expect_error(autocorrelations(list(ma = c(0.8, 0.1)), maxlag = 7, lag_0 = "var"),
                  "sigma2 > 0 is not TRUE")

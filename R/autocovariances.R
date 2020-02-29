@@ -1340,6 +1340,7 @@ nvcovOfAcfBD <- function(acf, ma = NULL, maxlag){
     else
         stopifnot(ma <= max_avail_lag)
 
+    ## TODO: this may make max_avail_lag too large. Fix!
     if(max_avail_lag < 2 * maxlag + ma)
         max_avail_lag <- 2 * maxlag + ma
 
@@ -1380,9 +1381,11 @@ nvarOfAcfKP <- function(x, maxlag, center = FALSE, acfscale = c("one", "mom")){
            mom = {
                fac <- n / (n - seq_len(maxlag))
                fac * acv[-1] / den
-           },
-           ## default
-           stop("argument 'acfscale' must be one of 'one', 'mom' or abbreviation thereof")
+           }
+           ## 2020-02-29 removing this since match.arg() above catches this error.
+           ## ,
+           ## ## default
+           ## stop("argument 'acfscale' must be one of 'one', 'mom' or abbreviation thereof")
            )
 }
 
