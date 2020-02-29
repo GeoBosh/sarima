@@ -50,11 +50,22 @@ test_that("functions in sarima.R work ok", {
     expect_error(as(m1b, "ArmaModel"), "This SARIMA model is not stationary")
 
 
+    expect_error(xarmaFilter(model1, x = AirPassengers, whiten = TRUE, from = 4),
+                 ".from. must be greater than max\\(p,q\\)")
+    xarmaFilter(model1, x = AirPassengers, whiten = TRUE, xintercept = 3)
+    xarmaFilter(model1, x = AirPassengers, whiten = TRUE, xcenter = 10)
+    xarmaFilter(c(model1, center = 10), x = AirPassengers, whiten = TRUE)
+
+    .beforeInitMain(list(before = numeric(5), init = numeric(5), main = numeric(5), dummy = 1))
+    .beforeInitMain(numeric(5))
+
     ap.1 <- xarmaFilter(model1, x = AirPassengers, whiten = TRUE)
     ap.2 <- xarmaFilter(model1, x = AirPassengers, eps = ap.1, whiten = FALSE)
     ap <- AirPassengers
     ap[-(1:13)] <- 0 # check that the filter doesn't use x, except for initial values.
     ap.2a <- xarmaFilter(model1, x = ap, eps = ap.1, whiten = FALSE)
+    xarmaFilter(model1, eps = ap.1, whiten = FALSE)
+
     ap.2a - ap.2 ## indeed = 0
     ##ap.3 <- xarmaFilter(model1, x = list(init = AirPassengers[1:13]), eps = ap.1, whiten = TRUE)
     
@@ -88,5 +99,18 @@ test_that("functions in sarima.R work ok", {
     fs1 <- prepareSimSarima(mo1, x = list(before = rep(0,6)),  n = 100)
     expect_output(print(fs1))
     tmp1 <- fs1()
+
+    ## more
+    prepareSimSarima(mo1)
+    prepareSimSarima(mo1,  n = 10)
+    expect_error(prepareSimSarima(mo1, x = list(before = rep(0,6)),  
+                                     eps = list(before = rep(0,4)), n = 10),
+    "Lengths of xbefore and innovbefore must be equal if both are present")
+
+    expect_error(prepareSimSarima(mo1, x = list(init = rep(0,6)),  
+                                     eps = list(init = rep(0,4)), n = 10),
+          "Lengths of xinit and innovinit must be equal if both are present")
+
+    prepareSimSarima(mo1, eps = list(init = rep(0,6)),  n = 100)
 
 })

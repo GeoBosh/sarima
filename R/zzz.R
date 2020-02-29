@@ -1,5 +1,5 @@
 .onLoad <- function(libname, pkgname){
-    ## TODO: when Polynom 2.0.0 or later has een around for some time,
+    ## TODO: when Polynom 2.0.0 or later has been around for some time,
     ##       rename the calls in the package with the new names
     ##       and reverse the check here to
     ##                 utils::packageVersion("PolynomF") < "2.0.0"
