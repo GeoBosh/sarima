@@ -905,8 +905,7 @@ acfIidTest <- function(acf, n, npar = 0, nlags = npar + 1,
            "LiMcLeod" = {
                rsq <- acf[usedLags]^2
                Q <- n * cumsum(rsq) + usedLags * (usedLags + 1) / (2*n)
-           },
-           stop("Unknown method")
+           }#, stop("Unknown method")
            )
 
     Q <- Q[nlags] # keep only the requested ChiSq values

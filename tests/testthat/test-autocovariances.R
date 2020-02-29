@@ -9,11 +9,44 @@ test_that("functions in autocorrelations.org work ok", {
     v1 <- rnorm(100)
     autocorrelations(v1)
     v1.acf <- autocorrelations(v1, maxlag = 10, se = TRUE)
+    v1.acvf <- autocovariances(v1, maxlag = 10, se = TRUE)
+    expect_output(show(v1.acf))
+    autocorrelations(autocovariances(v1, maxlag = 10, se = TRUE))
+
     vcov(v1.acf)
     diagOfVcov(v1.acf)
     confint(v1.acf)
     confint(v1.acf, maxlag = 5)
     coef(v1.acf)
+
+    .comboAcf(v1.acf)
+    .comboAcf(v1.acf, 1:2)
+    .comboAcf(v1.acf, c("acf", "pacf"))
+    .comboAcf(v1.acf, c("ar", "stdsigma2"))
+
+    expect_error(as(v1.acf, "ComboAutocovariances"), "not possible, missing R\\(0\\)")
+    as(v1.acvf, "ComboAutocovariances")
+
+    as(v1.acvf, "ComboAutocorrelations")
+    as(v1.acf, "ComboAutocorrelations")
+
+    as(as(v1.acf, "Autocorrelations"), "Autocovariances")
+    as(v1.acf, "Autocovariances")
+    as(v1.acf, "SampleAutocovariances")
+
+    modelCoef(v1.acvf)
+    expect_error(modelCoef(v1.acf, "Autocovariances"), 
+       "Can.t obtain autocovariances from object from class SampleAutocorrelations")
+    modelCoef(v1.acvf, "ComboAutocovariances")
+
+    modelCoef(v1.acf, "ComboAutocorrelations")
+    modelCoef(v1.acvf, "ComboAutocorrelations")
+
+    modelCoef(v1.acvf, "Autocorrelations")
+    modelCoef(v1.acvf, "PartialAutocorrelations")
+
+    ## modelCoef(v1.acf, "Autocorrelations")
+    modelCoef(v1.acf, "PartialAutocorrelations")
 
     v1.acf[1:10] # drop lag zero value (and the class)
     autocorrelations(v1, maxlag = 10, lag_0 = FALSE) # same
@@ -79,6 +112,10 @@ test_that("functions in autocorrelations.org work ok", {
     a1 <- drop(acf(ts1)$acf)
     acfIidTest(a1, n = 100, nlags = c(5, 10, 20))
     acfIidTest(a1, n = 100, nlags = c(5, 10, 20), method = "LjungBox")
+    expect_error(acfIidTest(a1,          nlags = c(5, 10, 20), method = "LjungBox"),
+        "argument .n. is missing, with no default")
+    acfIidTest(a1, n = 100, nlags = c(5, 10, 20), method = "BoxPierce")
+    expect_error(acfIidTest(a1, n = 100, nlags = c(5, 10, 20), method = "unknown") )
     acfIidTest(a1, n = 100, nlags = c(5, 10, 20), interval = NULL)
     acfIidTest(a1, n = 100, method = "LjungBox", interval = c(0.95, 0.90), expandCI = FALSE)
     
@@ -110,6 +147,9 @@ test_that("functions in autocorrelations.org work ok", {
     expect_equal(nv, nvBD)
     nvcovOfAcfBD(acr, maxlag = 2)
     nvcovOfAcfBD(acr, maxlag = 4)
+
+    expect_error(acfMaTest(acr, 2, nlags = 4), "argument .n. is missing, with no default")
+    acfMaTest(acr, 2, nlags = 4, n = 100)
 
     expect_error(autocorrelations(list(ma = c(0.8, 0.1)), maxlag = 7, lag_0 = "var"),
                  "sigma2 > 0 is not TRUE")

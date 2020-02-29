@@ -3,9 +3,11 @@
 library(sarima)
 context("Fitting Sarima models with estimated unit roots")
 
-## 2018-08-23 wrapping the tests in test_that() and add ing n expectation
-##            in the hope that this will spee up valgrind.
+## 2018-08-23 wrapping the tests in test_that() and adding an expectation
+##            in the hope that this will speed up valgrind.
 test_that("Sarima and Arma models work ok", {
+    expect_true(TRUE) # for now
+
 ## the air plane model (1-B)(1-B^12) + MA(1) + SMA(12, 1)
 sarima(log(AirPassengers) ~ 0 | ma(1, c(-0.3)) + sma(12,1, c(-0.1)) + 
               i(1) + si(12,1), ss.method = "sarima")
