@@ -5,6 +5,9 @@ test_that("functions in autocorrelations.org work ok", {
     autocovariances(acv1, maxlag = 3)
     autocorrelations(acv1, maxlag = 3)
     autocorrelations(acv1, maxlag = 3, lag_0 = TRUE)
+    partialAutocovariances(acv1, maxlag = 3)
+    partialAutocovariances(as(acv1, "Autocovariances"))
+    partialVariances(as(acv1, "Autocovariances"))
 
     v1 <- rnorm(100)
     autocorrelations(v1)
@@ -34,12 +37,16 @@ test_that("functions in autocorrelations.org work ok", {
     as(v1.acf, "Autocovariances")
     as(v1.acf, "SampleAutocovariances")
 
+    as(v1.acvf, "ComboAutocorrelations")
+    modelCoef(as(v1.acvf, "ComboAutocovariances"), "Autocovariances")
+
     modelCoef(v1.acvf)
     expect_error(modelCoef(v1.acf, "Autocovariances"), 
        "Can.t obtain autocovariances from object from class SampleAutocorrelations")
     modelCoef(v1.acvf, "ComboAutocovariances")
 
     modelCoef(v1.acf, "ComboAutocorrelations")
+    combo_acr <- as(v1.acvf, "ComboAutocorrelations")
     modelCoef(v1.acvf, "ComboAutocorrelations")
 
     modelCoef(v1.acvf, "Autocorrelations")
@@ -47,6 +54,12 @@ test_that("functions in autocorrelations.org work ok", {
 
     ## modelCoef(v1.acf, "Autocorrelations")
     modelCoef(v1.acf, "PartialAutocorrelations")
+
+    modelCoef(as(v1.acvf, "ComboAutocovariances"), "Autocovariances")
+    modelCoef(as(v1.acvf, "ComboAutocovariances"), "PartialAutocovariances")
+    modelCoef(as(v1.acvf, "ComboAutocovariances"), "PartialVariances")
+    modelCoef(combo_acr, new("Autocorrelations"))
+    modelCoef(combo_acr, new("PartialAutocorrelations"))
 
     v1.acf[1:10] # drop lag zero value (and the class)
     autocorrelations(v1, maxlag = 10, lag_0 = FALSE) # same

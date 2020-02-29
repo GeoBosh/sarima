@@ -773,7 +773,14 @@ setMethod("modelCoef", c("Autocorrelations", "ComboAutocorrelations", "missing")
 
 setMethod("modelCoef", c("ComboAutocovariances", "Autocovariances", "missing"),
           function(object, convention){
-              object@data["acvf", ]
+              ## 2020-02-29 changing this (here and at similar places) with temporary patch
+              ##     since Lagged2d objects don't have method for "character" (also "logical")
+              ## 
+              ## TODO: UPDATE PACKAGE "lagged" with such methods, if sensible!
+              ##
+              ##      object@data["acvf", ]
+              tmp <- which(rownames(object@data[]) == "acvf")
+              object@data[tmp, ]
           }
           )
 
@@ -781,13 +788,17 @@ setMethod("modelCoef", c("ComboAutocovariances", "Autocovariances", "missing"),
 
 setMethod("modelCoef", c("ComboAutocovariances", "PartialAutocovariances", "missing"),
           function(object, convention){
-              object@data["pacvf", ]
+              ## object@data["pacvf", ]
+              tmp <- which(rownames(object@data[]) == "pacvf")
+              object@data[tmp, ]
           }
           )
 
 setMethod("modelCoef", c("ComboAutocovariances", "PartialVariances", "missing"),
           function(object, convention){
-              object@data["sigma2", ]
+              ## object@data["sigma2", ]
+              tmp <- which(rownames(object@data[]) == "sigma2")
+              object@data[tmp, ]
           }
           )
 
@@ -802,7 +813,9 @@ setMethod("modelCoef", c("ComboAutocovariances", "VirtualAutocovariances", "miss
 
 setMethod("modelCoef", c("ComboAutocorrelations", "Autocorrelations", "missing"),
           function(object, convention){
-              object@data["acf", ]
+              ## object@data["acf", ]
+              tmp <- which(rownames(object@data[]) == "acf")
+              object@data[tmp, ]
           }
           )
 
@@ -810,7 +823,9 @@ setMethod("modelCoef", c("ComboAutocorrelations", "Autocorrelations", "missing")
 
 setMethod("modelCoef", c("ComboAutocorrelations", "PartialAutocorrelations", "missing"),
           function(object, convention){
-              object@data["pacf", ]
+              ## object@data["pacf", ]
+              tmp <- which(rownames(object@data[]) == "pacf")
+              object@data[tmp, ]
           }
           )
 
