@@ -13,6 +13,10 @@ test_that("functions in sarima.R work ok", {
     nSeasons(m1)
     nSeasons(as(m1, "SarimaFilter"))
 
+    fi1 <- as(m1, "SarimaFilter")
+    nSeasons(fi1) <- 4
+    expect_equal(nSeasons(fi1), 4)
+
     m1a <- new("SarimaModel", iorder = 1, siorder = 1, ma = -0.3)
     m1b <- new("SarimaModel", iorder = 1, ma = -0.3)
     filterPoly(m1a)

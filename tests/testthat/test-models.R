@@ -180,6 +180,8 @@ test_that("Sarima and Arma models work ok", {
     as(ArmaModel(ar = ar3, sigma2 = 1), "ArModel")
     as(ArmaModel(ma = ma3, sigma2 = 1), "MaModel")
 
+    as.list(as(mo3, "ArmaSpec"))
+
     expect_error(as(ArmaModel(ar = ar3, ma = ma3, sigma2 = 1), "ArModel"))
     expect_error(as(ArmaModel(ar = ar3, ma = ma3, sigma2 = 1), "MaModel"))
     
