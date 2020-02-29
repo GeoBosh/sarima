@@ -101,8 +101,18 @@ test_that("functions in sarima.R work ok", {
     tmp1 <- fs1()
 
     ## more
+    moX <- list(ar = c(-0.5, 0.25), ma = +0.3, sigma2 = 2)
+    expect_true(environment(prepareSimSarima(moX, n = 100))$flag.stat.init.values)
+
     prepareSimSarima(mo1)
-    prepareSimSarima(mo1,  n = 10)
+    prepareSimSarima(mo1, n = 10)
+    prepareSimSarima(c(mo1, list(intercept = 3)), n = 10)
+    prepareSimSarima(mo1, xintercept = 3, n = 10)
+    prepareSimSarima(mo1, xintercept = 3, n = 10)
+    prepareSimSarima(mo1, xintercept = 1:10, n = 10)
+    prepareSimSarima(mo1, eps = list(before = rep(0,6)), n = 10)
+
+
     expect_error(prepareSimSarima(mo1, x = list(before = rep(0,6)),  
                                      eps = list(before = rep(0,4)), n = 10),
     "Lengths of xbefore and innovbefore must be equal if both are present")
@@ -111,6 +121,7 @@ test_that("functions in sarima.R work ok", {
                                      eps = list(init = rep(0,4)), n = 10),
           "Lengths of xinit and innovinit must be equal if both are present")
 
+    prepareSimSarima(mo1, x  = list(init = rep(0,6)),  n = 100)
     prepareSimSarima(mo1, eps = list(init = rep(0,6)),  n = 100)
 
 })
