@@ -83,6 +83,9 @@ test_that("functions in sarima.R work ok", {
     ## compare with sarima.f (an old function)
     ## compute predictions starting at from = 14
     pred1 <- sarima.f(past = AirPassengers[1:13], n = 131, ar = model1$ar, ma = model1$ma)
+    
+    sarima.f(past = AirPassengers, n = 131, ar = model1$ar, ma = model1$ma) # 'past' longer than needed
+
     pred2 <- xarmaFilter(model1, x = ap, whiten = FALSE)
     pred2 <- pred2[-(1:13)]
     all(pred1 == pred2) ##TRUE
@@ -107,6 +110,7 @@ test_that("functions in sarima.R work ok", {
     ## more
     moX <- list(ar = c(-0.5, 0.25), ma = +0.3, sigma2 = 2)
     expect_true(environment(prepareSimSarima(moX, n = 100))$flag.stat.init.values)
+    (prepareSimSarima(moX, n = 100))()
 
     prepareSimSarima(mo1)
     prepareSimSarima(mo1, n = 10)
