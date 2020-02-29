@@ -61,6 +61,13 @@ test_that("functions in autocorrelations.org work ok", {
     modelCoef(combo_acr, new("Autocorrelations"))
     modelCoef(combo_acr, new("PartialAutocorrelations"))
 
+    ## TODO: these need sorting out
+    expect_error(backwardPartialVariances(v1.acvf))
+    expect_error(backwardPartialCoefficients(v1.acvf))
+
+    ## need an object from S4 class for which this doesn't make sense:
+    ## expect_error(autocovariances(), "there is no applicable method for objects from class")
+
     v1.acf[1:10] # drop lag zero value (and the class)
     autocorrelations(v1, maxlag = 10, lag_0 = FALSE) # same
 
@@ -123,6 +130,7 @@ test_that("functions in autocorrelations.org work ok", {
     ts1 <- rnorm(100)
     
     a1 <- drop(acf(ts1)$acf)
+    acfIidTest(a1, n = 10)
     acfIidTest(a1, n = 100, nlags = c(5, 10, 20))
     acfIidTest(a1, n = 100, nlags = c(5, 10, 20), method = "LjungBox")
     expect_error(acfIidTest(a1,          nlags = c(5, 10, 20), method = "LjungBox"),
@@ -131,7 +139,8 @@ test_that("functions in autocorrelations.org work ok", {
     expect_error(acfIidTest(a1, n = 100, nlags = c(5, 10, 20), method = "unknown") )
     acfIidTest(a1, n = 100, nlags = c(5, 10, 20), interval = NULL)
     acfIidTest(a1, n = 100, method = "LjungBox", interval = c(0.95, 0.90), expandCI = FALSE)
-    
+
+    acfIidTest(x = AirPassengers)    
     
     ## acfIidTest() is called behind the scenes by methods for autocorrelation objects
     ts1_acrf <- autocorrelations(ts1)
