@@ -144,11 +144,11 @@ setMethod("show", signature(object = "SamplePartialVariances"),
           )
 
 .basecfclass2S4 <- function(x, r0){
-    stopifnot(class(x) == "acf")
+    stopifnot(inherits(x, "acf")) # 2020-02-29 was: stopifnot(class(x) == "acf"), similarly below
 
     lagged <- Lagged(x) # Lagged knows how to interpret "acf" objects
     if(!missing(r0))
-        lagged[0] <- if(class(r0) == "acf") r0$acf[1, , ] else r0
+        lagged[0] <- if(inherits(r0, "acf")) r0$acf[1, , ] else r0
 
     data <- lagged[]
     n <- x$n.used

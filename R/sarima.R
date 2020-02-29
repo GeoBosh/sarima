@@ -132,7 +132,7 @@ model2filter <- function(model){
 
     if(missing(x) || is.null(x))
         res
-    else if(class(x) == "list"){  # TODO: use inherits()?
+    else if(inherits(x, "list")){
                         #  x[c("before", "init", "main")] would return elements named <NA>
                         #  for absent components
         if(!is.null(x$before)) res$before <- x$before

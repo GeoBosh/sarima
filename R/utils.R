@@ -2,8 +2,14 @@
 ## It has been automatically generated from *.org sources.
 
 ## taken from "pcts"
+##
+## This is called by show() methods, so it is save to use 'class(object) == class'.
+## Nevertheless (2020-02-29), change the test to 'class(object)[1] == class' to make it
+## suitable for S3 methods, as well.
+##
+## Note: inherits(object, class) is not suitable here.
 .reportClassName <- function(object, class, trailer = "\n"){
-    if(class(object) == class)
+    if(class(object)[1] == class)
         cat('An object of class "', class, '"', trailer, sep = "")
     NULL
 }
