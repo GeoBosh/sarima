@@ -55,6 +55,10 @@ test_that("sarima() works ok", {
 
     tmpa <- sarima(y ~ 0 | ar(2) + ma(2), data = data.frame(y = as.vector(yKFAS)), ss.method = "kfas")
     tmpa # OK
+    sarima(y ~ 0 | ar(2) + ma(2), data = data.frame(y = as.vector(yKFAS)), ss.method = "fkf")
+
+    expect_error(sarima(y ~ 0 | ar(2) + ma(2), data = data.frame(y = as.vector(yKFAS)), 
+        ss.method = "argh"), "invalid .lik\\.method.")
 
    tmpa1 <- sarima(y ~ 0 | ar(2, atanh.tr = FALSE) + ma(2, atanh.tr = FALSE), data = data.frame(y = as.vector(yKFAS)), ss.method = "kfas")
 
@@ -219,5 +223,17 @@ test_that("prediction from fitted sarima() works ok", {
     ##   contains 6 NA's
     arima(presidents, c(1, 0, 0))
     sarima(presidents ~ 1 | ar(1), ss.method = "base")
+    sarima(presidents ~ 1 | ar(1), data.frame(presidents = presidents), ss.method = "base")
+    ## this gives error currently:
+    ## sarima(presidents ~ 1 | ar(1) + i(1), presidents, ss.method = "base")
+
+
+    ## silly tests for unsupported cases
+    expect_error(sarima(presidents, ss.method = "base"), 
+                 "unsupported class .* of argument .*model")
+    expect_error(sarima(presidents |AirPassengers ~ 1, ss.method = "base"), 
+                 "currently there should be exactly one response variable")
+    expect_error(sarima(presidents ~ 1, data = new.env(),  ss.method = "base"), 
+                 ".*data.* from class .*environment.* not supported")
 
 })
