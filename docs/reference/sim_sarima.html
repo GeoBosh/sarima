@@ -198,8 +198,11 @@
 <p>The function returns the simulated time series from the requested
   model.</p>
 <p>Information about the model is printed on the screen if
-  <code>info="print"</code>. To suppress this, set <code>info</code> to any other
+  <code>info = "print"</code>. To suppress this, set <code>info</code> to any other
   value.</p>
+<p>For multple simulations with the same (or almost the same) setup, it is
+  better to execute <code><a href='prepareSimSarima.html'>prepareSimSarima</a></code> once and call the
+  function returned by it as many times as needed.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>an object of class "ts"</p>
@@ -276,7 +279,33 @@
 <span class='fu'><a href='https://rdrr.io/r/stats/acf.html'>acf</a></span>(<span class='no'>x</span>, <span class='kw'>lag.max</span><span class='kw'>=</span><span class='fl'>48</span>)</div><div class='img'><img src='sim_sarima-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>sim_sarima</span>(<span class='kw'>n</span><span class='kw'>=</span><span class='fl'>144</span>, <span class='kw'>model</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>sar</span><span class='kw'>=</span>-<span class='fl'>0.4</span>, <span class='kw'>iorder</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>siorder</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>nseasons</span><span class='kw'>=</span><span class='fl'>12</span>))
 <span class='fu'><a href='https://rdrr.io/r/stats/acf.html'>acf</a></span>(<span class='no'>x</span>, <span class='kw'>lag.max</span><span class='kw'>=</span><span class='fl'>48</span>)</div><div class='img'><img src='sim_sarima-7.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>sim_sarima</span>(<span class='kw'>n</span><span class='kw'>=</span><span class='fl'>144</span>, <span class='kw'>model</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>ar</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1.2</span>, -<span class='fl'>0.8</span>), <span class='kw'>ma</span><span class='kw'>=</span><span class='fl'>0.4</span>, <span class='kw'>sar</span><span class='kw'>=</span><span class='fl'>0.3</span>, <span class='kw'>sma</span><span class='kw'>=</span><span class='fl'>0.7</span>,
-                                  <span class='kw'>iorder</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>siorder</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>nseasons</span><span class='kw'>=</span><span class='fl'>12</span>))</div></pre>
+                                  <span class='kw'>iorder</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>siorder</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>nseasons</span><span class='kw'>=</span><span class='fl'>12</span>))
+<span class='co'>## use xintercept to include arbitrary trend/covariates</span>
+<span class='fu'>sim_sarima</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>144</span>, <span class='kw'>model</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>sma</span> <span class='kw'>=</span> <span class='fl'>0.4</span>, <span class='kw'>ma</span> <span class='kw'>=</span> <span class='fl'>0.4</span>, <span class='kw'>sar</span> <span class='kw'>=</span> <span class='fl'>0.8</span>, <span class='kw'>ar</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+    <span class='kw'>nseasons</span> <span class='kw'>=</span> <span class='fl'>12</span>, <span class='kw'>sigma2</span> <span class='kw'>=</span> <span class='fl'>1</span>), <span class='kw'>xintercept</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>144</span>)</div><div class='output co'>#&gt;   [1]  -0.2530083  -0.8285530  -1.0033490  -3.5138394  -1.7712802  -1.0426153
+#&gt;   [7]  -1.0474588  -1.1177031   1.3171759  -1.3048626   3.0135072   3.4114213
+#&gt;  [13]   3.3051298  15.4808858  21.2194594  23.5050084  29.4569897  33.1402236
+#&gt;  [19]  35.8966548  37.4722891  40.2260995  41.0644829  47.5191716  48.7097546
+#&gt;  [25]  52.0033458  64.1040174  70.3644256  74.2107879  83.3898594  86.7750749
+#&gt;  [31]  87.8789993  91.1995938  96.7262624 101.2718453 107.7527807 108.8970362
+#&gt;  [37] 113.0459895 125.9313425 131.5137134 136.1595191 149.3604698 155.0198775
+#&gt;  [43] 155.1030609 158.0398892 164.6554215 170.3477743 176.8929749 179.3569840
+#&gt;  [49] 184.9747662 198.5196400 205.4488323 211.7966610 224.6811965 231.1697649
+#&gt;  [55] 230.9138144 234.0977038 244.1423958 249.9964802 255.1878849 258.2704035
+#&gt;  [61] 266.6894501 281.6292251 287.8500809 295.2390842 307.6643564 314.9509509
+#&gt;  [67] 315.2079349 317.9158687 328.7173804 335.4627755 343.4210266 347.4515970
+#&gt;  [73] 359.5906552 374.5661379 381.3040648 387.0705622 397.1497070 406.3716831
+#&gt;  [79] 407.1632213 410.4382473 421.8682283 428.4970223 438.6211249 443.3718830
+#&gt;  [85] 455.1658228 469.0491366 476.9036931 483.2732651 492.6809060 500.8960527
+#&gt;  [91] 502.8642320 507.5015153 519.1122944 526.6571533 537.2036857 542.6229856
+#&gt;  [97] 553.3556518 568.8669062 576.8704728 585.5237509 594.5116006 601.1795665
+#&gt; [103] 604.1865921 611.6072080 624.2896183 631.5440109 641.1545137 647.4146819
+#&gt; [109] 657.4743341 672.1723986 678.9888622 688.6128693 697.5976705 705.8366823
+#&gt; [115] 710.8321648 719.2892308 731.6861381 740.0613000 748.5829000 755.8239820
+#&gt; [121] 766.5528098 781.2525945 788.1969906 797.3178135 806.0319330 814.4354318
+#&gt; [127] 819.9657775 828.1794025 840.0014091 849.7719654 858.8083048 866.9821129
+#&gt; [133] 878.0905587 893.7347530 900.3697438 909.3237494 916.2741019 925.8707043
+#&gt; [139] 932.8359618 941.1822546 952.2462997 963.2926878 973.8664652 982.0239247</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

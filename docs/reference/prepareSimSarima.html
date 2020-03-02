@@ -208,13 +208,42 @@
   by <code>prepareSimSarima</code>.</p>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>for <code>prepareSimSarima</code>, a function to simulate time series</p>
+    
+
+<p>for <code>prepareSimSarima</code>, a function to simulate time series, see
+  Details.  it is typically called multiple times without arguments.
+  All arguments have defaults set by <code>prepareSimSarima</code>.</p>
+<dt>n</dt><dd><p>length of the simulated time series,</p></dd>
+  <dt>rand.gen</dt><dd><p>random number generator,</p></dd>
+  <dt>...</dt><dd><p>arguments for the random number generator, passed on to
+    <code>arima.sim</code>.</p></dd> 
+
+
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='sim_sarima.html'>sim_sarima</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>mo1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>ar</span><span class='kw'>=</span><span class='fl'>0.9</span>, <span class='kw'>iorder</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>siorder</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>nseasons</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>sigma2</span> <span class='kw'>=</span> <span class='fl'>2</span>)
+    <pre class="examples"><div class='input'><span class='no'>mo1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>ar</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='kw'>iorder</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>siorder</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>nseasons</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>sigma2</span> <span class='kw'>=</span> <span class='fl'>2</span>)
 <span class='no'>fs1</span> <span class='kw'>&lt;-</span> <span class='fu'>prepareSimSarima</span>(<span class='no'>mo1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>before</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>0</span>,<span class='fl'>6</span>)),  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>100</span>)
 <span class='no'>tmp1</span> <span class='kw'>&lt;-</span> <span class='fu'>fs1</span>()
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/ts.html'>ts</a></span>(<span class='no'>tmp1</span>))</div><div class='img'><img src='prepareSimSarima-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>tmp1</span></div><div class='output co'>#&gt;   [1]    1.106151    4.205416    7.521284   10.019933   14.000531   21.855963
+#&gt;   [7]   28.595003   37.478324   48.616229   62.960120   78.531584   95.032069
+#&gt;  [13]  111.636631  132.260428  153.288263  174.391366  194.008194  217.805811
+#&gt;  [19]  243.407281  266.806475  292.278320  320.405464  353.005188  383.913763
+#&gt;  [25]  417.157450  451.736824  489.144484  524.890322  564.120791  604.012459
+#&gt;  [31]  647.765026  688.141828  732.791685  777.296731  824.283629  869.333325
+#&gt;  [37]  918.253646  965.676320 1016.025664 1061.536129 1111.135557 1159.870152
+#&gt;  [43] 1210.729363 1259.924876 1314.687879 1365.797221 1417.360025 1467.743430
+#&gt;  [49] 1520.627687 1567.934126 1618.527422 1668.683278 1723.502354 1771.862067
+#&gt;  [55] 1823.371326 1875.021044 1932.517672 1984.189719 2037.154596 2087.851130
+#&gt;  [61] 2144.552008 2193.761464 2243.826582 2290.735383 2341.171685 2384.125566
+#&gt;  [67] 2427.813752 2470.881541 2517.293557 2557.086378 2595.277831 2634.563968
+#&gt;  [73] 2675.836587 2708.449172 2740.639140 2771.502415 2806.442656 2834.476657
+#&gt;  [79] 2862.335115 2887.436584 2916.851037 2939.997160 2963.546910 2982.648735
+#&gt;  [85] 3006.774512 3023.733698 3042.668300 3057.351639 3076.233189 3087.782157
+#&gt;  [91] 3103.000026 3113.902725 3130.311717 3138.748977 3152.142559 3162.518785
+#&gt;  [97] 3181.723418 3191.538531 3202.780478 3212.066296</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/ts.html'>ts</a></span>(<span class='no'>tmp1</span>))</div><div class='img'><img src='prepareSimSarima-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='no'>fs2</span> <span class='kw'>&lt;-</span> <span class='fu'>prepareSimSarima</span>(<span class='no'>mo1</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>before</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,<span class='fl'>6</span>)),  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>100</span>)
 <span class='no'>tmp2</span> <span class='kw'>&lt;-</span> <span class='fu'>fs2</span>()
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/ts.html'>ts</a></span>(<span class='no'>tmp2</span>))</div><div class='img'><img src='prepareSimSarima-2.png' alt='' width='700' height='433' /></div><div class='input'>
@@ -230,6 +259,7 @@
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#details">Details</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

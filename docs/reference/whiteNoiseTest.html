@@ -189,10 +189,10 @@ Chapman &amp; Hall/CRC Press.</p>
 
 <span class='no'>x.iid</span> <span class='kw'>&lt;-</span> <span class='fu'>whiteNoiseTest</span>(<span class='no'>x.acf</span>, <span class='kw'>h0</span> <span class='kw'>=</span> <span class='st'>"iid"</span>, <span class='kw'>nlags</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>,<span class='fl'>10</span>,<span class='fl'>20</span>), <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"LiMcLeod"</span>)
 <span class='no'>x.iid</span></div><div class='output co'>#&gt; $test
-#&gt;         ChiSq DF     pvalue
-#&gt; [1,] 11.68282  5 0.03940211
-#&gt; [2,] 14.16628 10 0.16554118
-#&gt; [3,] 23.72941 20 0.25441216
+#&gt;          ChiSq DF     pvalue
+#&gt; [1,]  9.515083  5 0.09020059
+#&gt; [2,] 13.376719 10 0.20336493
+#&gt; [3,] 23.092935 20 0.28425429
 #&gt; attr(,"method")
 #&gt; [1] "LiMcLeod"
 #&gt; 
@@ -223,10 +223,10 @@ Chapman &amp; Hall/CRC Press.</p>
 #&gt; </div><div class='input'>
 <span class='no'>x.iid2</span> <span class='kw'>&lt;-</span> <span class='fu'>whiteNoiseTest</span>(<span class='no'>x.acf</span>, <span class='kw'>h0</span> <span class='kw'>=</span> <span class='st'>"iid"</span>, <span class='kw'>nlags</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>,<span class='fl'>10</span>,<span class='fl'>20</span>), <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"LjungBox"</span>)
 <span class='no'>x.iid2</span></div><div class='output co'>#&gt; $test
-#&gt;         ChiSq DF     pvalue
-#&gt; [1,] 11.69274  5 0.03924927
-#&gt; [2,] 14.17361 10 0.16521887
-#&gt; [3,] 23.73834 20 0.25400910
+#&gt;          ChiSq DF     pvalue
+#&gt; [1,]  9.522931  5 0.08993792
+#&gt; [2,] 13.384747 10 0.20294845
+#&gt; [3,] 23.102129 20 0.28380766
 #&gt; attr(,"method")
 #&gt; [1] "LjungBox"
 #&gt; 
@@ -258,32 +258,32 @@ Chapman &amp; Hall/CRC Press.</p>
 <span class='no'>x.garch</span> <span class='kw'>&lt;-</span> <span class='fu'>whiteNoiseTest</span>(<span class='no'>x.acf</span>, <span class='kw'>h0</span> <span class='kw'>=</span> <span class='st'>"garch"</span>, <span class='kw'>nlags</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>,<span class='fl'>10</span>,<span class='fl'>20</span>), <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>)
 <span class='no'>x.garch</span></div><div class='output co'>#&gt; $test
 #&gt;       h         Q      pval
-#&gt; [1,]  5  7.806379 0.1672342
-#&gt; [2,] 10 10.089051 0.4327156
-#&gt; [3,] 20 20.976587 0.3985118
+#&gt; [1,]  5  6.367705 0.2720653
+#&gt; [2,] 10  9.857038 0.4531242
+#&gt; [3,] 20 20.571485 0.4227286
 #&gt; 
 #&gt; $ci
 #&gt;               int           
-#&gt;  [1,] -0.03686713 0.03686713
-#&gt;  [2,] -0.03503013 0.03503013
-#&gt;  [3,] -0.03406797 0.03406797
-#&gt;  [4,] -0.03290808 0.03290808
-#&gt;  [5,] -0.03201129 0.03201129
-#&gt;  [6,] -0.03186682 0.03186682
-#&gt;  [7,] -0.03190761 0.03190761
-#&gt;  [8,] -0.02990643 0.02990643
-#&gt;  [9,] -0.02972619 0.02972619
-#&gt; [10,] -0.02837251 0.02837251
-#&gt; [11,] -0.02797430 0.02797430
-#&gt; [12,] -0.02816944 0.02816944
-#&gt; [13,] -0.02806589 0.02806589
-#&gt; [14,] -0.02739791 0.02739791
-#&gt; [15,] -0.02722798 0.02722798
-#&gt; [16,] -0.02629805 0.02629805
-#&gt; [17,] -0.02660037 0.02660037
-#&gt; [18,] -0.02724967 0.02724967
-#&gt; [19,] -0.02718760 0.02718760
-#&gt; [20,] -0.02723309 0.02723309
+#&gt;  [1,] -0.03729931 0.03729931
+#&gt;  [2,] -0.03550894 0.03550894
+#&gt;  [3,] -0.03419037 0.03419037
+#&gt;  [4,] -0.03302372 0.03302372
+#&gt;  [5,] -0.03218217 0.03218217
+#&gt;  [6,] -0.03205760 0.03205760
+#&gt;  [7,] -0.03222041 0.03222041
+#&gt;  [8,] -0.03013818 0.03013818
+#&gt;  [9,] -0.03003940 0.03003940
+#&gt; [10,] -0.02840105 0.02840105
+#&gt; [11,] -0.02802229 0.02802229
+#&gt; [12,] -0.02825749 0.02825749
+#&gt; [13,] -0.02808877 0.02808877
+#&gt; [14,] -0.02743101 0.02743101
+#&gt; [15,] -0.02739894 0.02739894
+#&gt; [16,] -0.02614653 0.02614653
+#&gt; [17,] -0.02648426 0.02648426
+#&gt; [18,] -0.02714802 0.02714802
+#&gt; [19,] -0.02692681 0.02692681
+#&gt; [20,] -0.02705697 0.02705697
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
