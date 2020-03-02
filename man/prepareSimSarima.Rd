@@ -76,7 +76,15 @@ prepareSimSarima(model, x = NULL, eps = NULL, n, n.start = NA,
   by \code{prepareSimSarima}.
 }
 \value{
-  for \code{prepareSimSarima}, a function to simulate time series
+
+  for \code{prepareSimSarima}, a function to simulate time series, see
+  Details.  it is typically called multiple times without arguments.
+  All arguments have defaults set by \code{prepareSimSarima}.
+  \item{n}{length of the simulated time series,}
+  \item{rand.gen}{random number generator,}
+  \item{...}{arguments for the random number generator, passed on to
+    \code{arima.sim}.} 
+
 }
 %\references{
 %%% ~put references to the literature/web site here ~
@@ -88,13 +96,14 @@ prepareSimSarima(model, x = NULL, eps = NULL, n, n.start = NA,
 %
 %%% ~Make other sections like Warning with \section{Warning }{....} ~
 %
-%\seealso{
-%%% ~~objects to See Also as \code{\link{help}}, ~~~
-%}
+\seealso{
+  \code{\link{sim_sarima}}
+}
 \examples{
 mo1 <- list(ar = 0.9, iorder = 1, siorder = 1, nseasons = 4, sigma2 = 2)
 fs1 <- prepareSimSarima(mo1, x = list(before = rep(0,6)),  n = 100)
 tmp1 <- fs1()
+tmp1
 plot(ts(tmp1))
 
 fs2 <- prepareSimSarima(mo1, x = list(before = rep(1,6)),  n = 100)

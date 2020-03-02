@@ -7,6 +7,8 @@ reference:
       - "sarima-package"
       - sarima
       - sim_sarima
+      - prepareSimSarima
+      # - print(<simSarimaFun>)
   - title: "Functions for properties of models and time series"
     contents: 
       - matches("autocorrelations")
@@ -78,5 +80,3 @@ reference:
       - xarmaFilter
       - sarima.f
       - periodogram
-      - prepareSimSarima
-      # - print(<simSarimaFun>)
