@@ -53,7 +53,7 @@ sarima(model, data = NULL, ss.method = "sarima", use.symmetry = FALSE,
   SARIMA residuals: 
   \deqn{Y_t = f(t) + Y^c_t}
   \deqn{U(B)\Phi(B)Y^c_t = \Theta(B)\varepsilon_t,}
-  where \eqn{Yc_t = Y_t - f(t)} is the centred \eqn{Y_t}.
+  where \eqn{Y^c_t = Y_t - f(t)} is the centred \eqn{Y_t}.
   This can be written equivalently as a single equation:
   \deqn{U(B)\Phi(B)(Y_t - f(t)) = \Theta(B)\varepsilon_t.}
   The regression function \eqn{f(t)} can depend on
