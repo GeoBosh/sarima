@@ -22,15 +22,15 @@
 <script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">sarima</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.5</span>
       </span>
     </div>
 
@@ -179,7 +179,7 @@
     <p>Francq C, Zakoian J (2010).
 <em>GARCH models: structure, statistical inference and financial applications</em>.
 John Wiley &amp; Sons.
-ISBN 978-0-470-68391-0.<br /><br /> Kokoszka P, Politis D (2011).
+ISBN 978-0-470-68391-0.<br /><br /> Kokoszka PS, Politis DN (2011).
 &#8220;Nonlinearity of ARCH and stochastic volatility models and Bartlett's formula.&#8221;
 <em>Probability and Mathematical Statistics</em>, <b>31</b>(1), 47--59.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -259,9 +259,9 @@ ISBN 978-0-470-68391-0.<br /><br /> Kokoszka P, Politis D (2011).
 #&gt; [3,] 20 9.9930817 0.9682972
 #&gt; </div><div class='input'>
 <span class='co'>## plot methods call acfGarchTest() suitably if 'x' is given:</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x.acf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>x</span>)</div><div class='img'><img src='acfGarchTest-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x.pacf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>x</span>)</div><div class='img'><img src='acfGarchTest-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x.acf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>x</span>)</div><div class='img'><img src='acfGarchTest-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x.pacf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>x</span>)</div><div class='img'><img src='acfGarchTest-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## use 90% limits:</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x.acf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>interval</span> <span class='kw'>=</span> <span class='fl'>0.90</span>)</div><div class='img'><img src='acfGarchTest-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x.acf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>interval</span> <span class='kw'>=</span> <span class='fl'>0.90</span>)</div><div class='img'><img src='acfGarchTest-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='fu'>acfWnTest</span>(<span class='no'>x.acf</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>nlags</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>5</span>,<span class='fl'>10</span>,<span class='fl'>20</span>))</div><div class='output co'>#&gt; $test
 #&gt;       h         Q      pval
 #&gt; [1,]  5 0.8334477 0.9748511
@@ -336,7 +336,7 @@ ISBN 978-0-470-68391-0.<br /><br /> Kokoszka P, Politis D (2011).
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

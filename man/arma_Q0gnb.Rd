@@ -31,7 +31,7 @@ arma_Q0gnb(phi, theta, tol = 2.220446e-16)
    a matrix
 }
 \references{
-  \insertRef{gardner+harvey+phillips:1980}{stats}
+  \insertRef{gardner+harvey+phillips:1980}{sarima}
 
   R bug report PR#14682 (2011-2013)
   <URL: https://bugs.r-project.org/bugzilla3/show_bug.cgi?id=14682>.

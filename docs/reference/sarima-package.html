@@ -25,15 +25,15 @@
 <script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -85,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">sarima</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.5</span>
       </span>
     </div>
 
@@ -193,7 +193,7 @@ properties.</p>
 &#8220;Bartlett's formulae---closed forms and recurrent equations.&#8221;
 <em>Ann. Inst. Statist. Math.</em>, <b>48</b>(1), 49--59.
 ISSN 0020-3157, doi: <a href='https://doi.org/10.1007/BF00049288'>10.1007/BF00049288</a>
-.</p>
+, <a href='https://doi.org/10.1007/BF00049288'>https://doi.org/10.1007/BF00049288</a>.</p>
 <p>Brockwell PJ, Davis RA (1991).
 <em>Time series: theory and methods. 2nd ed.</em>.
 Springer Series in Statistics. Berlin etc.: Springer-Verlag..</p>
@@ -207,7 +207,7 @@ Chapman &amp; Hall/CRC Press.</p>
 <p>McLeod AI, Yu H, Krougly Z (2007).
 &#8220;Algorithms for Linear Time Series Analysis: With R Package.&#8221;
 <em>Journal of Statistical Software</em>, <b>23</b>(5).
-<a href='http://www.jstatsoft.org/v23/i05/'>http://www.jstatsoft.org/v23/i05/</a>.</p>
+<a href='https://www.jstatsoft.org/article/view/v023i05'>https://www.jstatsoft.org/article/view/v023i05</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='ArmaModel.html'>ArmaModel</a></code>
@@ -361,11 +361,11 @@ Chapman &amp; Hall/CRC Press.</p>
 #&gt; [20,] -0.02797315 0.02797315
 #&gt; </div><div class='input'>
 <span class='co'>## plot methods give the CI's under H0</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x.acf</span>)</div><div class='img'><img src='sarima-package-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x.acf</span>)</div><div class='img'><img src='sarima-package-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## if the data are given, the CI's under garch H0 are also given.</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x.acf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>x</span>)</div><div class='img'><img src='sarima-package-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x.acf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>x</span>)</div><div class='img'><img src='sarima-package-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Tests based on partial autocorrelations are also available:</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x.pacf</span>)</div><div class='img'><img src='sarima-package-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x.pacf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>x</span>)</div><div class='img'><img src='sarima-package-4.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x.pacf</span>)</div><div class='img'><img src='sarima-package-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x.pacf</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>x</span>)</div><div class='img'><img src='sarima-package-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>## Models</span>
 <span class='co'>## AR</span>
 ( <span class='no'>ar2a1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='ArmaModel.html'>ArModel</a></span>(<span class='kw'>ar</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>0.3</span>, -<span class='fl'>0.7</span>), <span class='kw'>sigma2</span> <span class='kw'>=</span> <span class='fl'>1</span>) )</div><div class='output co'>#&gt; An object of class "ArModel"
@@ -410,7 +410,7 @@ Chapman &amp; Hall/CRC Press.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

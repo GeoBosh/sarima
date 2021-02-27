@@ -1,3 +1,8 @@
+# sarima 0.8.4 (CRAN)
+
+- updated a reference to avoid redirect.
+
+
 # sarima 0.8.2 (CRAN)
 
 - import again FKF (support for it was removed when FKF was temporarily

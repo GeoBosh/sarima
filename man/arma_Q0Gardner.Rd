@@ -46,7 +46,7 @@ arma_Q0gnbR(phi, theta, tol = .Machine$double.eps)
   a matrix
 }
 \references{
-  \insertRef{gardner+harvey+phillips:1980}{stats}
+  \insertRef{gardner+harvey+phillips:1980}{sarima}
 
 }
 %\author{
