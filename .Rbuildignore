@@ -24,3 +24,4 @@ CHANGES
 /[.]RData$
 ^.*[.]Rhistory$
 ^tests/testthat/[.]RData$
+^\.github$
