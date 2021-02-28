@@ -25,3 +25,4 @@ CHANGES
 ^.*[.]Rhistory$
 ^tests/testthat/[.]RData$
 ^\.github$
+^codecov\.yml$

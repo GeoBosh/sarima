@@ -4,6 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/GeoBosh/sarima/badge.svg?branch=master)](https://coveralls.io/github/GeoBosh/sarima?branch=master)
   [![R-CMD-check](https://github.com/GeoBosh/sarima/workflows/R-CMD-check/badge.svg)](https://github.com/GeoBosh/sarima/actions)
 [![R-CMD-check](https://github.com/GeoBosh/sarima/workflows/R-CMD-check/badge.svg)](https://github.com/GeoBosh/sarima/actions)
+[![Codecov test coverage](https://codecov.io/gh/GeoBosh/sarima/branch/master/graph/badge.svg)](https://codecov.io/gh/GeoBosh/sarima?branch=master)
 <!-- badges: end -->
 
 

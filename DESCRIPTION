@@ -39,7 +39,8 @@ Imports:
 Suggests:
     fGarch,
     fImport,
-    testthat
+    testthat,
+    covr
 RdMacros: Rdpack
 License: GPL (>= 2)
 LazyLoad: yes
