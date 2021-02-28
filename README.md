@@ -20,8 +20,7 @@ Install the [latest stable version](https://cran.r-project.org/package=sarima) o
 You can install the [development version](https://github.com/GeoBosh/sarima) of
 `sarima` from Github:
 
-    library(devtools)
-    install_github("GeoBosh/sarima")
+    remotes::install_github("GeoBosh/sarima")
 
 
 # Overview
