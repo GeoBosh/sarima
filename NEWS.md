@@ -1,3 +1,10 @@
+# sarima 0.8.5
+
+- github repository housekeeping - switched from TravisCI to Github actions.
+
+- now the pkgdown website is automatically rebuild on push (via a github action).
+
+
 # sarima 0.8.4 (CRAN)
 
 - updated a reference to avoid redirect.
