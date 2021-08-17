@@ -1,6 +1,5 @@
 \name{sarima}
 \alias{sarima}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{Fit extended SARIMA models}
 \description{
 
@@ -261,7 +260,7 @@ sarima(model, data = NULL, ss.method = "sarima", use.symmetry = FALSE,
 ## fit the classic airline model using arima()
 ap.arima <- arima(log(AirPassengers), order = c(0,1,1), seasonal = c(0,1,1))
 
-## samemodel using twoequivalent ways to specify it
+## same model using two equivalent ways to specify it
 ap.baseA <- sarima(log(AirPassengers) ~ 
                    0 | ma(1, c(-0.3)) + sma(12,1, c(-0.1)) + i(1) + si(12,1), 
                    ss.method = "base")

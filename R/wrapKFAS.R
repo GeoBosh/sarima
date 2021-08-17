@@ -88,7 +88,7 @@ fitArma0Model <- function(arma0ss, init = NULL, method = "BFGS", hessian = TRUE,
         # fi <- fi[-(p+q+1), -(p+q+1)]
 
     se <- sqrt(diag(fi))
-    se.asy <- sqrt(diag(FitARMA::InformationMatrixARMA(ar, -ma)) /
+    se.asy <- sqrt(diag(InformationMatrixARMA(ar, -ma)) /
                                                     attr(modelObj, "n", exact = TRUE))
 
     param <- c(ar, ma)

@@ -9,5 +9,17 @@
         ## add other renamed functions from PolynomF
     }
 
+    ## invertibleQ is not visible in FitARMA::InformationMatrixARMA(), v1.6.1 and earlier,
+    ##    unless FitAR is attached. v1.6.1 is the current one at the time of writing this
+    ##    (2021-03-07) but it would be unsafe to make this changed for later versions.  Also,
+    ##    if a new version appears on CRAN this should be resolved since there is a NOTE
+    ##    about it by R CMD check.
+    if (utils::packageVersion("FitARMA") <= "1.6.1") {
+        fu <- FitARMA::InformationMatrixARMA
+        body(fu)[[c(2,2)]] <- 
+            quote(!(FitAR::InvertibleQ(phi) & FitAR::InvertibleQ(theta)))
+        assign("InformationMatrixARMA", fu, envir = topenv())
+    }
+        
     NULL
 }

@@ -1,8 +1,24 @@
 # sarima 0.8.5
 
+- new `tsdiag` method for class `Sarima` (the result of `sarima()`). The method
+  can be called also directly on the output from base R's `arima()` with
+  `tsdiag.Sarima()` or `sarima::tsdiag.Sarima()`. The method offers several
+  portmanteau tests (including Ljung-Box, Li-McLeod and Box-Pierce), plots of
+  autocorrelations and partial autocorrelations of the residuals, ability to
+  control which graphs to be produced (including interactively), and their
+  layout. The computed results are returned (invisibly).  
+
+  The method always makes a correction of the degrees of freedom of the
+  portmanteau tests.  By default is similar to `stats::tsdiag()` (but with
+  adjusted d.f.).
+
 - github repository housekeeping - switched from TravisCI to Github actions.
 
-- now the pkgdown website is automatically rebuild on push (via a github action).
+- now the pkgdown website is automatically rebuild on push (via a github
+  action).
+
+- moved FitAR from Depends to Imports (after some changes in `.onLoad()` to make
+  this possible).
 
 
 # sarima 0.8.4 (CRAN)

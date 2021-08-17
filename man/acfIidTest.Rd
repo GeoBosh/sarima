@@ -47,7 +47,7 @@ acfIidTest(acf, n, npar = 0, nlags = npar + 1,
   use in the test, it can be a vector to request several tests.
 
   The results of the test are gathered in a matrix with one row for each
-  element of \code{nlags}. The test statistic is in column "ChiSQ",
+  element of \code{nlags}. The test statistic is in column "ChiSq",
   degrees of freedom in "DF" and the p-value in "pvalue". The method is
   in attribute "method".
 

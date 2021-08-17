@@ -569,6 +569,154 @@ summary.Sarima <- function(object, ...){
     invisible(object)
 }
 
+.tsdiag_choices <- c(
+    ## "classic (std. residuals, acf, portmanteau p-values)",
+    "residuals",
+    "acf of residuals",
+    "p values for Ljung-Box statistic",
+    "p values for Li-McLeod statistic",
+    "p values for Box-Pierce statistic",
+    "pacf of residuals"
+)
+
+tsdiag.Sarima <- function(object, gof.lag = NULL, ask = FALSE, ..., plot = 1:3, layout = NULL)
+{
+    if(is.null(gof.lag))
+        gof.lag <- 20  # NOTE: arbitrary value
+    else if(!is.numeric(gof.lag))
+        stop("'gof.lag' must be numeric and contain positive integers")
+
+    lag.max <- max(gof.lag)
+
+
+    ## plot standardized residuals, acf of residuals, Ljung-Box p-values
+    err <- object$residuals
+    stdres <- err / sqrt(object$sigma2)
+
+    choices <- .tsdiag_choices
+    chnum <- 1:length(choices)
+    
+    if(!isTRUE(plot)){                  # plot is typically numeric index here;
+        choices <- choices[plot]        # FALSE or NULL give zero length result, so no plots
+        chnum <- chnum[plot]
+        if(anyNA(choices)){
+            warning("'plot' should be TRUE/FALSE or vector of positive integers <= ",
+                    length(choices), ",\n", "ignoring non-existent values")
+            chnum <- chnum[!is.na(choices)]
+            choices <- choices[!is.na(choices)]
+        }
+    }
+
+    if(length(choices) > 0){
+	old.par <- par(no.readonly = TRUE)
+	on.exit(par(old.par))     # restore graphics parameters before exiting.
+            # par(mfrow = c(2,1))
+        n_per_page <- if(is.null(layout))
+                          layout(matrix(1:3, nrow = 3))
+                      else
+                          ## TODO: this needs further thought!
+                          do.call("layout", layout) # for the time being
+            
+        choice_title <- "Select a plot number or 0 to exit"
+        ch_index <- if(length(choices) == 1)
+                        1
+                    else if(ask)
+                        menu(choices, title = choice_title)
+                    else if(!identical(plot, FALSE))
+                        1
+                    else
+                        integer(0)
+        choice <- chnum[ch_index]
+
+        ## precompute common stuff for portmanteau tests
+        nlag <- gof.lag
+        pval <- numeric(nlag)
+        fitdf <- if(inherits(object, "Sarima"))
+                     length(object$internal$nonfixed)
+                 else if(inherits(object, "Arima"))
+                     sum(object$arma[1:4]) # object$arma is: p, q, p_s. q_s, s, d, d_s
+                 else
+                     0
+                    # for(i in 1L:nlag)
+                    #     pval[i] <- Box.test(err, i, type="Ljung-Box", 
+                    #                         fitdf = ifelse(i > fitdf, fitdf, i - 1))$p.value
+        sacf <- autocorrelations(err, maxlag = nlag) # deal with NA's?
+        
+        res <- list(residuals = err,
+                    "LjungBox"   = NULL,
+                    "LiMcLeod"   = NULL,
+                    "BoxPierce" = NULL)
+        while(length(choice) != 0){
+            switch(choice,
+            { # 1:  "residuals",
+                plot(stdres, type = "h", main = "Standardized Residuals", ylab = "")
+                abline(h = 0)
+                #acf(err, main = "ACF of residuals from model", lag.max = lag.max)
+                #pacf(err, main = "PACF of residuals from model", lag.max = lag.max)
+            },
+            { # 2:  "ACF of residuals"
+                ## acf
+                acf(err, plot = TRUE, main = "ACF of Residuals", lag.max = lag.max, na.action = na.pass)
+                    # acf(cdf, main = "", lag.max = lag.max)
+                    # title("ACF of" ~U[t])
+                    # pacf(cdf, main = "", lag.max = lag.max)
+                    # title("PACF of" ~U[t])
+            },
+            { # 3: "Ljung-Box p-values"
+		acftest <- acfIidTest(sacf, npar = fitdf, nlags = 1:nlag, method = "LjungBox",
+                                      interval = NULL)
+                res[["LjungBox"]] <- acftest
+            },
+            { # 4: "Li-McLeod p-values"
+		acftest <- acfIidTest(sacf, npar = fitdf, nlags = 1:nlag, method = "LiMcLeod",
+                                      interval = NULL)
+                res[["LiMcLeod"]] <- acftest
+            },
+            { # 5: "Box-Pierce p-values"
+		acftest <- acfIidTest(sacf, npar = fitdf, nlags = 1:nlag, method = "BoxPierce",
+                                      interval = NULL)
+                res[["BoxPierce"]] <- acftest
+            },
+            { # 6:  "PACF of residuals"
+                ## acf
+                pacf(err, plot = TRUE, main = "PACF of Residuals", lag.max = lag.max, na.action = na.pass)
+            },
+                # { # 4: "ACF/Histogram of tau_residuals"
+                #     acf(err2, main = "ACF of tau_residuals", lag.max = lag.max)
+                #     hist(err2, freq = FALSE, main = "Histogram of tau_residuals", xlab  =  "",
+                #          ylim = c(0, 0.5))
+                #     lines(seq(-5, 5, .01), dnorm(seq(-5, 5, .01)), col = "red")
+                # }
+            )
+
+            if(choice %in% 3:5){ # common code for portmanteau tests
+                pval <- acftest$test[ , "pvalue"]
+                plot(1L:nlag, pval, xlab = "lag", ylab = "p value", ylim = c(0,1),
+                     main = .tsdiag_choices[choice])
+                abline(h = 0.05, lty = 2, col = "blue")
+            }
+            
+            if(length(chnum) == 1)  # length(choices) == 1
+                break
+            ## TODO: argument 'ask' could be used here to present a menu or just
+            ##       plot the next plot in choices.
+            if(ask || length(choices) > n_per_page){
+                ch_index <- menu(choices, title = choice_title)
+                choice <- chnum[ch_index]
+            }else{
+                ## just plot the next one
+                ##  Note: this doesn't update ch_index
+                chnum <- chnum[-1]
+                choice <- chnum[1]
+            }
+        }
+    }
+
+    class(res) <- "tsdiagSarima"
+    
+    invisible(res)
+}
+
 ## fkf: y ~ d x 1
 ##      state ~ m x 1
 armapqss <- function(ar, ma, sigma) {

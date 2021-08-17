@@ -5,23 +5,23 @@ import(methods, Formula, PolynomF, lagged)
 importFrom(stats4, vcov, coef, confint, plot)
 
 importFrom(stats, var, sd, filter, pnorm, rnorm, qnorm, pchisq,
-           ts, ar, acf, pacf, acf2AR, ARMAacf, arima.sim,
+           ts, ar, acf, pacf, acf2AR, ARMAacf, arima.sim, tsdiag,
            formula, as.formula, terms, is.empty.model, model.frame, model.matrix, update,
            lm, predict, printCoefmat, na.omit, poly,
            KalmanLike, KalmanRun, KalmanForecast, makeARIMA,
-           logLik, optim)
+           logLik, optim, na.pass)
 
-importFrom(utils, capture.output)
+importFrom(utils, capture.output, menu)
 importFrom(utils, as.relistable, relist)
 
-importFrom(graphics, abline, lines)
+importFrom(graphics, abline, lines, par)
 
 importFrom(ltsa, DLAcfToAR, PredictionVariance, tacvfARMA)
 importFrom(FitAR, TacvfAR, TacvfMA, VarianceRacfAR, PacfDL, PacfToAR,
            ARToPacf, ARToMA)
-importFrom(FitARMA, TacvfARMA, InformationMatrixARMA,
-           ImpulseCoefficientsARMA
-           ) # maybe also tccfAR
+importFrom(FitARMA, # TacvfARMA, ImpulseCoefficientsARMA, # maybe also tccfAR,
+           InformationMatrixARMA
+           )
 
 # importFrom(portes, LjungBox)
 importFrom(Rdpack, rebib)
@@ -53,6 +53,7 @@ S3method(as.list, ArmaModel)
 S3method(as.list, ArmaSpec)
 
 S3method(predict, Sarima)
+S3method(tsdiag, Sarima)
 
 
 #S3method(coef, SampleAutocorrelations)
@@ -70,7 +71,8 @@ export(
     ## pacf2Ar,
     ## pacf2ArWithJacobian,
     sarima,
-
+    tsdiag.Sarima,
+    
     ## odl
     sim_sarima, # was: sarima.sim
     fun.forecast,

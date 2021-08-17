@@ -959,7 +959,7 @@ setMethod("acfIidTest", "SampleAutocorrelations",
                       ## only warning to allow 'what-if use.
                       warning("argument 'n' is not equal to slot 'n' of the autocorrelations")
                   }
-              callNextMethod(acf, n = n, nlags = nlags, method = method, interval = interval)
+              callNextMethod(acf, n = n, npar = npar, nlags = nlags, method = method, interval = interval)
           })
 
 setMethod("acfIidTest", "missing",
@@ -967,7 +967,7 @@ setMethod("acfIidTest", "missing",
               if(missing(n))
                   n <- length(x)
               acf <- autocorrelations(x, maxlag = max(nlags))
-              acfIidTest(acf, n = n, nlags = nlags, method = method, interval = interval)
+              acfIidTest(acf, n = n, npar = npar, nlags = nlags, method = method, interval = interval)
           })
 
 acfMaTest <- function(acf, ma,  n, nlags,

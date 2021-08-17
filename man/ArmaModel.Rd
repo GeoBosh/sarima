@@ -11,7 +11,7 @@ MaModel(...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{\dots}{the arguments a reassed to \code{new()}. Typical
+  \item{\dots}{the arguments are passed to \code{new()}. Typical
     arguments are \code{ar}, \code{ma} and \code{mean}. 
   }
 }
