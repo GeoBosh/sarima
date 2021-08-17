@@ -119,8 +119,13 @@
 <a href="#sarima-085" class="anchor"></a>sarima 0.8.5<small> Unreleased </small>
 </h1>
 <ul>
+<li>
+<p>new <code>tsdiag</code> method for class <code>Sarima</code> (the result of <code><a href="../reference/sarima.html">sarima()</a></code>). The method can be called also directly on the output from base R’s <code><a href="https://rdrr.io/r/stats/arima.html">arima()</a></code> with <code><a href="../reference/tsdiag.Sarima.html">tsdiag.Sarima()</a></code> or <code><a href="../reference/tsdiag.Sarima.html">sarima::tsdiag.Sarima()</a></code>. The method offers several portmanteau tests (including Ljung-Box, Li-McLeod and Box-Pierce), plots of autocorrelations and partial autocorrelations of the residuals, ability to control which graphs to be produced (including interactively), and their layout. The computed results are returned (invisibly).</p>
+<p>The method always makes a correction of the degrees of freedom of the portmanteau tests. By default is similar to <code><a href="https://rdrr.io/r/stats/tsdiag.html">stats::tsdiag()</a></code> (but with adjusted d.f.).</p>
+</li>
 <li><p>github repository housekeeping - switched from TravisCI to Github actions.</p></li>
 <li><p>now the pkgdown website is automatically rebuild on push (via a github action).</p></li>
+<li><p>moved FitAR from Depends to Imports (after some changes in <code><a href="https://rdrr.io/r/base/ns-hooks.html">.onLoad()</a></code> to make this possible).</p></li>
 </ul>
 </div>
     <div id="sarima-084-cran" class="section level1">

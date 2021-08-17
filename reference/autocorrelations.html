@@ -352,7 +352,9 @@ Generic functions for computation of autocorrelations,
 #&gt; Slot objectname:  x</div><div class='input'>
 <span class='co'>## compute 2nd order properties from sample autocovariances</span>
 <span class='va'>acr</span> <span class='op'>&lt;-</span> <span class='fu'>autocorrelations</span><span class='op'>(</span><span class='va'>acv</span><span class='op'>)</span>
-<span class='va'>acr</span>
+</div><div class='output co'>#&gt; <span class='message'>Note: method with signature ‘Lagged#numeric#missing’ chosen for function ‘[[’,</span>
+#&gt; <span class='message'> target signature ‘SampleAutocovariances#numeric#missing’.</span>
+#&gt; <span class='message'> "FlexibleLagged#ANY#ANY" would also be valid</span></div><div class='input'><span class='va'>acr</span>
 </div><div class='output co'>#&gt; An object of class "SampleAutocorrelations"
 #&gt;     Lag_0     Lag_1     Lag_2     Lag_3     Lag_4     Lag_5     Lag_6 
 #&gt; 1.0000000 0.9480473 0.8755748 0.8066812 0.7526254 0.7137700 0.6817336 
