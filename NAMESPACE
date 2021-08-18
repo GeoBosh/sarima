@@ -2,46 +2,41 @@ useDynLib(sarima, .registration=TRUE)
 importFrom(Rcpp, evalCpp)
 
 import(methods, Formula, PolynomF, lagged)
-importFrom(stats4, vcov, coef, confint, plot)
 
+importFrom(stats4, vcov, coef, confint, plot)
 importFrom(stats, var, sd, filter, pnorm, rnorm, qnorm, pchisq,
            ts, ar, acf, pacf, acf2AR, ARMAacf, arima.sim, tsdiag,
-           formula, as.formula, terms, is.empty.model, model.frame, model.matrix, update,
-           lm, predict, printCoefmat, na.omit, poly,
+           frequency, spectrum, formula, as.formula, poly,
+           terms, is.empty.model, model.frame, model.matrix, update,
+           lm, predict, printCoefmat, na.omit, na.pass,
            KalmanLike, KalmanRun, KalmanForecast, makeARIMA,
-           logLik, optim, na.pass)
-
-importFrom(utils, capture.output, menu)
-importFrom(utils, as.relistable, relist)
-
+           logLik, optim)
+importFrom(utils, capture.output, menu, as.relistable, relist)
 importFrom(graphics, abline, lines, par)
 
-importFrom(ltsa, DLAcfToAR, PredictionVariance, tacvfARMA)
-importFrom(FitAR, TacvfAR, TacvfMA, VarianceRacfAR, PacfDL, PacfToAR,
-           ARToPacf, ARToMA)
-importFrom(FitARMA, # TacvfARMA, ImpulseCoefficientsARMA, # maybe also tccfAR,
-           InformationMatrixARMA
-           )
-
+importFrom(ltsa, DLAcfToAR, tacvfARMA) # PredictionVariance, 
+importFrom(FitAR, PacfToAR) # TacvfAR, TacvfMA, VarianceRacfAR, PacfDL, ARToPacf, ARToMA
+importFrom(FitARMA, InformationMatrixARMA) # TacvfARMA, ImpulseCoefficientsARMA, also tccfAR?
 # importFrom(portes, LjungBox)
+
+importFrom(numDeriv, hessian)
+
 importFrom(Rdpack, rebib)
+
+
+importFrom(KFAS, SSMarima, SSModel, artransform)
 
 ## 2018-07-08 commenting out for the CRAN release
 ## 2020-02-29 reinstating
 importFrom(FKF, fkf)
 
-importFrom(numDeriv, hessian)
-
-import(KFAS)
-
-# 2018-10-10 periodogram function
+# 2018-10-10 for periodogram function
 importFrom(dplyr, mutate, select)
-importFrom(stats, frequency, spectrum)
+
 
 ##S3method(print, sarima)
 S3method(print, simSarimaFun)
 S3method(print, Sarima)
-
 
 S3method(summary, SarimaFilter)
 S3method(summary, SarimaSpec)
@@ -55,14 +50,11 @@ S3method(as.list, ArmaSpec)
 S3method(predict, Sarima)
 S3method(tsdiag, Sarima)
 
-
 #S3method(coef, SampleAutocorrelations)
 #S3method(confint, SampleAutocorrelations)
 
-
 exportClassPattern("^[^\\.]")
 
-##exportPattern("^[[:alpha:]]+")
 export(
     ## work in progress
 
@@ -150,5 +142,3 @@ export(
     ## periodogram
     periodogram
 )
-
-

@@ -6,6 +6,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // uniKalmanLikelihood0b
 List uniKalmanLikelihood0b(const NumericVector& y, const List& mod, const NumericVector& nit, const LogicalVector& op, const LogicalVector& update);
 RcppExport SEXP _sarima_uniKalmanLikelihood0b(SEXP ySEXP, SEXP modSEXP, SEXP nitSEXP, SEXP opSEXP, SEXP updateSEXP) {
