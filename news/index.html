@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">sarima</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.5.9000</span>
       </span>
     </div>
 
@@ -114,14 +114,14 @@
       <small>Source: <a href='https://github.com/GeoBosh/sarima/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="sarima-085" class="section level1">
+    <div id="sarima-085-cran" class="section level1">
 <h1 class="page-header" data-toc-text="0.8.5">
-<a href="#sarima-085" class="anchor"></a>sarima 0.8.5<small> Unreleased </small>
+<a href="#sarima-085-cran" class="anchor"></a>sarima 0.8.5 (CRAN)<small> Unreleased </small>
 </h1>
 <ul>
 <li>
-<p>new <code>tsdiag</code> method for class <code>Sarima</code> (the result of <code><a href="../reference/sarima.html">sarima()</a></code>). The method can be called also directly on the output from base R’s <code><a href="https://rdrr.io/r/stats/arima.html">arima()</a></code> with <code><a href="../reference/tsdiag.Sarima.html">tsdiag.Sarima()</a></code> or <code><a href="../reference/tsdiag.Sarima.html">sarima::tsdiag.Sarima()</a></code>. The method offers several portmanteau tests (including Ljung-Box, Li-McLeod and Box-Pierce), plots of autocorrelations and partial autocorrelations of the residuals, ability to control which graphs to be produced (including interactively), and their layout. The computed results are returned (invisibly).</p>
-<p>The method always makes a correction of the degrees of freedom of the portmanteau tests. By default is similar to <code><a href="https://rdrr.io/r/stats/tsdiag.html">stats::tsdiag()</a></code> (but with adjusted d.f.).</p>
+<p>new <code>tsdiag</code> method for class <code>Sarima</code> (the result of <code><a href="../reference/sarima.html">sarima()</a></code>). The method can be called also directly on the output from base R’s <code><a href="https://rdrr.io/r/stats/arima.html">arima()</a></code> with <code><a href="../reference/tsdiag.Sarima.html">tsdiag.Sarima()</a></code> or <code><a href="../reference/tsdiag.Sarima.html">sarima::tsdiag.Sarima()</a></code>. The method offers several portmanteau tests (including Ljung-Box, Li-McLeod and Box-Pierce), plots of autocorrelations and partial autocorrelations of the residuals, ability to control which graphs to be produced (including interactively), and their layout. The computed results are returned (invisibly). The default layout of the graphs is similar to <code><a href="https://rdrr.io/r/stats/tsdiag.html">stats::tsdiag()</a></code> (but with adjusted d.f.).</p>
+<p>The method always makes a correction of the degrees of freedom of the portmanteau tests.</p>
 </li>
 <li><p>github repository housekeeping - switched from TravisCI to Github actions.</p></li>
 <li><p>now the pkgdown website is automatically rebuild on push (via a github action).</p></li>
@@ -176,17 +176,17 @@
 <li><p><code><a href="../reference/sarima.html">sarima()</a></code> gets an argument to specify the method to use for the stationary part of P0 (see above). The available options are the ones in <code><a href="https://rdrr.io/r/stats/KalmanLike.html">makeARIMA()</a></code> (“Rossignol2011” and “Gardner1980”) plus Georgi’s method (“gnb”). The default is “Rossignol2011”.</p></li>
 </ul>
 </div>
-    <div id="sarima-07-6-cran" class="section level1">
-<h1 class="page-header" data-toc-text="0.7-6">
-<a href="#sarima-07-6-cran" class="anchor"></a>sarima 0.7-6 (CRAN)<small> Unreleased </small>
+    <div id="sarima-076-cran" class="section level1">
+<h1 class="page-header" data-toc-text="0.7.6">
+<a href="#sarima-076-cran" class="anchor"></a>sarima 0.7.6 (CRAN)<small> 2018-08-23 </small>
 </h1>
 <ul>
 <li>updated Makevars and Makevars.win to deal with a NOTE from recent tightening of checks on CRAN (see <a href="https://stat.ethz.ch/pipermail/r-package-devel/2018q3/003030.html" class="uri">https://stat.ethz.ch/pipermail/r-package-devel/2018q3/003030.html</a>).</li>
 </ul>
 </div>
-    <div id="sarima-07-5" class="section level1">
-<h1 class="page-header" data-toc-text="0.7-5">
-<a href="#sarima-07-5" class="anchor"></a>sarima 0.7-5<small> Unreleased </small>
+    <div id="sarima-075" class="section level1">
+<h1 class="page-header" data-toc-text="0.7.5">
+<a href="#sarima-075" class="anchor"></a>sarima 0.7.5<small> Unreleased </small>
 </h1>
 <ul>
 <li><p><code>NEWS</code> becomes <code>NEWS.md</code> and uses markdown syntax. The style is loosely based on <a href="http://style.tidyverse.org/news.html" class="uri">http://style.tidyverse.org/news.html</a>).</p></li>
@@ -198,26 +198,26 @@
 </li>
 </ul>
 </div>
-    <div id="sarima-07-4" class="section level1">
-<h1 class="page-header" data-toc-text="0.7-4">
-<a href="#sarima-07-4" class="anchor"></a>sarima 0.7-4<small> Unreleased </small>
+    <div id="sarima-074" class="section level1">
+<h1 class="page-header" data-toc-text="0.7.4">
+<a href="#sarima-074" class="anchor"></a>sarima 0.7.4<small> Unreleased </small>
 </h1>
 <ul>
 <li><p>dealt with ‘valgrind’ warnings (had missed one uninitialised warning).</p></li>
 <li><p>fixed a bug in prepareSimSarima() - when initial values were not supplied in the stationary case, the initialisation was not correct (thanks to Cameron Doyle for reporting this).</p></li>
 </ul>
 </div>
-    <div id="sarima-07-3-cran" class="section level1">
-<h1 class="page-header" data-toc-text="0.7-3">
-<a href="#sarima-07-3-cran" class="anchor"></a>sarima 0.7-3 (CRAN)<small> Unreleased </small>
+    <div id="sarima-073-cran" class="section level1">
+<h1 class="page-header" data-toc-text="0.7.3">
+<a href="#sarima-073-cran" class="anchor"></a>sarima 0.7.3 (CRAN)<small> 2018-07-12 </small>
 </h1>
 <ul>
 <li>dealt with ‘valgrind’ warnings.</li>
 </ul>
 </div>
-    <div id="sarima-07-2-cran" class="section level1">
-<h1 class="page-header" data-toc-text="0.7-2">
-<a href="#sarima-07-2-cran" class="anchor"></a>sarima 0.7-2 (CRAN)<small> Unreleased </small>
+    <div id="sarima-072-cran" class="section level1">
+<h1 class="page-header" data-toc-text="0.7.2">
+<a href="#sarima-072-cran" class="anchor"></a>sarima 0.7.2 (CRAN)<small> 2018-07-09 </small>
 </h1>
 <ul>
 <li><p>this is an emergency release to avoid the package being archived on CRAN due to the archival of a dependency.</p></li>
@@ -406,15 +406,14 @@
 <li><p>moved “Lagged” to a separate package, “lagged”.</p></li>
 <li><p>streamlined acfIidTest() and documented it properly.</p></li>
 <li><p>new vignette based on example in Chapter 7 of James Proberts’ MMath project.</p></li>
-<li><p>first submission to CRAN.</p></li>
 </ul>
 </div>
-    <div id="sarima-04-0" class="section level1">
-<h1 class="page-header" data-toc-text="0.4-0">
-<a href="#sarima-04-0" class="anchor"></a>sarima 0.4-0<small> Unreleased </small>
+    <div id="sarima-04-3-cran" class="section level1">
+<h1 class="page-header" data-toc-text="0.4-3">
+<a href="#sarima-04-3-cran" class="anchor"></a>sarima 0.4-3 (CRAN)<small> 2017-02-06 </small>
 </h1>
 <ul>
-<li>first version for CRAN.</li>
+<li>first CRAN version.</li>
 </ul>
 </div>
     <div id="sarima-03-6" class="section level1">
