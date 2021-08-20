@@ -1,4 +1,4 @@
-# sarima 0.8.5
+# sarima 0.8.5 (CRAN)
 
 - new `tsdiag` method for class `Sarima` (the result of `sarima()`). The method
   can be called also directly on the output from base R's `arima()` with
@@ -6,11 +6,11 @@
   portmanteau tests (including Ljung-Box, Li-McLeod and Box-Pierce), plots of
   autocorrelations and partial autocorrelations of the residuals, ability to
   control which graphs to be produced (including interactively), and their
-  layout. The computed results are returned (invisibly).  
+  layout. The computed results are returned (invisibly).  The default layout of
+  the graphs is similar to `stats::tsdiag()` (but with adjusted d.f.).
 
   The method always makes a correction of the degrees of freedom of the
-  portmanteau tests.  By default is similar to `stats::tsdiag()` (but with
-  adjusted d.f.).
+  portmanteau tests.  
 
 - github repository housekeeping - switched from TravisCI to Github actions.
 
@@ -86,13 +86,14 @@ Error in UseMethod("replay_html", x) :
   is "Rossignol2011".
 
 
-# sarima 0.7-6 (CRAN)
+# sarima 0.7.6 (CRAN)
 
 * updated Makevars and Makevars.win to deal with a NOTE from recent tightening
   of checks on CRAN (see
   https://stat.ethz.ch/pipermail/r-package-devel/2018q3/003030.html). 
 
-# sarima 0.7-5
+
+# sarima 0.7.5
 
 * `NEWS` becomes `NEWS.md` and uses markdown syntax. The style is loosely based
   on http://style.tidyverse.org/news.html).
@@ -102,7 +103,8 @@ Error in UseMethod("replay_html", x) :
 
   * Import package *numDeriv* (for `hessian()`).
 
-# sarima 0.7-4
+
+# sarima 0.7.4
 
 * dealt with 'valgrind' warnings (had missed one uninitialised warning).
 
@@ -111,13 +113,12 @@ Error in UseMethod("replay_html", x) :
      Cameron Doyle for reporting this).
 
 
-# sarima 0.7-3 (CRAN)
+# sarima 0.7.3 (CRAN)
 
 * dealt with 'valgrind' warnings.
 
 
-
-# sarima 0.7-2 (CRAN)
+# sarima 0.7.2 (CRAN)
 
 * this is an emergency release to avoid the package being archived on CRAN
      due to the archival of a dependency.
@@ -136,7 +137,6 @@ Error in UseMethod("replay_html", x) :
 * removed package 'FKF' from Imports, since it has been archived on CRAN.
      
    
-
 # sarima 0.7-0 - 0.7-1
 
 * merged branch models with master.
@@ -320,6 +320,7 @@ Changes in branch 'models'
 
 * increasing the version number before some streamlining of class SarimaModel.
 
+
 # sarima 0.4-5 (CRAN)
 
 * moved "Lagged" to a separate package, "lagged".
@@ -329,17 +330,17 @@ Changes in branch 'models'
 * new vignette based on example in Chapter 7 of James Proberts' MMath
      project.
 
-* first submission to CRAN.
 
+# sarima 0.4-3 (CRAN)
 
-# sarima 0.4-0
+* first CRAN version.
 
-* first version for CRAN.
 
 # sarima 0.3-6
 
 * white noise tests based on acf and pacf and  corresponding plots.
 * vignette.
+
 
 # sarima 0.3-5
 
@@ -347,15 +348,18 @@ Changes in branch 'models'
      "vector", now work only if "vector" is of length one or multiple of the
      length of e1@data has the same length as the vector.
 
+
 # sarima 0.3-4
 
 * removed some old commented out code from sarima.org to reduce clutter.
 * extensive changes and consolidation.
 
+
 # sarima 0.3-3
 
 * streamlined SARIMA models and the functions based on old code.
      Keeping the old code (commented out) for reference.
+
 
 # sarima 0.3-2
 
@@ -364,16 +368,19 @@ Changes in branch 'models'
 * passes 'R CMD check'. Most classes have only fake documentation
      in VirtualMonicFilter-class.Rd.
 
+
 # sarima 0.3-0
 
 * switched to package PolynomF (from polynom).
 * new classes for models, including ARMA and SARIMA.
 * R CMD check passes 9only a WARNING for undocumented objects and S$ methods.
 
+
 # sarima 0.2-x
 
 * added new classes, substantial extension.
 * renamed sarima.sim() to sim_sarima()
+
 
 # sarima 0.1-0
 
