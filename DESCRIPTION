@@ -32,7 +32,7 @@ Imports:
     Rdpack,
     KFAS,
     FKF,
-    Rcpp (>= 0.12.14),
+    Rcpp (>= 0.12.14), 
     numDeriv,
     dplyr
 Suggests:
@@ -63,3 +63,6 @@ Collate:
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 7.1.1
 NeedsCompilation: yes
+
+
+

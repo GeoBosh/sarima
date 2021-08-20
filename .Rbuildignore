@@ -1,5 +1,6 @@
 .rsync_exclude
 _pkgdown.yml
+^revdep/
 ^docs/
 TODO
 CHANGES
