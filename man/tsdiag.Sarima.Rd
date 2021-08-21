@@ -49,17 +49,25 @@
   positive integers specifying which plots to consider. Currently the
   following options are available:
   \Sexpr[stage=build,results=rd]{paste0("\\\\tabular{rl}{", paste0(1:length(sarima:::.tsdiag_choices),  " \\\\tab ", sarima:::.tsdiag_choices, collapse = " \\\\cr\n "), "}\n")}
-  The default is \code{plot = 1:3}.
+  The default is \code{plot = 1:3}, which produces a plot similar to the
+  one from \code{stats::tsdiag} (but with adjusted d.f., see below). 
+
   If \code{plot} is \code{TRUE}, you probably need also \code{ask = TRUE}.
   
   The method always makes a correction of the degrees of freedom of the
-  portmanteau tests.  The default graph is similar to \code{stats::tsdiag} 
-  (but with adjusted d.f.).
+  portmanteau tests (roughly, subtracting the number of estimated ARMA
+  parameters). Note that \code{stats::tsdiag} doesn't do that. 
+
+  In interactive sessions, if the number of requested graphs (as
+  specified by argument \code{plot}) is larger than the number of graphs
+  specified by the layout (by default 3), the function makes the first
+  graph and then presents a menu of the requested plots. 
 
   Argument \code{layout} can be used to change the layout of the plot,
-  for example to put two graphs per plot. Currently it should be a list
-  of arguments for \code{\link[graphics]{layout}}. don't call
-  \code{layout} youself, as that will change the graphics device prematurely.
+  for example to put two graphs per plot, see the examples. Currently it
+  should be a list of arguments for \code{\link[graphics]{layout}}, see \code{?layout}.
+  Don't call \code{layout} youself, as that will change the graphics
+  device prematurely.
   
   The computed results are returned (invisibly).
 }
@@ -99,6 +107,17 @@ tsdiag.Sarima(ap.arima)
 tsdiag.Sarima(ap.arima, plot = c(1:2,4))
 ## call R's tsdiag method, for comparison:
 tsdiag(ap.arima, plot = c(1:2,4))
+
+## plot only acf an p-values
+tsdiag.Sarima(ap.arima, plot = c(2:3), layout = list(matrix(1:2, nrow = 2)))
+
+## plot only acf an p-values
+tsdiag.Sarima(ap.arima, plot = c(2:4), layout = list(matrix(1:2, nrow = 2)))
+
+
+## plot rsid, acf, and p-values, leaving half the space for residuals
+tsdiag.Sarima(ap.arima, plot = c(1:3), layout = list(matrix(1:3, nrow = 3),
+                                                     heights = c(1,2,2)))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

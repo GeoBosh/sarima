@@ -135,8 +135,7 @@ expect_warning(sarima(y ~ 1 + t| ar(2, c(0.5, -0.8), atanh.tr = FALSE) + ma(2, c
     tsdiag(ap.baseA)
     ## apply the tsdiag method on objects from arima()
     tsdiag.Sarima(ap.arima)
-    ## use Li-McLeod test instead of Ljung-Box
-    tsdiag.Sarima(ap.arima, plot = c(1:2,4))
+    tsdiag.Sarima(ap.arima, plot = c(1:6))
 
 
     ap2.arima <- arima(log(AirPassengers), order = c(0,0,1), seasonal = c(0,1,1))

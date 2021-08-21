@@ -700,7 +700,7 @@ tsdiag.Sarima <- function(object, gof.lag = NULL, ask = FALSE, ..., plot = 1:3, 
                 break
             ## TODO: argument 'ask' could be used here to present a menu or just
             ##       plot the next plot in choices.
-            if(ask || length(choices) > n_per_page){
+            if(interactive() && (ask || length(choices) > n_per_page)){
                 ch_index <- menu(choices, title = choice_title)
                 choice <- chnum[ch_index]
             }else{
