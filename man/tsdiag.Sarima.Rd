@@ -112,7 +112,7 @@ tsdiag(ap.arima, plot = c(1:2,4))
 tsdiag.Sarima(ap.arima, plot = c(2:3), layout = list(matrix(1:2, nrow = 2)))
 
 ## plot only acf an p-values
-tsdiag.Sarima(ap.arima, plot = c(2:4), layout = list(matrix(1:2, nrow = 2)))
+tsdiag.Sarima(ap.arima, plot = c(2:3), layout = list(matrix(1:2, nrow = 2)))
 
 
 ## plot rsid, acf, and p-values, leaving half the space for residuals
