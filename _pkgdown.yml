@@ -1,3 +1,5 @@
+figures:
+    dev: grDevices::png
 
 reference:
   - title: "sarima overview"
