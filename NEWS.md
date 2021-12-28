@@ -2,6 +2,9 @@
 
 - changed a doi to new-style JSS format.
 
+- the pkgdown site now has a `Search` button on the navigation bar.  This is a
+  consequence of switching the site to Bootstrap 5.
+
 
 
 # sarima 0.8.5 (CRAN)

@@ -2,6 +2,9 @@ url: https://geobosh.github.io/sarima
 
 template:
   bootstrap: 5
+  
+search:
+  exclude: ['news/index.html']
 
 reference:
   - title: "sarima overview"
