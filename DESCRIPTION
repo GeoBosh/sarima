@@ -18,7 +18,7 @@ Description: Functions, classes and methods for time series modelling with ARIMA
     functionality.  Function sarima() fits extended multiplicative seasonal
     ARIMA models with trends, exogenous variables and arbitrary roots on the
     unit circle, which can be fixed or estimated.
-URL: https://github.com/GeoBosh/sarima https://geobosh.github.io/sarima/
+URL: https://github.com/GeoBosh/sarima https://geobosh.github.io/sarima
 BugReports: https://github.com/GeoBosh/sarima/issues
 Depends:
     R (>= 2.10),
