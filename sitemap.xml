@@ -1,162 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>https://geobosh.github.io/sarima/404.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>https://geobosh.github.io/sarima/authors.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>https://geobosh.github.io/sarima/index.html</loc>
   </url>
   <url>
-    <loc>/news/index.html</loc>
+    <loc>https://geobosh.github.io/sarima/news/index.html</loc>
   </url>
   <url>
-    <loc>/reference/ArmaModel-class.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/ArmaModel-class.html</loc>
   </url>
   <url>
-    <loc>/reference/ArmaModel.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/ArmaModel.html</loc>
   </url>
   <url>
-    <loc>/reference/InterceptSpec-class.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/InterceptSpec-class.html</loc>
   </url>
   <url>
-    <loc>/reference/SarimaModel-class.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/SarimaModel-class.html</loc>
   </url>
   <url>
-    <loc>/reference/VirtualMonicFilter-class.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/VirtualMonicFilter-class.html</loc>
   </url>
   <url>
-    <loc>/reference/acfGarchTest.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/acfGarchTest.html</loc>
   </url>
   <url>
-    <loc>/reference/acfIidTest.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/acfIidTest.html</loc>
   </url>
   <url>
-    <loc>/reference/acfMaTest.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/acfMaTest.html</loc>
   </url>
   <url>
-    <loc>/reference/arma_Q0Gardner.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/arma_Q0Gardner.html</loc>
   </url>
   <url>
-    <loc>/reference/arma_Q0gnb.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/arma_Q0gnb.html</loc>
   </url>
   <url>
-    <loc>/reference/armaccf_xe.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/armaccf_xe.html</loc>
   </url>
   <url>
-    <loc>/reference/autocorrelations-methods.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/autocorrelations-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/autocorrelations.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/autocorrelations.html</loc>
   </url>
   <url>
-    <loc>/reference/autocovariances-methods.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/autocovariances-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/coerce-methods.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/coerce-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/filterCoef-methods.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/filterCoef-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/filterCoef.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/filterCoef.html</loc>
   </url>
   <url>
-    <loc>/reference/filterOrder-methods.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/filterOrder-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/filterPoly-methods.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/filterPoly-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/filterPolyCoef-methods.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/filterPolyCoef-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/fun.forecast.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/fun.forecast.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/isStationaryModel.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/isStationaryModel.html</loc>
   </url>
   <url>
-    <loc>/reference/modelCenter.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/modelCenter.html</loc>
   </url>
   <url>
-    <loc>/reference/modelCoef-methods.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/modelCoef-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/modelCoef.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/modelCoef.html</loc>
   </url>
   <url>
-    <loc>/reference/modelIntercept.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/modelIntercept.html</loc>
   </url>
   <url>
-    <loc>/reference/modelOrder-methods.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/modelOrder-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/modelOrder.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/modelOrder.html</loc>
   </url>
   <url>
-    <loc>/reference/modelPoly-methods.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/modelPoly-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/modelPolyCoef-methods.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/modelPolyCoef-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/nSeasons.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/nSeasons.html</loc>
   </url>
   <url>
-    <loc>/reference/nUnitRoots.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/nUnitRoots.html</loc>
   </url>
   <url>
-    <loc>/reference/nvarOfAcfKP.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/nvarOfAcfKP.html</loc>
   </url>
   <url>
-    <loc>/reference/nvcovOfAcf.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/nvcovOfAcf.html</loc>
   </url>
   <url>
-    <loc>/reference/partialAutocorrelations-methods.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/partialAutocorrelations-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/periodogram.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/periodogram.html</loc>
   </url>
   <url>
-    <loc>/reference/plot-methods.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/plot-methods.html</loc>
   </url>
   <url>
-    <loc>/reference/prepareSimSarima.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/prepareSimSarima.html</loc>
   </url>
   <url>
-    <loc>/reference/rgarch1p1.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/rgarch1p1.html</loc>
   </url>
   <url>
-    <loc>/reference/sarima-package.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/sarima-package.html</loc>
   </url>
   <url>
-    <loc>/reference/sarima.f.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/sarima.f.html</loc>
   </url>
   <url>
-    <loc>/reference/sarima.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/sarima.html</loc>
   </url>
   <url>
-    <loc>/reference/sigmaSq.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/sigmaSq.html</loc>
   </url>
   <url>
-    <loc>/reference/sim_sarima.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/sim_sarima.html</loc>
   </url>
   <url>
-    <loc>/reference/summary.SarimaModel.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/summary.SarimaModel.html</loc>
   </url>
   <url>
-    <loc>/reference/tsdiag.Sarima.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/tsdiag.Sarima.html</loc>
   </url>
   <url>
-    <loc>/reference/whiteNoiseTest.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/whiteNoiseTest.html</loc>
   </url>
   <url>
-    <loc>/reference/xarmaFilter.html</loc>
+    <loc>https://geobosh.github.io/sarima/reference/xarmaFilter.html</loc>
   </url>
 </urlset>
