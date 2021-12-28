@@ -130,14 +130,14 @@ Generic functions for computation of autocorrelations,
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">autocorrelations</span><span class="op">(</span><span class="va">v1</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "SampleAutocorrelations"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_0        Lag_1        Lag_2        Lag_3        Lag_4        Lag_5 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.000000000  0.071663769  0.048659209 -0.058743280 -0.005963299 -0.116995968 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_6        Lag_7        Lag_8        Lag_9       Lag_10       Lag_11 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.084424565  0.023398035  0.012029517 -0.148496245 -0.019922004  0.112806586 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       Lag_12       Lag_13       Lag_14       Lag_15       Lag_16       Lag_17 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.009333223  0.155981077  0.011980841 -0.172140255 -0.101078610  0.121509913 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       Lag_18       Lag_19       Lag_20 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.035487249  0.016045368  0.018035738 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Lag_0       Lag_1       Lag_2       Lag_3       Lag_4       Lag_5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.00000000 -0.21347213  0.21966170 -0.16715672  0.07076749 -0.12263808 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Lag_6       Lag_7       Lag_8       Lag_9      Lag_10      Lag_11 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.15701703 -0.04859005 -0.02745794  0.12250213 -0.06896876 -0.04094463 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Lag_12      Lag_13      Lag_14      Lag_15      Lag_16      Lag_17 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.08388102  0.03333861 -0.03633249  0.11667025 -0.04704418 -0.06321224 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Lag_18      Lag_19      Lag_20 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.07037730 -0.05285523  0.05829832 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot n:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 100</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot varnames:   &lt;not set&gt;</span>
@@ -145,36 +145,32 @@ Generic functions for computation of autocorrelations,
 <span class="r-in"><span class="va">v1.acf</span> <span class="op">&lt;-</span> <span class="fu">autocorrelations</span><span class="op">(</span><span class="va">v1</span>, maxlag <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">v1.acf</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span> <span class="co"># drop lag zero value (and the class)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  0.071663769  0.048659209 -0.058743280 -0.005963299 -0.116995968</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6]  0.084424565  0.023398035  0.012029517 -0.148496245 -0.019922004</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] -0.21347213  0.21966170 -0.16715672  0.07076749 -0.12263808  0.15701703</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] -0.04859005 -0.02745794  0.12250213 -0.06896876</span>
 <span class="r-in"><span class="fu">autocorrelations</span><span class="op">(</span><span class="va">v1</span>, maxlag <span class="op">=</span> <span class="fl">10</span>, lag_0 <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co"># same</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  0.071663769  0.048659209 -0.058743280 -0.005963299 -0.116995968</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6]  0.084424565  0.023398035  0.012029517 -0.148496245 -0.019922004</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] -0.21347213  0.21966170 -0.16715672  0.07076749 -0.12263808  0.15701703</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] -0.04859005 -0.02745794  0.12250213 -0.06896876</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">partialAutocorrelations</span><span class="op">(</span><span class="va">v1</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "SamplePartialAutocorrelations"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         Lag_0         Lag_1         Lag_2         Lag_3         Lag_4 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.0000000000  0.0716637688  0.0437481907 -0.0656753272  0.0005966234 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         Lag_5         Lag_6         Lag_7         Lag_8         Lag_9 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1118487791  0.0994443764  0.0203871673 -0.0134815041 -0.1450361124 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_10        Lag_11        Lag_12        Lag_13        Lag_14 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0086132374  0.1591737755 -0.0282810821  0.1452485090 -0.0421725756 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_15        Lag_16        Lag_17        Lag_18        Lag_19 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1796076935 -0.0160441708  0.1476790609  0.0274541090 -0.0596472995 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_20 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0157266973 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Lag_0       Lag_1       Lag_2       Lag_3       Lag_4       Lag_5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.00000000 -0.21347213  0.18240355 -0.09741266 -0.01374766 -0.07057186 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Lag_6       Lag_7       Lag_8       Lag_9      Lag_10      Lag_11 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.11205491  0.03234378 -0.10695311  0.15268986 -0.01823565 -0.11286500 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Lag_12      Lag_13      Lag_14      Lag_15      Lag_16      Lag_17 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.08353242  0.02366843  0.02635766  0.04105708 -0.01264551 -0.08860859 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Lag_18      Lag_19      Lag_20 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.08549279 -0.01827520  0.02882597 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot n:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 100</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot varnames:   &lt;not set&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot objectname:  x</span>
 <span class="r-in"><span class="fu">partialAutocorrelations</span><span class="op">(</span><span class="va">v1</span>, maxlag <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "SamplePartialAutocorrelations"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         Lag_0         Lag_1         Lag_2         Lag_3         Lag_4 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.0000000000  0.0716637688  0.0437481907 -0.0656753272  0.0005966234 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         Lag_5         Lag_6         Lag_7         Lag_8         Lag_9 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1118487791  0.0994443764  0.0203871673 -0.0134815041 -0.1450361124 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_10 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0086132374 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Lag_0       Lag_1       Lag_2       Lag_3       Lag_4       Lag_5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.00000000 -0.21347213  0.18240355 -0.09741266 -0.01374766 -0.07057186 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Lag_6       Lag_7       Lag_8       Lag_9      Lag_10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.11205491  0.03234378 -0.10695311  0.15268986 -0.01823565 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot n:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 100</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot varnames:   &lt;not set&gt;</span>
@@ -183,50 +179,48 @@ Generic functions for computation of autocorrelations,
 <span class="r-in"><span class="co">## compute 2nd order properties from raw data</span></span>
 <span class="r-in"><span class="fu">autocovariances</span><span class="op">(</span><span class="va">v1</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "SampleAutocovariances"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_0        Lag_1        Lag_2        Lag_3        Lag_4        Lag_5 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.997508668  0.071485231  0.048537983 -0.058596931 -0.005948442 -0.116704492 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_6        Lag_7        Lag_8        Lag_9       Lag_10       Lag_11 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.084214235  0.023339743  0.011999548 -0.148126291 -0.019872371  0.112525548 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       Lag_12       Lag_13       Lag_14       Lag_15       Lag_16       Lag_17 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.009309970  0.155592476  0.011950993 -0.171711396 -0.100826790  0.121207192 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       Lag_18       Lag_19       Lag_20 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.035398839  0.016005394  0.017990805 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Lag_0       Lag_1       Lag_2       Lag_3       Lag_4       Lag_5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.84881452 -0.18119825  0.18645204 -0.14188505  0.06006848 -0.10409698 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Lag_6       Lag_7       Lag_8       Lag_9      Lag_10      Lag_11 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.13327833 -0.04124394 -0.02330670  0.10398159 -0.05854169 -0.03475439 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Lag_12      Lag_13      Lag_14      Lag_15      Lag_16      Lag_17 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.07119943  0.02829830 -0.03083955  0.09903140 -0.03993178 -0.05365546 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Lag_18      Lag_19      Lag_20 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.05973727 -0.04486429  0.04948446 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot n:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 100</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot varnames:   &lt;not set&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot objectname:  x</span>
 <span class="r-in"><span class="fu">autocovariances</span><span class="op">(</span><span class="va">v1</span>, maxlag <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "SampleAutocovariances"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_0        Lag_1        Lag_2        Lag_3        Lag_4        Lag_5 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.997508668  0.071485231  0.048537983 -0.058596931 -0.005948442 -0.116704492 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_6        Lag_7        Lag_8        Lag_9       Lag_10 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.084214235  0.023339743  0.011999548 -0.148126291 -0.019872371 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Lag_0       Lag_1       Lag_2       Lag_3       Lag_4       Lag_5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.84881452 -0.18119825  0.18645204 -0.14188505  0.06006848 -0.10409698 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Lag_6       Lag_7       Lag_8       Lag_9      Lag_10 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.13327833 -0.04124394 -0.02330670  0.10398159 -0.05854169 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot n:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 100</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot varnames:   &lt;not set&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot objectname:  x</span>
 <span class="r-in"><span class="fu">partialAutocovariances</span><span class="op">(</span><span class="va">v1</span>, maxlag <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "SamplePartialAutocovariances"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             0             1             2             3             4 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.9975086685  0.0711181042  0.0433319895 -0.0647699418  0.0005883982 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             5             6 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1089268626  0.0958887773 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           0           1           2           3           4           5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.84881452 -0.17294098  0.14285476 -0.07556767 -0.01066270 -0.05446303 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           6 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.08539127 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot n:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 100</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot varnames:   &lt;not set&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot objectname:  x</span>
 <span class="r-in"><span class="fu">partialAutocovariances</span><span class="op">(</span><span class="va">v1</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "SamplePartialAutocovariances"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             0             1             2             3             4 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.9975086685  0.0711181042  0.0433319895 -0.0647699418  0.0005883982 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             5             6             7             8             9 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1089268626  0.0958887773  0.0196500605 -0.0129917129 -0.1368268000 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            10            11            12            13            14 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0081251094  0.1463487821 -0.0259816138  0.1306235204 -0.0378587905 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            15            16            17            18            19 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.1560345312 -0.0139348164  0.1254661334  0.0233070594 -0.0504571861 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            20 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0133003277 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            0            1            2            3            4            5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.848814522 -0.172940978  0.142854762 -0.075567672 -0.010662702 -0.054463025 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            6            7            8            9           10           11 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.085391266  0.024621740 -0.080486844  0.112226787 -0.013398713 -0.081871621 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           12           13           14           15           16           17 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.060171128  0.017039595  0.018962467  0.029487860 -0.009080759 -0.063130365 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           18           19           20 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.060465277 -0.012920922  0.020363593 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot n:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 100</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot varnames:   &lt;not set&gt;</span>
@@ -234,7 +228,7 @@ Generic functions for computation of autocorrelations,
 <span class="r-in"><span class="fu">partialVariances</span><span class="op">(</span><span class="va">v1</span>, maxlag <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "SamplePartialVariances"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         0         1         2         3         4         5         6 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.9975087 0.9923858 0.9904864 0.9862142 0.9862139 0.9738762 0.9642453 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.8488145 0.8101337 0.7831797 0.7757480 0.7756014 0.7717386 0.7620484 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot n:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 100</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot varnames:   &lt;not set&gt;</span>

@@ -127,10 +127,10 @@ Chapman &amp; Hall/CRC Press.</p>
 <span class="r-in"><span class="va">x.iid</span> <span class="op">&lt;-</span> <span class="fu">whiteNoiseTest</span><span class="op">(</span><span class="va">x.acf</span>, h0 <span class="op">=</span> <span class="st">"iid"</span>, nlags <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">20</span><span class="op">)</span>, x <span class="op">=</span> <span class="va">x</span>, method <span class="op">=</span> <span class="st">"LiMcLeod"</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">x.iid</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         ChiSq DF       pvalue</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 26.64226  5 6.695955e-05</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 36.62510 10 6.569627e-05</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 93.70736 20 1.654674e-11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         ChiSq DF      pvalue</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 16.17867  5 0.006352048</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 23.12134 10 0.010307433</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 31.68900 20 0.046727063</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"method")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "LiMcLeod"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -163,10 +163,10 @@ Chapman &amp; Hall/CRC Press.</p>
 <span class="r-in"><span class="va">x.iid2</span> <span class="op">&lt;-</span> <span class="fu">whiteNoiseTest</span><span class="op">(</span><span class="va">x.acf</span>, h0 <span class="op">=</span> <span class="st">"iid"</span>, nlags <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">20</span><span class="op">)</span>, x <span class="op">=</span> <span class="va">x</span>, method <span class="op">=</span> <span class="st">"LjungBox"</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">x.iid2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         ChiSq DF       pvalue</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 26.67047  5 6.611921e-05</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 36.66601 10 6.463693e-05</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 93.89855 20 1.530964e-11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         ChiSq DF      pvalue</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 16.18960  5 0.006323094</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 23.13830 10 0.010247448</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 31.70625 20 0.046530690</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"method")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "LjungBox"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -199,33 +199,33 @@ Chapman &amp; Hall/CRC Press.</p>
 <span class="r-in"><span class="va">x.garch</span> <span class="op">&lt;-</span> <span class="fu">whiteNoiseTest</span><span class="op">(</span><span class="va">x.acf</span>, h0 <span class="op">=</span> <span class="st">"garch"</span>, nlags <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">20</span><span class="op">)</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">x.garch</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       h         Q       pval</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  5  5.433613 0.36528034</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 10  7.398133 0.68739961</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 20 30.622710 0.06037244</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       h         Q      pval</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  5  7.898616 0.1619123</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 10 12.439861 0.2566959</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 20 22.178949 0.3308799</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $ci</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               int           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] -0.06651728 0.06651728</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] -0.05862294 0.05862294</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] -0.06293622 0.06293622</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] -0.06454720 0.06454720</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] -0.05879838 0.05879838</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] -0.04945801 0.04945801</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] -0.05456194 0.05456194</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] -0.05427709 0.05427709</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] -0.05380155 0.05380155</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] -0.04949370 0.04949370</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11,] -0.04752488 0.04752488</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [12,] -0.04934762 0.04934762</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13,] -0.04628681 0.04628681</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [14,] -0.04219439 0.04219439</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [15,] -0.04332994 0.04332994</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16,] -0.04320852 0.04320852</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [17,] -0.03684342 0.03684342</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [18,] -0.03822076 0.03822076</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19,] -0.03738820 0.03738820</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [20,] -0.03798907 0.03798907</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] -0.04154371 0.04154371</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] -0.03873026 0.03873026</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3,] -0.03989662 0.03989662</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4,] -0.03693376 0.03693376</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5,] -0.03460920 0.03460920</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6,] -0.03344428 0.03344428</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7,] -0.03429422 0.03429422</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8,] -0.03236986 0.03236986</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9,] -0.03135883 0.03135883</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10,] -0.03150492 0.03150492</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11,] -0.03099085 0.03099085</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [12,] -0.03035327 0.03035327</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13,] -0.02916692 0.02916692</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [14,] -0.02926488 0.02926488</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [15,] -0.02861963 0.02861963</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16,] -0.02909545 0.02909545</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [17,] -0.02867491 0.02867491</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [18,] -0.02837035 0.02837035</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19,] -0.02761361 0.02761361</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [20,] -0.02705961 0.02705961</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
