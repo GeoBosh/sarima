@@ -1,6 +1,6 @@
 # sarima 0.8.5.9000
 
-- 
+- changed a doi to new-style JSS format.
 
 
 
