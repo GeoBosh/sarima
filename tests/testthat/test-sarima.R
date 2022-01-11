@@ -134,6 +134,9 @@ expect_warning(sarima(y ~ 1 + t| ar(2, c(0.5, -0.8), atanh.tr = FALSE) + ma(2, c
 
     tsdiag(ap.baseA)
     ## apply the tsdiag method on objects from arima()
+    ## Note: interactively this willpresent a menu of choices,
+    ##       particularly annoying if running devtools::test() !!!
+    ##  TODO: make exception when in devtools::test() ?
     tsdiag.Sarima(ap.arima)
     tsdiag.Sarima(ap.arima, plot = c(1:6))
 

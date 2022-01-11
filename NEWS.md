@@ -5,6 +5,9 @@
 - the pkgdown site now has a `Search` button on the navigation bar.  This is a
   consequence of switching the site to Bootstrap 5.
 
+- in `tsdiag.Sarima()` if argument `plot` specifies only one or two plots, then
+  the window is split into 1 or 2 sub-windows even if argument `layout` is not
+  used. 
 
 
 # sarima 0.8.5 (CRAN)

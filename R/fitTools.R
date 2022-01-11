@@ -599,9 +599,10 @@ tsdiag.Sarima <- function(object, gof.lag = NULL, ask = FALSE, ..., plot = 1:3, 
     if(!isTRUE(plot)){                  # plot is typically numeric index here;
         choices <- choices[plot]        # FALSE or NULL give zero length result, so no plots
         chnum <- chnum[plot]
+#browser()
         if(anyNA(choices)){
             warning("'plot' should be TRUE/FALSE or vector of positive integers <= ",
-                    length(choices), ",\n", "ignoring non-existent values")
+                    length(.tsdiag_choices), ",\n", "ignoring non-existent values")
             chnum <- chnum[!is.na(choices)]
             choices <- choices[!is.na(choices)]
         }
@@ -613,6 +614,8 @@ tsdiag.Sarima <- function(object, gof.lag = NULL, ask = FALSE, ..., plot = 1:3, 
             # par(mfrow = c(2,1))
         n_per_page <- if(is.null(layout))
                           layout(matrix(1:3, nrow = 3))
+                          # layout(matrix(1:min(3, length(choices)), ncol = 1))
+                                        
                       else
                           ## TODO: this needs further thought!
                           do.call("layout", layout) # for the time being
