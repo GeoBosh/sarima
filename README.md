@@ -1,7 +1,7 @@
 <!-- badges: start -->
 [![CRANStatusBadge](http://www.r-pkg.org/badges/version/sarima)](https://cran.r-project.org/package=sarima)
 [![R-CMD-check](https://github.com/GeoBosh/sarima/workflows/R-CMD-check/badge.svg)](https://github.com/GeoBosh/sarima/actions)
-[![Codecov test coverage](https://codecov.io/gh/GeoBosh/sarima/branch/master/graph/badge.svg)](https://codecov.io/gh/GeoBosh/sarima?branch=master)
+[![Codecov test coverage](https://codecov.io/gh/GeoBosh/sarima/branch/master/graph/badge.svg)](https://app.codecov.io/gh/GeoBosh/sarima?branch=master)
 <!-- badges: end -->
 
 
@@ -35,13 +35,15 @@ variables and arbitrary roots on the unit circle, which can be fixed or
 estimated.
 
 Reference manuals and vignettes are available as usual from running R
-sessions. For example,
+sessions. For example, this shows the available vignettes:
 
     vignette(package = "sarima") # which vignettes are available?
-    
+
+These commands open the vignettes (the names are taken from the output of the
+command above):
+
     vignette("white_noise_tests", package = "sarima")
     vignette("garch_tests_example", package = "sarima")
-
 
 Alternatively, here are some links to online versions of the documentation:
 
@@ -52,3 +54,6 @@ Alternatively, here are some links to online versions of the documentation:
 - [vignette _Garch and white noise tests_ on CRAN](https://cran.r-project.org/package=sarima/vignettes/garch_tests_example.pdf)
 
 - [vignette _Autocorrelations and white noise tests_ on CRAN](https://cran.r-project.org/package=sarima/vignettes/white_noise_tests.pdf)
+
+The documentation is incomplete and some features are unfinished. Bug reports
+and suggestions are welcome.

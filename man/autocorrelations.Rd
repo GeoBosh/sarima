@@ -60,6 +60,12 @@ partialVariances(x, \dots)
   See the individual methods for the format of the result and further
   details.
 
+  There are plot methods for sample autocorrelations and sample partial
+  autocorrelations with overlaid significance limits under null
+  hypotheses for independence or weak white noise, see
+  \code{\link{plot-methods}} and the examples there. More details can be
+  found in the vignettes, see section \sQuote{See also} below. 
+
 }
 \value{
   an object from a class suitable for the requested property and \code{x}
@@ -72,10 +78,22 @@ partialVariances(x, \dots)
 %%%  ~~further notes~~
 %}
 \seealso{
+  \code{\link{plot-methods}} for plotting with significance limits
+  computed under strong white noise and weak white noise hypotheses;
+
+  \code{\link{autocorrelations-methods}},
+  \code{\link{partialAutocorrelations-methods}}
+  for details on individual methods;
+
+  \code{vignette("white_noise_tests", package = "sarima")} and \cr
+  \code{vignette("garch_tests_example", package = "sarima")} for
+  extensive worked examples.
+  
   \code{\link{armaccf_xe}},
   \code{\link{armaacf}}
 }
 \examples{
+set.seed(1234)
 v1 <- rnorm(100)
 autocorrelations(v1)
 v1.acf <- autocorrelations(v1, maxlag = 10)

@@ -1,8 +1,13 @@
 \name{acfGarchTest}
 \alias{acfGarchTest}
 \alias{acfWnTest}
-\title{Test for GARCH white noise}
-\description{Carry out a test for GARCH white noise}
+\title{Tests for weak white noise}
+\description{
+
+  Carry out tests for weak white noise under GARCH, GARCH-type, and
+  stochastic volatility null hypotheses.
+
+}
 \usage{
 acfGarchTest(acr, x, nlags, interval = 0.95)
 
@@ -56,10 +61,13 @@ acfWnTest(acr, x, nlags, interval = 0.95, \dots)
 
 \seealso{
   \code{\link{whiteNoiseTest}},
-  \code{\link{acfIidTest}}
+  \code{\link{acfIidTest}};
+
+  \code{\link{plot-methods}} for graphical representations of results
 }
 \examples{
 ## see also the examples for \code{\link{whiteNoiseTest}}
+set.seed(1234)
 n <- 5000
 x <- sarima:::rgarch1p1(n, alpha = 0.3, beta = 0.55, omega = 1, n.skip = 100)
 x.acf <- autocorrelations(x)

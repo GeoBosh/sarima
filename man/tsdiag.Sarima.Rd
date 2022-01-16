@@ -13,12 +13,21 @@
 }
 \usage{
 \method{tsdiag}{Sarima}(object, gof.lag = NULL, ask = FALSE, \dots, plot = 1:3, layout = NULL)
+
+# if 'object' is not produced by sarima(), use the full name,
+# 'tsdiag.Sarima()', in the call. The arguments are the same.
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{object}{
-    fitted (seasonal) ARIMA model, currently the output of \code{sarima}
-    or \code{stats::arima}.
+    
+    fitted (seasonal) ARIMA model. currently the output of
+    \code{sarima}, \code{stats::arima} or compatible (e.g.,
+    \code{forecast::Arima} and \code{forecast::auto.arima}).  If
+    \code{object} is not from \code{sarima}, use the full name,
+    \code{tsdiag.Sarima}, of the method when calling it, see the
+    examples. 
+
   }
   \item{gof.lag}{maximal lag for portmanteau tests.}
   \item{ask}{if \code{TRUE} present a menu of available plots, see Details.}
@@ -45,19 +54,23 @@
   autocorrelations of the residuals, ability to control which graphs are
   produced (including interactively), as well as their layout.
 
+  The method always makes a correction of the degrees of freedom of the
+  portmanteau tests (roughly, subtracting the number of estimated ARMA
+  parameters). Note that \code{stats::tsdiag} doesn't do that.
+
   \code{plot} can be \code{TRUE} to ask for all plots or a vector of
   positive integers specifying which plots to consider. Currently the
   following options are available:
   \Sexpr[stage=build,results=rd]{paste0("\\\\tabular{rl}{", paste0(1:length(sarima:::.tsdiag_choices),  " \\\\tab ", sarima:::.tsdiag_choices, collapse = " \\\\cr\n "), "}\n")}
   The default is \code{plot = 1:3}, which produces a plot similar to the
-  one from \code{stats::tsdiag} (but with adjusted d.f., see below). 
-
+  one from \code{stats::tsdiag} (but with adjusted d.f., see above). 
   If \code{plot} is \code{TRUE}, you probably need also \code{ask = TRUE}.
-  
-  The method always makes a correction of the degrees of freedom of the
-  portmanteau tests (roughly, subtracting the number of estimated ARMA
-  parameters). Note that \code{stats::tsdiag} doesn't do that. 
 
+  If argument \code{plot} is of length two the graphics window is split
+  into 2 equal subwindows. Argument \code{layout} can still be used to
+  change this.  If argument \code{plot} is of length one the graphics
+  window is not split at all.
+  
   In interactive sessions, if the number of requested graphs (as
   specified by argument \code{plot}) is larger than the number of graphs
   specified by the layout (by default 3), the function makes the first
@@ -69,7 +82,8 @@
   Don't call \code{layout} youself, as that will change the graphics
   device prematurely.
   
-  The computed results are returned (invisibly).
+  The computed results are returned (invisibly). This is another
+  difference from \code{stats::tsdiag} which doesn't return them.
 }
 \value{
   a list with components:
@@ -112,7 +126,9 @@ tsdiag(ap.arima, plot = c(1:2,4))
 tsdiag.Sarima(ap.arima, plot = c(2:3), layout = list(matrix(1:2, nrow = 2)))
 
 ## plot only acf an p-values
-tsdiag.Sarima(ap.arima, plot = c(2:3), layout = list(matrix(1:2, nrow = 2)))
+tsd <- tsdiag.Sarima(ap.arima, plot = c(2:3), layout = list(matrix(1:2, nrow = 2)))
+## the results can be used for further calculations:
+head(tsd$LjungBox$test, 4)
 
 ## plot resid, acf, and p-values, leaving half the space for residuals
 # tsdiag.Sarima(ap.arima, plot = c(1:3), layout = list(matrix(1:3, nrow = 3),

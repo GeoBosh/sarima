@@ -19,15 +19,13 @@ reference:
       # - print(<simSarimaFun>)
   - title: "Functions for properties of models and time series"
     contents: 
-      - matches("autocorrelations")
-      - matches("autocovariances")
-      - armaccf_xe
-      - armaacf
       - autocovariances
       - autocorrelations
       - partialAutocorrelations
       - partialAutocovariances
       - partialVariances
+      - armaccf_xe
+      - armaacf
       - filterCoef
       - filterOrder
       - filterPoly
@@ -53,14 +51,10 @@ reference:
       - nvcovOfAcf
       - nvcovOfAcfBD
       - acfOfSquaredArmaModel
-  - title: "Classes"
-    contents:
-      - ArmaModel
-      - matches("-class$")
   - title: "Methods"
     contents:
-      # - "autocorrelations-methods"
-      # - "autocovariances-methods"
+      - "autocorrelations-methods"
+      - "autocovariances-methods"
       - "coerce-methods"
       - "filterCoef-methods"
       - "filterOrder-methods"
@@ -73,6 +67,10 @@ reference:
       - "partialAutocorrelations-methods"
       - "plot-methods"
       - matches("summary")
+  - title: "Classes"
+    contents:
+      - ArmaModel
+      - matches("-class$")
   - title: "Initialisation for Kalman filter"
     contents: 
       - arma_Q0naive

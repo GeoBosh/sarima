@@ -105,9 +105,13 @@ acfIidTest(acf, n, npar = 0, nlags = npar + 1,
 \seealso{
   \code{\link{whiteNoiseTest}},
   \code{\link{acfGarchTest}},
-  \code{\link{acfMaTest}}
+  \code{\link{acfMaTest}};
+
+
+  \code{\link{plot-methods}} for graphical representations of results
 }
 \examples{
+set.seed(1234)
 ts1 <- rnorm(100)
 
 a1 <- drop(acf(ts1)$acf)
