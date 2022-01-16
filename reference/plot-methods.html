@@ -21,7 +21,7 @@ Plot methods in package sarima."><!-- mathjax --><script src="https://cdnjs.clou
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
@@ -64,14 +64,34 @@ Plot methods in package sarima."><!-- mathjax --><script src="https://cdnjs.clou
 
 
 <dt><code>signature(x = "SampleAutocorrelations", y = "missing")</code></dt>
-<dd><p><!-- %%  ~~describe this method here~~ --></p></dd>
+<dd>
+
+<p>plots the sample autocorrelations with (individual) rejection limits
+  computed under the null hypothesis of i.i.d. (strong white noise) If
+  argument <code>data</code> is provided, it should be the time series from
+  which the autocorrelations were computed. In this case rejection
+  limits for null hypothesis that the time series is (garch) weak white
+  noise are provided, as well.</p>
+<p>Additional arguments can be supplied, see <code><a href="whiteNoiseTest.html">whiteNoiseTest</a></code>
+  the examples, and the vignettes.</p></dd>
 
 
-<dt><code>signature(x = "SamplePartialAutocorrelations", y = "missing")</code></dt>
-<dd><p><!-- %%  ~~describe this method here~~ --></p></dd>
+<dt><code>signature(x = "SamplePartialAutocorrelations", y =
+    "missing")</code></dt>
+<dd>
+  
+<p>plots the sample partial autocorrelations with rejection limits for
+    the hypotheses and controlling arguments as for <code>"SampleAutocorrelations"</code>.</p></dd>
 
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p><code><a href="whiteNoiseTest.html">whiteNoiseTest</a></code> for the computations for the rejection
+  levels;</p>
+  
+</div>
+    </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p>Georgi N. Boshnakov</p>
@@ -79,27 +99,28 @@ Plot methods in package sarima."><!-- mathjax --><script src="https://cdnjs.clou
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">5000</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">5000</span></span>
 <span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">sarima</span><span class="fu">:::</span><span class="fu"><a href="rgarch1p1.html">rgarch1p1</a></span><span class="op">(</span><span class="va">n</span>, alpha <span class="op">=</span> <span class="fl">0.3</span>, beta <span class="op">=</span> <span class="fl">0.55</span>, omega <span class="op">=</span> <span class="fl">1</span>, n.skip <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">x.acf</span> <span class="op">&lt;-</span> <span class="fu"><a href="autocorrelations.html">autocorrelations</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">x.acf</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "SampleAutocorrelations"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         Lag_0         Lag_1         Lag_2         Lag_3         Lag_4 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.000000e+00 -8.100045e-03 -6.520140e-03 -2.081545e-02 -3.387859e-03 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.000000e+00  8.582362e-03 -2.018313e-02 -2.132628e-03 -3.961602e-03 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         Lag_5         Lag_6         Lag_7         Lag_8         Lag_9 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2.486664e-02 -5.281226e-05  7.727496e-03  3.387047e-03 -8.752992e-03 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -3.274167e-02 -4.079434e-02  1.854328e-02  4.641011e-03 -1.357080e-02 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_10        Lag_11        Lag_12        Lag_13        Lag_14 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.795628e-02  1.135998e-02  2.329266e-02 -9.574230e-03 -1.116910e-02 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -1.219076e-02  2.136221e-03 -1.492981e-02 -1.219485e-02 -4.381421e-02 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_15        Lag_16        Lag_17        Lag_18        Lag_19 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1.446199e-02 -6.106148e-03  7.043879e-03 -1.015652e-02  8.063133e-03 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -2.281830e-03 -1.766486e-02 -5.846757e-03  1.037726e-02 -9.286768e-05 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_20        Lag_21        Lag_22        Lag_23        Lag_24 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1.787733e-02 -1.906674e-02  9.388992e-03  1.556402e-02 -8.332076e-03 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -1.013180e-02 -1.038853e-02  1.402807e-02  2.423647e-02  1.047997e-02 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_25        Lag_26        Lag_27        Lag_28        Lag_29 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3.771732e-03  1.397359e-02  5.220020e-03 -2.312320e-03 -2.089232e-04 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7.201460e-03  8.488189e-03 -9.712715e-03  1.784192e-02 -1.952790e-02 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_30        Lag_31        Lag_32        Lag_33        Lag_34 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3.093704e-03  9.978436e-03 -6.378156e-03 -1.322972e-02  1.065309e-02 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  3.907283e-03 -3.013057e-03 -2.266969e-02 -8.177097e-03  5.453303e-03 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_35        Lag_36 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1.406288e-02  3.865687e-03 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  7.377188e-03  1.883301e-03 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot n:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot varnames:   &lt;not set&gt;</span>
@@ -108,21 +129,21 @@ Plot methods in package sarima."><!-- mathjax --><script src="https://cdnjs.clou
 <span class="r-in"><span class="va">x.pacf</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "SamplePartialAutocorrelations"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         Lag_0         Lag_1         Lag_2         Lag_3         Lag_4 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.000000e+00 -8.100045e-03 -6.586183e-03 -2.092424e-02 -3.776052e-03 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1.0000000000  0.0085823617 -0.0202582774 -0.0017828992 -0.0043383782 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         Lag_5         Lag_6         Lag_7         Lag_8         Lag_9 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  2.454365e-02 -1.255693e-04  7.906354e-03  4.536520e-03 -8.430649e-03 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0327650792 -0.0404641407  0.0178960591  0.0025478441 -0.0134144032 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_10        Lag_11        Lag_12        Lag_13        Lag_14 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1.760107e-02  1.178095e-02  2.303194e-02 -8.560929e-03 -1.008689e-02 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0132073022 -0.0006562451 -0.0160165907 -0.0104612044 -0.0454777643 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_15        Lag_16        Lag_17        Lag_18        Lag_19 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1.469792e-02 -7.184202e-03  4.921949e-03 -1.077728e-02  7.975552e-03 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0042317566 -0.0202992932 -0.0065655314  0.0070365865 -0.0043112264 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_20        Lag_21        Lag_22        Lag_23        Lag_24 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1.720202e-02 -1.918789e-02  8.040806e-03  1.521458e-02 -9.454272e-03 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.0136537970 -0.0107137774  0.0114656459  0.0228629885  0.0098952431 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_25        Lag_26        Lag_27        Lag_28        Lag_29 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  6.131992e-03  1.665518e-02  5.291320e-03 -1.876974e-03 -3.766973e-05 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0058602874  0.0053481194 -0.0098438262  0.0191055268 -0.0192762938 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_30        Lag_31        Lag_32        Lag_33        Lag_34 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  3.216597e-03  9.872142e-03 -5.248228e-03 -1.373186e-02  9.581660e-03 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0032466133 -0.0038284295 -0.0219232817 -0.0081774145  0.0051229039 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Lag_35        Lag_36 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -1.546979e-02  1.956244e-03 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.0052288057  0.0036772670 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot n:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot varnames:   &lt;not set&gt;</span>
@@ -130,9 +151,11 @@ Plot methods in package sarima."><!-- mathjax --><script src="https://cdnjs.clou
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x.acf</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="plot-methods-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span class="co">## add limits for a weak white noise test:</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x.acf</span>, data <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="plot-methods-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
+<span class="r-in"><span class="co">## similarly for pacf</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x.pacf</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="plot-methods-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x.pacf</span>, data <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
@@ -162,7 +185,7 @@ Plot methods in package sarima."><!-- mathjax --><script src="https://cdnjs.clou
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
     </footer></div>
