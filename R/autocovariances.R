@@ -1122,6 +1122,35 @@ setMethod("coef", "SampleAutocorrelations",
 
 setMethod("vcov", "SampleAutocorrelations",
           function (object, assuming = "iid", maxlag = maxLag(object), ...) {
+                  # res <- switch(assuming,
+                  #               iid = .wnacf_asycov_iid(n = object@n, maxlag = maxlag),
+                  #               garch = .wnacf_asycov_garch(maxlag = maxlag, ...),
+                  #               stop("Unknown assumption")
+                  #               )
+                  # if(is.null(names(res)))
+                  #     ## TODO: currently scalar case only;
+                  #     colnames(res) <- rownames(res) <- paste0("Lag_", 1:nrow(res))
+                  # res
+              if(inherits(assuming, "Arima")){
+                  ## todo: could get vcov of params and transform it for acf's
+                  ##       maybe have additional argument here (method?)
+                  mo <- list(ar = assuming$model$phi,
+                             ma = assuming$model$theta,
+                             sigma2 = assuming$model$sigma2 )
+                  res <- nvcovOfAcf(mo, maxlag = maxlag) / object@n
+                  res
+              }else
+                  vcovAcf(object, assuming, maxlag = maxlag, ...)
+          }
+          )
+
+setGeneric("vcovAcf", function(object, assuming, ...) stop("no suitable method"))
+
+setMethod("vcovAcf", c("SampleAutocorrelations", "character"),
+          function (object, assuming, maxlag = maxLag(object), ...) {
+              if(length(assuming) > 1)
+                  stop("'assuming' must be of length 1")
+              
               res <- switch(assuming,
                             iid = .wnacf_asycov_iid(n = object@n, maxlag = maxlag),
                             garch = .wnacf_asycov_garch(maxlag = maxlag, ...),
@@ -1134,10 +1163,62 @@ setMethod("vcov", "SampleAutocorrelations",
           }
           )
 
+setMethod("vcovAcf", c("SampleAutocorrelations", "ArmaModel"),
+          function (object, assuming, maxlag = maxLag(object), ...) {
+              res <- nvcovOfAcf(c(modelCoef(assuming), list(sigma2 = sigmaSq(assuming))), 
+                                maxlag = maxlag) / object@n
+              res
+          }
+          )
+
+se <- function (object, ...) {
+    vc <- vcov(object, ...)
+    sqrt(diag(vc))
+}
+## TODO: make S4 generic
+
+.fixed_values_under_h0 <- function(object, lags){
+    m <- length(lags)
+    if(identical(object, "iid"))
+        numeric(m)
+    else if(identical(object, "garch"))
+        numeric(m)
+    else if(inherits(object, "Arima")){
+        order <- object$arma
+        names(order) <- c("ar", "ma", "sar", "sma", "period", "d", "ds")
+        if(order["d"] != 0 || order["ds"] != 0)
+            stop("Can't compute acf confint for non-stationary models")
+        else if(all(order[c("ar", "sar")] == 0)){
+            if(order["sma"] == 0){
+                ## TODO: can be refined
+                res <- ifelse(lags <= order["ma"], NA_real_, 0)
+                res
+            }else if(order["ma"] == 0){ # pure seasonal MA
+                res <- ifelse(lags %% order["period"] == 0  &
+                              lags %/% order["period"] <= order["ma"] ,
+                              NA_real_, 0)
+                res
+            }else
+                res <- rep(NA_real_, m)
+        }
+    }else if(is(object, "ArmaModel")){
+        ## for a theoretical model all acfs are fixed
+        ## for fitted models => see the case 'Arima'
+        ## TODO: need further methods here
+            # if(modelOrder(object)$ar == 0)
+            #     ifelse(lags <= modelOrder(object)$ma, NA_real_, 0)
+            # else
+#browser()
+        autocovariances(c(modelCoef(object), list(sigma2 = sigmaSq(object))), 
+                        maxlag = max(lags))[lags]
+    }else ## default method - all not fixed
+        rep(NA_real_, m)
+}
+
 # setMethod("diagOfVcov", "SampleAutocorrelations",
 
 setMethod("confint", "SampleAutocorrelations",
-          function (object, parm, level = 0.95, se = FALSE, maxlag, ...){
+          function (object, parm, level = 0.95, se = FALSE, maxlag, ..., assuming = "iid"){
               ## based on confint.default(), main difference: we pass "..." to vcov();
               ## arg. 'se'
               cf <- coef(object)[-1] # drop lag 0
@@ -1148,7 +1229,7 @@ setMethod("confint", "SampleAutocorrelations",
                       parm <- pnames
                   }else{
                       lags <- 1:maxlag
-                      parm <- pnames[1:maxlag]
+                      parm <- pnames[1:maxlag] 
                   }
               }else if (is.numeric(parm)){
                   lags <- parm
@@ -1160,10 +1241,22 @@ setMethod("confint", "SampleAutocorrelations",
               fac <- qnorm(a)
               ci <- array(NA, dim = c(length(parm), 2L), dimnames = list(parm, pct))
                    # TODO: pass maxlag to vcov?
-              v <- vcov(object, ...)
-              ses <- sqrt(diag(v))[parm]
-              ci[] <- cf[parm] + ses %o% fac
-              ci <- cbind(Lag = lags, ci, Estimate = cf[parm])
+                  # 2022-01-17 was:
+                     # v <- vcov(object, ...)
+                     # ses <- sqrt(diag(v))[parm]
+              ses <- se(object, assuming = assuming, ...)[lags]
+
+              cg <- cf[parm]
+              if(!is.null(assuming)){
+                  int_types <- .fixed_values_under_h0(assuming, lags)
+                  if(!all(is.na(int_types))){
+                      cg[!is.na(int_types)] <- int_types[!is.na(int_types)]
+                  }
+              }else
+                  int_types <- rep(NA_real_, length(parm))
+
+              ci[] <- cg + ses %o% fac
+              ci <- cbind(Lag = lags, ci, Estimate = cf[parm], H0_fixed = int_types)
               if(se)
                   ci <- cbind(ci, StdError = ses)
               ci

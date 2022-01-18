@@ -7,6 +7,10 @@
 - extensive changes in the documentation, including reorganisation of the
   pkgdown site.
 
+- new convenience function, `se()` to compute standard errors
+
+- `confint` methods extended, though not finalised and not documented yet.
+
 
 # sarima 0.8.5 (CRAN)
 
