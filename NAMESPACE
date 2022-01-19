@@ -32,9 +32,9 @@ importFrom(Rdpack, rebib)
 ## 2022-01-19 moved to Suggests
 ##   importFrom(FKF, fkf)
 
-# 2018-10-10 for periodogram function
-importFrom(dplyr, mutate, select)
-
+## 2018-10-10 for periodogram function
+## 2022-01-19 dropping dplyr
+##   importFrom(dplyr, mutate, select)
 
 ##S3method(print, sarima)
 S3method(print, simSarimaFun)

@@ -35,20 +35,28 @@ periodogram <- function(x, ..., no.results = 20){
     ## how many frequencies?
     m <- length(obj$spec)
     
-    ## obtain a data frame containing results
+    ## create a data frame containing results
+         # 2022-01-19 - dropping dplyr
+         #
+         # res <- data.frame(rank  = seq_len(m),
+         #                   order = order(obj$spec, decreasing = TRUE))
+         # 
+         # res <- dplyr::mutate(res,
+         #                      spectrum  = obj$spec[order],
+         #                      frequency = obj$freq[order],
+         #                      period    = round(1/frequency))
+         # res <- dplyr::select(res, -order)
+    ord <- order(obj$spec, decreasing = TRUE)
     res <- data.frame(rank  = seq_len(m),
-                      order = order(obj$spec, decreasing = TRUE))
-    res <- dplyr::mutate(res,
-                         spectrum  = obj$spec[order],
-                         frequency = obj$freq[order],
-                         period    = round(1/frequency))
-    res <- dplyr::select(res, -order)
+		      spectrum  = obj$spec[ord],
+		      frequency = obj$freq[ord])
+    res$period <- round(1 / res$frequency)
     ## @georgi: above I have rounded period - is this a good idea?
     
     ## Remove duplicate periods
     ## @georgi: Is this a good idea?
-    res <- res[!duplicated(res$period),]
+    res <- res[!duplicated(res$period), ]
     
     ## print number of required results
-    res[seq_len(no.results),]
+    res[seq_len(no.results), ]
 }
