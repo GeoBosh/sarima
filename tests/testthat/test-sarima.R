@@ -13,7 +13,11 @@ context("Fitting extended Sarima models")
 ## })
 
 test_that("xarmaxss() works ok with fkf", {
-    ## this exanple is from the vignette in GKF and probably also from FKF
+    if(!requireNamespace("FKF")){
+        message("need package 'FKF' to test fkf() functionality")
+        return(invisible(NULL))
+    }
+    ## this example is from the vignette in GKF and probably also from FKF
     ## but I generalised the code for general p,q
     arm <- c(0.6, 0.2)
     mam <- -0.2
@@ -25,7 +29,7 @@ test_that("xarmaxss() works ok with fkf", {
     a <- arima.sim(model = list(ar = arm, ma = mam), n = n, innov = rnorm(n) * sigma)
     yt <- rbind(a)
     sp <- armapqss(ar = arm, ma = mam, sigma = sigma)
-    logLikfkf <- fkf(a0 = sp$a0, P0 = sp$P0, dt = sp$dt, ct = sp$ct, Tt = sp$Tt,
+    logLikfkf <- FKF::fkf(a0 = sp$a0, P0 = sp$P0, dt = sp$dt, ct = sp$ct, Tt = sp$Tt,
                      Zt = sp$Zt, HHt = sp$HHt, GGt = sp$GGt,
                      yt = yt)$logLik
 
@@ -53,29 +57,37 @@ test_that("sarima() works ok", {
    theta <- structure(c(1, 0.4, rep(0,10), 0.2, 0.3), fixed = c(TRUE,FALSE,rep(TRUE, 9), rep(FALSE,3)))
     delta <- list(c(1, -1), c(1, rep(0, 11), -1))
 
-    tmpa <- sarima(y ~ 0 | ar(2) + ma(2), data = data.frame(y = as.vector(yKFAS)), ss.method = "kfas")
-    tmpa # OK
-    sarima(y ~ 0 | ar(2) + ma(2), data = data.frame(y = as.vector(yKFAS)), ss.method = "fkf")
+    KFAS_avail <- requireNamespace("KFAS")
+    if(KFAS_avail){
+        tmpa <- sarima(y ~ 0 | ar(2) + ma(2), data = data.frame(y = as.vector(yKFAS)), ss.method = "kfas")
+        tmpa # OK
+    }
+
+    if(requireNamespace("FKF"))
+        sarima(y ~ 0 | ar(2) + ma(2), data = data.frame(y = as.vector(yKFAS)), ss.method = "fkf")
 
     expect_error(sarima(y ~ 0 | ar(2) + ma(2), data = data.frame(y = as.vector(yKFAS)), 
         ss.method = "argh"), "invalid .lik\\.method.")
 
-   tmpa1 <- sarima(y ~ 0 | ar(2, atanh.tr = FALSE) + ma(2, atanh.tr = FALSE), data = data.frame(y = as.vector(yKFAS)), ss.method = "kfas")
-
-
-    ## wrong convergence
-    tmpb <- sarima(y ~ 0 | ar(2, c(0.5, -0.8)) + ma(2, c(-0.3,0.8)), 
-                   data = data.frame(y = as.vector(yKFAS)), ss.method = "kfas")
+   if(KFAS_avail){
+       tmpa1 <- sarima(y ~ 0 | ar(2, atanh.tr = FALSE) + ma(2, atanh.tr = FALSE), 
+                       data = data.frame(y = as.vector(yKFAS)), ss.method = "kfas")
+       ## wrong convergence
+       tmpb <- sarima(y ~ 0 | ar(2, c(0.5, -0.8)) + ma(2, c(-0.3,0.8)), 
+                      data = data.frame(y = as.vector(yKFAS)), ss.method = "kfas")
+    }
 
     tmp.arima <- arima(yKFAS, order = c(2,0,2), include.mean = FALSE)
     tmp1t.arima <- arima(yKFAS, order = c(2,0,2), include.mean = FALSE, xreg = cbind(1, 1:length(yKFAS)))
 
     expect_equal_to_reference(tmp.arima$loglik, "loglik_tmp.RDS")
-    expect_equal_to_reference(tmpa$loglik, "loglik_tmpa.RDS")
 
-     expect_lt(abs(tmp.arima$loglik - tmpa$loglik), 1e-5)  # 1.391794e-06
-    expect_lt(abs(tmp.arima$loglik - tmpa1$loglik), 1e-6) # 1.294923e-07
+    if(KFAS_avail){
+        expect_equal_to_reference(tmpa$loglik, "loglik_tmpa.RDS")
 
+        expect_lt(abs(tmp.arima$loglik - tmpa$loglik), 1e-5)  # 1.391794e-06
+        expect_lt(abs(tmp.arima$loglik - tmpa1$loglik), 1e-6) # 1.294923e-07
+    }
     ## expect_identical(sm2, sm2c)
     ## 
     ## expect_error(new("ArModel", ma = 0.9, ar = 0.5), "Moving average terms found in ArModel")

@@ -30,12 +30,12 @@ Imports:
     FitAR, ltsa, FitARMA,
     lagged (>= 0.2.1),
     Rdpack,
-    KFAS,
-    FKF,
     Rcpp (>= 0.12.14), 
     numDeriv,
     dplyr
 Suggests:
+    KFAS,
+    FKF,
     fGarch,
     fImport,
     forecast,

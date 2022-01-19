@@ -24,11 +24,13 @@ importFrom(numDeriv, hessian)
 importFrom(Rdpack, rebib)
 
 
-importFrom(KFAS, SSMarima, SSModel, artransform)
+## 2022-01-19 moved to Suggests
+##   importFrom(KFAS, SSMarima, SSModel, artransform)
 
 ## 2018-07-08 commenting out for the CRAN release
 ## 2020-02-29 reinstating
-importFrom(FKF, fkf)
+## 2022-01-19 moved to Suggests
+##   importFrom(FKF, fkf)
 
 # 2018-10-10 for periodogram function
 importFrom(dplyr, mutate, select)

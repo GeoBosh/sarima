@@ -9,7 +9,7 @@ makeUpdateFun_arma0 <- function(pind, qind, s2ind){
     ## todo: check the case when both p=0 and q=0?
     ## this is based on an example in package KFAS
     function(pars, model, estimate = TRUE){
-        wrk <- try(SSMarima(artransform(pars[pind]), artransform(pars[qind]),
+        wrk <- try(KFAS::SSMarima(KFAS::artransform(pars[pind]), KFAS::artransform(pars[qind]),
                             Q = exp(pars[s2ind])), silent = TRUE)
 
         if(inherits(wrk, "try-error")){
@@ -29,7 +29,14 @@ makeUpdateFun_arma0 <- function(pind, qind, s2ind){
 
 makeArma0SSModel <- function(ar = numeric(0), ma = numeric(0), Q = 1, H = 0, y){
     ## todo: more care with the environment?
-    arma0 <- SSModel(y ~ -1 + SSMarima(ar = ar, ma = ma, Q = 1), H = 0)
+
+    ## 2022-01-19 moved KFAS to Suggests.
+    ##
+    ## however, then SSMarima is not visible and in a model formula can't
+    ##    be qualified with 'KFAS::'. So, copying it here. 
+    SSMarima <- KFAS::SSMarima
+
+    arma0 <- KFAS::SSModel(y ~ -1 + SSMarima(ar = ar, ma = ma, Q = 1), H = 0)
     p <- length(ar)
     q <- length(ma)
 

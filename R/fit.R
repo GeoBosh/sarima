@@ -318,7 +318,7 @@ sarimat <- function(y, phi, theta, delta, udelta, trmake = NULL, regxmake = NULL
                                 xreg = ct, regx = dt, delta = Delta)
         
         
-        fromKalman <<- fkf(a0 = fkf.model$a0, P0 = fkf.model$P0,
+        fromKalman <<- FKF::fkf(a0 = fkf.model$a0, P0 = fkf.model$P0,
                            dt = fkf.model$dt, ct = fkf.model$ct,
                            Tt = fkf.model$Tt, Zt = fkf.model$Zt, 
                            HHt = fkf.model$HHt, GGt = fkf.model$GGt, 
@@ -362,7 +362,7 @@ sarimat <- function(y, phi, theta, delta, udelta, trmake = NULL, regxmake = NULL
 
               # from makeUpdateFun_arma0() and KFAS examples
               #   TODO: only ARMA w.o. intercept for now.        
-        wrk <- try(SSMarima(Phi, Theta, Q = sigma2), silent = TRUE)
+        wrk <- try(KFAS::SSMarima(Phi, Theta, Q = sigma2), silent = TRUE)
 
         if(inherits(wrk, "try-error")){
 #            cat("1e100 !!\n")
@@ -811,14 +811,22 @@ sarimat <- function(y, phi, theta, delta, udelta, trmake = NULL, regxmake = NULL
                loglik_fkf(res_opt$par, use.symm = use.symm)
            },
            kfas = {
-               # SSMarima() returns a list
-               # kfas_model <- try(SSMarima(Phi, Theta, Q = sigma2), silent = TRUE)
+               # KFAS::SSMarima() returns a list
+               # kfas_model <- try(KFAS::SSMarima(Phi, Theta, Q = sigma2), silent = TRUE)
                ## loglik_kfas() doesn't recreate the full model,
                ## so create it in advance (could add if(is.null(kfas_model)) ... to loglik_kfas)
                update_params(flat_par[nonfixed], use.symm = use.symm)
                makePhiTheta() # expand polynomials
                
-               kfas_model <- SSModel(y ~ -1 + SSMarima(Phi, Theta, Q = sigma2), H = 0)
+               ## 2022-01-19 moved KFAS to Suggests.
+	       ##
+               ## however, then SSMarima is not visible and in a model formula can't
+               ##    be qualified with 'KFAS::'. So, copying it here. 
+               ## TODO: move this assignment elsewhere (here it is called every 
+               ##       time the likelihood is computed, the cost is negligible though)
+               SSMarima <- KFAS::SSMarima
+               
+               kfas_model <- KFAS::SSModel(y ~ -1 + SSMarima(Phi, Theta, Q = sigma2), H = 0)
                # kfas_init <- c(atanh(flat_par[nonfixed]), log(sigma2))
                kfas_init <- c(flat_par[nonfixed], log(sigma2))
                loglik_kfas(kfas_init, use.symm = use.symm)
