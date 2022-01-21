@@ -18,9 +18,19 @@ test_that("functions in autocorrelations.org work ok", {
 
     vcov(v1.acf)
     diagOfVcov(v1.acf)
-    confint(v1.acf)
-    confint(v1.acf, maxlag = 5)
+    confint(v1.acf, assuming = "iid")
+    confint(v1.acf, assuming = "iid", maxlag = 5, se = TRUE)
     coef(v1.acf)
+
+    confint(v1.acf, parm = 1:4, assuming = "garch", x = v1)
+
+    ## fitted model
+    v1.ar <- arima(v1, order = c(1,0,0), include.mean = FALSE)
+    confint(v1.acf, maxlag = 4, assuming = v1.ar)
+    
+    ## theoretical model
+    ma2 <- MaModel(ma = c(0.8, 0.1), sigma2 = 1)
+    confint(v1.acf, maxlag = 4, assuming = ma2)
 
     .comboAcf(v1.acf)
     .comboAcf(v1.acf, 1:2)

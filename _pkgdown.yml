@@ -48,6 +48,7 @@ reference:
       - acfWnTest
       - acfMaTest
       - se
+      - confint
       - nvarOfAcfKP
       - nvcovOfAcf
       - nvcovOfAcfBD

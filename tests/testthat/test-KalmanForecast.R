@@ -1,5 +1,5 @@
 library(sarima)
-context("test that forcasting Kalman functions work OK")
+context("test that forecasting Kalman functions work OK")
 
 data("sunspots")
 

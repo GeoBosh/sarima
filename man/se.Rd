@@ -1,5 +1,6 @@
 \name{se}
 \alias{se}
+\alias{vcov}
 \alias{vcov,SampleAutocorrelations-method}
 \title{Compute standard errors}
 \description{Compute standard errors.}
@@ -42,7 +43,7 @@ se(object, \dots)
   specifies that as the null model. 
 
   \bold{Note:} The method for \code{vcov} is not finalised yet. It is
-  used by a method for \code{confint}, which is not documented yet.  Bug
+  used by a method for \code{\link{confint}}.  Bug
   reports and requests on the github repo may bring this closer to the
   top of my task list.
   
@@ -53,7 +54,8 @@ se(object, \dots)
   for the \code{vcov} method, a square matrix
 }
 \seealso{
-  \code{\link{vcov}}
+  \code{link{confint}},
+  \code{\link[stats]{vcov}}
 }
 %\examples{
 %}

@@ -1134,9 +1134,9 @@ setMethod("vcov", "SampleAutocorrelations",
               if(inherits(assuming, "Arima")){
                   ## todo: could get vcov of params and transform it for acf's
                   ##       maybe have additional argument here (method?)
-                  mo <- list(ar = assuming$model$phi,
-                             ma = assuming$model$theta,
-                             sigma2 = assuming$model$sigma2 )
+                  mo <- list(ar     = assuming$model$phi,
+                             ma     = assuming$model$theta,
+                             sigma2 = assuming$sigma2 )
                   res <- nvcovOfAcf(mo, maxlag = maxlag) / object@n
                   res
               }else
@@ -1218,7 +1218,7 @@ se <- function (object, ...) {
 # setMethod("diagOfVcov", "SampleAutocorrelations",
 
 setMethod("confint", "SampleAutocorrelations",
-          function (object, parm, level = 0.95, se = FALSE, maxlag, ..., assuming = "iid"){
+          function (object, parm, level = 0.95, se = FALSE, maxlag, ..., assuming){
               ## based on confint.default(), main difference: we pass "..." to vcov();
               ## arg. 'se'
               cf <- coef(object)[-1] # drop lag 0
@@ -1259,6 +1259,7 @@ setMethod("confint", "SampleAutocorrelations",
               ci <- cbind(Lag = lags, ci, Estimate = cf[parm], H0_fixed = int_types)
               if(se)
                   ci <- cbind(ci, StdError = ses)
+              attr(ci, "assuming") <- assuming
               ci
           }
           )
