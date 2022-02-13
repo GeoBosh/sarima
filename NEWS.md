@@ -1,3 +1,12 @@
+# sarima 0.8.6.9000
+
+- new generic function `FisherInformation` giving the information matrix for
+  fitted and theoretical models with methods for ARMA and seasonal ARMA models.
+
+- new generic function `spectrum` with methods for(seasonal) ARMA models and
+  default `stats::spectrum`.
+  
+
 # sarima 0.8.6 (CRAN)
 
 - in `tsdiag.Sarima()`, if argument `plot` specifies only one or two plots, then

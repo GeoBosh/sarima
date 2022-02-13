@@ -6,13 +6,13 @@ import(methods, Formula, PolynomF, lagged)
 importFrom(stats4, vcov, coef, confint, plot)
 importFrom(stats, var, sd, filter, pnorm, rnorm, qnorm, pchisq,
            ts, ar, acf, pacf, acf2AR, ARMAacf, arima.sim, tsdiag,
-           frequency, spectrum, formula, as.formula, poly,
+           frequency, spectrum, formula, as.formula, poly, toeplitz,
            terms, is.empty.model, model.frame, model.matrix, update,
            lm, predict, printCoefmat, na.omit, na.pass,
            KalmanLike, KalmanRun, KalmanForecast, makeARIMA,
            logLik, optim)
-importFrom(utils, capture.output, menu, as.relistable, relist)
-importFrom(graphics, abline, lines, par)
+importFrom(utils, capture.output, menu, as.relistable, relist, head)
+importFrom(graphics, abline, lines, par, plot.function, curve)
 
 importFrom(ltsa, DLAcfToAR, tacvfARMA) # PredictionVariance, 
 importFrom(FitAR, PacfToAR) # TacvfAR, TacvfMA, VarianceRacfAR, PacfDL, ARToPacf, ARToMA
@@ -39,11 +39,17 @@ importFrom(Rdpack, rebib)
 ##S3method(print, sarima)
 S3method(print, simSarimaFun)
 S3method(print, Sarima)
+S3method(print, genspec)
+S3method(print, Spectrum)
+
+S3method(format, genspec)
 
 S3method(summary, SarimaFilter)
 S3method(summary, SarimaSpec)
 S3method(summary, SarimaModel)
 S3method(summary, Sarima)
+
+S3method(plot, Spectrum)
 
 S3method(as.list, SarimaModel)
 S3method(as.list, ArmaModel)
@@ -55,13 +61,25 @@ S3method(tsdiag, Sarima)
 #S3method(coef, SampleAutocorrelations)
 #S3method(confint, SampleAutocorrelations)
 
+S3method(FisherInformation, Arima)
+S3method(FisherInformation, ArmaModel)
+S3method(FisherInformation, SarimaModel)
+
+S3method(spectrum, default)
+S3method(spectrum, Arima)
+S3method(spectrum, ArmaModel)
+S3method(spectrum, SarimaModel)
+
+S3method(as.SarimaModel, Arima)                       
+
+
+exportMethods(plot)
+exportMethods(show)
+
+
 exportClassPattern("^[^\\.]")
 
 export(
-    ## work in progress
-
-    arma_Q0gnb,
-
     ## pacf2Ar,
     ## pacf2ArWithJacobian,
     sarima,
@@ -144,6 +162,14 @@ export(
     ## periodogram
     periodogram,
 
-    ## stqandard error, generic
-    se
+    ## standard error, generic
+    se,
+    FisherInformation,
+    spectrum,
+    as.SarimaModel,
+    print.Spectrum,
+    plot.Spectrum,
+
+    ## work in progress
+    arma_Q0gnb
 )

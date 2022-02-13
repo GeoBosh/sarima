@@ -180,3 +180,486 @@ plain_list <- function(...){  # , .drop.null = FALSE
         # else
     res
 }
+
+ltToeplitz <- function(x){
+    m <- toeplitz(x)
+    m[row(m) - col(m) < 0] <- 0
+    m
+}
+
+utToeplitz <- function(x){
+    m <- toeplitz(x)
+    m[row(m) - col(m) > 0] <- 0
+    m
+}
+
+## ARMA, SP convention for signs
+.FisherInfo <- function(phi = numeric(0), theta = numeric(0)){
+    n <- length(phi)
+    m <- length(theta)
+    q <- max(n, m)
+
+    if(n > 0){
+        if(n < m)
+            phi <- c(phi, rep(0, m - n))
+        A1 <- ltToeplitz(c(1, phi[-q]))
+        A2 <- ltToeplitz(rev(phi))
+        Rxx <- solve(A1 %*% t(A1) - A2 %*% t(A2))
+        if(m == 0)
+            return(Rxx)
+        
+    }
+
+    if(m > 0){
+        if(m < n)
+            theta <- c(theta, rep(0, n - m))
+        C1 <- ltToeplitz(c(1, theta[-q]))
+        C2 <- ltToeplitz(rev(theta))
+        Rzz <- solve(C1 %*% t(C1) - C2 %*% t(C2))
+        if(n == 0)
+            return(Rzz)
+    }
+    
+    if(m == 0 && n == 0)
+        return(matrix(nrow = 0, ncol = 0))
+
+    Rzx <- solve(A1 %*% t(C1) - C2 %*% t(A2))
+
+    rbind( cbind(Rxx[1:n, 1:n, drop = FALSE], -t(Rzx[1:m, 1:n, drop = FALSE])),
+           cbind(-Rzx[1:m, 1:n, drop = FALSE], Rzz[1:m, 1:m, drop = FALSE])    )
+}
+
+
+
+## seasonal ARMA, SP convention for signs
+.calF2 <- function(alpha, alphatilde, s){
+    p <- length(alpha)
+    P <- length(alphatilde)
+    if(p == 0)
+        return(matrix(nrow = 0, ncol = P))
+    else if(P == 0)
+        return(matrix(nrow = p, ncol = 0))
+
+    ## psi_i psi_{1-p}, ..., psi_{-1}, psi_{0}, psi_1, ... psi_{Ps + p}
+    psi <- numeric(p + P * s + p)
+    psi[(1-p):(-1) + p ] <- 0 # for clarity
+    psi[0 + p] <- 1
+    for(i in 1:((P * s) + p)){
+        psi[i + p] <- - sum(alpha * psi[(i + p - 1):(i + p - p)])
+    }
+
+    ## g_{1-p}, ..., g_0, g_1, ..., g_{p-1}
+    g <- numeric(2 * p + 1)
+    baseind <- (1:P) * s + p
+    for(i in (1-p):(p-1)){
+        g[i+p] <- sum(alphatilde * psi[baseind + i])
+    }
+
+    ## G
+    G <- matrix(0, nrow = p, ncol = p)
+    ind <- 0:(1 - p) + p # for 1st column
+    G[ , 1] <- g[ind]
+    if(p > 1){
+        for(j in 2:p){
+            ind <- ind + 1
+            curcol <- g[ind]
+            for(i in 1:(j - 1)){
+                curcol <- curcol + alpha[i] * g[ind - i]
+            }
+            G[ , j] <- curcol
+        }
+    }
+
+    ## (I + G)^(-1) => 1st column is H0 = (h_0, h_{-1}, ..., h_{1-p})
+    I <- diag(nrow(G))
+    H0 <- solve(I + G)[ , 1]
+    
+    ## use h0 to compute H1 = (h_1, ..., h_{Ps - p})
+    ## H = c(H0, H1), h_i is in H[i+p] !!!
+    H <- c(rev(H0), numeric(P * s - 1))
+    for(i in (p + 1):length(H)){
+        H[i] <- -sum(H[(i - 1):(i - p)]  * alpha)
+    }
+
+    ## F_2
+    ind <- .col(c(p, P)) * s - .row(c(p, P)) + p # '+ p' since h_i is in H[i+p]
+    res <- matrix(H[ind], nrow = p, ncol = P) # ncol is redundant but makes the  intent more clear
+    res
+}
+
+## ARMA, SP convention for signs
+.FisherInfoSarma <- function(phi = numeric(0), theta = numeric(0), sphi = numeric(0), 
+                             stheta = numeric(0), nseasons = NA_real_){
+    p <- length(phi)
+    q <- length(theta)
+    P <- length(sphi)
+    Q <- length(stheta)
+    if(is.na(nseasons) && (P > 0 || Q > 0))
+        stop("When there are seasonal components argument 'nseasons' is mandatory")
+
+    res <- matrix(0, nrow = p + P + q + Q, ncol = p + P + q + Q)
+
+    wrk <- .FisherInfo(phi, theta)
+
+    if(p > 0){
+        res[1:p, 1:p] <- wrk[1:p, 1:p]
+        if(q > 0){
+            res[1:p, (p+P+1):(p+P+q)] <- wrk[1:p, (p+1):(p+q)]
+            res[(p+P+1):(p+P+q), 1:p] <- wrk[(p+1):(p+q), 1:p]
+        }
+    }
+    if(q > 0)
+        res[(p+P+1):(p+P+q), (p+P+1):(p+P+q)] <- wrk[(p+1):(p+q), (p+1):(p+q)]
+
+    wrk <- .FisherInfo(sphi, stheta)
+    if(P > 0){
+        res[(p+1):(p+P), (p+1):(p+P)] <- wrk[1:P, 1:P]
+        if(Q > 0){
+            res[(p+1):(p+P), (p+P+q+1):(p+P+q+Q)] <- wrk[1:P, (P+1):(P+Q)]
+            res[(p+P+q+1):(p+P+q+Q), (p+1):(p+P)] <- wrk[(P+1):(P+Q), 1:P]
+        }
+    }
+    if(Q > 0)
+        res[(p+P+q+1):(p+P+q+Q), (p+P+q+1):(p+P+q+Q)] <- wrk[(P+1):(P+Q), (P+1):(P+Q)]
+
+    ## F0_a  <- .FisherInfo(phi) # .calF0(phi)
+    ## F0_b  <- .FisherInfo(theta) # .calF0(theta)
+    ## F0_A  <- .FisherInfo(sphi) # .calF0(sphi)
+    ## F0_B  <- .FisherInfo(stheta) # .calF0(stheta)
+    ## 
+    ## F1_ab <- .FisherInfo(phi, theta) # .calF1(phi, theta)
+    ## F1_AB <- .FisherInfo # .calF1(sphi, stheta)
+    
+    F2_aA <- .calF2(phi, sphi, nseasons)
+    F2_aB <- .calF2(phi, stheta, nseasons)
+    F2_bA <- .calF2(theta, sphi, nseasons)
+    F2_bB <- .calF2(theta, stheta, nseasons)
+
+    if(length(F2_aA) > 0){
+        res[1:p, (p+1):(p+P)] <- F2_aA
+        res[(p+1):(p+P), 1:p] <- t(F2_aA)
+    }
+    
+    if(length(F2_aB) > 0){
+        res[1:p, (p+P+q+1):(p+P+q+Q)] <- -F2_aB
+        res[(p+P+q+1):(p+P+q+Q), 1:p] <- -t(F2_aB)
+    }
+    
+    if(length(F2_bA) > 0){
+        res[(p+1):(p+P), (p+P+1):(p+P+q)] <- -t(F2_bA)
+        res[(p+P+1):(p+P+q), (p+1):(p+P)] <- -F2_bA
+    }
+    
+    if(length(F2_bB) > 0){
+        res[(p+P+1):(p+P+q), (p+P+q+1):(p+P+q+Q)] <- F2_bB
+        res[(p+P+q+1):(p+P+q+Q), (p+P+1):(p+P+q)] <- t(F2_bB)
+    }
+    
+    ## rbind(
+    ##     cbind(   F0_a,      F2_aA,   -F1_ab,  -F2_aB),
+    ##     cbind( t(F2_aA),    F0_A,  -t(F2_bA), -F1_AB),
+    ##     cbind(-t(F1_ab),   -F2_bA,    F0_b,    F2_bB),
+    ##     cbind(-t(F2_aB), -t(F1_AB), t(F2_bB),  F0_B )  )
+
+    rownames(res) <- colnames(res) <- 
+        paste0(c(rep("phi_", length(phi)), rep("Phi_", length(sphi)),
+                 rep("theta_", length(theta)), rep("Theta_", length(stheta))),
+               c(seq_len(length(phi)), seq_len(length(sphi)),
+                 seq_len(length(theta)), seq_len(length(stheta))) )
+    attr(res, "nseasons") <- nseasons
+
+    res
+}
+
+## as above but more manageable
+.FisherInfoSarma_rbind <- function(phi = numeric(0), theta = numeric(0), sphi = numeric(0), 
+                             stheta = numeric(0), nseasons = NA_real_){
+    p <- length(phi)
+    q <- length(theta)
+    P <- length(sphi)
+    Q <- length(stheta)
+    if(is.na(nseasons) && (P > 0 || Q > 0))
+        stop("When there are seasonal components argument 'nseasons' is mandatory")
+
+    res <- matrix(0, nrow = p + P + q + Q, ncol = p + P + q + Q)
+
+    wrk <- .FisherInfo(phi, theta)
+
+    F0_a  <- if(p > 0)    
+                 wrk[1:p, 1:p] # .FisherInfo(phi) # .calF0(phi)
+             else
+                 matrix(nrow = 0, ncol = 0)
+    F0_b  <- if(q > 0)
+                 wrk[(p+1):(p+q), (p+1):(p+q)]  # .FisherInfo(theta) # .calF0(theta)
+             else
+                 matrix(nrow = 0, ncol = 0)
+
+    F1_ab <- if(p == 0 || q == 0)
+                 matrix(nrow = p, ncol = q)
+             else # note the '-'! (in cbind() this is negated again
+                 - wrk[(p+1):(p+q), 1:p] # .FisherInfo(phi, theta) # .calF1(phi, theta)
+    
+    wrk2 <- .FisherInfo(sphi, stheta)
+
+    F0_A  <- if(P > 0)    
+                 wrk2[1:P, 1:P] #  .FisherInfo(sphi) # .calF0(sphi)
+             else
+                 matrix(nrow = 0, ncol = 0)
+    F0_B  <- if(Q > 0)
+                 wrk2[(P+1):(P+Q), (P+1):(P+Q)]  # .FisherInfo(stheta) # .calF0(stheta)
+             else
+                 matrix(nrow = 0, ncol = 0)
+
+    F1_AB <- if(P == 0 || Q == 0)
+                 matrix(nrow = P, ncol = Q)
+             else # note the '-'! (in cbind() this is negated again
+                 - wrk2[(P+1):(P+Q), 1:P] # .FisherInfo # .calF1(sphi, stheta)
+    
+    F2_aA <- .calF2(phi, sphi, nseasons)
+    F2_aB <- .calF2(phi, stheta, nseasons)
+    F2_bA <- .calF2(theta, sphi, nseasons)
+    F2_bB <- .calF2(theta, stheta, nseasons)
+
+    res <- rbind(
+        cbind(   F0_a,      F2_aA,   -F1_ab,  -F2_aB),
+        cbind( t(F2_aA),    F0_A,  -t(F2_bA), -F1_AB),
+        cbind(-t(F1_ab),   -F2_bA,    F0_b,    F2_bB),
+        cbind(-t(F2_aB), -t(F1_AB), t(F2_bB),  F0_B )  )
+
+    rownames(res) <- colnames(res) <- 
+        paste0(c(rep("phi_", length(phi)), rep("Phi_", length(sphi)),
+                 rep("theta_", length(theta)), rep("Theta_", length(stheta))),
+               c(seq_len(length(phi)), seq_len(length(sphi)),
+                 seq_len(length(theta)), seq_len(length(stheta))) )
+    attr(res, "nseasons") <- nseasons
+
+    res
+}
+
+FisherInformation <- function(model, ...)
+    UseMethod("FisherInformation")
+
+FisherInformation.Arima <- function(model, ...){
+    order <- model$arma
+    p <- order[1]
+    q <- order[2]
+    P <- order[3]
+    Q <- order[4]
+    nseasons <- order[5]
+    d <- order[6]
+    D <- order[7]
+
+    ## TODO: include the mean (named 'intercept' in Arima objects)
+    co <- coef(model)
+    ar <- co[seq_len(p)]
+    ma <- co[p + seq_len(q)]
+    sar <- co[p + q + seq_len(P)]
+    sma <- co[p + q + P + seq_len(Q)]
+    ## SP convention
+    .FisherInfoSarma(-ar, ma, -sar, sma, nseasons)
+}
+
+FisherInformation.ArmaModel <- function(model, ...){
+    co <- modelCoef(model, "SP")  # no seasonal components here
+    .FisherInfoSarma(co$ar, co$ma)
+}
+
+setMethod("FisherInformation", "ArmaModel", FisherInformation.ArmaModel)
+
+FisherInformation.SarimaModel <- function(model, ...){
+         # TODO: this expands the polynomials. Is this on purpose?
+         #       Doesn't seem intuitive.
+         #     co <- modelCoef(model, "SP") 
+     co <- modelCoef(model) # manually convert the ar-type coef to "SP":
+    .FisherInfoSarma(-co$ar, co$ma, -co$sar, co$sma, nseasons = co$nseasons)
+}
+
+setMethod("FisherInformation", "SarimaModel", FisherInformation.SarimaModel)
+
+spectrum <- function(x, standardize = TRUE, ...){
+    UseMethod("spectrum")
+}
+
+spectrum.default <- function(x, standardize = TRUE, raw = TRUE, taper = 0.1, 
+                                demean = FALSE, detrend = TRUE, ...){
+    xname <- deparse(substitute(x))
+
+    if(raw){ # completely raw unless user has requested otherwise
+        if(missing(taper))   taper   <- 0
+        if(missing(demean))  demean  <- TRUE
+        if(missing(detrend)) detrend <- FALSE
+    }
+
+    if(standardize){
+        x <- (x - mean(x)) / sd(x)
+        demean <- FALSE
+    }
+    res <- stats::spectrum(x, plot = FALSE, taper = taper, demean = demean, 
+                                            detrend = detrend, ...)
+
+    if(standardize) # stats::spectrum sets it but x is manipulated above in this case
+        res$series <- xname
+    
+    res$standardized <- standardize
+    res$nseasons <- frequency(x)
+    res$freq.range <- c(-1, 1) * frequency(x) %/% 2 
+    class(res) <- c("genspec", class(res))
+
+    res
+}
+
+.local_maxima <- function(x){
+    ## TODO: currently not handling ties properly;  NA's not considered
+    n <- length(x)
+    c(x[1] >= x[2],
+      (x[2:(n - 1)] >= x[1:(n - 2)]) & (x[2:(n-1)] >= x[3:n]),
+      x[n] >= x[n-1] )
+}
+
+.local_minima <- function(x){
+    ## TODO: currently not handling ties properly;  NA's not considered
+    n <- length(x)
+    c(x[1] <= x[2],
+      (x[2:(n - 1)] <= x[1:(n - 2)]) & (x[2:(n-1)] <= x[3:n]),
+      x[n] <= x[n-1] )
+}
+
+format.genspec <- function (x, n.head = length(x$freq), sort = TRUE, ...){
+    stopifnot(length(sort) == 1)
+
+    n.ind1 <- numeric(0)
+    mat <- if(is.logical(sort)){
+               if(sort){
+                   ind <- order(x$spec, decreasing = TRUE)
+                   cbind(freq = x$freq[ind], spec = x$spec[ind])
+               }else{
+                   cbind(freq = x$freq, spec = x$spec)
+               }
+           }else if(is.character(sort) && sort == "max"){
+               maxima_flags <- .local_maxima(x$spec)
+               max_freq <- x$freq[maxima_flags]
+               max_spec <- x$spec[maxima_flags]
+               ind1 <- order(max_spec, decreasing = TRUE)
+               max_freq <- max_freq[ind1]
+               max_spec <- max_spec[ind1]
+               n.ind1 <- length(ind1)
+
+               rest_freq <- x$freq[!maxima_flags]
+               rest_spec <- x$spec[!maxima_flags]
+               ind2 <- order(rest_spec, decreasing = TRUE)
+               rest_freq <- rest_freq[ind2]
+               rest_spec <- rest_spec[ind2]
+
+               cbind(freq = c(max_freq, rest_freq), spec = c(max_spec, rest_spec))
+           }else
+               stop("invalid value of argument 'sort'")
+    
+    frac <- mat[ , "spec"] / sum(mat[ , "spec"])
+    cum.frac <- cumsum(frac)
+    mat <- cbind(mat, "% Total" = frac, "Cum. %" = cum.frac)
+    if(length(n.ind1) > 0){
+        ranks <- c(1:n.ind1, rep(NA, nrow(mat) - n.ind1))
+        mat <- cbind(mat, ranks = ranks)
+    }
+    sort.method <- if(isTRUE(sort))
+                       "decreasing magnitudes"
+                   else if(identical(sort, FALSE))
+                       "none"
+                   else
+                       "local maxima first"
+    tab <- "    "	       
+    c(paste0("Estimated spectral density"),
+      paste0(tab, "series: ", x$series),
+      paste0(tab, "method: ", x$method),
+      paste0(tab, "nseasons: ", x$nseasons),
+      paste0(tab, "frequency range: (", x$freq.range[1], ",", x$freq.range[2], "]"),
+      "",
+      paste0(tab, "sort method for the table: ", sort.method),
+      "",
+      paste0(tab, capture.output(print(head(mat, n.head), ...)))
+      )
+}
+
+print.genspec <- function (x, n.head = min(length(x$spec), 6), sort = TRUE, plot = TRUE, ...) {
+    cat(format(x, n.head = n.head, sort = sort, ...), sep = "\n")
+    if(plot)
+        plot(x)
+    invisible(x)
+}
+
+## BD convention
+.spdArma <- function(ar = numeric(0), ma = numeric(0), freq, sigma2, standardize){
+    p <- length(ar)
+    q <- length(ma)
+    m <- max(p,q)
+
+    if(missing(freq)){
+        n <- max(512, p, q)  # TODO: arbitrary constant here: 512
+        freq <- seq(0, 0.5, length.out = n)
+    }else
+        n <- length(freq)
+
+    if(standardize) # cancels out when dividing by acvf[0] below
+        sigma2 <- 1
+    else if(is.na(sigma2))
+        stop("sigma2 is NA but must be a positive number when standardize = FALSE")
+
+    if(m == 0)
+        return( list(freq = freq, spec = rep(sigma2, n), ar = ar, ma = ma, sigma2 = sigma2) )
+    
+    tbl <- (2 * (1:m)) %o% freq  # (m,n)
+    co <- cospi(tbl)
+    si <- sinpi(tbl)
+
+    numer <- denom <- 1
+    if(p > 0)
+        denom <- (1 - drop(ar %*% co[1:p, ]))^2 + (drop(ar %*% si[1:p, ]))^2
+    if(q > 0)
+        numer <- (1 + drop(ma %*% co[1:q, ]))^2 + (drop(ma %*% si[1:q, ]))^2
+
+    spec <- numer / denom
+
+    spec <- if(standardize)
+                ## sigma2 doesn't matter in this case
+                spec / autocovariances(ArmaModel(ar = ar, ma = ma, sigma2 = 1), maxlag = 0)[]
+            else
+                spec <- sigma2 * spec
+
+    list(freq = freq, spec = spec, ar = ar, ma = ma, sigma2 = sigma2)
+}
+
+spectrum.ArmaModel <- function(x, standardize = TRUE, ...){
+    co <- modelCoef(x, "BD")  # no seasonal components here
+    # wrk <- .spdArma(co$ar, co$ma, sigma2 = x@sigma2, standardize = standardize, ...)
+    # new("Spectrum", freq = wrk$freq, spec = wrk$spec, model = x)
+    new("Spectrum", ar = co$ar, ma = co$ma, sigma2 = sigmaSq(x), model = x)
+}
+
+setMethod("spectrum", "ArmaModel", spectrum.ArmaModel)
+
+spectrum.SarimaModel <- function(x, standardize = TRUE, ...){
+    ## co <- modelCoef(x, "ArmaModel") 
+    pall <- modelPoly(x)
+    ar <- -coef(pall$arpoly * pall$sarpoly)[-1] # BD convention
+    ma <-  coef(pall$mapoly * pall$smapoly)[-1]
+    # wrk <- .spdArma(co$ar, co$ma, sigma2 = x@sigma2, standardize = standardize, ...)
+    # new("Spectrum", freq = wrk$freq, spec = wrk$spec, model = x)
+
+    new("Spectrum", ar = ar, ma = ma, sigma2 = x@sigma2, model = x)
+}
+
+setMethod("spectrum", "SarimaModel", spectrum.SarimaModel)
+
+## Arima is produced by stats::arima() and others
+spectrum.Arima <- function(x, standardize = TRUE, ...){
+    obj <- as.SarimaModel(x)
+    # co <- modelCoef(obj) 
+    pall <- modelPoly(obj)
+    ar <- -coef(pall$arpoly * pall$sarpoly)[-1] # BD convention
+    ma <-  coef(pall$mapoly * pall$smapoly)[-1]
+    # wrk <- .spdArma(ar, ma, sigma2 = x$sigma2, standardize = standardize)
+    # new("Spectrum", freq = wrk$freq, spec = wrk$spec, model = x)
+    new("Spectrum", ar = ar, ma = ma, sigma2 = x$sigma2, model = x)
+}
+
+setMethod("spectrum", "ArmaModel", spectrum.ArmaModel)

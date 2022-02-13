@@ -18,7 +18,8 @@ reference:
       - prepareSimSarima
       # - print(<simSarimaFun>)
   - title: "Functions for properties of models and time series"
-    contents: 
+    contents:
+      - spectrum
       - autocovariances
       - autocorrelations
       - partialAutocorrelations
@@ -53,6 +54,7 @@ reference:
       - nvcovOfAcf
       - nvcovOfAcfBD
       - acfOfSquaredArmaModel
+      - "FisherInformation-methods"
   - title: "Methods"
     contents:
       - "autocorrelations-methods"
@@ -69,10 +71,12 @@ reference:
       - "partialAutocorrelations-methods"
       - "plot-methods"
       - matches("summary")
+      - as.SarimaModel
   - title: "Classes"
     contents:
       - ArmaModel
       - matches("-class$")
+      - "Spectrum-class"
   - title: "Initialisation for Kalman filter"
     contents: 
       - arma_Q0naive

@@ -23,25 +23,37 @@
 \title{Class SarimaModel in package sarima}
 \description{Class SarimaModel in package sarima.}
 \section{Objects from the Class}{
-Objects can be created by calls of the form \code{new("SarimaModel", ..., ar, ma, sar, sma)}.
-%%  ~~ describe objects here ~~
 
-Class SarimaModel represents standard SARIMA models. It has provision
-for centering and/or intercept (in normal use at most one of these is
-needed). Their default values are zeroes.
+  Class \code{"SarimaModel"} represents standard SARIMA models.  Objects
+  can be created by calls of the form
+  \code{new("SarimaModel", ..., ar, ma, sar, sma)},
+  using named arguments in the form \code{slotname = value}, where
+  \code{slotname} is one of the slots, see below.  The arguments have
+  natural defaults. It may be somewhat surprising though that the
+  default for the variance of the innovations (slot \code{"sigma2"}) is
+  \code{NA}. The rationale for this choice is that for some calculations
+  the innovations' variance is not needed and, more importantly, it is
+  far too easy to forget to include it in the model (at least for the
+  author) when the variance matters. The latter may may lead silently to
+  wrong results if the "natural" default value of one is used when
+  \code{sigma2} matters.
 
-Note however that the default for the variance of the innovations (slot
-"sigma2") is NA. The rationale for this choice is that for some
-calculations the innovations' variance is not needed and, more
-importantly, it is far too easy to forget to include it in the model (at
-least for the author), which may lead silently to wrong results if the
-"natural" default value of one is used.
+  The models may be specified in intercept (\code{center = 0}) or
+  mean-corrected (\code{intercept = 0}) form. Setting both to non-zero
+  values is accepted but rarely needed.
 
+  If you waih to modify an existing object from class
+  \code{"SarimaModel"}, give it as an unnamed argument to \code{"new"}
+  and specify only the slots to be changed, see the examples.
+
+  Use \code{\link{as.SarimaModel}} to convert a model fitted with
+  \code{stats::arima()} to \code{"SarimaModel"}. 
+  
 }
 \section{Slots}{
   \describe{
     \item{\code{center}:}{Object of class \code{"numeric"},
-      a number, if not zero the ARIMA equation is for X(t) - center.
+      a number, the ARIMA equation is for \code{X(t) - center}.
 
     }
     \item{\code{intercept}:}{Object of class \code{"numeric"},
@@ -100,7 +112,7 @@ Class \code{"\linkS4class{VirtualMonicFilter}"}, by class "SarimaSpec", distance
   character string naming the target class.
 
   Essentially, the methods for \code{modelCoef} are a generalisation of
-  =as()= methods and can be interpreted as such (to an extent, the
+  \code{as()} methods and can be interpreted as such (to an extent, the
   result is not necessarilly from the target class, not least because
   the target class may be virtual).
 
@@ -189,30 +201,40 @@ Class \code{"\linkS4class{VirtualMonicFilter}"}, by class "SarimaSpec", distance
   \code{\linkS4class{ArmaModel}}
 }
 \examples{
-showClass("SarimaModel")
+ar1 <- new("SarimaModel", ar = 0.9)
+ar1c <- new("SarimaModel", ar = 0.9, intercept = 3)
+ar1c
+ar1m <- new("SarimaModel", ar = 0.9, center = 1)
+ar1m
 
 sm0 <- new("SarimaModel", nseasons = 12)
-
 sm1 <- new("SarimaModel", nseasons = 12, intercept = 3)
+sm1
 ## alternatively, pass a model and modify with named arguments
 sm1b <- new("SarimaModel", sm0, intercept = 3)
 identical(sm1, sm1b) # TRUE
 
-## Note: in the above models var. of innovations is NA
+## in the above models sigma2 is NA
 
+## sm2 - from scratch, the rest modefy an existing model
 sm2  <- new("SarimaModel", ar = 0.9, nseasons = 12, intercept = 3, sigma2 = 1)
+sm2a <- new("SarimaModel", sm0, ar = 0.9, intercept = 3, sigma2 = 1)
 sm2b <- new("SarimaModel", sm1, ar = 0.9, sigma2 = 1)
-sm2c <- new("SarimaModel", sm0, ar = 0.9, intercept = 3, sigma2 = 1)
+sm2c <- new("SarimaModel", ar1c, nseasons =12, sigma2 = 1)
+identical(sm2, sm2a) # TRUE
 identical(sm2, sm2b) # TRUE
 identical(sm2, sm2c) # TRUE
 
-sm3 <- new("SarimaModel", ar = 0.9, sar= 0.8, nseasons = 12, intercept = 3,
+sm3 <- new("SarimaModel", ar = 0.9, sar = 0.8, nseasons = 12, intercept = 3,
            sigma2 = 1)
 sm3b <- new("SarimaModel", sm2, sar = 0.8)
 identical(sm3, sm3b) # TRUE
 
-new("SarimaModel", ar = 0.9)
+## The classic 'airline model' (from examples for AirPassengers)
+(fit <- arima(log10(AirPassengers), c(0, 1, 1),
+              seasonal = list(order = c(0, 1, 1), period = 12)))
 
+as.SarimaModel(fit)
 }
 \keyword{classes}
 \keyword{ts}
