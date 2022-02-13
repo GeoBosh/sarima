@@ -19,10 +19,16 @@
     <loc>https://geobosh.github.io/sarima/reference/ArmaModel.html</loc>
   </url>
   <url>
+    <loc>https://geobosh.github.io/sarima/reference/FisherInformation-methods.html</loc>
+  </url>
+  <url>
     <loc>https://geobosh.github.io/sarima/reference/InterceptSpec-class.html</loc>
   </url>
   <url>
     <loc>https://geobosh.github.io/sarima/reference/SarimaModel-class.html</loc>
+  </url>
+  <url>
+    <loc>https://geobosh.github.io/sarima/reference/Spectrum-class.html</loc>
   </url>
   <url>
     <loc>https://geobosh.github.io/sarima/reference/VirtualMonicFilter-class.html</loc>
@@ -44,6 +50,9 @@
   </url>
   <url>
     <loc>https://geobosh.github.io/sarima/reference/armaccf_xe.html</loc>
+  </url>
+  <url>
+    <loc>https://geobosh.github.io/sarima/reference/as.SarimaModel.html</loc>
   </url>
   <url>
     <loc>https://geobosh.github.io/sarima/reference/autocorrelations-methods.html</loc>
@@ -148,10 +157,16 @@
     <loc>https://geobosh.github.io/sarima/reference/se.html</loc>
   </url>
   <url>
+    <loc>https://geobosh.github.io/sarima/reference/show-methods.html</loc>
+  </url>
+  <url>
     <loc>https://geobosh.github.io/sarima/reference/sigmaSq.html</loc>
   </url>
   <url>
     <loc>https://geobosh.github.io/sarima/reference/sim_sarima.html</loc>
+  </url>
+  <url>
+    <loc>https://geobosh.github.io/sarima/reference/spectrum.html</loc>
   </url>
   <url>
     <loc>https://geobosh.github.io/sarima/reference/summary.SarimaModel.html</loc>

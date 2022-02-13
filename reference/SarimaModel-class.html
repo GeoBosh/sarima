@@ -52,23 +52,35 @@
 
     <div class="section level2">
     <h2 id="objects-from-the-class">Objects from the Class<a class="anchor" aria-label="anchor" href="#objects-from-the-class"></a></h2>
-    <p>Objects can be created by calls of the form <code>new("SarimaModel", ..., ar, ma, sar, sma)</code>.
-<!-- %%  ~~ describe objects here ~~ --></p>
-<p>Class SarimaModel represents standard SARIMA models. It has provision
-for centering and/or intercept (in normal use at most one of these is
-needed). Their default values are zeroes.</p>
-<p>Note however that the default for the variance of the innovations (slot
-"sigma2") is NA. The rationale for this choice is that for some
-calculations the innovations' variance is not needed and, more
-importantly, it is far too easy to forget to include it in the model (at
-least for the author), which may lead silently to wrong results if the
-"natural" default value of one is used.</p>
+    
+
+<p>Class <code>"SarimaModel"</code> represents standard SARIMA models.  Objects
+  can be created by calls of the form
+  <code>new("SarimaModel", ..., ar, ma, sar, sma)</code>,
+  using named arguments in the form <code>slotname = value</code>, where
+  <code>slotname</code> is one of the slots, see below.  The arguments have
+  natural defaults. It may be somewhat surprising though that the
+  default for the variance of the innovations (slot <code>"sigma2"</code>) is
+  <code>NA</code>. The rationale for this choice is that for some calculations
+  the innovations' variance is not needed and, more importantly, it is
+  far too easy to forget to include it in the model (at least for the
+  author) when the variance matters. The latter may may lead silently to
+  wrong results if the "natural" default value of one is used when
+  <code>sigma2</code> matters.</p>
+<p>The models may be specified in intercept (<code>center = 0</code>) or
+  mean-corrected (<code>intercept = 0</code>) form. Setting both to non-zero
+  values is accepted but rarely needed.</p>
+<p>If you waih to modify an existing object from class
+  <code>"SarimaModel"</code>, give it as an unnamed argument to <code>"new"</code>
+  and specify only the slots to be changed, see the examples.</p>
+<p>Use <code><a href="as.SarimaModel.html">as.SarimaModel</a></code> to convert a model fitted with
+  <code><a href="https://rdrr.io/r/stats/arima.html" class="external-link">stats::arima()</a></code> to <code>"SarimaModel"</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="slots">Slots<a class="anchor" aria-label="anchor" href="#slots"></a></h2>
     <p></p><dl><dt><code>center</code>:</dt>
 <dd><p>Object of class <code>"numeric"</code>,
-      a number, if not zero the ARIMA equation is for X(t) - center.</p>
+      a number, the ARIMA equation is for <code>X(t) - center</code>.</p>
 <p></p></dd>
 
     <dt><code>intercept</code>:</dt>
@@ -138,7 +150,7 @@ Class <code>"<a href="VirtualMonicFilter-class.html">VirtualMonicFilter</a>"</co
   the class of the second argument. The second argument may also be a
   character string naming the target class.</p>
 <p>Essentially, the methods for <code>modelCoef</code> are a generalisation of
-  =as()= methods and can be interpreted as such (to an extent, the
+  <code>as()</code> methods and can be interpreted as such (to an extent, the
   result is not necessarilly from the target class, not least because
   the target class may be virtual).</p>
 <p></p><dl><dt>modelCoef</dt>
@@ -240,57 +252,25 @@ Class <code>"<a href="VirtualMonicFilter-class.html">VirtualMonicFilter</a>"</co
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">showClass</span><span class="op">(</span><span class="st">"SarimaModel"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Class "SarimaModel" [package "sarima"]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Slots:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Name:   nseasons    iorder   siorder        ar        ma       sar       sma</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Class:   numeric   numeric   numeric  BJFilter  SPFilter  BJFilter  SPFilter</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Name:     center intercept    sigma2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Class:   numeric   numeric   numeric</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Extends: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Class "VirtualSarimaModel", directly</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Class "SarimaSpec", directly</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Class "VirtualIntegratedModel", by class "VirtualSarimaModel", distance 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Class "SarimaFilter", by class "SarimaSpec", distance 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Class "InterceptSpec", by class "SarimaSpec", distance 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Class "VirtualFilterModel", by class "VirtualSarimaModel", distance 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Class "VirtualSarimaFilter", by class "SarimaSpec", distance 3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Class "VirtualCascadeFilter", by class "SarimaSpec", distance 4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Class "VirtualMonicFilter", by class "SarimaSpec", distance 5</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">sm0</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, nseasons <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">sm1</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, nseasons <span class="op">=</span> <span class="fl">12</span>, intercept <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="co">## alternatively, pass a model and modify with named arguments</span></span>
-<span class="r-in"><span class="va">sm1b</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, <span class="va">sm0</span>, intercept <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">sm1</span>, <span class="va">sm1b</span><span class="op">)</span> <span class="co"># TRUE</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Note: in the above models var. of innovations is NA</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">sm2</span>  <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, ar <span class="op">=</span> <span class="fl">0.9</span>, nseasons <span class="op">=</span> <span class="fl">12</span>, intercept <span class="op">=</span> <span class="fl">3</span>, sigma2 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">sm2b</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, <span class="va">sm1</span>, ar <span class="op">=</span> <span class="fl">0.9</span>, sigma2 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">sm2c</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, <span class="va">sm0</span>, ar <span class="op">=</span> <span class="fl">0.9</span>, intercept <span class="op">=</span> <span class="fl">3</span>, sigma2 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">sm2</span>, <span class="va">sm2b</span><span class="op">)</span> <span class="co"># TRUE</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">sm2</span>, <span class="va">sm2c</span><span class="op">)</span> <span class="co"># TRUE</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">sm3</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, ar <span class="op">=</span> <span class="fl">0.9</span>, sar<span class="op">=</span> <span class="fl">0.8</span>, nseasons <span class="op">=</span> <span class="fl">12</span>, intercept <span class="op">=</span> <span class="fl">3</span>,</span>
-<span class="r-in">           sigma2 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">sm3b</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, <span class="va">sm2</span>, sar <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">sm3</span>, <span class="va">sm3b</span><span class="op">)</span> <span class="co"># TRUE</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, ar <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">ar1</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, ar <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">ar1c</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, ar <span class="op">=</span> <span class="fl">0.9</span>, intercept <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">ar1c</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "SarimaModel"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Model: Phi(B)X(t) = e(t)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Model: Phi(B)X(t) = intercept + e(t)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> mean:  0 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> intercept:  3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sigmaSq:  NA </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Non-seasonal model </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Order of differencing:  0 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ar coefficients:   0.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ma coefficients:    &lt;None&gt;</span>
+<span class="r-in"><span class="va">ar1m</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, ar <span class="op">=</span> <span class="fl">0.9</span>, center <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">ar1m</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "SarimaModel"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Model: Phi(B)(X(t) - center) = e(t)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mean:  1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sigmaSq:  NA </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Non-seasonal model </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Order of differencing:  0 </span>
@@ -298,6 +278,76 @@ Class <code>"<a href="VirtualMonicFilter-class.html">VirtualMonicFilter</a>"</co
 <span class="r-out co"><span class="r-pr">#&gt;</span> ar coefficients:   0.9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ma coefficients:    &lt;None&gt;</span>
 <span class="r-in"></span>
+<span class="r-in"><span class="va">sm0</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, nseasons <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">sm1</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, nseasons <span class="op">=</span> <span class="fl">12</span>, intercept <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">sm1</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "SarimaModel"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Model: X(t) = intercept + e(t)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> intercept:  3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sigmaSq:  NA </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Period:  12 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Order of differencing:  0 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Order of seasonal differencing:  0 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ar coefficients:    &lt;None&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ma coefficients:    &lt;None&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> seasonal ar coefficients:   &lt;None&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> seasonal ma coefficients:   &lt;None&gt;</span>
+<span class="r-in"><span class="co">## alternatively, pass a model and modify with named arguments</span></span>
+<span class="r-in"><span class="va">sm1b</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, <span class="va">sm0</span>, intercept <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">sm1</span>, <span class="va">sm1b</span><span class="op">)</span> <span class="co"># TRUE</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co">## in the above models sigma2 is NA</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co">## sm2 - from scratch, the rest modefy an existing model</span></span>
+<span class="r-in"><span class="va">sm2</span>  <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, ar <span class="op">=</span> <span class="fl">0.9</span>, nseasons <span class="op">=</span> <span class="fl">12</span>, intercept <span class="op">=</span> <span class="fl">3</span>, sigma2 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">sm2a</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, <span class="va">sm0</span>, ar <span class="op">=</span> <span class="fl">0.9</span>, intercept <span class="op">=</span> <span class="fl">3</span>, sigma2 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">sm2b</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, <span class="va">sm1</span>, ar <span class="op">=</span> <span class="fl">0.9</span>, sigma2 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">sm2c</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, <span class="va">ar1c</span>, nseasons <span class="op">=</span><span class="fl">12</span>, sigma2 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">sm2</span>, <span class="va">sm2a</span><span class="op">)</span> <span class="co"># TRUE</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">sm2</span>, <span class="va">sm2b</span><span class="op">)</span> <span class="co"># TRUE</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">sm2</span>, <span class="va">sm2c</span><span class="op">)</span> <span class="co"># TRUE</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="va">sm3</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, ar <span class="op">=</span> <span class="fl">0.9</span>, sar <span class="op">=</span> <span class="fl">0.8</span>, nseasons <span class="op">=</span> <span class="fl">12</span>, intercept <span class="op">=</span> <span class="fl">3</span>,</span>
+<span class="r-in">           sigma2 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">sm3b</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, <span class="va">sm2</span>, sar <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">sm3</span>, <span class="va">sm3b</span><span class="op">)</span> <span class="co"># TRUE</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co">## The classic 'airline model' (from examples for AirPassengers)</span></span>
+<span class="r-in"><span class="op">(</span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/arima.html" class="external-link">arima</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log10</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span class="r-in">              seasonal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, period <span class="op">=</span> <span class="fl">12</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> arima(x = log10(AirPassengers), order = c(0, 1, 1), seasonal = list(order = c(0, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     1, 1), period = 12))</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           ma1     sma1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       -0.4018  -0.5569</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s.e.   0.0896   0.0731</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sigma^2 estimated as 0.0002543:  log likelihood = 353.96,  aic = -701.92</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="fu"><a href="as.SarimaModel.html">as.SarimaModel</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "SarimaModel"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Model: (1-B)(1-B^s)X(t) = Theta(B)Theta_s(B^s)e(t)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Intercept:  0 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> SigmaSq:  0.0002542551 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Period:  12 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Order of differencing:  1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Order of seasonal differencing:  1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ar coefficients:    &lt;None&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ma coefficients:   -0.401827932080369</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> seasonal ar coefficients:   &lt;None&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> seasonal ma coefficients:  -0.556944787504635</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
