@@ -126,20 +126,20 @@ doi: <a href="https://doi.org/10.1109/TASSP.1984.1164391" class="external-link">
 <span class="r-in"><span class="va">seas_spec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>, period <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">fitted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/arima.html" class="external-link">arima</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>, seasonal <span class="op">=</span> <span class="va">seas_spec</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">(</span><span class="va">fi</span> <span class="op">&lt;-</span> <span class="fu">FisherInformation</span><span class="op">(</span><span class="va">fitted</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               phi_1        Phi_1     theta_1       Theta_1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> phi_1    1.24529611  -0.08445698 -1.15306655  8.415792e-02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Phi_1   -0.08445698   5.53634933  0.02656537 -1.054760e+01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> theta_1 -1.15306655   0.02656537  1.09825061 -2.654537e-02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Theta_1  0.08415792 -10.54759555 -0.02654537  2.267280e+05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              phi_1      Phi_1    theta_1    Theta_1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> phi_1    1.7356433 -0.2907974 -1.5724505  0.3034902</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Phi_1   -0.2907974  1.0880411  0.1798552 -1.1678934</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> theta_1 -1.5724505  0.1798552  1.4549492 -0.1839419</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Theta_1  0.3034902 -1.1678934 -0.1839419  1.3430031</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"nseasons")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4</span>
 <span class="r-in"><span class="co">## asymptotic covariance matrix of the ARMA parameters:</span></span>
 <span class="r-in"><span class="va">fitted</span><span class="op">$</span><span class="va">sigma2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">fi</span><span class="op">)</span> <span class="op">/</span> <span class="fl">100</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                phi_1        Phi_1      theta_1      Theta_1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> phi_1   2.481070e-01 2.535347e-03 2.604292e-01 5.634431e-08</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Phi_1   2.535347e-03 1.554368e-03 2.624294e-03 7.167680e-08</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> theta_1 2.604292e-01 2.624294e-03 2.810677e-01 5.832480e-08</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Theta_1 5.634431e-08 7.167680e-08 5.832480e-08 3.731832e-08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                phi_1      Phi_1      theta_1      Theta_1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> phi_1    0.295471255 0.02282792  0.316052450 -0.003631228</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Phi_1    0.022827916 0.11424761  0.022852654  0.097322596</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> theta_1  0.316052450 0.02285265  0.343765191 -0.004465003</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Theta_1 -0.003631228 0.09732260 -0.004465003  0.090884900</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## a theoretical seasonal ARMA model:</span></span>
 <span class="r-in"><span class="va">sarima1</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, ar <span class="op">=</span> <span class="fl">0.9</span>, ma <span class="op">=</span> <span class="fl">0.1</span>, sar <span class="op">=</span> <span class="fl">0.5</span>, sma <span class="op">=</span> <span class="fl">0.9</span>, nseasons <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>

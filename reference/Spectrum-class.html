@@ -64,7 +64,8 @@ Objects from class "Spectrum" spectra computed by
 <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, n <span class="op">=</span> <span class="fl">128</span>, standardize <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="co"># S3 method for Spectrum</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">to</span>, from <span class="op">=</span> <span class="va">y</span>, n <span class="op">=</span> <span class="fl">128</span>, standardize <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">to</span>, from <span class="op">=</span> <span class="va">y</span>, n <span class="op">=</span> <span class="fl">128</span>, standardize <span class="op">=</span> <span class="cn">TRUE</span>,
+    log <span class="op">=</span> <span class="cn">NULL</span>, main <span class="op">=</span> <span class="st">"Spectral density"</span>, xlab <span class="op">=</span> <span class="st">"Frequency"</span>, ylab <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -81,13 +82,42 @@ Objects from class "Spectrum" spectra computed by
 <dt>standardize</dt>
 <dd><p>if <code>TRUE</code> make the spectral density integrate to one (i.e., be
     a probability density function).</p></dd>
+<dt>log</dt>
+<dd><p>if <code>log = "y"</code> plot the logarithm of the spectral density, see
+    <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">?plot.default</a></code>.</p></dd>
+<dt>main</dt>
+<dd><p>a character string, the title of the plot.</p></dd>
+<dt>xlab</dt>
+<dd><p>a character string, the label for the x-axis.</p></dd>
+<dt>ylab</dt>
+<dd>
+
+<p>a character string, the label for the y-axis. If <code>NULL</code>, the
+    default, the label is set to <code>"Spd"</code> or <code>"log(Spd)"</code>,
+    depending on the value of argument <code>log</code>.</p>
+<p></p></dd>
 <dt>...</dt>
 <dd>
 
-<p>for <code>print</code>, further arguments for <code><a href="https://rdrr.io/r/base/print.default.html" class="external-link">print.default()</a></code>;
-    for <code>plot</code>, further arguments for <code><a href="https://rdrr.io/r/graphics/curve.html" class="external-link">curve</a></code>.</p>
+<p>for <code>print</code>, further arguments for <code><a href="https://rdrr.io/r/base/print.default.html" class="external-link">print.default()</a></code>;</p>
+<p>for <code>plot</code>, further arguments for <code><a href="https://rdrr.io/r/graphics/curve.html" class="external-link">curve</a></code>.</p>
 <p></p></dd>
 </dl></div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    
+
+<p><code>"Spectrum"</code> is an S4 class and as such autoprinting calls the
+  <code>"Spectrum"</code> method for <code>show()</code>, which prints and plots,
+  see section ‘Methods’. <code>show</code> has a single argument, the
+  object.  For more control, there are also methods for <code>print</code> and
+  <code>plot</code>, which can be called directly and accept additional
+  arguments.</p>
+<p><code>print(object)</code> is equivalent to <code>show(object)</code>, except that
+  the former returns  <code>object</code> while the latter returns <code>NULL</code>
+  (both invisibly), as is standard for these functions. 
+  No plot is produced when <code>print</code> is called with further arguments.</p>
+    </div>
     <div class="section level2">
     <h2 id="objects-from-the-class">Objects from the Class<a class="anchor" aria-label="anchor" href="#objects-from-the-class"></a></h2>
     
@@ -124,12 +154,15 @@ Objects from class "Spectrum" spectra computed by
 <dd><p><code>signature(object = "Spectrum")</code>:</p>      
 <p>plots <code>object</code> and prints succinct information about it,
       including the peaks and troughs in the spectral density
-      (sd). These are computed by evaluating the sd at <code>n</code> equially
-      spaced points and recording the maxima of the resulting discrete
-      sequence. Set argument <code>n</code> to get a finer/coarser grid or to
-      force calculations for particular frequencies. For example, a
-      multiple of 12 may be suitable for <code>n</code> if the data is
-      monthly.</p>
+      (sd). These are computed by evaluating the spectral density at
+      <code>n</code> equially spaced points and recording the maxima of the
+      resulting discrete sequence. Set argument <code>n</code> to get a
+      finer/coarser grid or to force calculations for particular
+      frequencies. For example, a multiple of 12 may be suitable for
+      <code>n</code> if the data is monthly.</p>
+<p>For more control over printing, call <code>print</code> which has
+      additional arguments. Similarly, call <code>plot</code> for more
+      flexible graphics. See section ‘Details’ for the details.</p>
 <p></p></dd>
 
   
@@ -154,9 +187,10 @@ Objects from class "Spectrum" spectra computed by
 <span class="r-in"><span class="va">sd.air</span> <span class="op">&lt;-</span> <span class="fu"><a href="spectrum.html">spectrum</a></span><span class="op">(</span><span class="va">fit0</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">show</span><span class="op">(</span><span class="va">sd.air</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> standardized spectral density of the following ARMA(0,13) model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef:   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef:  -0.3086737 0 0 0 0 0 0 0 0 0 0 -0.107447 0.03316607 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:   135.4237 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef: -0.308673666075597 0 0 0 0 0 0 0 0 0 0 -0.107447034926172 0.0331660701796143</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:  135.423722144198</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Peaks:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            freq      spec    period</span>
@@ -168,6 +202,7 @@ Objects from class "Spectrum" spectra computed by
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6,] 0.46062992 1.8701110  2.170940</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Troughs:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            freq      spec    period</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.00000000 0.3436561  0.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.08267717 0.4023487 12.095238</span>
@@ -178,9 +213,11 @@ Objects from class "Spectrum" spectra computed by
 <span class="r-out co"><span class="r-pr">#&gt;</span> [7,] 0.50000000 1.2314609  2.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> max peak/min trough:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	5.441809</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	5.44180863322511</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-plt img"><img src="Spectrum-class-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">sd.air</span>, log <span class="op">=</span> <span class="st">"y"</span><span class="op">)</span> <span class="co"># plot log of the spectral density</span></span>
+<span class="r-plt img"><img src="Spectrum-class-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## use the "Spectrum" object as a function to evaluate the sp. density:</span></span>
 <span class="r-in"><span class="fu">sd.air</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span>, length.out <span class="op">=</span> <span class="fl">13</span><span class="op">)</span><span class="op">)</span></span>
@@ -194,29 +231,33 @@ Objects from class "Spectrum" spectra computed by
 <span class="r-in"><span class="va">sp.wn</span> <span class="op">&lt;-</span> <span class="fu"><a href="spectrum.html">spectrum</a></span><span class="op">(</span><span class="fu"><a href="ArmaModel.html">ArmaModel</a></span><span class="op">(</span>sigma2 <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">sp.wn</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> standardized spectral density of the following ARMA(0,0) model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef:   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef:   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:   2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> constant, equal to  1 for all frequencies </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:  2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> constant, equal to 1 for all frequencies</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sp.wn</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> standardized spectral density of the following ARMA(0,0) model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef:   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef:   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:   2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> constant, equal to  1 for all frequencies </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:  2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> constant, equal to 1 for all frequencies</span>
+<span class="r-plt img"><img src="Spectrum-class-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sp.wn</span>, standardize<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> spectral density of the following ARMA(0,0) model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef:   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef:   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:   2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> constant, equal to  2 for all frequencies </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:  2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> constant, equal to 2 for all frequencies</span>
 <span class="r-in"><span class="fu">show</span><span class="op">(</span><span class="va">sp.wn</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> standardized spectral density of the following ARMA(0,0) model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef:   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef:   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:   2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> constant, equal to  1 for all frequencies </span>
-<span class="r-plt img"><img src="Spectrum-class-2.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:  2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> constant, equal to 1 for all frequencies</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

@@ -67,7 +67,7 @@ Estimate the spectral density of a time series or compute the spectral
          demean <span class="op">=</span> <span class="cn">FALSE</span>, detrend <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span>
 
 <span class="co"># S3 method for genspec</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, n.head <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">spec</span><span class="op">)</span>, <span class="fl">6</span><span class="op">)</span>, sort <span class="op">=</span> <span class="cn">TRUE</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, n.head <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">spec</span><span class="op">)</span>, <span class="fl">6</span><span class="op">)</span>, sort <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span>
 
 <span class="co"># S3 method for Arima</span>
 <span class="fu">spectrum</span><span class="op">(</span><span class="va">x</span>, standardize <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span>
@@ -105,28 +105,24 @@ Estimate the spectral density of a time series or compute the spectral
 <dd><p>how many rows to print?</p></dd>
 <dt>sort</dt>
 <dd><p><code>TRUE</code>, <code>FALSE</code> or <code>"max"</code>, see section ‘Details'’.</p></dd>
-<dt>plot</dt>
-<dd><p>if <code>TRUE</code>, the default, plot the spectrum.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     
   
 <p><code>spectrum</code> in package <span class="pkg">sarima</span> is a generic function with a
-  default method its namesake in package <span class="pkg">stats</span>, see its help page
+  default method its namesake in package <span class="pkg">stats</span>, see
   <code><a href="https://rdrr.io/r/stats/spectrum.html" class="external-link">spectrum</a></code> for a full description of its
   functionality.</p>
-<p><code>print(object)</code> (and <code>show</code>, where applicable), for objects
-  returned by <code>spectrum</code> print concise information about the
-  spectrum and plot it. This means that a plot is produced whenever
-  printing of the object occurs. Most usefully, when the result of a
-  call to the function is not assigned to a variable or if a command
-  containing just the name of the object is executed. If you don't want
-  the graph, just assign the result to a variable. For more control over
-  the printing (for example, number of digits) use <code>print(object,
-  ...)</code> explicitly. Similarly, call <code>plot</code> if additional graphical
-  parameters are desired. Note that <code>print</code> doesn't plot when there
-  are additional arguments in the call.</p>
+<p>Autoprinting of objects returned by <code>spectrum</code> prints concise
+  information and plots the spectrum. This means that a plot is
+  produced, for example, when the result of a call to <code>spectrum()</code>
+  is not assigned to a variable or if a command containing just the name
+  of the object is executed. If you don't want the graph, just assign
+  the result to a variable. For more control over the printing (for
+  example, number of digits) use <code>print(object, ...)</code>
+  explicitly. In that case no plot is produced. If additional graphical
+  parameters are desired, call <code>plot, ...</code>.</p>
 <p>All methods print some basic information about the object and a table
   giving the most influential frequencies and their contributions to the
   spectrum.</p>  
@@ -207,9 +203,10 @@ Estimate the spectral density of a time series or compute the spectral
 <span class="r-in">              seasonal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, period <span class="op">=</span> <span class="fl">12</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">spectrum</span><span class="op">(</span><span class="va">fit0</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> standardized spectral density of the following ARMA(0,13) model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef:   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef:  -0.3086737 0 0 0 0 0 0 0 0 0 0 -0.107447 0.03316607 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:   135.4237 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef: -0.308673666075597 0 0 0 0 0 0 0 0 0 0 -0.107447034926172 0.0331660701796143</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:  135.423722144198</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Peaks:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            freq      spec    period</span>
@@ -221,6 +218,7 @@ Estimate the spectral density of a time series or compute the spectral
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6,] 0.46062992 1.8701110  2.170940</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Troughs:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            freq      spec    period</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.00000000 0.3436561  0.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.08267717 0.4023487 12.095238</span>
@@ -231,16 +229,18 @@ Estimate the spectral density of a time series or compute the spectral
 <span class="r-out co"><span class="r-pr">#&gt;</span> [7,] 0.50000000 1.2314609  2.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> max peak/min trough:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	5.441809</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	5.44180863322511</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-plt img"><img src="spectrum-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## spectral densities of some ARMA models models from Chan and Gray ().</span></span>
 <span class="r-in"><span class="co">##   (TODO: complete the reference)</span></span>
 <span class="r-in"><span class="fu">spectrum</span><span class="op">(</span><span class="fu"><a href="ArmaModel.html">ArmaModel</a></span><span class="op">(</span>ma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">0.6</span><span class="op">)</span>, sigma2 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> standardized spectral density of the following ARMA(0,2) model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef:   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef:  -1 0.6 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:   1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef: -1 0.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Peaks:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      freq      spec period</span>
@@ -248,51 +248,60 @@ Estimate the spectral density of a time series or compute the spectral
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.5 2.8644068      2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Troughs:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           freq       spec   period</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.1338583 0.03954802 7.470588</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> max peak/min trough:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	72.42857</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	72.4285712702576</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-plt img"><img src="spectrum-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span class="fu">spectrum</span><span class="op">(</span><span class="fu"><a href="ArmaModel.html">ArmaModel</a></span><span class="op">(</span>ar <span class="op">=</span> <span class="fl">0.5</span>, sigma2 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> standardized spectral density of the following ARMA(1,0) model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef:  0.5 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef:   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:   1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef: 0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Peaks:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      freq spec period</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,]    0    3      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Troughs:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      freq      spec period</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.5 0.3333333      2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> max peak/min trough:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-plt img"><img src="spectrum-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span class="fu">spectrum</span><span class="op">(</span><span class="fu"><a href="ArmaModel.html">ArmaModel</a></span><span class="op">(</span>ar <span class="op">=</span> <span class="fl">0.5</span>, ma <span class="op">=</span> <span class="op">-</span><span class="fl">0.8</span>, sigma2 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> standardized spectral density of the following ARMA(1,1) model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef:  0.5 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef:  -0.8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:   1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef: 0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef: -0.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Peaks:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      freq     spec period</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.5 1.285714      2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Troughs:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      freq      spec period</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,]    0 0.1428571      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> max peak/min trough:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	9.00000000000001</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-plt img"><img src="spectrum-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span class="fu">spectrum</span><span class="op">(</span><span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, ar <span class="op">=</span> <span class="fl">0.5</span>, sar <span class="op">=</span> <span class="fl">0.9</span>, nseasons <span class="op">=</span> <span class="fl">12</span>, sigma2 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> standardized spectral density of the following ARMA(13,0) model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef:  0.5 0 0 0 0 0 0 0 0 0 0 0.9 -0.45 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef:   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:   1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef: 0.5 0 0 0 0 0 0 0 0 0 0 0.9 -0.45</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Peaks:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            freq      spec    period</span>
@@ -305,6 +314,7 @@ Estimate the spectral density of a time series or compute the spectral
 <span class="r-out co"><span class="r-pr">#&gt;</span> [7,] 0.50000000  6.330551  2.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Troughs:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            freq       spec    period</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.04330709 0.13810376 23.090909</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.12598425 0.07219447  7.937500</span>
@@ -314,8 +324,9 @@ Estimate the spectral density of a time series or compute the spectral
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6,] 0.45669291 0.01789584  2.189655</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> max peak/min trough:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	3183.698</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	3183.6976128219</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-plt img"><img src="spectrum-5.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">mo</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, ma <span class="op">=</span> <span class="op">-</span><span class="fl">0.4</span>, sma <span class="op">=</span> <span class="op">-</span><span class="fl">0.9</span>, nseasons <span class="op">=</span> <span class="fl">12</span>, sigma2 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">sp1.mo</span> <span class="op">&lt;-</span> <span class="fu">spectrum</span><span class="op">(</span><span class="va">mo</span><span class="op">)</span></span>
@@ -324,9 +335,10 @@ Estimate the spectral density of a time series or compute the spectral
 <span class="r-in"><span class="co">##     I haven't figured out why.)</span></span>
 <span class="r-in"><span class="fu">show</span><span class="op">(</span><span class="va">sp1.mo</span><span class="op">)</span>  <span class="co"># equivalently, just sp1.mo</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> standardized spectral density of the following ARMA(0,13) model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef:   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef:  -0.4 0 0 0 0 0 0 0 0 0 0 -0.9 0.36 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:   1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef: -0.4 0 0 0 0 0 0 0 0 0 0 -0.9 0.36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Peaks:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            freq      spec    period</span>
@@ -338,6 +350,7 @@ Estimate the spectral density of a time series or compute the spectral
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6,] 0.45669291 3.3067228  2.189655</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Troughs:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            freq        spec    period</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.00000000 0.001714612  0.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.08267717 0.002705604 12.095238</span>
@@ -348,14 +361,15 @@ Estimate the spectral density of a time series or compute the spectral
 <span class="r-out co"><span class="r-pr">#&gt;</span> [7,] 0.50000000 0.009335111  2.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> max peak/min trough:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	1928.554</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	1928.55420344982</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sp1.mo</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> standardized spectral density of the following ARMA(0,13) model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef:   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef:  -0.4 0 0 0 0 0 0 0 0 0 0 -0.9 0.36 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:   1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef: -0.4 0 0 0 0 0 0 0 0 0 0 -0.9 0.36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Peaks:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            freq      spec    period</span>
@@ -367,6 +381,7 @@ Estimate the spectral density of a time series or compute the spectral
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6,] 0.45669291 3.3067228  2.189655</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Troughs:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            freq        spec    period</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.00000000 0.001714612  0.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.08267717 0.002705604 12.095238</span>
@@ -377,13 +392,15 @@ Estimate the spectral density of a time series or compute the spectral
 <span class="r-out co"><span class="r-pr">#&gt;</span> [7,] 0.50000000 0.009335111  2.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> max peak/min trough:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	1928.554</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	1928.55420344982</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-plt img"><img src="spectrum-6.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sp1.mo</span>, digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> standardized spectral density of the following ARMA(0,13) model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef:   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef:  -0.4 0 0 0 0 0 0 0 0 0 0 -0.9 0.36 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:   1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef: -0.4 0 0 0 0 0 0 0 0 0 0 -0.9 0.36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Peaks:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         freq  spec period</span>
@@ -395,6 +412,7 @@ Estimate the spectral density of a time series or compute the spectral
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6,] 0.45669 3.307  2.190</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Troughs:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         freq     spec period</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.00000 0.001715  0.000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.08268 0.002706 12.095</span>
@@ -405,12 +423,13 @@ Estimate the spectral density of a time series or compute the spectral
 <span class="r-out co"><span class="r-pr">#&gt;</span> [7,] 0.50000 0.009335  2.000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> max peak/min trough:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	1928.554</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	1928.55420344982</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">sp1.mo</span><span class="op">)</span></span>
-<span class="r-plt img"><img src="spectrum-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">sp1.mo</span>, standardize <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-plt img"><img src="spectrum-2.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="spectrum-7.png" alt="" width="700" height="433"></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co">## the object can be used as a function:</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">sp1.mo</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.001714612 0.002554241 0.005068983 0.009246422 0.015065928 0.022498754</span>
 <span class="r-in"><span class="fu">sp1.mo</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span>, length.out <span class="op">=</span> <span class="fl">12</span><span class="op">)</span><span class="op">)</span></span>
@@ -422,11 +441,12 @@ Estimate the spectral density of a time series or compute the spectral
 <span class="r-in"></span>
 <span class="r-in"><span class="va">sarima1b</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="st">"SarimaModel"</span>, ar <span class="op">=</span> <span class="fl">0.9</span>, ma <span class="op">=</span> <span class="fl">0.1</span>, sar <span class="op">=</span> <span class="fl">0.5</span>, sma <span class="op">=</span> <span class="fl">0.9</span>,</span>
 <span class="r-in">                nseasons <span class="op">=</span> <span class="fl">12</span>, sigma2 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">show</span><span class="op">(</span><span class="fu">spectrum</span><span class="op">(</span><span class="va">sarima1b</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">spectrum</span><span class="op">(</span><span class="va">sarima1b</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> standardized spectral density of the following ARMA(13,13) model:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef:  0.9 0 0 0 0 0 0 0 0 0 0 0.5 -0.45 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef:  0.1 0 0 0 0 0 0 0 0 0 0 0.9 0.09 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:   1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ar coef: 0.9 0 0 0 0 0 0 0 0 0 0 0.5 -0.45</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ma coef: 0.1 0 0 0 0 0 0 0 0 0 0 0.9 0.09</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   sigma2:  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Peaks:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            freq        spec    period</span>
@@ -439,6 +459,7 @@ Estimate the spectral density of a time series or compute the spectral
 <span class="r-out co"><span class="r-pr">#&gt;</span> [7,] 0.50000000  0.09535326  2.000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Troughs:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            freq         spec    period</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.04330709 4.917941e-03 23.090909</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.12598425 4.133602e-04  7.937500</span>
@@ -448,9 +469,9 @@ Estimate the spectral density of a time series or compute the spectral
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6,] 0.45669291 7.189623e-05  2.189655</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> max peak/min trough:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	928585.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	928585.262611838</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-plt img"><img src="spectrum-3.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="spectrum-8.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## default method for spectrum()</span></span>
 <span class="r-in"></span>
@@ -473,7 +494,7 @@ Estimate the spectral density of a time series or compute the spectral
 <span class="r-out co"><span class="r-pr">#&gt;</span>     [4,] 0.16666667 2.186349 0.09290079 0.5909519</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     [5,] 0.08333333 2.178577 0.09257054 0.6835224</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     [6,] 0.02083333 1.073144 0.04559926 0.7291217</span>
-<span class="r-plt img"><img src="spectrum-4.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="spectrum-9.png" alt="" width="700" height="433"></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co">## frequency range is c(-12/2, 12/2] since frequency(x) = 12</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/time.html" class="external-link">frequency</a></span><span class="op">(</span><span class="va">ldeaths</span><span class="op">)</span></span>
@@ -510,8 +531,8 @@ Estimate the spectral density of a time series or compute the spectral
 <span class="r-out co"><span class="r-pr">#&gt;</span>     [4,] 3.5000000 0.02873917 0.009714574 0.8797696</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     [5,] 2.5000000 0.02469094 0.008346168 0.8881157</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     [6,] 2.3333333 0.02371560 0.008016480 0.8961322</span>
-<span class="r-plt img"><img src="spectrum-5.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sp</span>, sort <span class="op">=</span> <span class="cn">FALSE</span>, n.head <span class="op">=</span> <span class="cn">Inf</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-plt img"><img src="spectrum-10.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sp</span>, sort <span class="op">=</span> <span class="cn">FALSE</span>, n.head <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Estimated spectral density</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     series: ldeaths</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     method: Raw Periodogram</span>
@@ -520,44 +541,11 @@ Estimate the spectral density of a time series or compute the spectral
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     sort method for the table: none</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                freq         spec      % Total     Cum. %</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [1,] 0.1666667 0.0765248014 2.586734e-02 0.02586734</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [2,] 0.3333333 0.0147142432 4.973790e-03 0.03084113</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [3,] 0.5000000 0.0083225364 2.813230e-03 0.03365436</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [4,] 0.6666667 0.0110344406 3.729923e-03 0.03738428</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [5,] 0.8333333 0.0161668621 5.464813e-03 0.04284910</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [6,] 1.0000000 2.3806277145 8.047130e-01 0.84756213</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [7,] 1.1666667 0.0150128049 5.074712e-03 0.85263684</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [8,] 1.3333333 0.0187011542 6.321468e-03 0.85895831</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [9,] 1.5000000 0.0215073992 7.270051e-03 0.86622836</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [10,] 1.6666667 0.0079473145 2.686395e-03 0.86891475</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [11,] 1.8333333 0.0083411692 2.819528e-03 0.87173428</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [12,] 2.0000000 0.1167799537 3.947461e-02 0.91120889</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [13,] 2.1666667 0.0068147353 2.303555e-03 0.91351245</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [14,] 2.3333333 0.0237156036 8.016480e-03 0.92152893</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [15,] 2.5000000 0.0246909373 8.346168e-03 0.92987509</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [16,] 2.6666667 0.0130944755 4.426267e-03 0.93430136</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [17,] 2.8333333 0.0129896406 4.390831e-03 0.93869219</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [18,] 3.0000000 0.0001560288 5.274171e-05 0.93874493</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [19,] 3.1666667 0.0102690438 3.471199e-03 0.94221613</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [20,] 3.3333333 0.0082072731 2.774268e-03 0.94499040</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [21,] 3.5000000 0.0287391707 9.714574e-03 0.95470498</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [22,] 3.6666667 0.0217472040 7.351111e-03 0.96205609</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [23,] 3.8333333 0.0130313695 4.404936e-03 0.96646102</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [24,] 4.0000000 0.0199830481 6.754781e-03 0.97321580</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [25,] 4.1666667 0.0028370500 9.589954e-04 0.97417480</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [26,] 4.3333333 0.0093393506 3.156939e-03 0.97733174</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [27,] 4.5000000 0.0128853605 4.355581e-03 0.98168732</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [28,] 4.6666667 0.0092774467 3.136014e-03 0.98482333</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [29,] 4.8333333 0.0077895647 2.633072e-03 0.98745641</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [30,] 5.0000000 0.0059515298 2.011769e-03 0.98946818</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [31,] 5.1666667 0.0032283295 1.091258e-03 0.99055943</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [32,] 5.3333333 0.0083260813 2.814428e-03 0.99337386</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [33,] 5.5000000 0.0011100244 3.752166e-04 0.99374908</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [34,] 5.6666667 0.0087122290 2.944956e-03 0.99669403</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [35,] 5.8333333 0.0097346608 3.290564e-03 0.99998460</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [36,] 6.0000000 0.0000455635 1.540163e-05 1.00000000</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sp</span>, sort <span class="op">=</span> <span class="st">"max"</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               freq        spec    % Total     Cum. %</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     [1,] 0.1666667 0.076524801 0.02586734 0.02586734</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     [2,] 0.3333333 0.014714243 0.00497379 0.03084113</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     [3,] 0.5000000 0.008322536 0.00281323 0.03365436</span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sp</span>, sort <span class="op">=</span> <span class="st">"max"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Estimated spectral density</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     series: ldeaths</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     method: Raw Periodogram</span>
@@ -573,55 +561,9 @@ Estimate the spectral density of a time series or compute the spectral
 <span class="r-out co"><span class="r-pr">#&gt;</span>     [4,] 3.5000000 0.02873917 0.009714574 0.8797696     4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     [5,] 2.5000000 0.02469094 0.008346168 0.8881157     5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     [6,] 1.5000000 0.02150740 0.007270051 0.8953858     6</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sp</span>, sort <span class="op">=</span> <span class="st">"max"</span>, n.head <span class="op">=</span> <span class="cn">Inf</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Estimated spectral density</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     series: ldeaths</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     method: Raw Periodogram</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     nseasons: 12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     frequency range: (-6,6]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     sort method for the table: local maxima first</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                freq         spec      % Total    Cum. % ranks</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [1,] 1.0000000 2.3806277145 8.047130e-01 0.8047130     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [2,] 2.0000000 0.1167799537 3.947461e-02 0.8441876     2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [3,] 0.1666667 0.0765248014 2.586734e-02 0.8700550     3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [4,] 3.5000000 0.0287391707 9.714574e-03 0.8797696     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [5,] 2.5000000 0.0246909373 8.346168e-03 0.8881157     5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [6,] 1.5000000 0.0215073992 7.270051e-03 0.8953858     6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [7,] 4.0000000 0.0199830481 6.754781e-03 0.9021406     7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [8,] 4.5000000 0.0128853605 4.355581e-03 0.9064961     8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [9,] 3.1666667 0.0102690438 3.471199e-03 0.9099673     9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [10,] 5.8333333 0.0097346608 3.290564e-03 0.9132579    10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [11,] 5.3333333 0.0083260813 2.814428e-03 0.9160723    11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [12,] 2.3333333 0.0237156036 8.016480e-03 0.9240888    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [13,] 3.6666667 0.0217472040 7.351111e-03 0.9314399    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [14,] 1.3333333 0.0187011542 6.321468e-03 0.9377614    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [15,] 0.8333333 0.0161668621 5.464813e-03 0.9432262    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [16,] 1.1666667 0.0150128049 5.074712e-03 0.9483009    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [17,] 0.3333333 0.0147142432 4.973790e-03 0.9532747    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [18,] 2.6666667 0.0130944755 4.426267e-03 0.9577010    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [19,] 3.8333333 0.0130313695 4.404936e-03 0.9621059    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [20,] 2.8333333 0.0129896406 4.390831e-03 0.9664967    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [21,] 0.6666667 0.0110344406 3.729923e-03 0.9702267    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [22,] 4.3333333 0.0093393506 3.156939e-03 0.9733836    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [23,] 4.6666667 0.0092774467 3.136014e-03 0.9765196    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [24,] 5.6666667 0.0087122290 2.944956e-03 0.9794646    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [25,] 1.8333333 0.0083411692 2.819528e-03 0.9822841    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [26,] 0.5000000 0.0083225364 2.813230e-03 0.9850973    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [27,] 3.3333333 0.0082072731 2.774268e-03 0.9878716    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [28,] 1.6666667 0.0079473145 2.686395e-03 0.9905580    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [29,] 4.8333333 0.0077895647 2.633072e-03 0.9931911    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [30,] 2.1666667 0.0068147353 2.303555e-03 0.9954946    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [31,] 5.0000000 0.0059515298 2.011769e-03 0.9975064    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [32,] 5.1666667 0.0032283295 1.091258e-03 0.9985976    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [33,] 4.1666667 0.0028370500 9.589954e-04 0.9995566    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [34,] 5.5000000 0.0011100244 3.752166e-04 0.9999319    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [35,] 3.0000000 0.0001560288 5.274171e-05 0.9999846    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [36,] 6.0000000 0.0000455635 1.540163e-05 1.0000000    NA</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">sp</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">sp</span>, log <span class="op">=</span> <span class="st">"dB"</span><span class="op">)</span>  <span class="co"># see ?plot.spec for further arguments</span></span>
-<span class="r-plt img"><img src="spectrum-6.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="spectrum-11.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
