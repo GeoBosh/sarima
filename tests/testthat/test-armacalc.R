@@ -54,6 +54,9 @@ test_that("functions in armacalc.R work ok", {
 ## arma(2,2)
 phi22 <- c(0.8, 0.1) 
 theta22 <- -c(1.2, -0.6)
+
+if(requireNamespace("FitARMA")){
+
 expect_equal(.FisherInfo(-phi22, theta22), InformationMatrixARMA(phi22, -theta22), check.attributes = FALSE)
 
 phi21 <- c(0.8, 0.1) 
@@ -76,6 +79,8 @@ expect_equal(.FisherInfo(-phi11, theta11), InformationMatrixARMA(phi11, -theta11
 expect_equal(.FisherInfo(-phi11), InformationMatrixARMA(phi11), check.attributes = FALSE)
 ## ma(1)
 expect_equal(.FisherInfo(theta = theta11), InformationMatrixARMA(theta = -theta11), check.attributes = FALSE)
+
+} # end if(requireNamespace("FitARMA"))
 
 ## ARMA(0,0);   ##  note: FitARMA::InformationMatrixARMA()  returns  numeric(0)
 expect_equal(.FisherInfo(), matrix(nrow = 0, ncol = 0), , check.attributes = FALSE)
@@ -101,9 +106,17 @@ b <- .FisherInfoSarma_rbind(c(-0.8, 0.1), 0.5)
 c <- .FisherInfo(c(-0.8, 0.1), 0.5)
 expect_equal(a,b)
 expect_equal(a,c, check.attributes = FALSE)
+
+expect_error(.FisherInfoSarma(c(-2, 1), 0.5), "phi is not causal")
+expect_error(.FisherInfoSarma(c(-0.8, 0.1), -1), "theta is not invertible")
+expect_error(.FisherInfoSarma(c(-0.8, 0.1), -0.5, 1), "sphi is not causal")
+expect_error(.FisherInfoSarma(c(-0.8, 0.1), -0.5, 0.3, 1), "stheta is not invertible")
+
 ## this is uses BJ convention, negate coef's (the above use SP convention): 
-d <- InformationMatrixARMA(-c(-0.8, 0.1), -0.5)
-expect_equal(a,d, check.attributes = FALSE)
+if(requireNamespace("FitARMA")){
+    d <- InformationMatrixARMA(-c(-0.8, 0.1), -0.5)
+    expect_equal(a,d, check.attributes = FALSE)
+}
 })
 
 test_that("functions in armacalc.R work ok", {
@@ -141,6 +154,9 @@ a <- new("Spectrum", ar = -0.9)
 tmp <- a()
 print(a)
 plot(a)
+plot(a, log = "y")
+plot(a, log = "y", ylab = "") # curve() decide ylab
+
 expect_error(plot(a, standardize = FALSE),
              "sigma2 is NA but must be a positive number when standardize = FALSE")
 show(a)

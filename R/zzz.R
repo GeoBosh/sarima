@@ -33,7 +33,10 @@ InformationMatrixARMA <- local({
                 fu <<- FitARMA::InformationMatrixARMA
                 if(utils::packageVersion("FitARMA") <= "1.6.1")
                     body(fu)[[c(2,2)]] <<- 
-                        quote(!(FitAR::InvertibleQ(phi) & FitAR::InvertibleQ(theta)))
+                            # 2022-02-14 was:
+                            #   quote(!(FitAR::InvertibleQ(phi) & FitAR::InvertibleQ(theta)))
+                        quote(!((length(phi) == 0 || all(abs(sarima::ar2Pacf(phi)) < 1)) &
+                                (length(theta) == 0 || all(abs(sarima::ar2Pacf(theta)) < 1))))
             }
         }
         fu(phi, theta)

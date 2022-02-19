@@ -24,7 +24,7 @@ spectrum(x, standardize = TRUE, \dots)
 \method{spectrum}{default}(x, standardize = TRUE, raw = TRUE, taper = 0.1, 
          demean = FALSE, detrend = TRUE, \dots)
 
-\method{print}{genspec}(x, n.head = min(length(x$spec), 6), sort = TRUE, plot = TRUE, \dots)
+\method{print}{genspec}(x, n.head = min(length(x$spec), 6), sort = TRUE, \dots)
 
 \method{spectrum}{Arima}(x, standardize = TRUE, \dots)
 
@@ -58,26 +58,23 @@ spectrum(x, standardize = TRUE, \dots)
   }
   \item{n.head}{how many rows to print?}
   \item{sort}{\code{TRUE}, \code{FALSE} or \code{"max"}, see section \sQuote{Details'}.}
-  \item{plot}{if \code{TRUE}, the default, plot the spectrum.}
 }
 \details{
   
   \code{spectrum} in package \pkg{sarima} is a generic function with a
-  default method its namesake in package \pkg{stats}, see its help page
+  default method its namesake in package \pkg{stats}, see
   \code{\link[stats]{spectrum}} for a full description of its
   functionality.
 
-  \code{print(object)} (and \code{show}, where applicable), for objects
-  returned by \code{spectrum} print concise information about the
-  spectrum and plot it. This means that a plot is produced whenever
-  printing of the object occurs. Most usefully, when the result of a
-  call to the function is not assigned to a variable or if a command
-  containing just the name of the object is executed. If you don't want
-  the graph, just assign the result to a variable. For more control over
-  the printing (for example, number of digits) use \code{print(object,
-  ...)} explicitly. Similarly, call \code{plot} if additional graphical
-  parameters are desired. Note that \code{print} doesn't plot when there
-  are additional arguments in the call.
+  Autoprinting of objects returned by \code{spectrum} prints concise
+  information and plots the spectrum. This means that a plot is
+  produced, for example, when the result of a call to \code{spectrum()}
+  is not assigned to a variable or if a command containing just the name
+  of the object is executed. If you don't want the graph, just assign
+  the result to a variable. For more control over the printing (for
+  example, number of digits) use \code{print(object, ...)}
+  explicitly. In that case no plot is produced. If additional graphical
+  parameters are desired, call \code{plot, ...}.
 
   All methods print some basic information about the object and a table
   giving the most influential frequencies and their contributions to the
@@ -178,13 +175,15 @@ print(sp1.mo)
 print(sp1.mo, digits = 4)
 plot(sp1.mo)
 plot(sp1.mo, standardize = FALSE)
+
+## the object can be used as a function:
 head(sp1.mo())
 sp1.mo(seq(0, 0.5, length.out = 12))
 sp1.mo(seq(0, 0.5, length.out = 12), standardize = FALSE)
 
 sarima1b <- new("SarimaModel", ar = 0.9, ma = 0.1, sar = 0.5, sma = 0.9,
                 nseasons = 12, sigma2 = 1)
-show(spectrum(sarima1b))
+spectrum(sarima1b)
 
 ## default method for spectrum()
 
@@ -196,9 +195,8 @@ spectrum(lh)
 frequency(ldeaths)
 ( sp <- spectrum(ldeaths) )
 print(sp) # equivalently: print(sp, sort = TRUE)
-print(sp, sort = FALSE, n.head = Inf, plot = FALSE)
-print(sp, sort = "max", plot = FALSE)
-print(sp, sort = "max", n.head = Inf, plot = FALSE)
+print(sp, sort = FALSE, n.head = 3)
+print(sp, sort = "max")
 plot(sp)
 plot(sp, log = "dB")  # see ?plot.spec for further arguments
 }

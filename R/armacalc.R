@@ -84,6 +84,21 @@ ar2Pacf <- function(phi){
     phi
 }
 
+.isInvertibleFilter <- function(phi){
+    if((p <- length(phi)) == 0)
+        return(TRUE)
+
+    if(p > 1){
+        for(k in (p - 1L):1L){
+            bk <- phi[k + 1L]
+            if(abs(bk) >= 1)
+                return(FALSE)
+            phi[1L:k] <- (phi[1L:k] + bk * phi[k:1L]) / (1 - bk^2)
+        }
+    }
+    abs(phi[1]) < 1
+}
+
 pacf2Ar <- function(parcor){
     p <- length(parcor)
     if(p <= 1L)
@@ -290,12 +305,23 @@ utToeplitz <- function(x){
 ## ARMA, SP convention for signs
 .FisherInfoSarma <- function(phi = numeric(0), theta = numeric(0), sphi = numeric(0), 
                              stheta = numeric(0), nseasons = NA_real_){
+    if(!.isInvertibleFilter(-phi)) # -phi since '-' convention there, but "-" in .isInvertibleFilter
+        stop("phi is not causal")
+    if(!.isInvertibleFilter(-sphi))
+        stop("sphi is not causal")
+    if(!.isInvertibleFilter(-theta))
+        stop("theta is not invertible")
+    if(!.isInvertibleFilter(-stheta))
+        stop("stheta is not invertible")
+
     p <- length(phi)
     q <- length(theta)
     P <- length(sphi)
     Q <- length(stheta)
     if(is.na(nseasons) && (P > 0 || Q > 0))
         stop("When there are seasonal components argument 'nseasons' is mandatory")
+
+
 
     res <- matrix(0, nrow = p + P + q + Q, ncol = p + P + q + Q)
 
@@ -580,9 +606,9 @@ format.genspec <- function (x, n.head = length(x$freq), sort = TRUE, ...){
       )
 }
 
-print.genspec <- function (x, n.head = min(length(x$spec), 6), sort = TRUE, plot = TRUE, ...) {
+print.genspec <- function (x, n.head = min(length(x$spec), 6), sort = TRUE, ...) {
     cat(format(x, n.head = n.head, sort = sort, ...), sep = "\n")
-    if(plot)
+    if(length(list(...)) == 0 && missing(n.head) && missing(sort) )
         plot(x)
     invisible(x)
 }

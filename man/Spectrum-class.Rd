@@ -17,7 +17,8 @@
 \usage{
 \method{print}{Spectrum}(x, ..., n = 128, standardize = TRUE)
 
-\method{plot}{Spectrum}(x, y, to, from = y, n = 128, standardize = TRUE, ...)
+\method{plot}{Spectrum}(x, y, to, from = y, n = 128, standardize = TRUE,
+    log = NULL, main = "Spectral density", xlab = "Frequency", ylab = NULL, ...)
 }
 \arguments{
   \item{x}{a \code{"Spectrum"} object.}
@@ -33,13 +34,48 @@
     if \code{TRUE} make the spectral density integrate to one (i.e., be
     a probability density function).
   }
+
+  \item{log}{
+    if \code{log = "y"} plot the logarithm of the spectral density, see
+    \code{?plot.default}.
+  }
+  \item{main}{
+    a character string, the title of the plot.
+  }
+  \item{xlab}{
+    a character string, the label for the x-axis.
+  }
+  \item{ylab}{
+
+    a character string, the label for the y-axis. If \code{NULL}, the
+    default, the label is set to \code{"Spd"} or \code{"log(Spd)"},
+    depending on the value of argument \code{log}.
+
+  }
   \item{\dots}{
 
     for \code{print}, further arguments for \code{print.default()};
+
     for \code{plot}, further arguments for \code{\link[graphics]{curve}}.
 
   }
 }
+\details{
+
+  \code{"Spectrum"} is an S4 class and as such autoprinting calls the
+  \code{"Spectrum"} method for \code{show()}, which prints and plots,
+  see section \sQuote{Methods}. \code{show} has a single argument, the
+  object.  For more control, there are also methods for \code{print} and
+  \code{plot}, which can be called directly and accept additional
+  arguments.
+
+  \code{print(object)} is equivalent to \code{show(object)}, except that
+  the former returns  \code{object} while the latter returns \code{NULL}
+  (both invisibly), as is standard for these functions. 
+  No plot is produced when \code{print} is called with further arguments.
+
+}
+
 \section{Objects from the Class}{
 
   Objects contain spectra produced by \code{sarima::spectrum}
@@ -72,12 +108,16 @@
       
       plots \code{object} and prints succinct information about it,
       including the peaks and troughs in the spectral density
-      (sd). These are computed by evaluating the sd at \code{n} equially
-      spaced points and recording the maxima of the resulting discrete
-      sequence. Set argument \code{n} to get a finer/coarser grid or to
-      force calculations for particular frequencies. For example, a
-      multiple of 12 may be suitable for \code{n} if the data is
-      monthly.
+      (sd). These are computed by evaluating the spectral density at
+      \code{n} equially spaced points and recording the maxima of the
+      resulting discrete sequence. Set argument \code{n} to get a
+      finer/coarser grid or to force calculations for particular
+      frequencies. For example, a multiple of 12 may be suitable for
+      \code{n} if the data is monthly.
+
+      For more control over printing, call \code{print} which has
+      additional arguments. Similarly, call \code{plot} for more
+      flexible graphics. See section \sQuote{Details} for the details.
 
     }
   
@@ -102,6 +142,7 @@ fit0 <- arima(AirPassengers, order = c(0,1,1),
               seasonal = list(order = c(0,1,1), period = 12))
 sd.air <- spectrum(fit0)
 show(sd.air)
+plot(sd.air, log = "y") # plot log of the spectral density
 
 ## use the "Spectrum" object as a function to evaluate the sp. density:
 sd.air(seq(0, 0.5, length.out = 13))

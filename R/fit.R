@@ -171,25 +171,25 @@ sarimat <- function(y, phi, theta, delta, udelta, trmake = NULL, regxmake = NULL
 
         mapply(function(x, newpar){
             x$parcor[x$dyn.index] <- newpar
-            x$a[-1] <- - FitAR::PacfToAR(x$parcor[-1])
+            x$a[-1] <- - pacf2Ar(x$parcor[-1]) # 2022-02-14 was: FitAR::PacfToAR(x$parcor[-1]) 
         }, e_phi, newpars[["phi"]], SIMPLIFY = FALSE)
         
         mapply(function(x, newpar){
             x$parcor[x$dyn.index] <- newpar
-            x$a[-1] <- FitAR::PacfToAR(x$parcor[-1])
+            x$a[-1] <- pacf2Ar(x$parcor[-1]) # 2022-02-14 was: FitAR::PacfToAR(x$parcor[-1])
         }, e_theta, newpars[["theta"]], SIMPLIFY = FALSE)
         
         if(use.symm){
             mapply(function(x, newpar){
                 x$parcor_symm[x$dyn.index_symm] <- newpar
                 x$parcor[x$polyInd] <- x$parcor_symm
-                x$a[-1] <- - FitAR::PacfToAR(x$parcor[-1])
+                x$a[-1] <- - pacf2Ar(x$parcor[-1]) # 2022-02-14 was: FitAR::PacfToAR(x$parcor[-1])
                 x$coef_symm <- x$a[x$paramInd]
             }, e_udelta, newpars[["udelta"]], SIMPLIFY = FALSE)
         }else{
             mapply(function(x, newpar){
                 x$parcor[x$dyn.index] <- newpar
-                x$a[-1] <- - FitAR::PacfToAR(x$parcor[-1])
+                x$a[-1] <- - pacf2Ar(x$parcor[-1]) # 2022-02-14 was: FitAR::PacfToAR(x$parcor[-1])
             }, e_udelta, newpars[["udelta"]], SIMPLIFY = FALSE)
         }
         

@@ -868,7 +868,8 @@ setMethod("modelCoef", c("PartialAutocorrelations", "Autocorrelations", "missing
                   #     pacf <- object@data
                   #     pacfonly <- pacf[-1]
               pacfonly <- object[1:maxLag(object)]
-              ar <- FitAR::PacfToAR(pacfonly)
+                   # 2022-02-14 was:  ar <- FitAR::PacfToAR(pacfonly)
+              ar <- pacf2Ar(pacfonly)
                    # alternatively:
                    # acvf <- ltsa::tacvfARMA(phi = ar, maxLag = length(ar))
                    # acf <- acvf/acvf[0]

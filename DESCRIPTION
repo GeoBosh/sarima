@@ -2,7 +2,7 @@ Package: sarima
 Type: Package
 Title: Simulation and Prediction with Seasonal ARIMA Models
 Version: 0.8.6.9000
-Date: 2022-02-13
+Date: 2022-02-14
 Authors@R: c( person(given = c("Georgi", "N."), 
                      family = "Boshnakov", 
                      role = c("aut", "cre"), 
@@ -27,19 +27,19 @@ Imports:
     methods, graphics, stats, utils, 
     PolynomF (>= 1.0-0),
     Formula,
-    FitAR, ltsa, FitARMA,
     lagged (>= 0.2.1),
-    Rdpack,
     Rcpp (>= 0.12.14), 
-    numDeriv
+    Rdpack,
+    numDeriv,
+    ltsa
 Suggests:
+    testthat,
     KFAS,
     FKF,
+    FitARMA,
     fGarch,
     fImport,
-    forecast,
-    testthat,
-    covr
+    forecast
 RdMacros: Rdpack
 License: GPL (>= 2)
 LazyLoad: yes
@@ -63,6 +63,3 @@ Collate:
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 7.1.1
 NeedsCompilation: yes
-
-
-

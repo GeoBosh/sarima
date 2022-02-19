@@ -15,8 +15,8 @@ importFrom(utils, capture.output, menu, as.relistable, relist, head)
 importFrom(graphics, abline, lines, par, plot.function, curve)
 
 importFrom(ltsa, DLAcfToAR, tacvfARMA) # PredictionVariance, 
-importFrom(FitAR, PacfToAR) # TacvfAR, TacvfMA, VarianceRacfAR, PacfDL, ARToPacf, ARToMA
-importFrom(FitARMA, InformationMatrixARMA) # TacvfARMA, ImpulseCoefficientsARMA, also tccfAR?
+## importFrom(FitAR, PacfToAR) # TacvfAR, TacvfMA, VarianceRacfAR, PacfDL, ARToPacf, ARToMA
+## importFrom(FitARMA, InformationMatrixARMA) # TacvfARMA, ImpulseCoefficientsARMA, also tccfAR?
 # importFrom(portes, LjungBox)
 
 importFrom(numDeriv, hessian)
@@ -43,6 +43,7 @@ S3method(print, genspec)
 S3method(print, Spectrum)
 
 S3method(format, genspec)
+S3method(format, Spectrum)
 
 S3method(summary, SarimaFilter)
 S3method(summary, SarimaSpec)
@@ -171,5 +172,8 @@ export(
     plot.Spectrum,
 
     ## work in progress
-    arma_Q0gnb
+    arma_Q0gnb,
+
+    ## internal, may change
+    ar2Pacf
 )

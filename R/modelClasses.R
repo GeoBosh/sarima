@@ -770,46 +770,46 @@ setMethod("initialize", "Spectrum",
               .Object
           })
 
-# TODO: this is to get started, elaborate later  !!!
-#       may need 'type' arg. but its ne=atural default is "l", 
-#       except when there are only a handful of frequences.
-#
-# TODO: maybe revamp class Spectrum not to store values of the spectrum but to compute them
-# on demand. It could be made to act like a function ?!!!
-plot.Spectrum <- function(x, y, to, from = y, n = 128, standardize = TRUE, ...){
-## force(x)
+plot.Spectrum <- function(x, y, to, from = y, n = 128, standardize = TRUE,
+                          log = NULL, main = "Spectral density", xlab = "Frequency", 
+                          ylab = NULL, ...){
     if(missing(from))
         from <- 0
     if(missing(to))
-       to <- 0.5
+        to <- 0.5
+    if(is.null(ylab)){
+        ylab <- if(identical(log, "y"))
+                    "log(Spd)"
+                else
+                    "Spd"
+    }
+    ## else leave as is
+
     if(standardize)
-        plot.function(x, type = "l", from = from, to = to, n = n, ...)
+        plot.function(x, type = "l", from = from, to = to, n = n,
+                      log = log, main = main, xlab = xlab, ylab = ylab, ...)
     else{
         ## f <- function(z) x(z, standardize = FALSE)
         ## curve(f, from = from, to = to, ...)
-        curve(x(x, standardize = FALSE), from = from, to = to, n = n, ...)
+        curve(x(x, standardize = FALSE), from = from, to = to, n = n,
+              log = log, main = main, xlab = xlab, ylab = ylab, ...)
     }
 }
 
 setMethod("plot", "Spectrum", plot.Spectrum)
 
-setMethod("show", "Spectrum", function(object){
-    print.Spectrum(object)
-    plot(object)
-    invisible(NULL)
-})
-
-print.Spectrum <- function (x, ..., n = 128, standardize = TRUE){
+format.Spectrum <- function (x, ..., n = 128, standardize = TRUE){
     ar     <- environment(x@.Data)$ar
     ma     <- environment(x@.Data)$ma
     sigma2 <- environment(x@.Data)$sigma2
     
-    cat(if(standardize) "standardized " else "")
-    cat("spectral density of the following ")
-    cat("ARMA(", length(ar), ",", length(ma), ") model:", "\n", sep = "")
-    cat("  ar coef: ", ar, "\n")
-    cat("  ma coef: ", ma, "\n")
-    cat("  sigma2:  ", sigma2, "\n")
+    res <- c(paste0(if(standardize) "standardized " else "",
+                    "spectral density of the following ",
+                    "ARMA(", length(ar), ",", length(ma), ") model:"),
+             paste0("  ar coef: ", paste0(ar, collapse = " ")),
+             paste0("  ma coef: ", paste0(ma, collapse = " ")),
+             paste0("  sigma2:  ", sigma2),
+             "")
 
     if(standardize)
         sigma2 <- 1
@@ -817,34 +817,50 @@ print.Spectrum <- function (x, ..., n = 128, standardize = TRUE){
         stop("sigma2 must be non-NA when 'standardize' is FALSE")
 
     if(length(ar) == 0 && length(ma) == 0){
-        cat("constant, equal to ", sigma2, "for all frequencies", "\n")
-	return(invisible(x))
+        res <- c(res, paste0("constant, equal to ", sigma2, " for all frequencies"))
+	return(res)
     }
 
     freq <- seq(0, 0.5, length.out = n)
     spec <- x(freq)
 
-    cat("\nPeaks:\n")
+    res <- c(res, "\nPeaks:")
     max_flags <- .local_maxima(spec)
     ma_freq <- freq[max_flags]
     ma_spec <- spec[max_flags]
     pma <- 1 / ma_freq
     pma <- ifelse(is.infinite(pma), 0, pma)
-    print(cbind(freq = ma_freq, spec = ma_spec, period = pma), ...)
-    cat("\n")
+    res <- c(res, capture.output(print(cbind(freq = ma_freq, spec = ma_spec, period = pma), ...)),
+                  "")
     
-    cat("Troughs:\n")
+    res <- c(res, "Troughs:\n")
     min_flags <- .local_minima(spec)
     mi_freq <- freq[min_flags]
     mi_spec <- spec[min_flags]
     pmi <- 1 / mi_freq
     pmi <- ifelse(is.infinite(pmi), 0, pmi)
-    print(cbind(freq = mi_freq, spec = mi_spec, period = pmi), ...)
-    cat("\n")
+    res <- c(res, capture.output(print(cbind(freq = mi_freq, spec = mi_spec, period = pmi), ...)),
+                  "")
 
     p <- max(ma_spec) / min(mi_spec)
-    cat("max peak/min trough:\n\t", p, sep = "")
-    cat("\n\n")
+    res <- c(res, "max peak/min trough:")
+    res <- c(res, paste0("\t", p))
+    res <- c(res, "")
+
+    res
+}
+
+print.Spectrum <- function (x, ..., n = 128, standardize = TRUE){
+    wrk <- format(x, ..., n = n, standardize = standardize)
+    cat(wrk, sep = "\n")
+    if(length(list(...)) == 0 && missing(n) && missing(standardize) )
+        plot(x)
 
     invisible(x)
 }
+
+setMethod("show", "Spectrum", function(object){
+    cat(format(object), sep = "\n")
+    plot(object)
+    invisible(NULL)
+})

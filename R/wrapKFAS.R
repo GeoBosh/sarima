@@ -95,7 +95,9 @@ fitArma0Model <- function(arma0ss, init = NULL, method = "BFGS", hessian = TRUE,
         # fi <- fi[-(p+q+1), -(p+q+1)]
 
     se <- sqrt(diag(fi))
-    se.asy <- sqrt(diag(InformationMatrixARMA(ar, -ma)) /
+    se.asy <- sqrt(diag(## 2022-02-14 was: InformationMatrixARMA(ar, -ma) /
+                        ##     .FisherInfo has the SP convention:
+                        .FisherInfo(-ar, ma)) /
                                                     attr(modelObj, "n", exact = TRUE))
 
     param <- c(ar, ma)
