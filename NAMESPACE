@@ -44,6 +44,7 @@ S3method(print, Spectrum)
 
 S3method(format, genspec)
 S3method(format, Spectrum)
+S3method(format, ArmaSpectrum)
 
 S3method(summary, SarimaFilter)
 S3method(summary, SarimaSpec)
@@ -67,6 +68,7 @@ S3method(FisherInformation, ArmaModel)
 S3method(FisherInformation, SarimaModel)
 
 S3method(spectrum, default)
+S3method(spectrum, "function")
 S3method(spectrum, Arima)
 S3method(spectrum, ArmaModel)
 S3method(spectrum, SarimaModel)

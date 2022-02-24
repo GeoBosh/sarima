@@ -63,40 +63,50 @@
 \details{
 
   \code{"Spectrum"} is an S4 class and as such autoprinting calls the
-  \code{"Spectrum"} method for \code{show()}, which prints and plots,
-  see section \sQuote{Methods}. \code{show} has a single argument, the
-  object.  For more control, there are also methods for \code{print} and
-  \code{plot}, which can be called directly and accept additional
-  arguments.
+  \code{"Spectrum"} method for \code{show()}, which prints and
+  plots. \code{show} has a single argument, the object.  For more
+  control over printing, call \code{print} which has additional
+  arguments. Similarly, call \code{plot} for more flexible graphics.
+      
+  \code{print(object)} (i.e., without further arguments) is equivalent
+  to \code{show(object)}, except that the former returns \code{object}
+  while the latter returns \code{NULL} (both invisibly), as is standard
+  for these functions.  If \code{print} is called with further
+  arguments. the spectrum is not plotted.
 
-  \code{print(object)} is equivalent to \code{show(object)}, except that
-  the former returns  \code{object} while the latter returns \code{NULL}
-  (both invisibly), as is standard for these functions. 
-  No plot is produced when \code{print} is called with further arguments.
+  The peaks and throughs printed by \code{print} are computed by
+  evaluating the spectral density at \code{n} equially spaced points and
+  recording the maxima of the resulting discrete sequence. Set argument
+  \code{n} to get a finer/coarser grid or to force calculations for
+  particular frequencies. For example, a multiple of 12 may be suitable
+  for \code{n} if the data is monthly.
 
+  Except for \code{x} and \code{standardize} the arguments of the
+  \code{plot} method are as for \code{curve}. With the default
+  \code{standardize = TRUE} the spectral density integrates to one over
+  one whole period (usually \eqn{(-1/2, 1/2]} but due to its symmetry it
+  is usually plotted over the second half of that interval.
+  
 }
 
 \section{Objects from the Class}{
 
-  Objects contain spectra produced by \code{sarima::spectrum}
-  (recommended), see \code{\link[sarima]{spectrum}} for details.
+  Objects contain spectra produced by \code{sarima::spectrum},
+  see \code{\link[sarima]{spectrum}} for details.
   
-  Objects can also be created by calls of the form
-  \code{new("Spectrum", ar = , ma = , sigma2 = , ...)},
-  where \code{ar} and \code{ma} are numeric vectors and \code{sigma2} is
-  a number. \code{sigma2} may be omitted but then only normalized
-  spectra can be computed. There further possibilities for the arguments
-  but they should be considered internal and subject to change.
+  Objects can also be created by calling \code{"new"} but this is not
+  recommended and currently considered internal.
   
 }
 \section{Slots}{
   \describe{
     \item{\code{.Data}:}{Object of class \code{"function"} ~~ }
 
+    \item{\code{call}:}{Object of class \code{"call"} ~~ }
+    
     \item{\code{model}:}{Object of class \code{"ANY"},
       the underlying model.
     }
-  
   }
 }
 \section{Methods}{
@@ -107,21 +117,12 @@
     \item{show}{\code{signature(object = "Spectrum")}:
       
       plots \code{object} and prints succinct information about it,
-      including the peaks and troughs in the spectral density
-      (sd). These are computed by evaluating the spectral density at
-      \code{n} equially spaced points and recording the maxima of the
-      resulting discrete sequence. Set argument \code{n} to get a
-      finer/coarser grid or to force calculations for particular
-      frequencies. For example, a multiple of 12 may be suitable for
-      \code{n} if the data is monthly.
-
-      For more control over printing, call \code{print} which has
-      additional arguments. Similarly, call \code{plot} for more
-      flexible graphics. See section \sQuote{Details} for the details.
+      including the peaks and troughs in the spectral density. It is
+      equivalent to calling \code{print} and \code{plot} with a single
+      argument, see section \sQuote{Details}.
 
     }
-  
-    \item{initialize}{\code{signature(.Object = "Spectrum")}: ... }}
+  }
 }
 %\references{
 %%%  ~~put references to the literature/web site here~~
@@ -134,25 +135,31 @@
 %%% ~Make other sections like Warning with \section{Warning }{....} ~
 %
 \seealso{
-  \code{\link[sarima]{spectrum}} for details and examples
+  \code{\link[sarima]{spectrum}} for details and further examples,
+
+  \code{\linkS4class{ArmaSpectrum}} for ARMA spectra
 }
 \examples{
-## spectral density of the stationary part of a fitted 'airline model'
-fit0 <- arima(AirPassengers, order = c(0,1,1),
-              seasonal = list(order = c(0,1,1), period = 12))
-sd.air <- spectrum(fit0)
-show(sd.air)
-plot(sd.air, log = "y") # plot log of the spectral density
+## ARFIMA(0,d,0) with parameters 'freq' and 'd'
+spARFIMA0d0 <- function(freq){  sigma2 / (2 * sin(2*pi*freq/2)^(2 * d)) }
+sp <- spectrum(spARFIMA0d0, param = list(sigma2 = 1, d = 0.2))
+print(sp, digits = 4)
+## evaluate the spd at selected frequencies 
+sp(c(0:4 / 8))
 
-## use the "Spectrum" object as a function to evaluate the sp. density:
-sd.air(seq(0, 0.5, length.out = 13))
-sd.air(seq(0, 0.5, length.out = 13), standardize = FALSE)
+## argument 'freq' doesn't need to be called 'freq' but it needs to be
+##   the first one. This is equivalent to above:
+spARFIMA0d0b <- function(x){  sigma2 / (2 * sin(2*pi*x/2)^(2 * d)) }
+spb <- spectrum(spARFIMA0d0b, param = list(sigma2 = 1, d = 0.2))
+plot(spb)
 
-## white noise (constant spectral density)
-sp.wn <- spectrum(ArmaModel(sigma2 = 2))
-sp.wn
-print(sp.wn)
-print(sp.wn, standardize=FALSE)
-show(sp.wn)
+## An example without parameters, as above with sigma2 = 1, d = 0.2 hard
+##   coded:
+spARFIMA0d0c <- function(freq){  1 / (2 * sin(2*pi*freq/2)^(2 * 0.2)) }
+spc <- spectrum(spARFIMA0d0c)
+print(spc, digits = 4)
+
+spc(c(0:4 / 8))
+all.equal(spc(c(0:4 / 8)), sp(c(0:4 / 8))) # TRUE
 }
 \keyword{classes}

@@ -1,4 +1,4 @@
-# sarima 0.8.6.9000
+# sarima 0.9 (CRAN)
 
 - new generic function `FisherInformation` giving the information matrix for
   fitted and theoretical models with methods for ARMA and seasonal ARMA models.

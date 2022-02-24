@@ -613,6 +613,21 @@ print.genspec <- function (x, n.head = min(length(x$spec), 6), sort = TRUE, ...)
     invisible(x)
 }
 
+spectrum.function <- function(x, standardize = TRUE, param = list(), ...){
+    e <- new.env(parent = environment(x))
+    e$standardize <- standardize
+    e$.fun <- x
+    environment(e$.fun) <- e
+
+    for(nam in names(param))
+        e[[nam]] <- param[[nam]]
+    freq <- standardize <- .fun <- NULL ## otherwise 'R CMD check' may complain
+
+    f <- as.function(alist(freq = , .fun(freq)), envir = e) # , standardize = standardize
+    
+    new("Spectrum", f, call = sys.call(), model = x)
+}
+
 ## BD convention
 .spdArma <- function(ar = numeric(0), ma = numeric(0), freq, sigma2, standardize){
     p <- length(ar)
@@ -658,7 +673,7 @@ spectrum.ArmaModel <- function(x, standardize = TRUE, ...){
     co <- modelCoef(x, "BD")  # no seasonal components here
     # wrk <- .spdArma(co$ar, co$ma, sigma2 = x@sigma2, standardize = standardize, ...)
     # new("Spectrum", freq = wrk$freq, spec = wrk$spec, model = x)
-    new("Spectrum", ar = co$ar, ma = co$ma, sigma2 = sigmaSq(x), model = x)
+    new("ArmaSpectrum", ar = co$ar, ma = co$ma, sigma2 = sigmaSq(x), model = x)
 }
 
 setMethod("spectrum", "ArmaModel", spectrum.ArmaModel)
@@ -671,7 +686,7 @@ spectrum.SarimaModel <- function(x, standardize = TRUE, ...){
     # wrk <- .spdArma(co$ar, co$ma, sigma2 = x@sigma2, standardize = standardize, ...)
     # new("Spectrum", freq = wrk$freq, spec = wrk$spec, model = x)
 
-    new("Spectrum", ar = ar, ma = ma, sigma2 = x@sigma2, model = x)
+    new("ArmaSpectrum", ar = ar, ma = ma, sigma2 = x@sigma2, model = x)
 }
 
 setMethod("spectrum", "SarimaModel", spectrum.SarimaModel)
@@ -685,7 +700,7 @@ spectrum.Arima <- function(x, standardize = TRUE, ...){
     ma <-  coef(pall$mapoly * pall$smapoly)[-1]
     # wrk <- .spdArma(ar, ma, sigma2 = x$sigma2, standardize = standardize)
     # new("Spectrum", freq = wrk$freq, spec = wrk$spec, model = x)
-    new("Spectrum", ar = ar, ma = ma, sigma2 = x$sigma2, model = x)
+    new("ArmaSpectrum", ar = ar, ma = ma, sigma2 = x$sigma2, model = x)
 }
 
 setMethod("spectrum", "ArmaModel", spectrum.ArmaModel)

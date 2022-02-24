@@ -122,7 +122,7 @@ if(requireNamespace("FitARMA")){
 test_that("functions in armacalc.R work ok", {
 expect_true(TRUE)
 FisherInformation(ArmaModel(ma = 0.9, sigma2 = 1))
-print(spectrum(ArmaModel(ma = 0.9, sigma2 = 1)))
+print(spectrum(ArmaModel(ma = 0.9, sigma2 = 1)), digits = 4)
 spectrum(ArmaModel(ma = c(-1, 0.6), sigma2 = 1))
 spectrum(ArmaModel(ar = 0.9, sigma2 = 1))
 spectrum(ArmaModel(ar = c(1.5, -0.75), sigma2 = 1))
@@ -137,7 +137,7 @@ FisherInformation(sarima1b)
 set.seed(1234)
 gwn <- ts(rnorm(1:128), frequency = 4)
 sp.gwn <- spectrum(gwn)
-sp.gwn
+print(sp.gwn)
 plot(sp.gwn)
 print(spectrum(gwn), sort = TRUE)
 print(spectrum(gwn), sort = FALSE)
@@ -150,7 +150,7 @@ spectrum(as.SarimaModel(fit0))
 
 print(spectrum(fit0), n = 1024)
 
-a <- new("Spectrum", ar = -0.9)
+a <- new("ArmaSpectrum", ar = -0.9)
 tmp <- a()
 print(a)
 plot(a)
@@ -161,7 +161,7 @@ expect_error(plot(a, standardize = FALSE),
              "sigma2 is NA but must be a positive number when standardize = FALSE")
 show(a)
 
-b <- new("Spectrum", ar = -0.9, sigma2 = 1)
+b <- new("ArmaSpectrum", ar = -0.9, sigma2 = 1)
 plot(b, standardize = FALSE) # now ok, sigma2 is set
 
 ## environment(a)
@@ -177,4 +177,23 @@ show(sp.wn)
 sp.wn2 <- spectrum(ArmaModel()) # sigma2 is NA here
 print(sp.wn2, standardize = TRUE) # ok
 expect_error(print(sp.wn2, standardize = FALSE))
+
+## spectrum.function => class "Spectrum"
+spARFIMA0d0 <- function(freq){  sigma2 / (2 * sin(2*pi*freq/2)^(2 * d)) }
+sp <- spectrum(spARFIMA0d0, param = list(sigma2 = 1, d = 0.2))
+print(sp, digits = 4)
+
+## argument doesn't need to be called 'freq'
+spARFIMA0d0b <- function(x){  sigma2 / (2 * sin(2*pi*x/2)^(2 * d)) }
+spb <- spectrum(spARFIMA0d0b, param = list(sigma2 = 1, d = 0.2))
+plot(spb)
+
+## An example without parameters, as above with sigma2 = 1, d = 0.2 hard
+##   coded:
+spARFIMA0d0c <- function(freq){  1 / (2 * sin(2*pi*freq/2)^(2 * 0.2)) }
+spc <- spectrum(spARFIMA0d0c)
+print(spc, digits = 4)
+
+spc(c(0:4 / 8))
+all.equal(spc(c(0:4 / 8)), sp(c(0:4 / 8))) # TRUE
 })

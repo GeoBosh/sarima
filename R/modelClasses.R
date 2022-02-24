@@ -311,7 +311,7 @@ setMethod("modelCoef", c("VirtualFilterModel", "character", "missing"),
 ## convenience method for ARMA with BJ convention
 setMethod("modelCoef", c("VirtualFilterModel", "BJ", "missing"),
           function(object, convention){
-              if(class(object) == "ArmaModel")
+              if(class(object)[1] == "ArmaModel")
                  filt <- modelCoef(object)
               else{
                  filt <- modelCoef(object, convention  = "ArmaModel" )
@@ -322,7 +322,7 @@ setMethod("modelCoef", c("VirtualFilterModel", "BJ", "missing"),
 ## convenience method for ARMA with "SP" convention
 setMethod("modelCoef", c("VirtualFilterModel", "SP", "missing"),
           function(object, convention){
-              if(class(object) == "ArmaModel")
+              if(class(object)[1] == "ArmaModel")
                  filt <- modelCoef(object)
               else{
                  filt <- modelCoef(object, convention  = "ArmaModel" )
@@ -333,7 +333,7 @@ setMethod("modelCoef", c("VirtualFilterModel", "SP", "missing"),
 ## convenience method for ARMA with "BD" convention
 setMethod("modelCoef", c("VirtualFilterModel", "BD", "missing"),
           function(object, convention){
-              if(class(object) == "ArmaModel")
+              if(class(object)[1] == "ArmaModel")
                  modelCoef(object)
               else{
                      # 2018-05-30 was:
@@ -744,9 +744,10 @@ as.SarimaModel.Arima <- function (x, ...){
 ## setClass("Spectrum", slots = c(freq = "numeric", spec = "numeric", model = "ANY"),
 ##          contains = "function")
 
-setClass("Spectrum", slots = c(model = "ANY"), contains = "function")
+setClass("Spectrum", slots = c(call = "call", model = "ANY"), contains = "function")
+setClass("ArmaSpectrum", contains = "Spectrum")
 
-setMethod("initialize", "Spectrum",
+setMethod("initialize", "ArmaSpectrum",
           function(.Object, ar = numeric(0), ma = numeric(0), sigma2 = NA_real_, ...){
               .Object <- callNextMethod(.Object, ...)
               if(is.null(.Object@model))
@@ -799,30 +800,10 @@ plot.Spectrum <- function(x, y, to, from = y, n = 128, standardize = TRUE,
 setMethod("plot", "Spectrum", plot.Spectrum)
 
 format.Spectrum <- function (x, ..., n = 128, standardize = TRUE){
-    ar     <- environment(x@.Data)$ar
-    ma     <- environment(x@.Data)$ma
-    sigma2 <- environment(x@.Data)$sigma2
-    
-    res <- c(paste0(if(standardize) "standardized " else "",
-                    "spectral density of the following ",
-                    "ARMA(", length(ar), ",", length(ma), ") model:"),
-             paste0("  ar coef: ", paste0(ar, collapse = " ")),
-             paste0("  ma coef: ", paste0(ma, collapse = " ")),
-             paste0("  sigma2:  ", sigma2),
-             "")
-
-    if(standardize)
-        sigma2 <- 1
-    else if(is.na(sigma2))
-        stop("sigma2 must be non-NA when 'standardize' is FALSE")
-
-    if(length(ar) == 0 && length(ma) == 0){
-        res <- c(res, paste0("constant, equal to ", sigma2, " for all frequencies"))
-	return(res)
-    }
-
     freq <- seq(0, 0.5, length.out = n)
     spec <- x(freq)
+
+    res <- ""
 
     res <- c(res, "\nPeaks:")
     max_flags <- .local_maxima(spec)
@@ -844,8 +825,38 @@ format.Spectrum <- function (x, ..., n = 128, standardize = TRUE){
 
     p <- max(ma_spec) / min(mi_spec)
     res <- c(res, "max peak/min trough:")
-    res <- c(res, paste0("\t", p))
+    res <- c(res, paste0("\t", format(p, ...)))
     res <- c(res, "")
+
+    res
+}
+
+format.ArmaSpectrum <- function (x, ..., n = 128, standardize = TRUE){
+    ar     <- environment(x@.Data)$ar
+    ma     <- environment(x@.Data)$ma
+    sigma2 <- environment(x@.Data)$sigma2
+    
+    res <- c(paste0(if(standardize) "standardized " else "",
+                    "spectral density of the following ",
+                    "ARMA(", length(ar), ",", length(ma), ") model:"),
+             paste0("  ar coef: ", 
+                    paste0(formatC(ar, zero.print = TRUE, ...), collapse = " ")),
+             paste0("  ma coef: ", 
+                    paste0(formatC(ma, zero.print = TRUE, ...), collapse = " ")),
+             paste0("  sigma2:  ", format(sigma2, ...)),
+             "")
+
+    if(standardize)
+        sigma2 <- 1
+    else if(is.na(sigma2))
+        stop("sigma2 must be non-NA when 'standardize' is FALSE")
+
+    if(length(ar) == 0 && length(ma) == 0){
+        res <- c(res, paste0("constant, equal to ", sigma2, " for all frequencies"))
+	return(res)
+    }
+
+    res <- c(res, format.Spectrum(x, ..., n = n, standardize = standardize))
 
     res
 }

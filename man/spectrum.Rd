@@ -10,6 +10,7 @@
 \alias{spectrum,ArmaModel-method}
 \alias{spectrum,SarimaModel-method}
 \alias{print.genspec}
+\alias{spectrum.function}
 
 \title{Spectral Density}
 \description{
@@ -31,6 +32,8 @@ spectrum(x, standardize = TRUE, \dots)
 \method{spectrum}{ArmaModel}(x, standardize = TRUE, \dots)
 
 \method{spectrum}{SarimaModel}(x, standardize = TRUE, \dots)
+
+\method{spectrum}{function}(x, standardize = TRUE, param = list(), \dots)
 }
 \arguments{
   \item{x}{
@@ -58,6 +61,12 @@ spectrum(x, standardize = TRUE, \dots)
   }
   \item{n.head}{how many rows to print?}
   \item{sort}{\code{TRUE}, \code{FALSE} or \code{"max"}, see section \sQuote{Details'}.}
+  \item{param}{
+
+    a named list, specying model parameters for the \code{"function"}
+    method, see section \sQuote{Details}.
+
+  }
 }
 \details{
   
@@ -89,6 +98,18 @@ spectrum(x, standardize = TRUE, \dots)
   density function).  For fitted models confidence bands are not
   computed currently.
 
+  The method for class \code{"function"} can be used to create objects
+  from class \code{"Spectrum"} using a user specified function. The
+  first argument of that function needs to be a vector of frequencies
+  for which to calculate the spectrum. It is conventionally called
+  \code{freq} but this is not required.  If there are parameters they
+  should not be part of the signature of the function but need to be
+  listed and given values as a named list via argument \code{param}, see
+  the examples for class \code{"\linkS4class{Spectrum}"}. This method is
+  somewhat experimental but the restrictions might be relaxed in a
+  future release.
+
+  
   The rest of this section describes the default method. For futher
   details on the other methods see \code{"\linkS4class{Spectrum}"}.
 
