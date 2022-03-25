@@ -1,3 +1,13 @@
+# sarima 0.9.0.9000
+
+- in `prepareSimSarima` (and hence `sim_sarima`) fixed a bug causing wrong
+  results for some combination of parameters when initial values were
+  supplied. Also removed some parts in the documentation of these functions
+  which no longer applied. This needs further work before the next release of
+  the package.
+
+
+
 # sarima 0.9 (CRAN)
 
 - new generic function `FisherInformation` giving the information matrix for

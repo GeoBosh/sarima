@@ -11,7 +11,11 @@ sim_sarima(model, n = NA, rand.gen = rnorm, n.start = NA, x, eps,
            xcenter = NULL, xintercept = NULL, \dots)
 }
 \arguments{
-  \item{model}{specification of the model, a list, see `Details'.}
+  \item{model}{
+
+    specification of the model, a list or a model object, see `Details'.
+
+  }
   \item{rand.gen}{
     random number generator for the innovations.
   }
@@ -36,9 +40,10 @@ sim_sarima(model, n = NA, rand.gen = rnorm, n.start = NA, x, eps,
 }
 \details{
 
-  The model is specified by the argument "model" which is a list with
-  elements suitable to be passed to \code{new("SarimaModel", ...)}, see
-  the description of class \code{"SarimaModel"}. Here are some of the
+  The model can be specified by a model object, e.g., from class
+  \linkS4class{SarimaModel}. It can also be a list with elements
+  suitable to be passed to \code{new("SarimaModel", ...)}, see the
+  description of class \code{"SarimaModel"}. Here are some of the
   possible components:
 
   \describe{
@@ -55,18 +60,15 @@ sim_sarima(model, n = NA, rand.gen = rnorm, n.start = NA, x, eps,
     \item{sma}{seasonal ma parameters}
   }
 
-  Additional arguments for \code{rand.gen}  may be specified
-  via the "\dots" argument.
-  In particular, the length of the generated series is specified with
-  argument \code{n}. Arguments for \code{rand.gen} can also be passed
-  via the "\dots" argument.
+  Additional arguments for \code{rand.gen} may be specified via the
+  "\dots" argument.  In particular, the length of the generated series
+  is specified with argument \code{n}. Arguments for \code{rand.gen} can
+  also be passed via the "\dots" argument.
 
-  \code{sim_sarima} calls internally \code{arima.sim} to simulate the
-  ARMA part of the model. Then undifferences the result to obtain the
-  end result.
+  If the model is stationary the generated time series is stationary
+  starting with the first value. In particular, there is no need for a
+  \sQuote{warm-up} period.
 
-  The function returns the simulated time series from the requested
-  model.
 
   Information about the model is printed on the screen if
   \code{info = "print"}. To suppress this, set \code{info} to any other
@@ -77,8 +79,13 @@ sim_sarima(model, n = NA, rand.gen = rnorm, n.start = NA, x, eps,
   function returned by it as many times as needed. 
   
 }
+% 2022-03-24 This has not been correct for a long time:
+%
+%   \code{sim_sarima} calls internally \code{arima.sim} to simulate the
+%   ARMA part of the model. Then undifferences the result to obtain the
+%   end result.
 \value{
-  an object of class "ts"
+  an object of class "ts", a simulated time series from the given model
 }
 % \references{
 % %% ~put references to the literature/web site here ~

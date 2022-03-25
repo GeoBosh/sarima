@@ -95,7 +95,7 @@ xarmaFilter <- function(model, x = NULL, eps = NULL, from = NULL, whiten = FALSE
     }
 }
 
-                   # 2017-05-26: (somewhat) incompatible change - now uses prepareSimSarima()
+# 2017-05-26: (somewhat) incompatible change - now uses prepareSimSarima()
 sim_sarima <- function(model, n = NA, rand.gen = rnorm,
                    n.start = NA, x, eps, xcenter = NULL, xintercept = NULL, ...){
     ## decide if this patch should be permanent.
@@ -155,8 +155,8 @@ model2filter <- function(model){
 }
 
 prepareSimSarima <- local({
-    ## these variables will be shadowed by list2env().
-    ## they are defined for somewhat more clear code; 'R CMD check' also is happier.
+    ## these variables will be shadowed by assignments in the body of prepareSimSarima
+    ## they are defined for somewhat more clear code; 'R CMD check' is also happier.
     x <- eps <- NULL
     ar <- ma <- numeric(0)
     p <- q <- 0
@@ -196,7 +196,7 @@ prepareSimSarima <- local({
         if(missing(n) || is.null(n))
             n <- length(eps$main) + length(eps$init) - n.start
         else{ # adjust x$main and eps$main
-            eps$main <- c(eps$main,
+            eps$main <- c(eps$main,  
                           numeric(n.start + n - length(eps$init) - length(eps$main)) )
             x$main <- c(x$main,
                           numeric(n.start + n - length(x$init) - length(x$main)) )
@@ -258,8 +258,8 @@ prepareSimSarima <- local({
         ## 2018-07-28 krapka - for the case when no unit roots and no initial values
         ##            => generate initial values      
         flag.stat.init.values <- filtmodel$n_ur == 0  && from == 1 # 2018-07-28
+        mpq <- max(p,q)  ## TODO: what  if mpq = 0?
         if(flag.stat.init.values){
-            mpq <- max(p,q)  ## TODO: what  if mpq = 0?
             acv <- autocovariances(filtmodel[c("ar", "ma", "sigma2")], maxlag = mpq)
             partial_sds <- sqrt(.comboAcvf(acv, "psigma2"))[-1]
             partial_coefs <- acf2AR(acv[])
@@ -278,15 +278,15 @@ prepareSimSarima <- local({
 
 
             ## simulate (standardised) innovations and multiply by sigma
-            eps.main <- sigma * rand.gen(n.start + n, ...)
+            ## 2022-03-24 was: eps.main <- sigma * rand.gen(n.start + n, ...)
             eps <- if(from > 1) # 2018-07-28 added if()
-                       c(eps[1:(from-1)], eps.main)
+                       c(eps[1:(from-1)], sigma * rand.gen(length(eps) - (from - 1), ...))
                    else
-                       eps.main
+                       sigma * rand.gen(n.start + n, ...)
 
             ## TODO: may need to modify x if n != n0
 
-            if(flag.stat.init.values){ # TODO: needs more thought
+            if(flag.stat.init.values && mpq > 0){ # TODO: needs more thought
                 x[1:mpq] <- partial_sds * eps[1:mpq]
                 if(mpq > 1){
                     for(i in 2:mpq){
@@ -302,6 +302,8 @@ prepareSimSarima <- local({
                  else
                      x
 
+            stopifnot(length(x) == length(eps), mpq < length(x)) # 2022-03-24
+            
             y <- coreXarmaFilter(x = y, eps = eps, ar = ar, ma = ma, p = p, q = q, # n = n,
                                  # from = from, TODO: temporary commenting out (v. 0.4-5)
                                  intercept = ctt )
