@@ -9,7 +9,7 @@
     unit circle, which can be fixed or estimated."><title>Package sarima
   
   
-  Simulation and Prediction with Seasonal ARIMA Models — sarima-package • sarima</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Package sarima
+  Simulation and Prediction with Seasonal ARIMA Models — sarima-package • sarima</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Package sarima
   
   
   Simulation and Prediction with Seasonal ARIMA Models — sarima-package"><meta property="og:description" content="Functions, classes and methods for time series modelling with ARIMA
@@ -30,7 +30,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">sarima</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -134,7 +134,7 @@ properties.</p>
     <p>Boshnakov GN (1996).
 “Bartlett's formulae---closed forms and recurrent equations.”
 <em>Ann. Inst. Statist. Math.</em>, <b>48</b>(1), 49--59.
-ISSN 0020-3157, doi: <a href="https://doi.org/10.1007/BF00049288" class="external-link">10.1007/BF00049288</a>
+ISSN 0020-3157, <a href="https://doi.org/10.1007/BF00049288" class="external-link">doi:10.1007/BF00049288</a>
 .</p>
 <p>Brockwell PJ, Davis RA (1991).
 <em>Time series: theory and methods. 2nd ed.</em>.
@@ -149,7 +149,7 @@ Chapman &amp; Hall/CRC Press.</p>
 <p>McLeod AI, Yu H, Krougly Z (2007).
 “Algorithms for Linear Time Series Analysis: With R Package.”
 <em>Journal of Statistical Software</em>, <b>23</b>(5).
-doi: <a href="https://doi.org/10.18637/jss.v023.i05" class="external-link">10.18637/jss.v023.i05</a>
+<a href="https://doi.org/10.18637/jss.v023.i05" class="external-link">doi:10.18637/jss.v023.i05</a>
 .</p>
     </div>
     <div class="section level2">
@@ -160,12 +160,12 @@ doi: <a href="https://doi.org/10.18637/jss.v023.i05" class="external-link">10.18
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## simulate a white noise ts (model from Francq &amp; Zakoian)</span></span>
-<span class="r-in"><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">5000</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">sarima</span><span class="fu">:::</span><span class="fu"><a href="rgarch1p1.html">rgarch1p1</a></span><span class="op">(</span><span class="va">n</span>, alpha <span class="op">=</span> <span class="fl">0.3</span>, beta <span class="op">=</span> <span class="fl">0.55</span>, omega <span class="op">=</span> <span class="fl">1</span>, n.skip <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## acf and pacf</span></span>
-<span class="r-in"><span class="op">(</span> <span class="va">x.acf</span> <span class="op">&lt;-</span> <span class="fu"><a href="autocorrelations.html">autocorrelations</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## simulate a white noise ts (model from Francq &amp; Zakoian)</span></span></span>
+<span class="r-in"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">5000</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">sarima</span><span class="fu">:::</span><span class="fu"><a href="rgarch1p1.html">rgarch1p1</a></span><span class="op">(</span><span class="va">n</span>, alpha <span class="op">=</span> <span class="fl">0.3</span>, beta <span class="op">=</span> <span class="fl">0.55</span>, omega <span class="op">=</span> <span class="fl">1</span>, n.skip <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## acf and pacf</span></span></span>
+<span class="r-in"><span><span class="op">(</span> <span class="va">x.acf</span> <span class="op">&lt;-</span> <span class="fu"><a href="autocorrelations.html">autocorrelations</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "SampleAutocorrelations"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         Lag_0         Lag_1         Lag_2         Lag_3         Lag_4 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1.0000000000 -0.0328968366  0.0404686214 -0.0280091109 -0.0140648056 </span>
@@ -187,7 +187,7 @@ doi: <a href="https://doi.org/10.18637/jss.v023.i05" class="external-link">10.18
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot varnames:   &lt;not set&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot objectname:  x</span>
-<span class="r-in"><span class="op">(</span> <span class="va">x.pacf</span> <span class="op">&lt;-</span> <span class="fu"><a href="autocorrelations.html">partialAutocorrelations</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">)</span></span>
+<span class="r-in"><span><span class="op">(</span> <span class="va">x.pacf</span> <span class="op">&lt;-</span> <span class="fu"><a href="autocorrelations.html">partialAutocorrelations</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "SamplePartialAutocorrelations"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         Lag_0         Lag_1         Lag_2         Lag_3         Lag_4 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1.000000e+00 -3.289684e-02  3.942909e-02 -2.550042e-02 -1.738071e-02 </span>
@@ -209,10 +209,10 @@ doi: <a href="https://doi.org/10.18637/jss.v023.i05" class="external-link">10.18
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot varnames:   &lt;not set&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Slot objectname:  x</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## portmanteau test for iid, by default gives also ci's for the acf under H0</span></span>
-<span class="r-in"><span class="va">x.iid</span> <span class="op">&lt;-</span> <span class="fu"><a href="whiteNoiseTest.html">whiteNoiseTest</a></span><span class="op">(</span><span class="va">x.acf</span>, h0 <span class="op">=</span> <span class="st">"iid"</span>, nlags <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">20</span><span class="op">)</span>, x <span class="op">=</span> <span class="va">x</span>, method <span class="op">=</span> <span class="st">"LiMcLeod"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x.iid</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## portmanteau test for iid, by default gives also ci's for the acf under H0</span></span></span>
+<span class="r-in"><span><span class="va">x.iid</span> <span class="op">&lt;-</span> <span class="fu"><a href="whiteNoiseTest.html">whiteNoiseTest</a></span><span class="op">(</span><span class="va">x.acf</span>, h0 <span class="op">=</span> <span class="st">"iid"</span>, nlags <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">20</span><span class="op">)</span>, x <span class="op">=</span> <span class="va">x</span>, method <span class="op">=</span> <span class="st">"LiMcLeod"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x.iid</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $test</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         ChiSq DF       pvalue</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 18.52103  5 0.0023595472</span>
@@ -246,9 +246,9 @@ doi: <a href="https://doi.org/10.18637/jss.v023.i05" class="external-link">10.18
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"level")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.95</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">x.iid2</span> <span class="op">&lt;-</span> <span class="fu"><a href="whiteNoiseTest.html">whiteNoiseTest</a></span><span class="op">(</span><span class="va">x.acf</span>, h0 <span class="op">=</span> <span class="st">"iid"</span>, nlags <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">20</span><span class="op">)</span>, x <span class="op">=</span> <span class="va">x</span>, method <span class="op">=</span> <span class="st">"LjungBox"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x.iid2</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">x.iid2</span> <span class="op">&lt;-</span> <span class="fu"><a href="whiteNoiseTest.html">whiteNoiseTest</a></span><span class="op">(</span><span class="va">x.acf</span>, h0 <span class="op">=</span> <span class="st">"iid"</span>, nlags <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">20</span><span class="op">)</span>, x <span class="op">=</span> <span class="va">x</span>, method <span class="op">=</span> <span class="st">"LjungBox"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x.iid2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $test</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         ChiSq DF       pvalue</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 18.53295  5 0.0023475578</span>
@@ -282,10 +282,10 @@ doi: <a href="https://doi.org/10.18637/jss.v023.i05" class="external-link">10.18
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"level")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.95</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## portmanteau test for garch H0</span></span>
-<span class="r-in"><span class="va">x.garch</span> <span class="op">&lt;-</span> <span class="fu"><a href="whiteNoiseTest.html">whiteNoiseTest</a></span><span class="op">(</span><span class="va">x.acf</span>, h0 <span class="op">=</span> <span class="st">"garch"</span>, nlags <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">20</span><span class="op">)</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x.garch</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## portmanteau test for garch H0</span></span></span>
+<span class="r-in"><span><span class="va">x.garch</span> <span class="op">&lt;-</span> <span class="fu"><a href="whiteNoiseTest.html">whiteNoiseTest</a></span><span class="op">(</span><span class="va">x.acf</span>, h0 <span class="op">=</span> <span class="st">"garch"</span>, nlags <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">20</span><span class="op">)</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x.garch</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $test</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       h         Q       pval</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  5  6.454586 0.26446280</span>
@@ -315,24 +315,24 @@ doi: <a href="https://doi.org/10.18637/jss.v023.i05" class="external-link">10.18
 <span class="r-out co"><span class="r-pr">#&gt;</span> [19,] -0.02891890 0.02891890</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [20,] -0.03169497 0.03169497</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## plot methods give the CI's under H0</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x.acf</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## plot methods give the CI's under H0</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x.acf</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="sarima-package-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## if the data are given, the CI's under garch H0 are also given.</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x.acf</span>, data <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## if the data are given, the CI's under garch H0 are also given.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x.acf</span>, data <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="sarima-package-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Tests based on partial autocorrelations are also available:</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x.pacf</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Tests based on partial autocorrelations are also available:</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x.pacf</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="sarima-package-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x.pacf</span>, data <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x.pacf</span>, data <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="sarima-package-4.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Models</span></span>
-<span class="r-in"><span class="co">## AR</span></span>
-<span class="r-in"><span class="op">(</span> <span class="va">ar2a1</span> <span class="op">&lt;-</span> <span class="fu"><a href="ArmaModel.html">ArModel</a></span><span class="op">(</span>ar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.3</span>, <span class="op">-</span><span class="fl">0.7</span><span class="op">)</span>, sigma2 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Models</span></span></span>
+<span class="r-in"><span><span class="co">## AR</span></span></span>
+<span class="r-in"><span><span class="op">(</span> <span class="va">ar2a1</span> <span class="op">&lt;-</span> <span class="fu"><a href="ArmaModel.html">ArModel</a></span><span class="op">(</span>ar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.3</span>, <span class="op">-</span><span class="fl">0.7</span><span class="op">)</span>, sigma2 <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "ArModel"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mean:  0 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sigmaSq:  1 </span>
@@ -348,26 +348,26 @@ doi: <a href="https://doi.org/10.18637/jss.v023.i05" class="external-link">10.18
 <span class="r-out co"><span class="r-pr">#&gt;</span> order:  0 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> numeric(0)</span>
-<span class="r-in"><span class="fu"><a href="autocorrelations.html">autocorrelations</a></span><span class="op">(</span><span class="va">ar2a1</span>, maxlag <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="autocorrelations.html">autocorrelations</a></span><span class="op">(</span><span class="va">ar2a1</span>, maxlag <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "Autocorrelations"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          0          1          2          3          4          5          6 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1.0000000 -0.1764706 -0.6470588  0.3176471  0.3576471 -0.3296471 -0.1514588 </span>
-<span class="r-in"><span class="fu"><a href="autocorrelations.html">partialAutocorrelations</a></span><span class="op">(</span><span class="va">ar2a1</span>, maxlag <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="autocorrelations.html">partialAutocorrelations</a></span><span class="op">(</span><span class="va">ar2a1</span>, maxlag <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "PartialAutocorrelations"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         Lag_0         Lag_1         Lag_2         Lag_3         Lag_4 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  1.000000e+00 -1.764706e-01 -7.000000e-01 -1.123440e-16  0.000000e+00 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         Lag_5         Lag_6 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  0.000000e+00 -5.617200e-17 </span>
-<span class="r-in"><span class="fu"><a href="autocorrelations.html">autocovariances</a></span><span class="op">(</span><span class="va">ar2a1</span>, maxlag <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="autocorrelations.html">autocovariances</a></span><span class="op">(</span><span class="va">ar2a1</span>, maxlag <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "Autocovariances"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Lag_0      Lag_1      Lag_2      Lag_3      Lag_4      Lag_5      Lag_6 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  2.0238095 -0.3571429 -1.3095238  0.6428571  0.7238095 -0.6671429 -0.3065238 </span>
-<span class="r-in"><span class="fu"><a href="autocorrelations.html">partialVariances</a></span><span class="op">(</span><span class="va">ar2a1</span>, maxlag <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="autocorrelations.html">partialVariances</a></span><span class="op">(</span><span class="va">ar2a1</span>, maxlag <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "PartialVariances"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        0        1        2        3        4        5        6 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2.023810 1.960784 1.000000 1.000000 1.000000 1.000000 1.000000 </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## see examples for ArmaModel()</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## see examples for ArmaModel()</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -379,7 +379,7 @@ doi: <a href="https://doi.org/10.18637/jss.v023.i05" class="external-link">10.18
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer></div>

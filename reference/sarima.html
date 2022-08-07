@@ -6,7 +6,7 @@ Fit extended SARIMA models, which can include lagged exogeneous
   periodicities, and multiplicative terms in the SARIMA
   specification. The models are specified with a flexible formula syntax
   and contain as special cases many models with specialised names, such
-  as ARMAX and reg-ARIMA."><title>Fit extended SARIMA models — sarima • sarima</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Fit extended SARIMA models — sarima"><meta property="og:description" content="
+  as ARMAX and reg-ARIMA."><title>Fit extended SARIMA models — sarima • sarima</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Fit extended SARIMA models — sarima"><meta property="og:description" content="
 
 Fit extended SARIMA models, which can include lagged exogeneous
   variables, general unit root non-stationary factors, multiple
@@ -24,7 +24,7 @@ Fit extended SARIMA models, which can include lagged exogeneous
     
     <a class="navbar-brand me-2" href="../index.html">sarima</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,27 +72,32 @@ Fit extended SARIMA models, which can include lagged exogeneous
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">sarima</span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="cn">NULL</span>, ss.method <span class="op">=</span> <span class="st">"sarima"</span>, use.symmetry <span class="op">=</span> <span class="cn">FALSE</span>, 
-       SSinit <span class="op">=</span> <span class="st">"Rossignol2011"</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sarima</span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="cn">NULL</span>, ss.method <span class="op">=</span> <span class="st">"sarima"</span>, use.symmetry <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>       SSinit <span class="op">=</span> <span class="st">"Rossignol2011"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>model</dt>
 <dd><p>a model formula specifying the model.</p></dd>
-<dt>data</dt>
+
+  <dt>data</dt>
 <dd><p>a list or data frame, usually can be omitted.</p></dd>
-<dt>ss.method</dt>
+
+  <dt>ss.method</dt>
 <dd><p>state space engine to use, defaults to
     <code>"sarima"</code>. (<strong>Note:</strong> this argument will
     probably be renamed.)</p></dd>
-<dt>use.symmetry</dt>
+
+  <dt>use.symmetry</dt>
 <dd><p>a logical argument indicating whether 
     symmetry should be used to estimate the unit polynomial.</p></dd>
-<dt>SSinit</dt>
+
+  <dt>SSinit</dt>
 <dd><p>method to use for computation of the stationary part of
     the initial covariance matrix, one of "Rossignol2011", "gnb",
     "Gardner1980".</p></dd>
+ 
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -285,9 +290,15 @@ Fit extended SARIMA models, which can include lagged exogeneous
     </div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>an object from S3 class Sarima
-  (<strong>Note:</strong> the format of the object is still under development
+    
+
+<p>an object from S3 class Sarima</p>
+  
+
+<p>(<strong>Note:</strong> the format of the object is still under development
   and may change; use accessor functions, such as <code><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef()</a></code>, where provided.)</p>
+  
+
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -305,19 +316,19 @@ Fit extended SARIMA models, which can include lagged exogeneous
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## AirPassengers example</span></span>
-<span class="r-in"><span class="co">## fit the classic airline model using arima()</span></span>
-<span class="r-in"><span class="va">ap.arima</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/arima.html" class="external-link">arima</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>, order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, seasonal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## same model using two equivalent ways to specify it</span></span>
-<span class="r-in"><span class="va">ap.baseA</span> <span class="op">&lt;-</span> <span class="fu">sarima</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span> <span class="op">~</span> </span>
-<span class="r-in">                   <span class="fl">0</span> <span class="op">|</span> <span class="fu">ma</span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">sma</span><span class="op">(</span><span class="fl">12</span>,<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">i</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fu">si</span><span class="op">(</span><span class="fl">12</span>,<span class="fl">1</span><span class="op">)</span>, </span>
-<span class="r-in">                   ss.method <span class="op">=</span> <span class="st">"base"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ap.baseB</span> <span class="op">&lt;-</span> <span class="fu">sarima</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span> <span class="op">~</span> </span>
-<span class="r-in">                   <span class="fl">0</span> <span class="op">|</span> <span class="fu">ma</span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">sma</span><span class="op">(</span><span class="fl">12</span>,<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">i</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu">s</span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>, </span>
-<span class="r-in">                   ss.method <span class="op">=</span> <span class="st">"base"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">ap.baseA</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## AirPassengers example</span></span></span>
+<span class="r-in"><span><span class="co">## fit the classic airline model using arima()</span></span></span>
+<span class="r-in"><span><span class="va">ap.arima</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/arima.html" class="external-link">arima</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>, order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, seasonal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## same model using two equivalent ways to specify it</span></span></span>
+<span class="r-in"><span><span class="va">ap.baseA</span> <span class="op">&lt;-</span> <span class="fu">sarima</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span> <span class="op">~</span> </span></span>
+<span class="r-in"><span>                   <span class="fl">0</span> <span class="op">|</span> <span class="fu">ma</span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">sma</span><span class="op">(</span><span class="fl">12</span>,<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">i</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fu">si</span><span class="op">(</span><span class="fl">12</span>,<span class="fl">1</span><span class="op">)</span>, </span></span>
+<span class="r-in"><span>                   ss.method <span class="op">=</span> <span class="st">"base"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ap.baseB</span> <span class="op">&lt;-</span> <span class="fu">sarima</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span> <span class="op">~</span> </span></span>
+<span class="r-in"><span>                   <span class="fl">0</span> <span class="op">|</span> <span class="fu">ma</span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">sma</span><span class="op">(</span><span class="fl">12</span>,<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">i</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu">s</span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>, </span></span>
+<span class="r-in"><span>                   ss.method <span class="op">=</span> <span class="st">"base"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">ap.baseA</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> *Sarima model*</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sarima(model = log(AirPassengers) ~ 0 | ma(1, c(-0.3)) + sma(12, 1, c(-0.1)) + </span>
@@ -332,7 +343,7 @@ Fit extended SARIMA models, which can include lagged exogeneous
 <span class="r-out co"><span class="r-pr">#&gt;</span> s.e.   0.1072   0.1068</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sigma^2 estimated as 0.001347:  log likelihood = 169.3,  aic = -332.61</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ap.baseA</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ap.baseA</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sarima(model = log(AirPassengers) ~ 0 | ma(1, c(-0.3)) + sma(12, </span>
@@ -354,7 +365,7 @@ Fit extended SARIMA models, which can include lagged exogeneous
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> estimated sigma^2 = 0.00135,  log-likelihood = 169.3,  aic = -332.61</span>
-<span class="r-in"><span class="va">ap.baseB</span></span>
+<span class="r-in"><span><span class="va">ap.baseB</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> *Sarima model*</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sarima(model = log(AirPassengers) ~ 0 | ma(1, c(-0.3)) + sma(12, 1, c(-0.1)) + </span>
@@ -369,7 +380,7 @@ Fit extended SARIMA models, which can include lagged exogeneous
 <span class="r-out co"><span class="r-pr">#&gt;</span> s.e.   0.1072   0.1068</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sigma^2 estimated as 0.001347:  log likelihood = 169.3,  aic = -332.61</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ap.baseB</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ap.baseB</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sarima(model = log(AirPassengers) ~ 0 | ma(1, c(-0.3)) + sma(12, </span>
@@ -391,28 +402,28 @@ Fit extended SARIMA models, which can include lagged exogeneous
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> estimated sigma^2 = 0.00135,  log-likelihood = 169.3,  aic = -332.61</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## as above, but drop 1-B from the model:</span></span>
-<span class="r-in"><span class="va">ap2.arima</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/arima.html" class="external-link">arima</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>, order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>, seasonal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ap2.baseA</span> <span class="op">&lt;-</span> <span class="fu">sarima</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span> <span class="op">~</span> </span>
-<span class="r-in">                    <span class="fl">0</span> <span class="op">|</span> <span class="fu">ma</span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">sma</span><span class="op">(</span><span class="fl">12</span>,<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>     <span class="fu">si</span><span class="op">(</span><span class="fl">12</span>,<span class="fl">1</span><span class="op">)</span>, </span>
-<span class="r-in">                    ss.method <span class="op">=</span> <span class="st">"base"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">ap2.baseB</span> <span class="op">&lt;-</span> <span class="fu">sarima</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span> <span class="op">~</span> </span>
-<span class="r-in">                    <span class="fl">0</span> <span class="op">|</span> <span class="fu">ma</span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">sma</span><span class="op">(</span><span class="fl">12</span>,<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">i</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fu">s</span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>, </span>
-<span class="r-in">                    ss.method <span class="op">=</span> <span class="st">"base"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## for illustration, here the non-stationary part is </span></span>
-<span class="r-in"><span class="co">##     (1-B)^2(1+B+...+B^5) = (1-B)(1-B^6)</span></span>
-<span class="r-in"><span class="co">##     (  compare to (1-B)(1-B^{12}) = (1-B)(1-B^6)(1+B^6) ) </span></span>
-<span class="r-in"><span class="va">ap3.base</span> <span class="op">&lt;-</span> <span class="fu">sarima</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span> <span class="op">~</span> </span>
-<span class="r-in">                   <span class="fl">0</span> <span class="op">|</span> <span class="fu">ma</span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">sma</span><span class="op">(</span><span class="fl">12</span>,<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">i</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu">s</span><span class="op">(</span><span class="fl">6</span><span class="op">)</span>, </span>
-<span class="r-in">                   ss.method <span class="op">=</span> <span class="st">"base"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## further unit roots, equivalent specifications for the airline model</span></span>
-<span class="r-in"><span class="va">tmp.su</span> <span class="op">&lt;-</span> <span class="fu">sarima</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span> <span class="op">~</span> </span>
-<span class="r-in">                 <span class="fl">0</span> <span class="op">|</span> <span class="fu">ma</span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">sma</span><span class="op">(</span><span class="fl">12</span>,<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">i</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu">s</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu">su</span><span class="op">(</span><span class="fl">12</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, </span>
-<span class="r-in">                 ss.method <span class="op">=</span> <span class="st">"base"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">tmp.su</span><span class="op">$</span><span class="va">interna</span><span class="op">$</span><span class="va">delta_poly</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## as above, but drop 1-B from the model:</span></span></span>
+<span class="r-in"><span><span class="va">ap2.arima</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/arima.html" class="external-link">arima</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span>, order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>, seasonal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ap2.baseA</span> <span class="op">&lt;-</span> <span class="fu">sarima</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span> <span class="op">~</span> </span></span>
+<span class="r-in"><span>                    <span class="fl">0</span> <span class="op">|</span> <span class="fu">ma</span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">sma</span><span class="op">(</span><span class="fl">12</span>,<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>     <span class="fu">si</span><span class="op">(</span><span class="fl">12</span>,<span class="fl">1</span><span class="op">)</span>, </span></span>
+<span class="r-in"><span>                    ss.method <span class="op">=</span> <span class="st">"base"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ap2.baseB</span> <span class="op">&lt;-</span> <span class="fu">sarima</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span> <span class="op">~</span> </span></span>
+<span class="r-in"><span>                    <span class="fl">0</span> <span class="op">|</span> <span class="fu">ma</span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">sma</span><span class="op">(</span><span class="fl">12</span>,<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">i</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fu">s</span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>, </span></span>
+<span class="r-in"><span>                    ss.method <span class="op">=</span> <span class="st">"base"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## for illustration, here the non-stationary part is </span></span></span>
+<span class="r-in"><span><span class="co">##     (1-B)^2(1+B+...+B^5) = (1-B)(1-B^6)</span></span></span>
+<span class="r-in"><span><span class="co">##     (  compare to (1-B)(1-B^{12}) = (1-B)(1-B^6)(1+B^6) ) </span></span></span>
+<span class="r-in"><span><span class="va">ap3.base</span> <span class="op">&lt;-</span> <span class="fu">sarima</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span> <span class="op">~</span> </span></span>
+<span class="r-in"><span>                   <span class="fl">0</span> <span class="op">|</span> <span class="fu">ma</span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">sma</span><span class="op">(</span><span class="fl">12</span>,<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">i</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu">s</span><span class="op">(</span><span class="fl">6</span><span class="op">)</span>, </span></span>
+<span class="r-in"><span>                   ss.method <span class="op">=</span> <span class="st">"base"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## further unit roots, equivalent specifications for the airline model</span></span></span>
+<span class="r-in"><span><span class="va">tmp.su</span> <span class="op">&lt;-</span> <span class="fu">sarima</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span> <span class="op">~</span> </span></span>
+<span class="r-in"><span>                 <span class="fl">0</span> <span class="op">|</span> <span class="fu">ma</span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">sma</span><span class="op">(</span><span class="fl">12</span>,<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">i</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu">s</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu">su</span><span class="op">(</span><span class="fl">12</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, </span></span>
+<span class="r-in"><span>                 ss.method <span class="op">=</span> <span class="st">"base"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">tmp.su</span><span class="op">$</span><span class="va">interna</span><span class="op">$</span><span class="va">delta_poly</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of polynomials:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 - x </span>
@@ -435,12 +446,12 @@ Fit extended SARIMA models, which can include lagged exogeneous
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[7]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 + 1.732051*x + x^2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/prod.html" class="external-link">prod</a></span><span class="op">(</span><span class="va">tmp.su</span><span class="op">$</span><span class="va">interna</span><span class="op">$</span><span class="va">delta_poly</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/prod.html" class="external-link">prod</a></span><span class="op">(</span><span class="va">tmp.su</span><span class="op">$</span><span class="va">interna</span><span class="op">$</span><span class="va">delta_poly</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 + 8.881784e-16*x^3 - 1.332268e-15*x^4 + 1.776357e-15*x^5 - 1.776357e-15*x^7 +  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1.332268e-15*x^8 - 8.881784e-16*x^9 - x^12 </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/zapsmall.html" class="external-link">zapsmall</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/prod.html" class="external-link">prod</a></span><span class="op">(</span><span class="va">tmp.su</span><span class="op">$</span><span class="va">interna</span><span class="op">$</span><span class="va">delta_poly</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/zapsmall.html" class="external-link">zapsmall</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/prod.html" class="external-link">prod</a></span><span class="op">(</span><span class="va">tmp.su</span><span class="op">$</span><span class="va">interna</span><span class="op">$</span><span class="va">delta_poly</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  1  0  0  0  0  0  0  0  0  0  0  0 -1</span>
-<span class="r-in"><span class="va">tmp.su</span></span>
+<span class="r-in"><span><span class="va">tmp.su</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> *Sarima model*</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sarima(model = log(AirPassengers) ~ 0 | ma(1, c(-0.3)) + sma(12, 1, c(-0.1)) + </span>
@@ -455,11 +466,11 @@ Fit extended SARIMA models, which can include lagged exogeneous
 <span class="r-out co"><span class="r-pr">#&gt;</span> s.e.   0.1072   0.1068</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sigma^2 estimated as 0.001347:  log likelihood = 169.3,  aic = -332.61</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">tmp.u</span> <span class="op">&lt;-</span> <span class="fu">sarima</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span> <span class="op">~</span> </span>
-<span class="r-in">                <span class="fl">0</span> <span class="op">|</span> <span class="fu">ma</span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">sma</span><span class="op">(</span><span class="fl">12</span>,<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">i</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu">s</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu">u</span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span><span class="op">/</span><span class="fl">12</span><span class="op">)</span>, </span>
-<span class="r-in">                ss.method <span class="op">=</span> <span class="st">"base"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">tmp.u</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">tmp.u</span> <span class="op">&lt;-</span> <span class="fu">sarima</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span> <span class="op">~</span> </span></span>
+<span class="r-in"><span>                <span class="fl">0</span> <span class="op">|</span> <span class="fu">ma</span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">sma</span><span class="op">(</span><span class="fl">12</span>,<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">i</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu">s</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu">u</span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span><span class="op">/</span><span class="fl">12</span><span class="op">)</span>, </span></span>
+<span class="r-in"><span>                ss.method <span class="op">=</span> <span class="st">"base"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">tmp.u</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> *Sarima model*</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sarima(model = log(AirPassengers) ~ 0 | ma(1, c(-0.3)) + sma(12, 1, c(-0.1)) + </span>
@@ -485,7 +496,7 @@ Fit extended SARIMA models, which can include lagged exogeneous
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer></div>
