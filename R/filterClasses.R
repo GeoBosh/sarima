@@ -428,7 +428,8 @@ setMethod("filterPoly", "SarimaFilter",
                   smapoly_expanded <-
                   saripoly_expanded <- polynom(1)
 
-                  fullarpoly <- arpoly * aripoly
+                  fullarstatpoly <- arpoly
+                  fullarpoly <- fullarstatpoly * aripoly
                   fullmapoly <- mapoly
 
               }else{                           # seasonal part present
@@ -441,7 +442,9 @@ setMethod("filterPoly", "SarimaFilter",
                   smapoly_expanded <- predict(smapoly,bs)
                   saripoly_expanded <- (1-bs)^object@siorder
 
-                  fullarpoly <- arpoly * sarpoly_expanded * aripoly * saripoly_expanded
+                  fullarstatpoly <- arpoly * sarpoly_expanded
+                      # fullarpoly <- arpoly * sarpoly_expanded * aripoly * saripoly_expanded
+                  fullarpoly <- fullarstatpoly * aripoly * saripoly_expanded
                   fullmapoly <- mapoly * smapoly_expanded
               }
 
@@ -457,6 +460,7 @@ setMethod("filterPoly", "SarimaFilter",
                    sarpoly = sarpoly_expanded, # 2016-11-01 - was: sarpoly
                    smapoly = smapoly_expanded, #                   smapoly
 
+                   fullarstatpoly = fullarstatpoly, ## multiplied out all stationary AR factors
                    fullarpoly = fullarpoly,  ## multiplied out all AR like
                    fullmapoly = fullmapoly,  ##   ""           all MA
 

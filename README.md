@@ -1,5 +1,7 @@
 <!-- badges: start -->
 [![CRANStatusBadge](http://www.r-pkg.org/badges/version/sarima)](https://cran.r-project.org/package=sarima)
+[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/sarima)](https://www.r-pkg.org/pkg/sarima)
+[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/grand-total/sarima?color=blue)](https://r-pkg.org/pkg/sarima)
 [![R-CMD-check](https://github.com/GeoBosh/sarima/workflows/R-CMD-check/badge.svg)](https://github.com/GeoBosh/sarima/actions)
 [![Codecov test coverage](https://codecov.io/gh/GeoBosh/sarima/branch/master/graph/badge.svg)](https://app.codecov.io/gh/GeoBosh/sarima?branch=master)
 <!-- badges: end -->

@@ -56,21 +56,23 @@ prepareSimSarima(model, x = NULL, eps = NULL, n, n.start = NA,
   SARIMA family, such as "SarimaModel", or a list with components
   suitable to be passed to =new()= for such models.
 
-  The canonical form of argument \code{x} u is a list with components
-  "before", "init" and "main". If any of these components is missing or
-  NULL, it is filled suitably.  Any other components are ignored. If
-  \code{x} is not a list, it is put in component "main". Conceptually,
-  the three components are concatenated in the given order, the
-  simulated values are put in "main" ("before" and "init" are not
-  changed), the "before" part is dropped and rest is returned. In
-  effect, "before" and "init" can be viewed as initial values but "init"
-  is considered part of the generated series.
+  The canonical form of argument \code{x} is a list with components
+  \code{before}, \code{init} and \code{main}. If any of these components
+  is missing or NULL, it is filled suitably.  Any other components of
+  \code{x} are ignored. If \code{x} is not a list, it is put in
+  component \code{main}. Conceptually, the three components are
+  concatenated in the given order, the simulated values are put in
+  \code{main} (\code{before} and \code{init} are not changed), the
+  \code{before} part is dropped and the rest is returned. In effect,
+  \code{before} and \code{init} can be viewed as initial values but
+  \code{init} is considered part of the generated series.
 
   The format for \code{eps} is the same as that of \code{x}. The lengths of
   missing components in \code{x} are inferred from the corresponding
   components of \code{eps}, and vice versa.
 
-
+  The format for \code{xintercept} is the same as that of \code{x} and
+  \code{eps}.
 
   \code{print.simSarimaFun} is a print method for the objects generated
   by \code{prepareSimSarima}.

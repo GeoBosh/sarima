@@ -33,7 +33,7 @@ acfOfSquaredArmaModel(model, maxlag)
   "ma", and "sigma2".
 
   \code{nvcovOfAcfBD} computes the same quantities but uses the formula
-  given by Brockwell \& Davis (1991) (eq. (7.2.6.), p. 222), which is
+  given by Brockwell & Davis (1991) (eq. (7.2.6.), p. 222), which is
   based on the autocorrelations of the model. Argument
   \code{acf} contains the autocorrelations.
   

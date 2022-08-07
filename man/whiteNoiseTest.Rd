@@ -30,7 +30,7 @@ whiteNoiseTest(object, h0, ...)
   "LiMcLeod" (default), "LjungBox", "BoxPierce".
 
   If \code{h0 = "garch"}, the null hypothesis is that the time series is
-  GARCH, see Francq \& Zakoian (2010). The
+  GARCH, see Francq & Zakoian (2010). The
   tests in this case are based on a non-parametric estimate of the
   asymptotic covariance matrix.
 
