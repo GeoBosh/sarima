@@ -73,7 +73,7 @@ Sys.setenv(TZ = "GMT")
 %\VignettePackage{sarima}
 
 <<setup,echo=FALSE>>=
-library("fImport")
+## library("fImport")
 library("sarima")
 library("fGarch")
 options(prompt = "R> ")

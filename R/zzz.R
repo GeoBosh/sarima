@@ -16,15 +16,12 @@
 }
 
 InformationMatrixARMA <- local({
-    first_call <- TRUE
+    avail <- NA
     fu <- function(phi, theta){phi + theta}
     function(phi = numeric(0), theta = numeric(0)){
-        if(first_call){
-            first_call <<- FALSE
-            if(!requireNamespace("FitARMA")){
-                stop("This feature needs package 'FitARMA'",
-                     "Please install it from CRAN.")
-            }else{
+        if(!isTRUE(avail)){
+            if(requireNamespace("FitARMA")){
+                avail <<- TRUE
                 ## invertibleQ is not visible in FitARMA::InformationMatrixARMA(), v1.6.1 and
                 ## earlier, unless FitAR is attached. v1.6.1 is the current one at the time
                 ## of writing this (2021-03-07) but it would be unsafe to make this changed
@@ -37,6 +34,13 @@ InformationMatrixARMA <- local({
                             #   quote(!(FitAR::InvertibleQ(phi) & FitAR::InvertibleQ(theta)))
                         quote(!((length(phi) == 0 || all(abs(sarima::ar2Pacf(phi)) < 1)) &
                                 (length(theta) == 0 || all(abs(sarima::ar2Pacf(theta)) < 1))))
+            }else{
+                avail <<- FALSE
+                stop("This feature needs package 'FitARMA'. ",
+                     "Please install it from Github using\n\n",
+                     '    remotes::install_github("cran/FitARMA")\n\n',
+                     '(if package "remotes" is not installed, install it from CRAN)'
+                     )
             }
         }
         fu(phi, theta)

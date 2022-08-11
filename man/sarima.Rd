@@ -241,9 +241,9 @@ sarima(model, data = NULL, ss.method = "sarima", use.symmetry = FALSE,
   and may change; use accessor functions, such as \code{coef()}, where provided.)
   
 }
-%\references{
-%%% ~put references to the literature/web site here ~
-%}
+\references{
+  \insertRef{BoshnakovHalliday2022parcor}{sarima}
+}
 \author{Georgi N. Boshnakov}
 \note{
     Currently the implementation of the intercept form (ie the third

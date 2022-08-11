@@ -64,6 +64,8 @@ Maintainer: \Sexpr[stage=build]{pd$Maintainer}
 \references{
   \insertRef{boshnakov1996aism}{sarima}
 
+  \insertRef{BoshnakovHalliday2022parcor}{sarima}
+
   \insertRef{BrockwellDavis1991}{sarima}
 
   \insertRef{FrancqZakoian2010garch}{sarima}

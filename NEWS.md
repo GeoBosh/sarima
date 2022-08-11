@@ -1,5 +1,7 @@
 # sarima 0.9.1 (CRAN)
 
+- included instructions how to install package 'FitARMA', if it is needed.
+
 - fixed NOTEs from CRAN about escaped LaTeX specials.
 
 - added the expanded stationary AR polynomial to the output of the
