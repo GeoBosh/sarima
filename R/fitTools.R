@@ -599,7 +599,7 @@ tsdiag.Sarima <- function(object, gof.lag = NULL, ask = FALSE, ..., plot = 1:3, 
     if(!isTRUE(plot)){                  # plot is typically numeric index here;
         choices <- choices[plot]        # FALSE or NULL give zero length result, so no plots
         chnum <- chnum[plot]
-#browser()
+
         if(anyNA(choices)){
             warning("'plot' should be TRUE/FALSE or vector of positive integers <= ",
                     length(.tsdiag_choices), ",\n", "ignoring non-existent values")
@@ -611,12 +611,18 @@ tsdiag.Sarima <- function(object, gof.lag = NULL, ask = FALSE, ..., plot = 1:3, 
     if(length(choices) > 0){
 	old.par <- par(no.readonly = TRUE)
 	on.exit(par(old.par))     # restore graphics parameters before exiting.
-            # par(mfrow = c(2,1))
-        n_per_page <- if(is.null(layout))
-                          layout(matrix(1:3, nrow = 3))
-                          # layout(matrix(1:min(3, length(choices)), ncol = 1))
+
+        n_per_page <- 3
+        ask_user <- interactive() && (ask || length(choices) > n_per_page)
+
+        n_per_page <- if(is.null(layout)) {
+                          if(ask_user)
+                              ## was: layout(matrix(1:3, ncol = 1))
+                              layout(matrix(1:min(3, length(choices)), ncol = 1))
+                          else
+                              layout(matrix(1:min(3, length(choices)), ncol = 1))
                                         
-                      else
+                      } else
                           ## TODO: this needs further thought!
                           do.call("layout", layout) # for the time being
             
@@ -703,10 +709,10 @@ tsdiag.Sarima <- function(object, gof.lag = NULL, ask = FALSE, ..., plot = 1:3, 
                 break
             ## TODO: argument 'ask' could be used here to present a menu or just
             ##       plot the next plot in choices.
-            if(interactive() && (ask || length(choices) > n_per_page)){
+            if(ask_user) { # was: interactive() && (ask || length(choices) > n_per_page)
                 ch_index <- menu(choices, title = choice_title)
                 choice <- chnum[ch_index]
-            }else{
+            } else{
                 ## just plot the next one
                 ##  Note: this doesn't update ch_index
                 chnum <- chnum[-1]

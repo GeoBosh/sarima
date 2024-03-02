@@ -1,3 +1,15 @@
+# sarima 0.9.2
+
+- the 'Sarima' method for `tsdiag` now splits the window into less than 3
+  subwindows when the number of choices is less than 3. As before, if argument
+  `layout` is supplied, then it is used unconditionally to set the layout of the
+  plots.
+
+- no longer require C++11, thus relying on R to do the right thing. Also, avoids
+  the following NOTE from recent R-devel: 'Specified C++11: please drop
+  specification unless essential'.
+
+
 # sarima 0.9.1 (CRAN)
 
 - included instructions how to install package 'FitARMA', if it is needed.
@@ -6,7 +18,7 @@
 
 - added the expanded stationary AR polynomial to the output of the
   `"SarimaModel"` method for `filterPoly` and `filterPolyCoef`. The fully
-  axpanded AR polynomial which includes also the integrated terms is availalbe
+  expanded AR polynomial which includes also the integrated terms is availalbe
   as before.
 
 - in `prepareSimSarima` (and hence `sim_sarima`) fixed a bug causing wrong
@@ -20,7 +32,7 @@
 - new generic function `FisherInformation` giving the information matrix for
   fitted and theoretical models with methods for ARMA and seasonal ARMA models.
 
-- new generic function `spectrum` with methods for(seasonal) ARMA models and
+- new generic function `spectrum` with methods for (seasonal) ARMA models and
   default `stats::spectrum`.
   
 
