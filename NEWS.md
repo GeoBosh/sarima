@@ -440,22 +440,27 @@ Changes in branch 'models'
 
 * updated and cleaned a bit the old code.
 
+
 # sarima 0.0-5 (not on CRAN)
 
 * removed argument "eps" from fun.forecast since it is ignored.
+
 
 # sarima 0.0-3 (not on CRAN)
 
 * sarima.mod now sets class "sarima" for its result.
 * print method for "sarima" class.
 
+
 # sarima 0.0-2 (not on CRAN)
 
 * inserted examples from lectures and handouts from past years.
 
+
 # sarima 0.0-1 (not on CRAN)
 
 * created documentation using the comments in the source code.
+
 
 # sarima 0.0-0 (not on CRAN)
 
