@@ -18,9 +18,6 @@ Description: Functions, classes and methods for time series modelling with ARIMA
     ARIMA models with trends, exogenous variables and arbitrary roots on the
     unit circle, which can be fixed or estimated (for the algebraic basis for
     this see <arXiv:2208.05055>, a paper on the methodology is being prepared).
-    The suggested package 'FitARMA' can be installed with
-    'remotes::install_github("cran/FitARMA")' if necessary but is no longer
-    needed in normal use.
 URL: https://geobosh.github.io/sarima/ (doc) https://github.com/GeoBosh/sarima (devel) 
 BugReports: https://github.com/GeoBosh/sarima/issues
 Depends:
@@ -40,7 +37,6 @@ Suggests:
     testthat,
     KFAS,
     FKF,
-    FitARMA,
     fGarch,
     forecast
 RdMacros: Rdpack
@@ -66,4 +62,3 @@ Collate:
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 7.1.1
 NeedsCompilation: yes
-Remotes: cran/FitAR, cran/FitARMA

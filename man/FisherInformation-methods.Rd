@@ -37,8 +37,8 @@ FisherInformation(model, ...)
   information matrix after differencing.
 
   For ARMA models the implementation is based on
-  \insertCite{Friedlander1984CramerRaoArma}{sarima} and (for the seasonal
-  specifics) \insertCite{Godolphin2007Sarma}{sarima}.
+  \insertCite{Friedlander1984CramerRaoArma;textual}{sarima} and (for the seasonal
+  specifics) \insertCite{Godolphin2007Sarma;textual}{sarima}.
 
 }
 \value{

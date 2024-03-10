@@ -1,3 +1,8 @@
+# sarima 0.9.2.9000
+
+- removed 'FitARMA' from 'Suggests:'; it had not been needed for some time.
+
+
 # sarima 0.9.2
 
 - the 'Sarima' method for `tsdiag` now splits the window into less than 3
