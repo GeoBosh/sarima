@@ -1,7 +1,11 @@
 \name{tsdiag.Sarima}
 \alias{tsdiag.Sarima}
+
 \alias{tsdiag}
+
+
 \title{Diagnostic Plots for fitted seasonal ARIMA models}
+
 \description{
 
   Produce diagnostics for fitted seasonal ARIMA models. The method
@@ -14,10 +18,10 @@
 \usage{
 \method{tsdiag}{Sarima}(object, gof.lag = NULL, ask = FALSE, \dots, plot = 1:3, layout = NULL)
 
-# if 'object' is not produced by sarima(), use the full name,
-# 'tsdiag.Sarima()', in the call. The arguments are the same.
+# if 'object' is produced by stats::arima(), forecast::auto.arima() and
+# similar, use the full name, 'tsdiag.Sarima()', in the call. The
+# arguments are the same.
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{object}{
     
@@ -30,7 +34,10 @@
 
   }
   \item{gof.lag}{maximal lag for portmanteau tests.}
-  \item{ask}{if \code{TRUE} present a menu of available plots, see Details.}
+  \item{ask}{
+    if \code{TRUE} present a menu of available plots, see section
+    \sQuote{Details}.
+  }
   \item{\dots}{not used.}
   \item{plot}{
     if \code{TRUE} all available plots; a vector of positive integers
@@ -122,20 +129,20 @@ tsdiag.Sarima(ap.arima, plot = c(1:2,4))
 ## call R's tsdiag method, for comparison:
 tsdiag(ap.arima, plot = c(1:2,4))
 
-## plot only acf an p-values
-tsdiag.Sarima(ap.arima, plot = c(2:3), layout = list(matrix(1:2, nrow = 2)))
-
-## plot only acf an p-values
+## plot only acf and p-values
 tsd <- tsdiag.Sarima(ap.arima, plot = c(2:3), layout = list(matrix(1:2, nrow = 2)))
 ## the results can be used for further calculations:
 head(tsd$LjungBox$test, 4)
 
+\dontshow{if(FALSE) # otherwise R check warns about help page running time > 5s}
 ## plot resid, acf, and p-values, leaving half the space for residuals
-# tsdiag.Sarima(ap.arima, plot = c(1:3), layout = list(matrix(1:3, nrow = 3),
-#                                                      heights = c(1,2,2)))
+tsdiag.Sarima(ap.arima, plot = c(1:3), layout = list(matrix(1:3, nrow = 3),
+                                                     heights = c(1,2,2)))
+
+\dontshow{if(FALSE)}
+## four plots arranged as a 2x2 matrix.
+tsdiag.Sarima(ap.arima, plot = c(2:5), layout = list(matrix(1:4, nrow = 2)))
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory (show via RShowDoc("KEYWORDS")):
 \keyword{ts}
 \keyword{htest}
 \concept{diagnostics}

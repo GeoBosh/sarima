@@ -2,6 +2,10 @@
 
 - removed 'FitARMA' from 'Suggests:'; it had not been needed for some time.
 
+- `tsdiag.Sarima` was sometimes presenting the menu of choices when that was not
+  needed or asked for (e.g., when `plot = 1:4` and 'layout' a two-by-two matrix),
+  a bug introduced in v0.9.2.
+
 
 # sarima 0.9.2
 

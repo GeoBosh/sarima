@@ -612,19 +612,15 @@ tsdiag.Sarima <- function(object, gof.lag = NULL, ask = FALSE, ..., plot = 1:3, 
 	old.par <- par(no.readonly = TRUE)
 	on.exit(par(old.par))     # restore graphics parameters before exiting.
 
-        n_per_page <- 3
-        ask_user <- interactive() && (ask || length(choices) > n_per_page)
+        # n_per_page <- 3
 
-        n_per_page <- if(is.null(layout)) {
-                          if(ask_user)
-                              ## was: layout(matrix(1:3, ncol = 1))
-                              layout(matrix(1:min(3, length(choices)), ncol = 1))
-                          else
-                              layout(matrix(1:min(3, length(choices)), ncol = 1))
-                                        
-                      } else
+        n_per_page <- if(is.null(layout))
+                          layout(matrix(1:min(3, length(choices)), ncol = 1))
+                      else
                           ## TODO: this needs further thought!
                           do.call("layout", layout) # for the time being
+
+        ask_user <- interactive() && (ask || length(choices) > n_per_page)
             
         choice_title <- "Select a plot number or 0 to exit"
         ch_index <- if(length(choices) == 1)
@@ -707,9 +703,8 @@ tsdiag.Sarima <- function(object, gof.lag = NULL, ask = FALSE, ..., plot = 1:3, 
             
             if(length(chnum) == 1)  # length(choices) == 1
                 break
-            ## TODO: argument 'ask' could be used here to present a menu or just
-            ##       plot the next plot in choices.
-            if(ask_user) { # was: interactive() && (ask || length(choices) > n_per_page)
+
+            if(ask_user) {
                 ch_index <- menu(choices, title = choice_title)
                 choice <- chnum[ch_index]
             } else{

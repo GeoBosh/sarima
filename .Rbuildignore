@@ -1,7 +1,7 @@
 .rsync_exclude
 _pkgdown.yml
-^revdep/
-^docs/
+^revdep$
+^docs$
 TODO
 CHANGES
 ^vignettes/auto/
