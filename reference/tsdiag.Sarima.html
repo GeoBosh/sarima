@@ -72,8 +72,9 @@ Produce diagnostics for fitted seasonal ARIMA models. The method
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for Sarima</span></span>
 <span><span class="fu">tsdiag</span><span class="op">(</span><span class="va">object</span>, gof.lag <span class="op">=</span> <span class="cn">NULL</span>, ask <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span>, plot <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, layout <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># if 'object' is not produced by sarima(), use the full name,</span></span>
-<span><span class="co"># 'tsdiag.Sarima()', in the call. The arguments are the same.</span></span></code></pre></div>
+<span><span class="co"># if 'object' is produced by stats::arima(), forecast::auto.arima() and</span></span>
+<span><span class="co"># similar, use the full name, 'tsdiag.Sarima()', in the call. The</span></span>
+<span><span class="co"># arguments are the same.</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -93,7 +94,8 @@ Produce diagnostics for fitted seasonal ARIMA models. The method
 <dd><p>maximal lag for portmanteau tests.</p></dd>
 
   <dt>ask</dt>
-<dd><p>if <code>TRUE</code> present a menu of available plots, see Details.</p></dd>
+<dd><p>if <code>TRUE</code> present a menu of available plots, see section
+    ‘Details’.</p></dd>
 
   <dt>...</dt>
 <dd><p>not used.</p></dd>
@@ -195,10 +197,7 @@ Produce diagnostics for fitted seasonal ARIMA models. The method
 <span class="r-in"><span><span class="fu">tsdiag</span><span class="op">(</span><span class="va">ap.arima</span>, plot <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="tsdiag.Sarima-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## plot only acf an p-values</span></span></span>
-<span class="r-in"><span><span class="fu">tsdiag.Sarima</span><span class="op">(</span><span class="va">ap.arima</span>, plot <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## plot only acf an p-values</span></span></span>
+<span class="r-in"><span><span class="co">## plot only acf and p-values</span></span></span>
 <span class="r-in"><span><span class="va">tsd</span> <span class="op">&lt;-</span> <span class="fu">tsdiag.Sarima</span><span class="op">(</span><span class="va">ap.arima</span>, plot <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="tsdiag.Sarima-5.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="co">## the results can be used for further calculations:</span></span></span>
@@ -209,9 +208,14 @@ Produce diagnostics for fitted seasonal ARIMA models. The method
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 2.45802081  1 0.1169260</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 4.30491459  2 0.1161983</span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="co"># otherwise R check warns about help page running time &gt; 5s</span></span></span>
 <span class="r-in"><span><span class="co">## plot resid, acf, and p-values, leaving half the space for residuals</span></span></span>
-<span class="r-in"><span><span class="co"># tsdiag.Sarima(ap.arima, plot = c(1:3), layout = list(matrix(1:3, nrow = 3),</span></span></span>
-<span class="r-in"><span><span class="co">#                                                      heights = c(1,2,2)))</span></span></span>
+<span class="r-in"><span><span class="fu">tsdiag.Sarima</span><span class="op">(</span><span class="va">ap.arima</span>, plot <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                                                     heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## four plots arranged as a 2x2 matrix.</span></span></span>
+<span class="r-in"><span><span class="fu">tsdiag.Sarima</span><span class="op">(</span><span class="va">ap.arima</span>, plot <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, layout <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
