@@ -1,9 +1,9 @@
-# sarima 0.9.2.9000
+# sarima 0.9.3
 
 - removed 'FitARMA' from 'Suggests:'; it had not been needed for some time.
 
 - `tsdiag.Sarima` was sometimes presenting the menu of choices when that was not
-  needed or asked for (e.g., when `plot = 1:4` and 'layout' a two-by-two matrix),
+  needed or asked for (e.g., when `plot  = 1:4` and 'layout' a two-by-two matrix),
   a bug introduced in v0.9.2.
 
 
@@ -19,7 +19,7 @@
   specification unless essential'.
 
 
-# sarima 0.9.1 (CRAN)
+# sarima 0.9.1
 
 - included instructions how to install package 'FitARMA', if it is needed.
 
@@ -36,7 +36,7 @@
   which no longer applied. 
 
 
-# sarima 0.9 (CRAN)
+# sarima 0.9
 
 - new generic function `FisherInformation` giving the information matrix for
   fitted and theoretical models with methods for ARMA and seasonal ARMA models.
@@ -45,7 +45,7 @@
   default `stats::spectrum`.
   
 
-# sarima 0.8.6 (CRAN)
+# sarima 0.8.6
 
 - in `tsdiag.Sarima()`, if argument `plot` specifies only one or two plots, then
   the window is now split into 1 or 2 sub-windows, respectively, even if
@@ -61,7 +61,7 @@
 - moved fkf and KFAS to Suggests and removed dplyr from the dependencies.
 
 
-# sarima 0.8.5 (CRAN)
+# sarima 0.8.5
 
 - new `tsdiag` method for class `Sarima` (the result of `sarima()`). The method
   can be called also directly on the output from base R's `arima()` with
@@ -84,12 +84,12 @@
   this possible).
 
 
-# sarima 0.8.4 (CRAN)
+# sarima 0.8.4
 
 - updated a reference to avoid redirect.
 
 
-# sarima 0.8.2 (CRAN)
+# sarima 0.8.2
 
 - import again FKF (support for it was removed when FKF was temporarily
   archived on CRAN).
@@ -109,13 +109,13 @@ Error in UseMethod("replay_html", x) :
 ```
 
 
-# sarima 0.8.1 (CRAN)
+# sarima 0.8.1
 
 - relaxed numerical comparisons in some tests, to account for additional
   platforms, such as Open-BLAS, recently activated for checks on CRAN.
   
 
-# sarima 0.8.0 (CRAN)
+# sarima 0.8.0
 
 * new test for GARCH-type noise based on Kokoszka and Politis result.
 
@@ -149,7 +149,7 @@ Error in UseMethod("replay_html", x) :
   is "Rossignol2011".
 
 
-# sarima 0.7.6 (CRAN)
+# sarima 0.7.6
 
 * updated Makevars and Makevars.win to deal with a NOTE from recent tightening
   of checks on CRAN (see
@@ -176,12 +176,12 @@ Error in UseMethod("replay_html", x) :
      Cameron Doyle for reporting this).
 
 
-# sarima 0.7.3 (CRAN)
+# sarima 0.7.3
 
 * dealt with 'valgrind' warnings.
 
 
-# sarima 0.7.2 (CRAN)
+# sarima 0.7.2
 
 * this is an emergency release to avoid the package being archived on CRAN
      due to the archival of a dependency.
@@ -342,7 +342,7 @@ Changes in branch 'models'
 * packing this version before further work on sarima().
 
 
-# sarima 0.5-2 (CRAN)
+# sarima 0.5-2
 
 * plot of acf tests now uses different 'lty' so that the confidence limits
      under iid and garch nulls are visually distinguishable in black and white
@@ -384,7 +384,7 @@ Changes in branch 'models'
 * increasing the version number before some streamlining of class SarimaModel.
 
 
-# sarima 0.4-5 (CRAN)
+# sarima 0.4-5
 
 * moved "Lagged" to a separate package, "lagged".
 
@@ -394,7 +394,7 @@ Changes in branch 'models'
      project.
 
 
-# sarima 0.4-3 (CRAN)
+# sarima 0.4-3
 
 * first CRAN version.
 
