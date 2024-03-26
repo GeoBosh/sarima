@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">sarima</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.2.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,9 +45,9 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.9.2.9000" id="sarima-0929000">sarima 0.9.2.9000<a class="anchor" aria-label="anchor" href="#sarima-0929000"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.9.3" id="sarima-093">sarima 0.9.3<a class="anchor" aria-label="anchor" href="#sarima-093"></a></h2>
 <ul><li><p>removed ‘FitARMA’ from ‘Suggests:’; it had not been needed for some time.</p></li>
-<li><p><code>tsdiag.Sarima</code> was sometimes presenting the menu of choices when that was not needed or asked for (e.g., when <code>plot = 1:4</code> and ‘layout’ a two-by-two matrix), a bug introduced in v0.9.2.</p></li>
+<li><p><code>tsdiag.Sarima</code> was sometimes presenting the menu of choices when that was not needed or asked for (e.g., when <code>plot  = 1:4</code> and ‘layout’ a two-by-two matrix), a bug introduced in v0.9.2.</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.9.2" id="sarima-092">sarima 0.9.2<a class="anchor" aria-label="anchor" href="#sarima-092"></a></h2><p class="text-muted">CRAN release: 2024-03-01</p>
@@ -55,19 +55,19 @@
 <li><p>no longer require C++11, thus relying on R to do the right thing. Also, avoids the following NOTE from recent R-devel: ‘Specified C++11: please drop specification unless essential’.</p></li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.9.1" id="sarima-091-cran">sarima 0.9.1 (CRAN)<a class="anchor" aria-label="anchor" href="#sarima-091-cran"></a></h2><p class="text-muted">CRAN release: 2022-08-11</p>
+<h2 class="pkg-version" data-toc-text="0.9.1" id="sarima-091">sarima 0.9.1<a class="anchor" aria-label="anchor" href="#sarima-091"></a></h2><p class="text-muted">CRAN release: 2022-08-11</p>
 <ul><li><p>included instructions how to install package ‘FitARMA’, if it is needed.</p></li>
 <li><p>fixed NOTEs from CRAN about escaped LaTeX specials.</p></li>
 <li><p>added the expanded stationary AR polynomial to the output of the <code>"SarimaModel"</code> method for <code>filterPoly</code> and <code>filterPolyCoef</code>. The fully expanded AR polynomial which includes also the integrated terms is availalbe as before.</p></li>
 <li><p>in <code>prepareSimSarima</code> (and hence <code>sim_sarima</code>) fixed a bug causing wrong results for some combinations of parameters when initial values were supplied. Also removed some parts in the documentation of these functions which no longer applied.</p></li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.9" id="sarima-09-cran">sarima 0.9 (CRAN)<a class="anchor" aria-label="anchor" href="#sarima-09-cran"></a></h2><p class="text-muted">CRAN release: 2022-02-24</p>
+<h2 class="pkg-version" data-toc-text="0.9" id="sarima-09">sarima 0.9<a class="anchor" aria-label="anchor" href="#sarima-09"></a></h2><p class="text-muted">CRAN release: 2022-02-24</p>
 <ul><li><p>new generic function <code>FisherInformation</code> giving the information matrix for fitted and theoretical models with methods for ARMA and seasonal ARMA models.</p></li>
 <li><p>new generic function <code>spectrum</code> with methods for (seasonal) ARMA models and default <code><a href="https://rdrr.io/r/stats/spectrum.html" class="external-link">stats::spectrum</a></code>.</p></li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.8.6" id="sarima-086-cran">sarima 0.8.6 (CRAN)<a class="anchor" aria-label="anchor" href="#sarima-086-cran"></a></h2><p class="text-muted">CRAN release: 2022-01-22</p>
+<h2 class="pkg-version" data-toc-text="0.8.6" id="sarima-086">sarima 0.8.6<a class="anchor" aria-label="anchor" href="#sarima-086"></a></h2><p class="text-muted">CRAN release: 2022-01-22</p>
 <ul><li><p>in <code><a href="../reference/tsdiag.Sarima.html">tsdiag.Sarima()</a></code>, if argument <code>plot</code> specifies only one or two plots, then the window is now split into 1 or 2 sub-windows, respectively, even if argument <code>layout</code> is not used.</p></li>
 <li><p>new convenience function, <code><a href="../reference/se.html">se()</a></code> to compute standard errors.</p></li>
 <li><p><code>confint</code> methods extended and documented.</p></li>
@@ -75,7 +75,7 @@
 <li><p>moved fkf and KFAS to Suggests and removed dplyr from the dependencies.</p></li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.8.5" id="sarima-085-cran">sarima 0.8.5 (CRAN)<a class="anchor" aria-label="anchor" href="#sarima-085-cran"></a></h2><p class="text-muted">CRAN release: 2021-08-20</p>
+<h2 class="pkg-version" data-toc-text="0.8.5" id="sarima-085">sarima 0.8.5<a class="anchor" aria-label="anchor" href="#sarima-085"></a></h2><p class="text-muted">CRAN release: 2021-08-20</p>
 <ul><li>
 <p>new <code>tsdiag</code> method for class <code>Sarima</code> (the result of <code><a href="../reference/sarima.html">sarima()</a></code>). The method can be called also directly on the output from base R’s <code><a href="https://rdrr.io/r/stats/arima.html" class="external-link">arima()</a></code> with <code><a href="../reference/tsdiag.Sarima.html">tsdiag.Sarima()</a></code> or <code><a href="../reference/tsdiag.Sarima.html">sarima::tsdiag.Sarima()</a></code>. The method offers several portmanteau tests (including Ljung-Box, Li-McLeod and Box-Pierce), plots of autocorrelations and partial autocorrelations of the residuals, ability to control which graphs to be produced (including interactively), and their layout. The computed results are returned (invisibly). The default layout of the graphs is similar to <code><a href="https://rdrr.io/r/stats/tsdiag.html" class="external-link">stats::tsdiag()</a></code> (but with adjusted d.f.).</p>
 <p>The method always makes a correction of the degrees of freedom of the portmanteau tests.</p>
@@ -85,11 +85,11 @@
 <li><p>moved FitAR from Depends to Imports (after some changes in <code>.onLoad()</code> to make this possible).</p></li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.8.4" id="sarima-084-cran">sarima 0.8.4 (CRAN)<a class="anchor" aria-label="anchor" href="#sarima-084-cran"></a></h2><p class="text-muted">CRAN release: 2020-09-29</p>
+<h2 class="pkg-version" data-toc-text="0.8.4" id="sarima-084">sarima 0.8.4<a class="anchor" aria-label="anchor" href="#sarima-084"></a></h2><p class="text-muted">CRAN release: 2020-09-29</p>
 <ul><li>updated a reference to avoid redirect.</li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.8.2" id="sarima-082-cran">sarima 0.8.2 (CRAN)<a class="anchor" aria-label="anchor" href="#sarima-082-cran"></a></h2><p class="text-muted">CRAN release: 2020-03-02</p>
+<h2 class="pkg-version" data-toc-text="0.8.2" id="sarima-082">sarima 0.8.2<a class="anchor" aria-label="anchor" href="#sarima-082"></a></h2><p class="text-muted">CRAN release: 2020-03-02</p>
 <ul><li><p>import again FKF (support for it was removed when FKF was temporarily archived on CRAN).</p></li>
 <li><p>removed developers’ comments that had been accidentally left in a vignette.</p></li>
 <li><p>removed an erroneous <code><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev()</a></code> from the garch tests vignette.</p></li>
@@ -100,11 +100,11 @@
 </code></pre>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.8.1" id="sarima-081-cran">sarima 0.8.1 (CRAN)<a class="anchor" aria-label="anchor" href="#sarima-081-cran"></a></h2><p class="text-muted">CRAN release: 2019-05-12</p>
+<h2 class="pkg-version" data-toc-text="0.8.1" id="sarima-081">sarima 0.8.1<a class="anchor" aria-label="anchor" href="#sarima-081"></a></h2><p class="text-muted">CRAN release: 2019-05-12</p>
 <ul><li>relaxed numerical comparisons in some tests, to account for additional platforms, such as Open-BLAS, recently activated for checks on CRAN.</li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.8.0" id="sarima-080-cran">sarima 0.8.0 (CRAN)<a class="anchor" aria-label="anchor" href="#sarima-080-cran"></a></h2><p class="text-muted">CRAN release: 2019-04-13</p>
+<h2 class="pkg-version" data-toc-text="0.8.0" id="sarima-080">sarima 0.8.0<a class="anchor" aria-label="anchor" href="#sarima-080"></a></h2><p class="text-muted">CRAN release: 2019-04-13</p>
 <ul><li><p>new test for GARCH-type noise based on Kokoszka and Politis result.</p></li>
 <li><p>more complete sets of methods for several functions. In particular, there was infinite recursion in some cases.</p></li>
 <li><p>bug fixes</p></li>
@@ -117,7 +117,7 @@
 <li><p><code><a href="../reference/sarima.html">sarima()</a></code> gets an argument to specify the method to use for the stationary part of P0 (see above). The available options are the ones in <code><a href="https://rdrr.io/r/stats/KalmanLike.html" class="external-link">makeARIMA()</a></code> (“Rossignol2011” and “Gardner1980”) plus Georgi’s method (“gnb”). The default is “Rossignol2011”.</p></li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.7.6" id="sarima-076-cran">sarima 0.7.6 (CRAN)<a class="anchor" aria-label="anchor" href="#sarima-076-cran"></a></h2><p class="text-muted">CRAN release: 2018-08-23</p>
+<h2 class="pkg-version" data-toc-text="0.7.6" id="sarima-076">sarima 0.7.6<a class="anchor" aria-label="anchor" href="#sarima-076"></a></h2><p class="text-muted">CRAN release: 2018-08-23</p>
 <ul><li>updated Makevars and Makevars.win to deal with a NOTE from recent tightening of checks on CRAN (see <a href="https://stat.ethz.ch/pipermail/r-package-devel/2018q3/003030.html" class="external-link uri">https://stat.ethz.ch/pipermail/r-package-devel/2018q3/003030.html</a>).</li>
 </ul></div>
     <div class="section level2">
@@ -134,11 +134,11 @@
 <li><p>fixed a bug in prepareSimSarima() - when initial values were not supplied in the stationary case, the initialisation was not correct (thanks to Cameron Doyle for reporting this).</p></li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.7.3" id="sarima-073-cran">sarima 0.7.3 (CRAN)<a class="anchor" aria-label="anchor" href="#sarima-073-cran"></a></h2><p class="text-muted">CRAN release: 2018-07-12</p>
+<h2 class="pkg-version" data-toc-text="0.7.3" id="sarima-073">sarima 0.7.3<a class="anchor" aria-label="anchor" href="#sarima-073"></a></h2><p class="text-muted">CRAN release: 2018-07-12</p>
 <ul><li>dealt with ‘valgrind’ warnings.</li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.7.2" id="sarima-072-cran">sarima 0.7.2 (CRAN)<a class="anchor" aria-label="anchor" href="#sarima-072-cran"></a></h2><p class="text-muted">CRAN release: 2018-07-09</p>
+<h2 class="pkg-version" data-toc-text="0.7.2" id="sarima-072">sarima 0.7.2<a class="anchor" aria-label="anchor" href="#sarima-072"></a></h2><p class="text-muted">CRAN release: 2018-07-09</p>
 <ul><li><p>this is an emergency release to avoid the package being archived on CRAN due to the archival of a dependency.</p></li>
 <li><p>the main new feature since the previous release, 0.5-2, of the package is the versatile function <code><a href="../reference/sarima.html">sarima()</a></code>, which provides formula syntax for fitting encompassing SARIMA, ARUMA, XSARIMA, Reg-SARIMA, ARMAX models. Parsimonious multiplicative specifications are supported for the stationary and non-stationary parts of the model, as well as arbitrary unit roots on the unit circle, which can be fixed or estimated. ‘sarima()’ is documented but is still under development.</p></li>
 <li><p>removed ‘portes’ from Imports - it was not used for some time in ‘sarima’ (it was scheduled from removal from CRAN on 2018-07-30).</p></li>
@@ -225,7 +225,7 @@
 <li><p>packing this version before further work on sarima().</p></li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.5-2" id="sarima-05-2-cran">sarima 0.5-2 (CRAN)<a class="anchor" aria-label="anchor" href="#sarima-05-2-cran"></a></h2><p class="text-muted">CRAN release: 2017-10-16</p>
+<h2 class="pkg-version" data-toc-text="0.5-2" id="sarima-05-2">sarima 0.5-2<a class="anchor" aria-label="anchor" href="#sarima-05-2"></a></h2><p class="text-muted">CRAN release: 2017-10-16</p>
 <ul><li><p>plot of acf tests now uses different ‘lty’ so that the confidence limits under iid and garch nulls are visually distinguishable in black and white printouts.</p></li>
 <li><p>plot of acf tests now accepts argument ‘interval’ to produce rejection limits for levels other than the default 95%.</p></li>
 <li><p>started to add references to the documentation.</p></li>
@@ -247,13 +247,13 @@
 <li><p>increasing the version number before some streamlining of class SarimaModel.</p></li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.4-5" id="sarima-04-5-cran">sarima 0.4-5 (CRAN)<a class="anchor" aria-label="anchor" href="#sarima-04-5-cran"></a></h2><p class="text-muted">CRAN release: 2017-05-23</p>
+<h2 class="pkg-version" data-toc-text="0.4-5" id="sarima-04-5">sarima 0.4-5<a class="anchor" aria-label="anchor" href="#sarima-04-5"></a></h2><p class="text-muted">CRAN release: 2017-05-23</p>
 <ul><li><p>moved “Lagged” to a separate package, “lagged”.</p></li>
 <li><p>streamlined acfIidTest() and documented it properly.</p></li>
 <li><p>new vignette based on example in Chapter 7 of James Proberts’ MMath project.</p></li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.4-3" id="sarima-04-3-cran">sarima 0.4-3 (CRAN)<a class="anchor" aria-label="anchor" href="#sarima-04-3-cran"></a></h2><p class="text-muted">CRAN release: 2017-02-06</p>
+<h2 class="pkg-version" data-toc-text="0.4-3" id="sarima-04-3">sarima 0.4-3<a class="anchor" aria-label="anchor" href="#sarima-04-3"></a></h2><p class="text-muted">CRAN release: 2017-02-06</p>
 <ul><li>first CRAN version.</li>
 </ul></div>
     <div class="section level2">
